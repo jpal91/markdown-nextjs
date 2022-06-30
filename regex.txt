@@ -11,6 +11,7 @@
 ((?<=`*\s)[A-Za-z]*(?!`))*\s - works but have no damn clue why
 (?<=`js\s+)[A-Za-z]*(?!`)\s - seems to work for `js
 ^(```js)+\s+[A-Za-z]*\s+(```)/gs - captures the entire string
+(?<=`js\s+)([\w\d\s\\/&()*#^@+\-~'":;[\].|?<>%!](`{1}\w)*)*(?!`{3}\S)/gm - Best working so far with `
 
 - [React](https://reactjs.org/) - JS library
 
