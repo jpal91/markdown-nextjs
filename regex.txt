@@ -1,0 +1,13 @@
+###Something
+
+(#\s)[A-Za-z]*/g - Appears to work but captures #s as well
+(?<=#\s)[A-Za-z]*/g - Seems like this is the best option although it says it has poor browser support
+
+
+```
+
+```
+
+((?<=`*\s)[A-Za-z]*(?!`))*\s - works but have no damn clue why
+(?<=`js\s+)[A-Za-z]*(?!`)\s - seems to work for `js
+^(```js)+\s+[A-Za-z]*\s+(```)/gs - captures the entire string
