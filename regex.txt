@@ -11,3 +11,15 @@
 ((?<=`*\s)[A-Za-z]*(?!`))*\s - works but have no damn clue why
 (?<=`js\s+)[A-Za-z]*(?!`)\s - seems to work for `js
 ^(```js)+\s+[A-Za-z]*\s+(```)/gs - captures the entire string
+
+- [React](https://reactjs.org/) - JS library
+
+^(-\s\[)[A-Z a-z]+\]\([A-Z a-z://.]+\)/gm - Captures everything up to " - JS Library"
+(?<=-\s\[[A-Z a-z]+\]\([A-Z a-z://.]+\)\s)[A-Z a-z\-]*/gm - Captures "- JS library"
+
+
+This is a solution to the [Rock, Paper, Scissors challenge on Frontend Mentor](https://www.frontendmentor.io/challenges/rock-paper-scissors-game-pTgwgvgH).
+
+\[[A-Z a-z,]*\]\([A-Z a-z://.-]*\)/g - Captures entire section starting with "[" ending in ")"
+(?<=\[)[A-Z a-z,]*/g - Captures everything within the brackets
+(?<=\()(http|https):\/\/[A-Za-z,./-]* - Captures link
