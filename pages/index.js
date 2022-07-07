@@ -33,7 +33,10 @@ export default function Home() {
         <TextField
           multiline
           variant="standard"
-          sx={{ width: "100%", overflow: "auto" }}
+          sx={{
+            width: "100%",
+            overflow: "auto"
+          }}
           minRows={30}
           InputProps={{ disableUnderline: "true" }}
         />

@@ -3,14 +3,18 @@ import Typography from "@mui/material/Typography";
 import IconButton from "@mui/material/IconButton";
 import RemoveRedEyeOutlinedIcon from "@mui/icons-material/RemoveRedEyeOutlined";
 
-const SubBar = () => {
+const SubBar = (props) => {
+  const { open } = props;
+
   return (
     <Grid
       container
       sx={{
-        width: "100%",
+        width: open ? "calc(100% - 240px)" : "100%",
         backgroundColor: "background.vlgray",
-        height: "42px"
+        height: "42px",
+        ml: open ? "240px" : 0,
+        position: "sticky"
       }}
     >
       <Grid
