@@ -56,7 +56,7 @@ const NavBar = () => {
             <Toolbar sx={{ p: "0 !important" }}>
               <IconButton
                 color="inherit"
-                edge="false"
+                edge={false}
                 onClick={handleOpen}
                 sx={{
                   mr: 5,

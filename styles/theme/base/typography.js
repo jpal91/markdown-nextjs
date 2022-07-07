@@ -79,6 +79,11 @@ const typography = {
     fontFamily: baseProperties.fontFamily,
     color: baseProperties.color,
     fontSize: 12
+  },
+  editor: {
+    fontWeight: baseProperties.fontWeightRegular,
+    fontFamily: fontFam.mono,
+    fontSize: 14
   }
 };
 
