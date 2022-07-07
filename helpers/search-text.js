@@ -3,17 +3,14 @@ import emojis from "./emojis";
 import { listBuilder } from "./funcs";
 
 export const searchText = (str) => {
-  // const bracketRegex = /(`"?<.*>"?`|<.*>|<.*|<)(?!<\/code>)/g
   const openBracketRegex = /.?<.*/g;
   const bracketRegex = /`<.+>.*<\/.+>`/g;
-  const headingsRegex = /#+\s.+\n/g;
+  const headingsRegex = /#+\s.+\n?/g;
   const linksRegex = /\[.+\]\(.+\)/g;
   const boldRegex = /(?<!(\*|\S))\*\*[^*\n]+\*\*(?!\*)/g;
   const italicRegex = /(?<!(\*|\S))\*[^*\n]+\*(?!\*)/g;
-  //   const codeRegex = /`[^<>\n`]+`/g;
   const codeRegex = /`.+`/g;
   const imageRegex = /!\[.*\]\(.+\)/g;
-  //   const blockCodeRegex = /```js\n(?:(?!```)[\s\S])+\n```/g;
   const blockCodeRegex = /```.*\n(?:(?!```)[\s\S])+\n```/g;
   const emojiRegex = /:[\w]+:/g;
   const blockQuoteRegex = /(?<=\n)(?:> .+\n)+/g;
@@ -21,7 +18,6 @@ export const searchText = (str) => {
   const highRegex = /(==[^=]+==)/g;
   const strikeRegex = /~~[^~]+~~/g;
   const subRegex = /(?<!~)~[^~]+~(?!~)/g;
-  //   const uoRegex = /(?<=\n)(\s*-\s.+\n)+/g;
   const uoRegex = /(?<=\n)((?:>\s)?\s*-\s(?!\[|]).+\n)+/g;
   const olRegex = /(?<=\n)((?:>\s)?\s*\d\.\s.+\n>?)+/g;
   const checkListRegex = /-\s\[(\s|x)\]\s.+\n/g;
@@ -29,107 +25,72 @@ export const searchText = (str) => {
   const superRegex = /\^.+\^/g;
 
   const hasOpenBracket = str.match(openBracketRegex);
-  hasOpenBracket ? (str = openBrackets(hasOpenBracket, str)) : (str = str);
+  hasOpenBracket && (str = openBrackets(hasOpenBracket, str));
 
   const hasBlockCode = str.match(blockCodeRegex);
-  hasBlockCode ? (str = blockCode(hasBlockCode, str)) : (str = str);
-  // console.log(str)
-  const hasBracket = str.match(bracketRegex);
-  hasBracket ? (str = bracket(hasBracket, str)) : (str = str);
-  //console.log(str)
+  hasBlockCode && (str = blockCode(hasBlockCode, str));
 
-  // openBracketRegex.test(str) ? str = str.replace(/</g, `<span>&lt;</span>`) : str = str
-  // //console.log(openBracketRegex.test(str))
-  // console.log(str)
+  const hasBracket = str.match(bracketRegex);
+  hasBracket && (str = bracket(hasBracket, str));
 
   const hasHeadings = str.match(headingsRegex);
-  hasHeadings ? (str = headings(hasHeadings, str)) : (str = str);
+  hasHeadings && (str = headings(hasHeadings, str));
 
   const hasLinks = str.match(linksRegex);
-  hasLinks ? (str = links(hasLinks, str)) : (str = str);
+  hasLinks && (str = links(hasLinks, str));
 
   const hasBold = str.match(boldRegex);
-  hasBold ? (str = bold(hasBold, str)) : (str = str);
+  hasBold && (str = bold(hasBold, str));
 
   const hasItalic = str.match(italicRegex);
-  hasItalic ? (str = italic(hasItalic, str)) : (str = str);
+  hasItalic && (str = italic(hasItalic, str));
 
   const hasCode = str.match(codeRegex);
-  hasCode ? (str = code(hasCode, str)) : (str = str);
+  hasCode && (str = code(hasCode, str));
 
   const hasImage = str.match(imageRegex);
-  hasImage ? (str = image(hasImage, str)) : (str = str);
+  hasImage && (str = image(hasImage, str));
 
   const hasEmoji = str.match(emojiRegex);
-  hasEmoji ? (str = emoji(hasEmoji, str)) : (str = str);
+  hasEmoji && (str = emoji(hasEmoji, str));
 
   const hasBlockQuote = str.match(blockQuoteRegex);
-  hasBlockQuote ? (str = blockQuote(hasBlockQuote, str)) : (str = str);
+  hasBlockQuote && (str = blockQuote(hasBlockQuote, str));
 
   const hasLineBreak = str.match(lineBreakRegex);
-  hasLineBreak ? (str = lineBreak(hasLineBreak, str)) : (str = str);
+  hasLineBreak && (str = lineBreak(hasLineBreak, str));
 
   const hasHighLight = str.match(highRegex);
-  hasHighLight ? (str = highLight(hasHighLight, str)) : (str = str);
+  hasHighLight && (str = highLight(hasHighLight, str));
 
   const hasStrikeThru = str.match(strikeRegex);
-  hasStrikeThru ? (str = strikeThru(hasStrikeThru, str)) : (str = str);
+  hasStrikeThru && (str = strikeThru(hasStrikeThru, str));
 
   const hasSubtext = str.match(subRegex);
-  hasSubtext ? (str = subText(hasSubtext, str)) : (str = str);
+  hasSubtext && (str = subText(hasSubtext, str));
 
   const hasUOList = str.match(uoRegex);
-  hasUOList ? (str = uoList(hasUOList, str)) : (str = str);
+  hasUOList && (str = uoList(hasUOList, str));
 
   const hasOList = str.match(olRegex);
-  hasOList ? (str = oList(hasOList, str)) : (str = str);
+  hasOList && (str = oList(hasOList, str));
 
   const hasCheckList = str.match(checkListRegex);
-  hasCheckList ? (str = checkList(hasCheckList, str)) : (str = str);
+  hasCheckList && (str = checkList(hasCheckList, str));
 
   const hasFootNote = str.match(footRegex);
-  hasFootNote ? (str = footNote(hasFootNote, str)) : (str = str);
+  hasFootNote && (str = footNote(hasFootNote, str));
 
   const hasSuperScript = str.match(superRegex);
-  hasSuperScript ? (str = superScript(hasSuperScript, str)) : (str = str);
-  // str = str.replace(/(\\n )*/, "</br>");
-  // str = str.replace(/\t/g, '&nbsp;&nbsp;&nbsp;')
-  console.log(str);
+  hasSuperScript && (str = superScript(hasSuperScript, str));
+
+  str = str.replace(/\t/g, "&nbsp;&nbsp;&nbsp;");
   str = str.replace(/\n{3,}/g, "</br></br>");
   str = str.replace(/\n\n/g, "</br></br>");
   str = str.replace(/(\n|\\\n)/g, "</br>");
-  //   str = str.replace(/\n---\n/g, "<hr>");
 
   return str;
 };
-
-// const bracket = (match, str) => {
-//     //const bracketOpen = /</g
-//     const badBracket = /(<.*>|<.*|<)/g
-//     const goodBracket = /(?<=`)"?<.*>.*<.*>"?(?=`)/g
-//     const codeMatch = /`?<code.*>.*<\/code>`?/g
-//     //const goodBracket = /(?<=`<.*>).*(?=<.*>`)/g
-
-//     match.forEach((m) => {
-//         let badMatch = m.match(badBracket)
-//         let goodMatch = m.match(goodBracket)
-//         console.log(m.match(codeMatch))
-//         if (m.match(codeMatch)) {
-//             return
-//         }
-
-//         if (goodMatch) {
-//             //console.log(goodMatch)
-//             str = str.replace(m, `<pre><code>${goodMatch[0]}</code></pre>`)
-//             return
-//         } else if (badMatch) {
-//             str = str.replace(m, '')
-//             return
-//         }
-//     })
-
-//     return str
-// }
 
 const openBrackets = (match, str) => {
   const quoteTest = /`<.*>`/g;
@@ -155,7 +116,6 @@ const bracket = (match, str) => {
 
   match.forEach((m) => {
     let cMatch = m.match(codeMatch);
-    console.log(cMatch);
     let hl = hljs.highlightAuto(`${cMatch[0]}`, ["html"]).value;
     str = str.replace(m, `<blockquote><pre>${hl}</pre></blockquote>`);
   });
@@ -164,40 +124,17 @@ const bracket = (match, str) => {
 };
 
 const headings = (match, str) => {
-  const h1 = /(?<=#\s)[^{}]+\n?/g;
-  const h2 = /(?<=##\s)[^{}]+\n?/g;
-  const h3 = /(?<=###\s)[^{}]+\n?/g;
-  const h4 = /(?<=####\s)[^{}]+\n?/g;
-  const h5 = /(?<=#####\s)[^{}]+\n?/g;
-  const h6 = /(?<=######\s)[^{}]+\n?/g;
+  const h1 = /(?<=#\s)[^{}\n]+/g;
+  const h2 = /(?<=##\s)[^{}\n]+/g;
+  const h3 = /(?<=###\s)[^{}\n]+/g;
+  const h4 = /(?<=####\s)[^{}\n]+/g;
+  const h5 = /(?<=#####\s)[^{}\n]+/g;
+  const h6 = /(?<=######\s)[^{}\n]+/g;
   const headArray = [h1, h2, h3, h4, h5, h6];
-  const id = /(?<={).+(?=})\n?/;
+  const id = /(?<={).+(?=})/;
 
   match.forEach((m) => {
     const idMatch = m.match(id);
-
-    // if (m.match(h3)) {
-    //     matched = m.match(h3);
-    //     str = str.replace(
-    //         m,
-    //         `<h3 ${idMatch ? `id=${idMatch[0]}` : ""}>${matched[0]}</h3>`
-    //     );
-    //     return;
-    // } else if (m.match(h2)) {
-    //     matched = m.match(h2);
-    //     str = str.replace(
-    //         m,
-    //         `<h2 ${idMatch ? `id=${idMatch[0]}` : ""}>${matched[0]}</h2>`
-    //     );
-    //     return;
-    // } else if (m.match(h1)) {
-    //     matched = m.match(h1);
-    //     str = str.replace(
-    //         m,
-    //         `<h1 ${idMatch ? `id=${idMatch[0]}` : ""}>${matched[0]}</h1>`
-    //     );
-    //     return;
-    // }
 
     const index = m.match(h6)
       ? 5
@@ -215,7 +152,7 @@ const headings = (match, str) => {
 
     str = str.replace(
       m,
-      `<h${index + 1} ${idMatch ? `id=${idMatch[0]}` : ""}>${
+      `<h${index + 1}${idMatch ? `id=${idMatch[0]}` : ""}>${
         m.match(headArray[index])[0]
       }</h${index + 1}>`
     );
@@ -270,13 +207,11 @@ const italic = (match, str) => {
 };
 
 const code = (match, str) => {
-  //   const codeRegex = /(?<=`)[^<>\n]+(?=`)/g;
   const codeRegex = /(?<=`).+(?=`)/g;
 
   match.forEach((m) => {
     let cMatch = m.match(codeRegex);
     cMatch[0] = cMatch[0].replace(/&lt;/g, "<span><</span>");
-    // let hl = hljs.highlightAuto(`${cMatch[0]}`, ["html", "javascript"]).value
     str = str.replace(m, `<code id="code_styled">${cMatch[0]}</code>`);
   });
 
@@ -298,7 +233,6 @@ const image = (match, str) => {
 };
 
 const blockCode = (match, str) => {
-  //   const innerCode = /(?<=```js\n)(.+\s*)+\n?(?=```)/gm;
   const innerCode = /(?<=```.*\n\s?)(.+\s*)+\n?(?=```)/gm;
   const codeType = /(?<=```).*(?=\n)/;
 
@@ -306,15 +240,12 @@ const blockCode = (match, str) => {
     let codeMatch = m.match(codeType) || "";
     let bcMatch = m.match(innerCode);
     bcMatch[0] = bcMatch[0].replace(/&lt;/g, "<");
-    // console.log(bcMatch)
     let hl = hljs.highlightAuto(`${bcMatch[0]}`, [
       `${codeMatch[0]}`,
       "html",
       "javascript"
     ]).value;
-    // console.log(hl)
-    // console.log(hl)
-    //str = str.replace(m, `<blockquote style="gray;width:400px;"><pre><code class="language-js" id='block'>${bcMatch}</code></pre></blockquote>`)
+
     str = str.replace(
       m,
       `<br><blockquote id='code-holder'><pre id='code-holder'><code class='code-block'>${hl}</code></pre></blockquote>`
@@ -325,11 +256,7 @@ const blockCode = (match, str) => {
 };
 
 const emoji = (match, str) => {
-  //const lazyMatch = /:.+:?/
-
   match.forEach((m) => {
-    // let firstMatch = m.match(lazyMatch)
-    // console.log(firstMatch)
     let emojiMatch = emojis.find((el) => el.shortname === m);
 
     if (!emojiMatch) {
@@ -350,17 +277,15 @@ const blockQuote = (match, str) => {
 
     str = str.replace(
       m,
-      `<blockquote style="border-left:5px solid gray;padding-left:1.5em;margin:1.2em;">\n${bqMatch}\n</blockquote>`
+      `<blockquote id='block-q'>\n${bqMatch}\n</blockquote>`
     );
-    //console.log(str)
   });
-
+  //style="border-left:5px solid gray;padding-left:1.5em;margin:1.2em;"
   return str;
 };
 
 const lineBreak = (match, str) => {
   match.forEach((m) => {
-    // console.log(m);
     str = str.replace(m, "</br><hr></br>");
   });
 
@@ -372,7 +297,7 @@ const highLight = (match, str) => {
 
   match.forEach((m) => {
     let highLMatch = m.match(highL);
-    // console.log(highLMatch);
+
     str = str.replace(m, `<mark>${highLMatch[0]}</mark>`);
   });
 
@@ -404,11 +329,9 @@ const subText = (match, str) => {
 };
 
 const uoList = (match, str) => {
-  // console.log(match)
   match.forEach((m) => {
-    //let listSection = m.split(/((?<=(\n))\s*-\s.+\n?)/).filter((el) => el.length > 0);
-    let listSection = m.split(/(\s*-\s.+\n?)/).filter((el) => el.length > 0);
-
+    // let listSection = m.split(/(\s*-\s.+\n?)/).filter((el) => el.length > 0);
+    let listSection = m.split(/\n/).filter((el) => el.length > 0);
     let result = listBuilder(listSection, false);
 
     str = str.replace(m, result.join(""));
@@ -419,11 +342,9 @@ const uoList = (match, str) => {
 
 const oList = (match, str) => {
   match.forEach((m) => {
-    let test = m.split(/\n/).filter((el) => el.length > 0);
-    //let listSection = m.split(/(?<=(\n|>\s))(\s*\d\.\s.+)(?=\n*)/).filter((el) => el.length > 0);
-    let listSection = m.split(/(\s*\d\.\s.+\n?)/).filter((el) => el.length > 0);
-    // console.log(m, listSection, test)
-    let result = listBuilder(test, true);
+    let listSection = m.split(/\n/).filter((el) => el.length > 0);
+
+    let result = listBuilder(listSection, true);
 
     str = str.replace(m, result.join(""));
   });
@@ -454,7 +375,7 @@ const footNote = (match, str) => {
   const note = /(?<=\[\^).(?=\]:)/;
   const link = /(?<=\[\^).(?=\](?!:))/;
   const text = /(?<=\[\^.\]: ).+/;
-  // console.log(match)
+
   match.forEach((m) => {
     let noteMatch = m.match(note);
     let linkMatch = m.match(link);
@@ -477,7 +398,7 @@ const footNote = (match, str) => {
 
 const superScript = (match, str) => {
   const innerText = /(?<=\^).+(?=\^)/;
-  // console.log(match)
+
   match.forEach((m) => {
     let textMatch = m.match(innerText);
 

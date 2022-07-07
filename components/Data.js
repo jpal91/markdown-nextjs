@@ -1,18 +1,32 @@
-import { useEffect } from "react";
-import fs from "fs";
-import path from "path";
+import React from "react";
+import Typography from "@mui/material/Typography";
+import ReactHtmlParser from "react-html-parser";
 
-const filePath = path.join(process.cwd(), "README.md");
-const dataFile = fs.readFile(filePath, "utf8", (err, data) => {
-  console.log(data);
-});
+import { searchText } from "../helpers/search-text.js";
 
-const Data = () => {
-  useEffect(() => {
-    dataFile();
-  }, []);
+const transform = (node, index) => {
+  if (node.name && node.name.startsWith("h")) {
+    let tagName = node.name;
+    let str = "";
+    node.children.forEach((child) => (str += child.data));
 
-  return <p>Hello</p>;
+    return (
+      <Typography key={index} variant={tagName}>
+        {str}
+      </Typography>
+    );
+  }
+};
+
+const Data = (props) => {
+  const { data } = props;
+  const formattedData = data && searchText(data);
+
+  return (
+    <div id="preview">
+      {ReactHtmlParser(formattedData, { transform: transform })}
+    </div>
+  );
 };
 
 export default Data;

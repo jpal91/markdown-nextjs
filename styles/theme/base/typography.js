@@ -70,9 +70,9 @@ const typography = {
   },
   body1: {
     fontWeight: baseProperties.fontWeightRegular,
-    fontFamily: baseProperties.fontFamily,
-    color: baseProperties.color,
-    fontSize: 16
+    fontFamily: fontFam.slab,
+    fontSize: 14,
+    lineHeight: "24px"
   },
   body2: {
     fontWeight: baseProperties.fontWeightRegular,
