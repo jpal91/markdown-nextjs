@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 //import styles from '../styles/Home.module.css'
 import Grid from '@mui/material/Grid'
 import Container from '@mui/material/Container'
@@ -23,11 +22,5 @@ export default function Home() {
             </Grid>
         </Container>
     )
-=======
-import Data from "../components/Data";
-
-export default function Home() {
-  return <Data />;
->>>>>>> 6f817d8ea7855fd65ffcfee13337a098839a8b24
 }
 // <TextField varint='outlined' fullWidth multiline sx={{ height: '100%' }} maxRows={50} InputProps={{ classes: { input: {height: 2000} } }}/>
