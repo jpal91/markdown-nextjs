@@ -20,7 +20,16 @@ export default function Home() {
         p: "0px !important"
       }}
     >
-      <Grid xs={6} sx={{ width: "100%", height: "100%", p: 5 }}>
+      <Grid
+        xs={6}
+        sx={{
+          width: "100%",
+          height: "calc(100vh - 114px)",
+          p: 5,
+          borderRight: "1px solid",
+          borderColor: "primary.vlgray"
+        }}
+      >
         <TextField
           multiline
           variant="standard"
@@ -33,8 +42,9 @@ export default function Home() {
         xs={6}
         sx={{
           width: "100%",
-          height: "calc(100vh - 72px)",
-          backgroundColor: "background.secondary",
+          height: "calc(100vh - 114px)",
+          borderLeft: "1px solid",
+          borderColor: "primary.vlgray",
           flex: "1 1 auto",
           p: 5
         }}

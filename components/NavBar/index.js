@@ -15,6 +15,8 @@ import Box from "@mui/material/Box";
 import InsertDriveFileOutlinedIcon from "@mui/icons-material/InsertDriveFileOutlined";
 import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
 
+import SubBar from "./sub-bar.js";
+
 const NavBar = () => {
   // const themeCtx = useContext(ThemeContext);
   const [open, setOpen] = useState(false);
@@ -123,6 +125,7 @@ const NavBar = () => {
           </Grid>
         </Grid>
       </AppBar>
+      <SubBar />
       <Drawer
         variant="persistent"
         anchor="left"
