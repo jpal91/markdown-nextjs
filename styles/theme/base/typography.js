@@ -1,6 +1,6 @@
-import colors from './colors'
+import colors from "./colors";
 
-const { primary } = colors
+const { primary } = colors;
 
 const baseProperties = {
   fontWeightBold: 800,
@@ -15,8 +15,7 @@ const fontFam = {
   regular: "'Roboto', sans-serif;",
   mono: "'Roboto mono', monospace",
   slab: "'Roboto Slab', serif"
-}
-
+};
 
 const typography = {
   ...baseProperties,
@@ -24,44 +23,50 @@ const typography = {
     fontWeight: baseProperties.fontWeightBold,
     fontFamily: fontFam.slab,
     color: baseProperties.color,
-    fontSize: '32px',
+    fontSize: "32px"
   },
   h2: {
     fontWeight: baseProperties.fontWeightLight,
     fontFamily: fontFam.slab,
     color: baseProperties.color,
-    fontSize: '28px',
+    fontSize: "28px"
   },
   h3: {
     fontWeight: baseProperties.fontWeightBold,
     fontFamily: fontFam.slab,
     color: baseProperties.color,
-    fontSize: '24px',
+    fontSize: "24px"
   },
   h4: {
     fontWeight: baseProperties.fontWeightBold,
     fontFamily: fontFam.slab,
     color: baseProperties.color,
-    fontSize: '20px',
+    fontSize: "20px"
   },
   h5: {
     fontWeight: baseProperties.fontWeightBold,
     fontFamily: fontFam.slab,
     color: baseProperties.color,
-    fontSize: '16px',
+    fontSize: "16px"
   },
   h6: {
     fontWeight: baseProperties.fontWeightBold,
     fontFamily: fontFam.slab,
     color: primary.dOrange,
-    fontSize: '14px',
+    fontSize: "14px"
   },
   heading: {
     fontWeight: baseProperties.fontWeightRegular,
     fontFamily: fontFam.regular,
-    color: 'white',
-    fontSize: 14,
-    letterSpacing: '2px'
+    color: "white",
+    fontSize: 20,
+    letterSpacing: "3px"
+  },
+  headingText: {
+    fontWeight: baseProperties.fontWeightRegular,
+    fontFamily: fontFam.regular,
+    color: "white",
+    fontSize: 15
   },
   body1: {
     fontWeight: baseProperties.fontWeightRegular,
@@ -75,6 +80,6 @@ const typography = {
     color: baseProperties.color,
     fontSize: 12
   }
-}
+};
 
 export default typography;
