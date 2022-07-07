@@ -13,6 +13,7 @@ import Drawer from "@mui/material/Drawer";
 import CloseIcon from "@mui/icons-material/Close";
 import Box from "@mui/material/Box";
 import InsertDriveFileOutlinedIcon from "@mui/icons-material/InsertDriveFileOutlined";
+import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
 
 const NavBar = () => {
   // const themeCtx = useContext(ThemeContext);
@@ -102,9 +103,22 @@ const NavBar = () => {
               </Grid>
             </Grid>
           </Grid>
-          <Grid item xs={6} sx={{ justifyContent: "flex-end", mr: { xs: 5 } }}>
+          <Grid
+            item
+            xs={6}
+            sx={{
+              justifyContent: "flex-end",
+              alignItems: "center",
+              pr: { xs: 5 }
+            }}
+          >
+            <IconButton>
+              <DeleteOutlineOutlinedIcon
+                sx={{ color: "primary.vlgray", mr: 2 }}
+              />
+            </IconButton>
             <ButtonBase>
-              <Image src="/images/save-button.svg" width="150" height="100" />
+              <Image src="/images/save-button.svg" width="150" height="70" />
             </ButtonBase>
           </Grid>
         </Grid>
