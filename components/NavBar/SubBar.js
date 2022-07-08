@@ -4,8 +4,62 @@ import Typography from "@mui/material/Typography";
 import IconButton from "@mui/material/IconButton";
 import RemoveRedEyeOutlinedIcon from "@mui/icons-material/RemoveRedEyeOutlined";
 import VisibilityOffOutlinedIcon from '@mui/icons-material/VisibilityOffOutlined';
+import { keyframes } from "@emotion/react";
 
 import { togglePreview } from "../../actions";
+
+const fade = keyframes`
+  from {
+    max-width: 50%;
+  }
+
+  to {
+    max-width: 100%;
+  }
+`
+
+const reverseFade = keyframes`
+  from {
+    max-width: 100%;
+  }
+
+  to {
+    max-width: 50%;
+  }
+`
+
+// const display = keyframes`
+//   from {
+//     flex: 0 0 100%;
+//     width: 100%;
+//     padding-left: 16px;
+//     visibility: visible;
+//   }
+
+//   to {
+//     flex: 0 0 0%;
+//     width: 0%;
+//     padding-left: 0px;
+//     visibility: hidden;
+//   }
+// `
+
+// const reverseDisplay = keyframes`
+//   from {
+//     flex: 0 0 0%;
+//     width: 0%;
+//     padding-left: 0px;
+//     visibility: hidden;
+//   }
+
+//   to {
+//     flex: 0 0 100%;
+//     width: 100%;
+//     padding-left: 16px;
+//     visibility: visible;
+//   }
+
+// `
 
 const SubBar = (props) => {
   const { isMenuOpen, isPreviewMode, togglePreview } = props;
@@ -18,19 +72,21 @@ const SubBar = (props) => {
         backgroundColor: "background.vlgray",
         height: "42px",
         ml: isMenuOpen ? "240px" : 0,
-        position: "sticky"
+        position: "sticky",
+        justifyContent: isPreviewMode ? 'flex-end' : 'center'
       }}
     >
       <Grid
         item
-        xs={6}
+        xs={isPreviewMode ? 0 : 6}
         sx={{
-          borderRight: "1px solid",
+          borderRight: isPreviewMode ? '0px' : "1px solid",
           borderColor: "primary.vlgray",
           justifyContent: "flex-start",
           alignItems: "center",
           display: isPreviewMode ? 'none' : 'inherit',
-          pl: 2
+          // animation: isPreviewMode ? `${display} 0.5s linear 0s 1 normal both` : `${reverseDisplay} 0.5s linear 0s normal both`,
+          pl: 2,
         }}
       >
         <Typography variant="body1" sx={{ color: "primary.lgray" }}>
@@ -44,7 +100,8 @@ const SubBar = (props) => {
         sx={{
           borderLeft: isPreviewMode ? '0px' : "1px solid",
           borderColor: "primary.vlgray",
-          alignItems: "center"
+          alignItems: "center",
+          animation: isPreviewMode ? `${fade} 0.5s linear 0s 1 normal forwards` : `${reverseFade} 0.5s linear 0s 1 normal forwards`,
         }}
       >
         <Grid item xs={6} sx={{ justifyContent: "flex-start", pl: 2 }}>
