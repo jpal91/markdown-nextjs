@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import Link from "next/link";
 import Image from "next/image";
@@ -14,15 +14,49 @@ import CloseIcon from "@mui/icons-material/Close";
 import Box from "@mui/material/Box";
 import InsertDriveFileOutlinedIcon from "@mui/icons-material/InsertDriveFileOutlined";
 import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
+import KeyboardDoubleArrowDownIcon from '@mui/icons-material/KeyboardDoubleArrowDown';
+import { keyframes } from "@emotion/react";
 
 import { toggleMenu } from "../../actions/index.js";
 
 import SubBar from "./SubBar.js";
 
+const reverseMenuHide = keyframes` 
+  from {
+    margin-left: 240px;
+    width: calc(100% - 240px);
+  }
+
+  to {
+    margin-left: 0px;
+    width: 100%;
+  }
+`
+
+const menuHide = keyframes` 
+  from {
+    margin-left: 0px;
+    width: 100%;
+  }
+
+  to {
+    margin-left: 240px;
+    width: calc(100% - 240px);
+  }
+`
+
 const NavBar = (props) => {
   const { isMenuOpen, toggleMenu } = props
   // const [open, setOpen] = useState(false);
   // const handleOpen = () => setOpen(!open);
+  const [windowSize, setWindowSize] = useState()
+
+  useEffect(() => {
+    const vp = window.visualViewport || null
+    setWindowSize(vp)
+    console.log(windowSize)
+  }, [])
 
   return (
     <React.Fragment>
@@ -30,13 +64,15 @@ const NavBar = (props) => {
         sx={{
           backgroundColor: "background.navLight",
           position: "sticky",
-          maxWidth: "100%",
+          maxWidth: '100%',//"100%",
           height: "72px",
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          width: isMenuOpen ? "calc(100% - 240px)" : "100%",
-          ml: isMenuOpen ? "240px" : 0
+          // width: '100%',
+          // width: isMenuOpen ? "calc(100% - 240px)" : "100%",
+          // ml: isMenuOpen ? "240px" : 0,
+          // animation: isMenuOpen ? `${menuHide} 0.25s linear 0s 1 normal forwards` : `${reverseMenuHide} 0.1s ease 0s 1 normal forwards`
         }}
       >
         <Grid
@@ -47,7 +83,8 @@ const NavBar = (props) => {
             flexWrap: "nowrap",
             alignItems: "center",
             p: { xs: 1, lg: 0 },
-            ml: { xs: 0, lg: 0 }
+            ml: { xs: 0, lg: 0 },
+            animation: isMenuOpen ? `${menuHide} 0.1s linear 0s 1 normal forwards` : `${reverseMenuHide} 0.1s ease 0s 1 normal forwards`
           }}
         >
           <Grid
@@ -78,8 +115,8 @@ const NavBar = (props) => {
             <Link href="/">
               <ButtonBase>
                 <a>
-                  <Typography sx={{ color: "white" }} variant="heading">
-                    MARKDOWN
+                  <Typography variant="heading">
+                    .MARK<KeyboardDoubleArrowDownIcon/>
                   </Typography>
                 </a>
               </ButtonBase>
@@ -155,3 +192,6 @@ const mapStateToProps = (state) => {
 }
 
 export default connect(mapStateToProps, { toggleMenu })(NavBar)
+
+
+//&#x2B07;

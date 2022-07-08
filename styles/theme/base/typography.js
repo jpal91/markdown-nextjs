@@ -58,9 +58,9 @@ const typography = {
   heading: {
     fontWeight: baseProperties.fontWeightRegular,
     fontFamily: fontFam.regular,
-    color: "white",
+    color: primary.dOrange,
     fontSize: 20,
-    letterSpacing: "3px"
+    letterSpacing: "5px"
   },
   headingText: {
     fontWeight: baseProperties.fontWeightRegular,

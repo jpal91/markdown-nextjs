@@ -85,8 +85,7 @@ const SubBar = (props) => {
           justifyContent: "flex-start",
           alignItems: "center",
           display: isPreviewMode ? 'none' : 'inherit',
-          // animation: isPreviewMode ? `${display} 0.5s linear 0s 1 normal both` : `${reverseDisplay} 0.5s linear 0s normal both`,
-          pl: 2,
+          pl: 2
         }}
       >
         <Typography variant="body1" sx={{ color: "primary.lgray" }}>
@@ -102,6 +101,7 @@ const SubBar = (props) => {
           borderColor: "primary.vlgray",
           alignItems: "center",
           animation: isPreviewMode ? `${fade} 0.5s linear 0s 1 normal forwards` : `${reverseFade} 0.5s linear 0s 1 normal forwards`,
+
         }}
       >
         <Grid item xs={6} sx={{ justifyContent: "flex-start", pl: 2 }}>
