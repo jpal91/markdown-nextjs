@@ -78,7 +78,7 @@ const NavBar = (props) => {
             <Link href="/">
               <ButtonBase>
                 <a>
-                  <Typography sx={{ color: "white" }} variant="heading">
+                  <Typography variant="heading">
                     MARKDOWN
                   </Typography>
                 </a>
