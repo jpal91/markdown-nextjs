@@ -1,19 +1,23 @@
+import { connect } from "react-redux";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import IconButton from "@mui/material/IconButton";
 import RemoveRedEyeOutlinedIcon from "@mui/icons-material/RemoveRedEyeOutlined";
+import VisibilityOffOutlinedIcon from '@mui/icons-material/VisibilityOffOutlined';
+
+import { togglePreview } from "../../actions";
 
 const SubBar = (props) => {
-  const { open } = props;
+  const { isMenuOpen, isPreviewMode, togglePreview } = props;
 
   return (
     <Grid
       container
       sx={{
-        width: open ? "calc(100% - 240px)" : "100%",
+        width: isMenuOpen ? "calc(100% - 240px)" : "100%",
         backgroundColor: "background.vlgray",
         height: "42px",
-        ml: open ? "240px" : 0,
+        ml: isMenuOpen ? "240px" : 0,
         position: "sticky"
       }}
     >
@@ -25,6 +29,7 @@ const SubBar = (props) => {
           borderColor: "primary.vlgray",
           justifyContent: "flex-start",
           alignItems: "center",
+          display: isPreviewMode ? 'none' : 'inherit',
           pl: 2
         }}
       >
@@ -35,9 +40,9 @@ const SubBar = (props) => {
       <Grid
         container
         item
-        xs={6}
+        xs={isPreviewMode ? 12 : 6}
         sx={{
-          borderLeft: "1px solid",
+          borderLeft: isPreviewMode ? '0px' : "1px solid",
           borderColor: "primary.vlgray",
           alignItems: "center"
         }}
@@ -48,8 +53,8 @@ const SubBar = (props) => {
           </Typography>
         </Grid>
         <Grid item xs={6} sx={{ justifyContent: "flex-end", pr: 2 }}>
-          <IconButton>
-            <RemoveRedEyeOutlinedIcon />
+          <IconButton onClick={() => togglePreview(!isPreviewMode)}>
+            {isPreviewMode ? <VisibilityOffOutlinedIcon/> : <RemoveRedEyeOutlinedIcon />}
           </IconButton>
         </Grid>
       </Grid>
@@ -57,4 +62,11 @@ const SubBar = (props) => {
   );
 };
 
-export default SubBar;
+const mapStateToProps = (state) => {
+  return {
+    isPreviewMode: state.isPreviewMode,
+    isMenuOpen: state.isMenuOpen
+  }
+}
+
+export default connect(mapStateToProps, { togglePreview })(SubBar);

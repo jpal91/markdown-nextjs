@@ -1,11 +1,11 @@
 import React, { useState } from "react";
+import { connect } from "react-redux";
 import Link from "next/link";
 import Image from "next/image";
 import Typography from "@mui/material/Typography";
 import AppBar from "@mui/material/AppBar";
 import Grid from "@mui/material/Grid";
 import IconButton from "@mui/material/IconButton";
-import ModeNightIcon from "@mui/icons-material/ModeNight";
 import ButtonBase from "@mui/material/ButtonBase";
 import Toolbar from "@mui/material/Toolbar";
 import MenuIcon from "@mui/icons-material/Menu";
@@ -15,12 +15,14 @@ import Box from "@mui/material/Box";
 import InsertDriveFileOutlinedIcon from "@mui/icons-material/InsertDriveFileOutlined";
 import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
 
+import { toggleMenu } from "../../actions/index.js";
+
 import SubBar from "./SubBar.js";
 
-const NavBar = () => {
-  // const themeCtx = useContext(ThemeContext);
-  const [open, setOpen] = useState(false);
-  const handleOpen = () => setOpen(!open);
+const NavBar = (props) => {
+  const { isMenuOpen, toggleMenu } = props
+  // const [open, setOpen] = useState(false);
+  // const handleOpen = () => setOpen(!open);
 
   return (
     <React.Fragment>
@@ -33,8 +35,8 @@ const NavBar = () => {
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          width: open ? "calc(100% - 240px)" : "100%",
-          ml: open ? "240px" : 0
+          width: isMenuOpen ? "calc(100% - 240px)" : "100%",
+          ml: isMenuOpen ? "240px" : 0
         }}
       >
         <Grid
@@ -57,7 +59,7 @@ const NavBar = () => {
               <IconButton
                 color="inherit"
                 edge={false}
-                onClick={handleOpen}
+                onClick={() => toggleMenu(!isMenuOpen)}
                 sx={{
                   mr: 5,
                   backgroundColor: "background.icon",
@@ -66,7 +68,7 @@ const NavBar = () => {
                   width: "72px"
                 }}
               >
-                {open ? (
+                {isMenuOpen ? (
                   <CloseIcon sx={{ fontSize: "35px" }} />
                 ) : (
                   <MenuIcon sx={{ fontSize: "35px" }} />
@@ -125,11 +127,11 @@ const NavBar = () => {
           </Grid>
         </Grid>
       </AppBar>
-      <SubBar open={open} />
+      <SubBar />
       <Drawer
         variant="persistent"
         anchor="left"
-        open={open}
+        open={isMenuOpen}
         sx={{
           width: 240,
           flexShrink: 0,
@@ -146,4 +148,10 @@ const NavBar = () => {
   );
 };
 
-export default NavBar;
+const mapStateToProps = (state) => {
+  return {
+    isMenuOpen: state.isMenuOpen
+  }
+}
+
+export default connect(mapStateToProps, { toggleMenu })(NavBar)
