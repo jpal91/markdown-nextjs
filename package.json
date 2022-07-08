@@ -13,6 +13,7 @@
     "@emotion/styled": "^11.9.3",
     "@mui/icons-material": "^5.8.4",
     "@mui/material": "^5.8.7",
+    "@redux-devtools/extension": "^3.2.2",
     "axios": "0.27.2",
     "fs": "0.0.2",
     "highlight.js": "^11.5.1",
@@ -21,7 +22,8 @@
     "react-dom": "18.2.0",
     "react-html-parser": "^2.0.2",
     "react-redux": "8.0.2",
-    "redux": "4.2.0"
+    "redux": "4.2.0",
+    "redux-thunk": "^2.4.1"
   },
   "devDependencies": {
     "eslint": "8.18.0",
