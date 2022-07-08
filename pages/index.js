@@ -46,7 +46,7 @@ const Home = (props) => {
                     width: isPreviewMode ? '0%' : "100%",
                     height: "calc(100vh - 114px)",
                     p: isPreviewMode ? 0 : 5,
-                    borderRight: "1px solid",
+                    borderRight: isPreviewMode ? 'none' : "1px solid",
                     borderColor: "primary.vlgray",
                 }}
             >
@@ -76,7 +76,7 @@ const Home = (props) => {
                 sx={{
                     width: "100%",
                     height: "calc(100vh - 114px)",
-                    borderLeft: "1px solid",
+                    borderLeft: isPreviewMode ? 'none' : "1px solid",
                     borderColor: "primary.vlgray",
                     flex: "1 1 auto",
                     p: 5,

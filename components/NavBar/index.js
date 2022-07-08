@@ -14,6 +14,7 @@ import CloseIcon from "@mui/icons-material/Close";
 import Box from "@mui/material/Box";
 import InsertDriveFileOutlinedIcon from "@mui/icons-material/InsertDriveFileOutlined";
 import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
+import KeyboardDoubleArrowDownIcon from '@mui/icons-material/KeyboardDoubleArrowDown';
 
 import { toggleMenu } from "../../actions/index.js";
 
@@ -79,7 +80,7 @@ const NavBar = (props) => {
               <ButtonBase>
                 <a>
                   <Typography variant="heading">
-                    MARKDOWN
+                    .MARK<KeyboardDoubleArrowDownIcon/>
                   </Typography>
                 </a>
               </ButtonBase>
