@@ -84,7 +84,7 @@ export const searchText = (str) => {
   const hasSuperScript = str.match(superRegex);
   hasSuperScript && (str = superScript(hasSuperScript, str));
 
-  str = str.replace(/\t/g, "&nbsp;&nbsp;&nbsp;");
+  str = str.replace(/\t/g, "&nbsp;"); //&nbsp;&nbsp;&nbsp;
   str = str.replace(/\n{3,}/g, "</br></br>");
   str = str.replace(/\n\n/g, "</br></br>");
   str = str.replace(/(\n|\\\n)/g, "</br>");
