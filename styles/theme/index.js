@@ -21,6 +21,7 @@ export default createTheme({
       }
     },
     MuiGrid: { ...grid },
-    MuiContainer: { ...container }
+    MuiContainer: { ...container },
+    
   }
 });

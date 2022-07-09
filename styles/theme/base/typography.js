@@ -68,6 +68,13 @@ const typography = {
     color: "white",
     fontSize: 15
   },
+  sideNavHeading: {
+    fontWeight: baseProperties.fontWeightRegular,
+    fontFamily: fontFam.regular,
+    color: primary.vlgray,
+    fontSize: 15,
+    letterSpacing: '2px'
+  },
   body1: {
     fontWeight: baseProperties.fontWeightRegular,
     fontFamily: fontFam.slab,

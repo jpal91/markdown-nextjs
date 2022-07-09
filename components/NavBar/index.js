@@ -19,6 +19,7 @@ import KeyboardDoubleArrowDownIcon from '@mui/icons-material/KeyboardDoubleArrow
 import { toggleMenu } from "../../actions/index.js";
 
 import SubBar from "./SubBar.js";
+import SideNav from "./SideNav.js";
 
 const NavBar = (props) => {
   const { isMenuOpen, toggleMenu } = props
@@ -129,22 +130,7 @@ const NavBar = (props) => {
         </Grid>
       </AppBar>
       <SubBar />
-      <Drawer
-        variant="persistent"
-        anchor="left"
-        open={isMenuOpen}
-        sx={{
-          width: 240,
-          flexShrink: 0,
-          "& .MuiDrawer-paper": {
-            width: 240,
-            boxSizing: "border-box",
-            backgroundColor: "background.navLight"
-          }
-        }}
-      >
-        thing
-      </Drawer>
+      <SideNav />
     </React.Fragment>
   );
 };
