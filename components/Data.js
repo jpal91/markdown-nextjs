@@ -4,7 +4,7 @@ import Typography from "@mui/material/Typography";
 import Box from '@mui/material/Box'
 import ReactHtmlParser, { processNodes, convertNodeToElement } from "react-html-parser";
 
-import { searchText } from "../helpers/search-text.js";
+import searchText from "../helpers/search-text.js";
 
 const transform = (node, index) => {
     if (node.name && node.name.startsWith("h")) {

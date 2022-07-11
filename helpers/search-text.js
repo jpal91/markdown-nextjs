@@ -3,7 +3,7 @@ import emojis from "./emojis";
 import { listBuilder } from "./funcs";
 import DOMPurify from "dompurify";
 
-export const searchText = (str) => {
+const searchText = (str) => {
   const openBracketRegex = /.?<.*/g;
   const bracketRegex = /`<.+>.*<\/.+>`/g;
   const headingsRegex = /#+\s.+\n?/g;
@@ -12,7 +12,7 @@ export const searchText = (str) => {
   const italicRegex = /(?<!(\*|\S))\*[^*\n]+\*(?!\*)/g;
   const codeRegex = /`[^`\n]+`/g
   const imageRegex = /!\[.*\]\(.+\)/g;
-  const blockCodeRegex = /```.*\n(?:(?!```)[\s\S])+\n```/g;
+  const blockCodeRegex = /```.*\n(?:(?!```|```\w)[\s\S])+\n```/g;
   const emojiRegex = /:[\w]+:/g;
   const blockQuoteRegex = /(?<=\n)(?:> .+\n)+/g;
   const lineBreakRegex = /\n---\n/g;
@@ -25,6 +25,7 @@ export const searchText = (str) => {
   const footRegex = /\[\^.\]:?(.+)?/g;
   const superRegex = /\^.+\^/g;
 
+  
   // let clean = DOMPurify.sanitize(str)
 
   const hasOpenBracket = str.match(openBracketRegex);
@@ -241,10 +242,11 @@ const image = (match, str) => {
 const blockCode = (match, str) => {
   const innerCode = /(?<=```.*\n\s?)(.+\s*)+\n?(?=```)/gm;
   const codeType = /(?<=```).*(?=\n)/;
-  console.log(match)
+
   match.forEach((m) => {
     let codeMatch = m.match(codeType) || "";
     let bcMatch = m.match(innerCode);
+    if (!bcMatch) {return}
     bcMatch[0] = bcMatch[0].replace(/&lt;/g, "<");
     let hl = hljs.highlightAuto(`${bcMatch[0]}`, [
       `${codeMatch[0]}`,
@@ -411,3 +413,5 @@ const superScript = (match, str) => {
 
   return str;
 };
+
+export default searchText
