@@ -7,11 +7,10 @@ export const searchText = (str) => {
   const openBracketRegex = /.?<.*/g;
   const bracketRegex = /`<.+>.*<\/.+>`/g;
   const headingsRegex = /#+\s.+\n?/g;
-  // const linksRegex = /\[.+\]\(.+\)/g;
   const linksRegex = /\[[^\[\)]+\)/g
   const boldRegex = /(?<!(\*|\S))\*\*[^*\n]+\*\*(?!\*)/g;
   const italicRegex = /(?<!(\*|\S))\*[^*\n]+\*(?!\*)/g;
-  const codeRegex = /`.+`/g;
+  const codeRegex = /`[^`\n]+`/g
   const imageRegex = /!\[.*\]\(.+\)/g;
   const blockCodeRegex = /```.*\n(?:(?!```)[\s\S])+\n```/g;
   const emojiRegex = /:[\w]+:/g;
@@ -26,18 +25,13 @@ export const searchText = (str) => {
   const footRegex = /\[\^.\]:?(.+)?/g;
   const superRegex = /\^.+\^/g;
 
-  let clean = DOMPurify.sanitize(str)
-
-  // console.log(clean)
+  // let clean = DOMPurify.sanitize(str)
 
   const hasOpenBracket = str.match(openBracketRegex);
   hasOpenBracket && (str = openBrackets(hasOpenBracket, str));
-  console.log(str)
+
   const hasBlockCode = str.match(blockCodeRegex);
   hasBlockCode && (str = blockCode(hasBlockCode, str));
-
-  const hasBracket = str.match(bracketRegex);
-  hasBracket && (str = bracket(hasBracket, str));
 
   const hasHeadings = str.match(headingsRegex);
   hasHeadings && (str = headings(hasHeadings, str));
@@ -91,10 +85,10 @@ export const searchText = (str) => {
   hasSuperScript && (str = superScript(hasSuperScript, str));
 
   str = str.replace(/\t/g, "&nbsp;"); //&nbsp;&nbsp;&nbsp;
-  str = str.replace(/\n{3,}/g, "</br></br>");
-  str = str.replace(/\n\n/g, "</br></br>");
+  str = str.replace(/\n{2,}/g, "<br><br>");
+  str = str.replace(/(<\/?br>){3,}/g, "<br><br>")
   str = str.replace(/(\n|\\\n)/g, "</br>");
-
+  
   return str;
 };
 
@@ -116,6 +110,7 @@ const openBrackets = (match, str) => {
 
   return str;
 };
+
 
 const bracket = (match, str) => {
   const codeMatch = /(?<=`)<.+>.*<\/.+>(?=`)/g;
@@ -160,7 +155,7 @@ const headings = (match, str) => {
       m,
       `<h${index + 1}${idMatch ? `id=${idMatch[0]}` : ""}>${
         m.match(headArray[index])[0]
-      }</h${index + 1}>`
+      }</h${index + 1}>\n`
     );
   });
 
@@ -217,7 +212,8 @@ const italic = (match, str) => {
 };
 
 const code = (match, str) => {
-  const codeRegex = /(?<=`).+(?=`)/g;
+  const codeRegex = /(?<=`).+(?=`)/;
+  const bracketRegex = /(&lt;|<)/
 
   match.forEach((m) => {
     let cMatch = m.match(codeRegex);
@@ -245,7 +241,7 @@ const image = (match, str) => {
 const blockCode = (match, str) => {
   const innerCode = /(?<=```.*\n\s?)(.+\s*)+\n?(?=```)/gm;
   const codeType = /(?<=```).*(?=\n)/;
-
+  console.log(match)
   match.forEach((m) => {
     let codeMatch = m.match(codeType) || "";
     let bcMatch = m.match(innerCode);
@@ -258,7 +254,7 @@ const blockCode = (match, str) => {
 
     str = str.replace(
       m,
-      `<br><blockquote id='code-holder'><pre id='code-holder'><code class='code-block'>${hl}</code></pre></blockquote>`
+      `<br><blockquote id='code-holder'><pre id='code-holder' wrap='true'><code class='code-block'>${hl}</code></pre></blockquote>`
     );
   });
 
@@ -290,7 +286,6 @@ const blockQuote = (match, str) => {
       `<blockquote id='block-q'>\n${bqMatch}\n</blockquote>`
     );
   });
-  //style="border-left:5px solid gray;padding-left:1.5em;margin:1.2em;"
   return str;
 };
 
@@ -340,7 +335,6 @@ const subText = (match, str) => {
 
 const uoList = (match, str) => {
   match.forEach((m) => {
-    // let listSection = m.split(/(\s*-\s.+\n?)/).filter((el) => el.length > 0);
     let listSection = m.split(/\n/).filter((el) => el.length > 0);
     let result = listBuilder(listSection, false);
 

@@ -13,6 +13,7 @@ A utility for converting HTML strings into [React](https://facebook.github.io/re
 ## Install
 
 ```bash
+
 npm install react-html-parser
 # or
 yarn add react-html-parser
@@ -21,6 +22,7 @@ yarn add react-html-parser
 ## Usage
 
 ```javascript
+
 import React from 'react';
 import ReactHtmlParser, { processNodes, convertNodeToElement, htmlparser2 } from 'react-html-parser';
 
@@ -53,13 +55,16 @@ Additionally, HTML sanitization is a hard thing to get right and even the most p
 ## API
 
 ### `function ReactHtmlParser(html, [options])`
+
 Takes an HTML string and returns equivalent React elements
 
 #### Usage
+
 ```js
 import ReactHtmlParser from 'react-html-parser';
 ```
 #### Arguments
+
 - `html`: The HTML string to parse
 - `options`: Options object
   - decodeEntities=true *(boolean)*: Whether to decode html entities (defaults to true)
@@ -70,6 +75,7 @@ import ReactHtmlParser from 'react-html-parser';
 The transform function will be called for every node that is parsed by the library.
 
 `function transform(node, index)`
+
 ##### Arguments
 - `node`: The node being parsed. This is the [htmlparser2](https://github.com/fb55/htmlparser2) node object. Full details can be found on their project page but important properties are:
   - `type` (string): The type of node *(tag, text, style etc)*
@@ -82,9 +88,13 @@ The transform function will be called for every node that is parsed by the libra
 - `index` (number): The index of the node in relation to it's parent
 
 #### Return Types
+
 `return null`
+
 Returning null will prevent the node and all of it's children from being rendered.
+
 ```js
+
 function transform(node) {
   // do not render any <span> tags
   if (node.type === 'tag' && node.name === 'span') {
@@ -92,12 +102,16 @@ function transform(node) {
   }
 }
 ```
+
 `return undefined`
+
 If the function does not return anything, or returns undefined, then the default behaviour will occur and the parser will continue was usual.
 
 `return React element`
 React elements can be returned directly
+
 ```js
+
 import React from 'react';
 function transform(node) {
   if (node.type === 'tag' && node.name === 'b') {
@@ -117,6 +131,7 @@ Allows pre-processing the nodes generated from the html by `htmlparser2` before 
 The `preprocessNodes` function should return a valid `htmlparser2` node tree.
 
 ### `function convertNodeToElement(node, index, transform)`
+
 Processes a node and returns the React element to be rendered. This function can be used in conjunction with the previously described `transform` function to continue to process a node after modifying it.
 
 #### Usage
