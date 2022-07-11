@@ -6,8 +6,8 @@ export const toggleMenu = (bool) => {
     return { type: 'TOGGLE_MENU', payload: bool }
 }
 
-export const setData = (event) => {
-    return { type: 'SET_DATA', payload: event.target.value }
+export const setData = (string) => {
+    return { type: 'SET_DATA', payload: string }
 }
 
 export const togglePreview = (bool) => {

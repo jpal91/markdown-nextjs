@@ -1,12 +1,14 @@
 import hljs from "highlight.js";
 import emojis from "./emojis";
 import { listBuilder } from "./funcs";
+import DOMPurify from "dompurify";
 
 export const searchText = (str) => {
   const openBracketRegex = /.?<.*/g;
   const bracketRegex = /`<.+>.*<\/.+>`/g;
   const headingsRegex = /#+\s.+\n?/g;
-  const linksRegex = /\[.+\]\(.+\)/g;
+  // const linksRegex = /\[.+\]\(.+\)/g;
+  const linksRegex = /\[[^\[\)]+\)/g
   const boldRegex = /(?<!(\*|\S))\*\*[^*\n]+\*\*(?!\*)/g;
   const italicRegex = /(?<!(\*|\S))\*[^*\n]+\*(?!\*)/g;
   const codeRegex = /`.+`/g;
@@ -24,9 +26,13 @@ export const searchText = (str) => {
   const footRegex = /\[\^.\]:?(.+)?/g;
   const superRegex = /\^.+\^/g;
 
+  let clean = DOMPurify.sanitize(str)
+
+  // console.log(clean)
+
   const hasOpenBracket = str.match(openBracketRegex);
   hasOpenBracket && (str = openBrackets(hasOpenBracket, str));
-
+  console.log(str)
   const hasBlockCode = str.match(blockCodeRegex);
   hasBlockCode && (str = blockCode(hasBlockCode, str));
 
@@ -167,6 +173,10 @@ const links = (match, str) => {
   const external = /https?:/g;
 
   match.forEach((m) => {
+    let trueLinkTest = /\[.+\]\(.+\)/
+
+    if (!trueLinkTest.test(m)) { return }
+    
     let dMatch = m.match(description);
     let hMatch = m.match(href);
     let externalTest = external.test(m);
@@ -211,7 +221,7 @@ const code = (match, str) => {
 
   match.forEach((m) => {
     let cMatch = m.match(codeRegex);
-    cMatch[0] = cMatch[0].replace(/&lt;/g, "<span><</span>");
+    cMatch[0] = cMatch[0].replace(/(&lt;|<)/g, "<span><</span>");
     str = str.replace(m, `<code id="code_styled">${cMatch[0]}</code>`);
   });
 

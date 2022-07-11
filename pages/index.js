@@ -8,9 +8,17 @@ import Data from "../components/Data";
 import { setData } from "../actions";
 
 const Home = (props) => {
-    const { isMenuOpen, isPreviewMode, setData } = props;
+    const { isMenuOpen, isPreviewMode, setData, mdData } = props;
 
     useEffect(() => {
+        const getData = async () => {
+            await fetch('./examples/test.md')
+            .then(res => res.text())
+            .then(res => { setData(res); console.log(res)})
+        }
+
+        getData()
+        
         const textId = document.querySelector("textarea");
 
         textId.addEventListener("keydown", (e) => {
@@ -22,7 +30,7 @@ const Home = (props) => {
                     textId.selectionStart,
                     "end"
                 );
-                setData(e);
+                setData(e.target.value);
             }
         });
     }, []);
@@ -53,7 +61,8 @@ const Home = (props) => {
                 <TextField
                     multiline
                     variant="standard"
-                    onChange={(event) => setData(event)}
+                    value={mdData}
+                    onChange={(event) => setData(event.target.value)}
                     sx={{
                         width: "100%",
                         overflow: "auto",
@@ -94,7 +103,8 @@ const Home = (props) => {
 const mapStateToProps = (state) => {
     return {
         isMenuOpen: state.isMenuOpen,
-        isPreviewMode: state.isPreviewMode
+        isPreviewMode: state.isPreviewMode,
+        mdData: state.mdData
     };
 };
 

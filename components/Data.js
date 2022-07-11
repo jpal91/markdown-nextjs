@@ -1,20 +1,17 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import Typography from "@mui/material/Typography";
 import Box from '@mui/material/Box'
-import ReactHtmlParser from "react-html-parser";
+import ReactHtmlParser, { processNodes } from "react-html-parser";
 
 import { searchText } from "../helpers/search-text.js";
 
 const transform = (node, index) => {
     if (node.name && node.name.startsWith("h")) {
         let tagName = node.name;
-        let str = "";
-        node.children.forEach((child) => (str += child.data));
-
         return (
             <Typography key={index} variant={tagName}>
-                {str}
+                {processNodes(node.children, transform)}
             </Typography>
         );
     }
@@ -22,10 +19,20 @@ const transform = (node, index) => {
 
 const Data = (props) => {
     const { mdData, isPreviewMode } = props;
-    const formattedData = mdData && searchText(mdData);
+    // const formattedData = mdData && searchText(mdData);
+    const [formattedData, setFormattedData] = useState('')
+
+    useEffect(() => {
+        if (!mdData) {
+            return
+        }
+
+        setFormattedData(searchText(mdData))
+
+    }, [mdData])
 
     return (
-        <Box id="preview" sx={{ width: isPreviewMode ? '50%' : '100%' }}>
+        <Box id="preview" sx={{ width: isPreviewMode ? '50%' : '100%', overflow: 'auto' }}>
             {ReactHtmlParser(formattedData, { transform: transform })}
         </Box>
     );
