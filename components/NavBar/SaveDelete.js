@@ -4,11 +4,29 @@ import Image from "next/image";
 import Grid from "@mui/material/Grid";
 import IconButton from "@mui/material/IconButton";
 import ButtonBase from "@mui/material/ButtonBase";
+import Snackbar from '@mui/material/Snackbar'
+import Alert from '@mui/material/Alert'
 import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
+import { connect } from "react-redux";
 
-const SaveDelete = () => {
+const SaveDelete = (props) => {
     const [visibility, setVisibility] = useState(true);
+    const [openSave, setOpenSave] = useState(false)
+    const [openDelete, setOpenDelete] = useState(false)
     const router = useRouter();
+
+    const handleSave = () => {
+        setOpenSave(true)
+    }
+
+    const handleClose = (event, reason) => {
+        if (reason === 'clickaway') {
+            return
+        }
+
+        setOpenSave(false)
+        setOpenDelete(false)
+    }
 
     useEffect(() => {
         if (router.pathname.includes("example")) {
@@ -34,11 +52,26 @@ const SaveDelete = () => {
                     sx={{ color: "primary.vlgray", mr: 2 }}
                 />
             </IconButton>
-            <ButtonBase>
+            <ButtonBase onClick={handleSave} >
                 <Image src="/images/save-button.svg" width="150" height="70" />
             </ButtonBase>
+            <Snackbar 
+                open={openSave}
+                autoHideDuration={5000}
+                onClose={handleClose}
+                message='Document saved'
+
+            >
+                <Alert severity="success" sx={{ width: 'fit-content', height: '100px', fontSize: '24px', justifyContent: 'center' }}>Document Saved!</Alert>
+            </Snackbar>
         </Grid>
     );
 };
 
-export default SaveDelete;
+const mapStateToProps = (state) => {
+    return {
+        mdData: state.mdData
+    }
+}
+
+export default connect(mapStateToProps)(SaveDelete);
