@@ -13,3 +13,7 @@ export const setData = (string) => {
 export const togglePreview = (bool) => {
     return { type: 'TOGGLE_PREVIEW', payload: bool }
 }
+
+export const setFileName = (string) => {
+    return { type: 'FILE_NAME', payload: string }
+}

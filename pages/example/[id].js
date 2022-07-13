@@ -6,15 +6,13 @@ import path from 'path'
 
 import MainApp from "../../components/Main/MainApp";
 
-import { setData } from "../../actions";
+import { setData, setFileName } from "../../actions";
 
 const Example = (props) => {
-    const { setData, post } = props
-    const router = useRouter()
-
+    const { setData, post, setFileName, id } = props
 
     useEffect(() => {
-
+        setFileName(`${id}.md`)
         setData(post)
     }, [])
 
@@ -33,6 +31,7 @@ export const getStaticProps = async (context) => {
     return {
         props: {
             post,
+            id: params.id
         }
     }
 }
@@ -48,4 +47,4 @@ export const getStaticPaths = async () => {
     }
 }
 
-export default connect(null, { setData })(Example)
+export default connect(null, { setData, setFileName })(Example)

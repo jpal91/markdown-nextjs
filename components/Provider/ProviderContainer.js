@@ -6,7 +6,11 @@ import theme from "../../styles/theme";
 const ProviderContainer = (props) => {
     const { isDarkMode } = props;
 
-    return <ThemeProvider theme={isDarkMode ? null : theme}>{props.children}</ThemeProvider>;
+    return (
+        <ThemeProvider theme={isDarkMode ? null : theme}>
+            {props.children}
+        </ThemeProvider>
+    );
 };
 
 const mapStateToProps = (state) => {

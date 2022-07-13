@@ -1,12 +1,14 @@
 import { useEffect } from "react";
-import { useRouter } from "next/router";
 import MainApp from "../components/Main/MainApp";
+import { connect } from "react-redux";
 
-const Home = () => {
-    const router = useRouter()
+import { setFileName } from "../actions";
+
+const Home = (props) => {
+    const { setFileName } = props
 
     useEffect(() => {
-        console.log(router.pathname)
+        setFileName('welcome.md')
     }, [])
     
     return (
@@ -15,5 +17,5 @@ const Home = () => {
 };
 
 
-export default Home
+export default connect(null, { setFileName })(Home)
 
