@@ -1,4 +1,5 @@
 import Document, { Html, Head, Main, NextScript } from "next/document";
+import Script from "next/script";
 
 class MyDocument extends Document {
     render() {
@@ -10,7 +11,7 @@ class MyDocument extends Document {
                         rel="stylesheet"
                         href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.0/styles/default.min.css"
                     />
-                    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.0/highlight.min.js"></script>
+                    <Script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.0/highlight.min.js"></Script>
 
                     <link
                         rel="preconnect"
@@ -19,7 +20,7 @@ class MyDocument extends Document {
                     <link
                         rel="preconnect"
                         href="https://fonts.gstatic.com"
-                        crossorigin='true'
+                        crossOrigin='true'
                     />
                     <link
                         href="https://fonts.googleapis.com/css2?family=Lato&display=swap"

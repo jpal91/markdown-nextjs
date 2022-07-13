@@ -8,6 +8,7 @@ import { CssBaseline } from "@mui/material";
 import ProviderContainer from "../components/Provider/ProviderContainer";
 import NavBar from "../components/NavBar";
 import reducers from "../reducers";
+import '../public/theme.css'
 
 const store = createStore(
 	reducers,

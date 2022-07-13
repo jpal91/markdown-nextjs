@@ -96,6 +96,7 @@ export const searchText = (str) => {
     str = str.replace(/(\n|\\\n)/g, "</br>");
     str = str.replace(/(<\/?br>){2,}/g, "</br></br>");
     str = str.replace(/(&#35;)/g, "#");
+    str = str.replace(/(&#61;)/g, "=");
 
     return DOMPurify.sanitize(str, { ADD_ATTR: ['target'] });
 };
@@ -254,11 +255,13 @@ const blockCode = (match, str) => {
     const innerCode = /(?<=```.*(\r\n|\s))(.+\s*)+\n?(?=```)/gm;
     const codeType = /(?<=```).*(?=\n)/;
     const headings = /#+/g;
+    const equals = /=+/g
 
     match.forEach((m) => {
         let codeMatch = m.match(codeType) || "";
         let bcMatch = m.match(innerCode);
         let hMatch = m.match(headings);
+        let eMatch = m.match(equals)
         if (!bcMatch) {
             return;
         }
@@ -271,6 +274,7 @@ const blockCode = (match, str) => {
         ]).value;
 
         hMatch ? (hl = hl.replace(/#/g, `&#35;`)) : null;
+        eMatch ? (hl = hl.replace(/=/g, '&#61;')) : null
 
         str = str.replace(
             m,
@@ -320,7 +324,7 @@ const lineBreak = (match, str) => {
 
 const highLight = (match, str) => {
     const highL = /(?<===)[\s\S]+(?===)/;
-    console.log(match)
+    // console.log(match)
     match.forEach((m) => {
         let highLMatch = m.match(highL);
 
