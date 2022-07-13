@@ -5,7 +5,6 @@ class MyDocument extends Document {
         return (
             <Html lang="en">
                 <Head>
-                    <meta name="viewport" content="width=device-width" />
                     <link rel="stylesheet" href="./theme.css" />
                     <link
                         rel="stylesheet"
@@ -20,7 +19,7 @@ class MyDocument extends Document {
                     <link
                         rel="preconnect"
                         href="https://fonts.gstatic.com"
-                        crossorigin
+                        crossorigin='true'
                     />
                     <link
                         href="https://fonts.googleapis.com/css2?family=Lato&display=swap"
@@ -33,7 +32,7 @@ class MyDocument extends Document {
                     <link
                         rel="preconnect"
                         href="https://fonts.gstatic.com"
-                        crossOrigin
+                        crossOrigin='true'
                     />
                     <link
                         href="https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap"
@@ -46,7 +45,7 @@ class MyDocument extends Document {
                     <link
                         rel="preconnect"
                         href="https://fonts.gstatic.com"
-                        crossOrigin
+                        crossOrigin='true'
                     />
                     <link
                         href="https://fonts.googleapis.com/css2?family=Roboto&display=swap"
@@ -59,7 +58,7 @@ class MyDocument extends Document {
                     <link
                         rel="preconnect"
                         href="https://fonts.gstatic.com"
-                        crossOrigin
+                        crossOrigin='true'
                     />
                     <link
                         href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@300;400;700&display=swap"
