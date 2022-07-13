@@ -1,19 +1,17 @@
 import { useEffect } from "react";
 import { useRouter } from "next/router";
-import MainApp from "../components/Main/MainApp";
+import MainApp from "../../components/Main/MainApp";
 
-const Home = () => {
+const Example = () => {
     const router = useRouter()
 
     useEffect(() => {
-        console.log(router.pathname)
+        console.log(router.query)
     }, [])
-    
+
     return (
         <MainApp />
     );
-};
+}
 
-
-export default Home
-
+export default Example

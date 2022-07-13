@@ -47,7 +47,6 @@ const Preview = (props) => {
                 borderColor: "primary.vlgray",
                 flex: "1 1 auto",
                 p: 5,
-                // px: 'auto',
                 typography: "body1",
                 justifyContent: isPreviewMode ? "center" : "flex-start",
             }}
