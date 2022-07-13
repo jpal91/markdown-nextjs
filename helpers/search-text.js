@@ -12,7 +12,7 @@ export const searchText = (str) => {
   const boldRegex = /(?<!(\*|\S))\*\*[^*\n]+\*\*(?!\*)/g;
   const italicRegex = /(?<!(\*|\S))\*[^*\n]+\*(?!\*)/g;
   // const codeRegex = /`.+`/g;
-  const codeRegex = /`[^`\n]+`/g
+  const codeRegex = /`[^`\n]+`\n?/g
   const imageRegex = /!\[.*\]\(.+\)/g;
   const blockCodeRegex = /```.*(\r?\n|\s)(?:(?!```)[\s\S])+\n```/g; ///```.*\s(?:(?!```)[\s\S])+\n```/g
   const emojiRegex = /:[\w]+:/g;
@@ -93,6 +93,9 @@ export const searchText = (str) => {
   str = str.replace(/\n{3,}/g, "</br></br>");
   str = str.replace(/\n\n/g, "</br></br>");
   str = str.replace(/(\n|\\\n)/g, "</br>");
+  str = str.replace(/(<\/?br>){2,}/g, '</br></br>')
+  str = str.replace(/(&#35;)/g, '#')
+  console.log(str.match(/&#35;/))
 
   return DOMPurify.sanitize(str);
 };
@@ -159,7 +162,7 @@ const headings = (match, str) => {
       m,
       `<h${index + 1}${idMatch ? `id=${idMatch[0]}` : ""}>${
         m.match(headArray[index])[0]
-      }</h${index + 1}>`
+      }</h${index + 1}>\n`
     );
   });
 
@@ -217,11 +220,14 @@ const italic = (match, str) => {
 
 const code = (match, str) => {
   const codeRegex = /(?<=`).+(?=`)/g;
+  const returnRegex = /\n/
 
   match.forEach((m) => {
     let cMatch = m.match(codeRegex);
+    let rMatch = returnRegex.test(m) ? '<br><br>' : ''
+    console.log(rMatch)
     cMatch[0] = cMatch[0].replace(/(&lt;|<)/g, "<span><</span>");
-    str = str.replace(m, `<code id="code_styled">${cMatch[0]}</code>`);
+    str = str.replace(m, `<code id="code_styled">${cMatch[0]}</code>${rMatch}`);
   });
 
   return str;
@@ -243,20 +249,24 @@ const image = (match, str) => {
 
 const blockCode = (match, str) => {
   const innerCode = /(?<=```.*(\r\n|\s))(.+\s*)+\n?(?=```)/gm;
-  //(?<=```.*\n)(.+|\s*)+\n(?=```)
   const codeType = /(?<=```).*(?=\n)/;
+  const headings = /#+/g
 
   match.forEach((m) => {
     let codeMatch = m.match(codeType) || "";
     let bcMatch = m.match(innerCode);
+    let hMatch = m.match(headings)
     if (!bcMatch) {return}
     bcMatch[0] = bcMatch[0].replace(/&lt;/g, "<");
+
     let hl = hljs.highlightAuto(`${bcMatch[0]}`, [
       `${codeMatch[0]}`,
       "html",
       "javascript"
     ]).value;
 
+    hMatch ? hl = hl.replace(/#/g, `&#35;`) : null
+    
     str = str.replace(
       m,
       `<br><blockquote id='code-holder'><pre id='code-holder' wrap='true'><code class='code-block'>${hl}</code></pre></blockquote>`
