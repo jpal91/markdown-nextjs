@@ -1,3 +1,6 @@
+import { processNodes } from "react-html-parser";
+import Typography from '@mui/material/Typography'
+
 export const listBuilder = (matches, ordered) => {
   const olOrUl = ordered
     ? { open: "<ol>", close: "</ol>" }
@@ -48,4 +51,23 @@ export const listBuilder = (matches, ordered) => {
 
     return newString;
   });
+};
+
+
+export const transform = (node, index) => {
+  if (node.name && node.name.startsWith("h")) {
+      if (node.parent && node.parent.name === 'span') {
+          return (
+              <p key={index}>
+                  {processNodes(node.children, transform)}
+              </p>
+          )
+      }
+      let tagName = node.name;
+      return (
+          <Typography key={index} variant={tagName}>
+              {processNodes(node.children, transform)}
+          </Typography>
+      );
+  }
 };
