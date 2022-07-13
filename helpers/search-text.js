@@ -20,7 +20,8 @@ export const searchText = (str) => {
     const emojiRegex = /:[\w]+:/g;
     const blockQuoteRegex = /(?<=\n)(?:> .+\n)+/g;
     const lineBreakRegex = /\n---\n/g;
-    const highRegex = /(==[^=]+==)/g;
+    // const highRegex = /==[^=]+==/g;
+    const highRegex = /==(?:(?!==)[\s\S])+==/g;
     const strikeRegex = /~~[^~]+~~/g;
     const subRegex = /(?<!~)~[^~]+~(?!~)/g;
     const uoRegex = /(?<=\n)((?:>\s)?\s*-\s(?!\[|]).+\n)+/g;
@@ -318,8 +319,8 @@ const lineBreak = (match, str) => {
 };
 
 const highLight = (match, str) => {
-    const highL = /(?<===)[^=]+(?===)/;
-
+    const highL = /(?<===)[\s\S]+(?===)/;
+    console.log(match)
     match.forEach((m) => {
         let highLMatch = m.match(highL);
 

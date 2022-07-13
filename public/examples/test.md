@@ -1,4 +1,4 @@
-#### *Important Note: This Markdown file is an example. All credit for it's creation goes to the Facebook team @ [Create React App](https://github.com/facebook/create-react-app)*
+#### ==*Important Note: This Markdown file is an example. All credit for it's creation goes to the Facebook team @ [Create React App](https://github.com/facebook/create-react-app)*==
 
 # Getting Started with Create React App
 
