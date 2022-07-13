@@ -55,7 +55,7 @@ const Data = (props) => {
 
     return (
         <ScrollSyncPane>
-        <Box id="preview" sx={{ width: isPreviewMode ? '50%' : '100%', overflow: 'auto' }}>
+        <Box id="preview" sx={{ width: isPreviewMode ? '50%' : '100%', overflow: 'auto', height: '100%' }}>
             {formattedText}
         </Box>
         </ScrollSyncPane>

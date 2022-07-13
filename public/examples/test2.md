@@ -1,3 +1,5 @@
+#### ==*Important Note: This Markdown file is an example. All credit for it's creation goes to the team @ [React HTML Parser](https://github.com/peternewnham/react-html-parser)*==
+
 # React HTML Parser
 
 A utility for converting HTML strings into [React](https://facebook.github.io/react/) components. Converts standard HTML elements, attributes and inline styles into their React equivalents and provides a simple way to modify and replace the content.

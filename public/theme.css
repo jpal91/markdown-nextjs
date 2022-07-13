@@ -22,7 +22,7 @@ code.code-block {
   width: 100%;
   max-width: 600px;
   border-radius: 3px;
-  word-wrap: normal;
+  word-wrap: break-word;
 }
 
 .hljs-keyword {
@@ -47,6 +47,10 @@ code.code-block {
 
 .hljs-variable {
   color: hsla(294, 71%, 66%, 1) !important;
+}
+
+.hljs-attr {
+  color: white !important
 }
 
 #code-holder {
