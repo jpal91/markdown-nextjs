@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { connect } from "react-redux";
+import { ScrollSync, ScrollSyncPane } from "react-scroll-sync";
 import Grid from "@mui/material/Grid";
 import Container from "@mui/material/Container";
 import TextField from "@mui/material/TextField";
@@ -36,6 +37,7 @@ const Home = (props) => {
     }, []);
 
     return (
+        <ScrollSync>
         <Container
             sx={{
                 maxWidth: "100% !important",
@@ -47,6 +49,7 @@ const Home = (props) => {
                 ml: isMenuOpen ? "240px" : 0,
             }}
         >
+            
             <Grid
                 item
                 xs={6}
@@ -58,6 +61,7 @@ const Home = (props) => {
                     borderColor: "primary.vlgray",
                 }}
             >
+                <ScrollSyncPane>
                 <TextField
                     multiline
                     variant="standard"
@@ -78,6 +82,7 @@ const Home = (props) => {
                         },
                     }}
                 />
+                </ScrollSyncPane>
             </Grid>
             <Grid
                 item
@@ -96,7 +101,9 @@ const Home = (props) => {
             >
                 <Data />
             </Grid>
+            
         </Container>
+        </ScrollSync>
     );
 };
 

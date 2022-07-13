@@ -5,15 +5,16 @@ import DOMPurify from "dompurify";
 
 export const searchText = (str) => {
   const openBracketRegex = /.?<.*/g;
-  const bracketRegex = /`<.+>.*<\/.+>`/g;
+  // const bracketRegex = /`<.+>.*<\/.+>`/g;
   const headingsRegex = /#+\s.+\n?/g;
   // const linksRegex = /\[.+\]\(.+\)/g;
   const linksRegex = /\[[^\[\)]+\)/g
   const boldRegex = /(?<!(\*|\S))\*\*[^*\n]+\*\*(?!\*)/g;
   const italicRegex = /(?<!(\*|\S))\*[^*\n]+\*(?!\*)/g;
-  const codeRegex = /`.+`/g;
+  // const codeRegex = /`.+`/g;
+  const codeRegex = /`[^`\n]+`/g
   const imageRegex = /!\[.*\]\(.+\)/g;
-  const blockCodeRegex = /```.*\n(?:(?!```)[\s\S])+\n```/g;
+  const blockCodeRegex = /```.*(\r?\n|\s)(?:(?!```)[\s\S])+\n```/g; ///```.*\s(?:(?!```)[\s\S])+\n```/g
   const emojiRegex = /:[\w]+:/g;
   const blockQuoteRegex = /(?<=\n)(?:> .+\n)+/g;
   const lineBreakRegex = /\n---\n/g;
@@ -28,16 +29,14 @@ export const searchText = (str) => {
 
   let clean = DOMPurify.sanitize(str)
 
-  // console.log(clean)
-
   const hasOpenBracket = str.match(openBracketRegex);
   hasOpenBracket && (str = openBrackets(hasOpenBracket, str));
 
   const hasBlockCode = str.match(blockCodeRegex);
   hasBlockCode && (str = blockCode(hasBlockCode, str));
 
-  const hasBracket = str.match(bracketRegex);
-  hasBracket && (str = bracket(hasBracket, str));
+  // const hasBracket = str.match(bracketRegex);
+  // hasBracket && (str = bracket(hasBracket, str));
 
   const hasHeadings = str.match(headingsRegex);
   hasHeadings && (str = headings(hasHeadings, str));
@@ -95,7 +94,7 @@ export const searchText = (str) => {
   str = str.replace(/\n\n/g, "</br></br>");
   str = str.replace(/(\n|\\\n)/g, "</br>");
 
-  return str;
+  return DOMPurify.sanitize(str);
 };
 
 const openBrackets = (match, str) => {
@@ -243,12 +242,14 @@ const image = (match, str) => {
 };
 
 const blockCode = (match, str) => {
-  const innerCode = /(?<=```.*\n\s?)(.+\s*)+\n?(?=```)/gm;
+  const innerCode = /(?<=```.*(\r\n|\s))(.+\s*)+\n?(?=```)/gm;
+  //(?<=```.*\n)(.+|\s*)+\n(?=```)
   const codeType = /(?<=```).*(?=\n)/;
 
   match.forEach((m) => {
     let codeMatch = m.match(codeType) || "";
     let bcMatch = m.match(innerCode);
+    if (!bcMatch) {return}
     bcMatch[0] = bcMatch[0].replace(/&lt;/g, "<");
     let hl = hljs.highlightAuto(`${bcMatch[0]}`, [
       `${codeMatch[0]}`,
@@ -258,7 +259,7 @@ const blockCode = (match, str) => {
 
     str = str.replace(
       m,
-      `<br><blockquote id='code-holder'><pre id='code-holder'><code class='code-block'>${hl}</code></pre></blockquote>`
+      `<br><blockquote id='code-holder'><pre id='code-holder' wrap='true'><code class='code-block'>${hl}</code></pre></blockquote>`
     );
   });
 
