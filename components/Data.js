@@ -11,7 +11,7 @@ const transform = (node, index) => {
     if (node.name && node.name.startsWith("h")) {
         if (node.parent && node.parent.name === 'span') {
             return (
-                <p>
+                <p key={index}>
                     {processNodes(node.children, transform)}
                 </p>
             )

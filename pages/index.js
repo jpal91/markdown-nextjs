@@ -15,7 +15,10 @@ const Home = (props) => {
         const getData = async () => {
             await fetch('./examples/test2.md')
             .then(res => res.text())
-            .then(res => { setData(res)})
+            .then(res => { 
+                res = res.replace(/\r\n/g, '\n')
+                setData(res)
+            })
         }
 
         getData()

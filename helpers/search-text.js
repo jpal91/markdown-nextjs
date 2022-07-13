@@ -27,7 +27,7 @@ export const searchText = (str) => {
   const footRegex = /\[\^.\]:?(.+)?/g;
   const superRegex = /\^.+\^/g;
 
-  let clean = DOMPurify.sanitize(str)
+  
 
   const hasOpenBracket = str.match(openBracketRegex);
   hasOpenBracket && (str = openBrackets(hasOpenBracket, str));
