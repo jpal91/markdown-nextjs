@@ -19,21 +19,35 @@ const transform = (node, index) => {
 
 const Data = (props) => {
     const { mdData, isPreviewMode } = props;
-    // const formattedData = mdData && searchText(mdData);
     const [formattedData, setFormattedData] = useState('')
+    const [formattedText, setFormattedText] = useState()
 
     useEffect(() => {
-        if (!mdData) {
-            return
-        }
+        setFormattedData(mdData)
+        setFormattedText(ReactHtmlParser(formattedData, { transform: transform }))
+    }, [])
 
-        setFormattedData(searchText(mdData))
+    useEffect(() => {
+        
+        const timerId = setTimeout(() => {
+            setFormattedData(searchText(mdData))
+        }, 100)
+        
+        return () => {
+            clearTimeout(timerId)
+        }
 
     }, [mdData])
 
+    useEffect(() => {
+        setFormattedText(ReactHtmlParser(formattedData, { transform: transform }))
+    }, [formattedData])
+
+
+
     return (
         <Box id="preview" sx={{ width: isPreviewMode ? '50%' : '100%', overflow: 'auto' }}>
-            {ReactHtmlParser(formattedData, { transform: transform })}
+            {formattedText}
         </Box>
     );
 };

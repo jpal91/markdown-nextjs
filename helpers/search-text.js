@@ -32,7 +32,7 @@ export const searchText = (str) => {
 
   const hasOpenBracket = str.match(openBracketRegex);
   hasOpenBracket && (str = openBrackets(hasOpenBracket, str));
-  console.log(str)
+
   const hasBlockCode = str.match(blockCodeRegex);
   hasBlockCode && (str = blockCode(hasBlockCode, str));
 

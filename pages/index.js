@@ -12,9 +12,9 @@ const Home = (props) => {
 
     useEffect(() => {
         const getData = async () => {
-            await fetch('./examples/test.md')
+            await fetch('./examples/test2.md')
             .then(res => res.text())
-            .then(res => { setData(res); console.log(res)})
+            .then(res => { setData(res)})
         }
 
         getData()
