@@ -13,7 +13,7 @@ const Home = (props) => {
 
     useEffect(() => {
         const getData = async () => {
-            await fetch('./examples/test2.md')
+            await fetch('./examples/test.md')
             .then(res => res.text())
             .then(res => { 
                 res = res.replace(/\r\n/g, '\n')

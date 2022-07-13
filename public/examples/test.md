@@ -1,8 +1,8 @@
+#### *Important Note: This Markdown file is an example. All credit for it's creation goes to the Facebook team @ [Create React App](https://github.com/facebook/create-react-app)*
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
-
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Available Scripts
 
