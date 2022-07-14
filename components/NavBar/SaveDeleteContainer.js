@@ -10,11 +10,12 @@ import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined
 import { connect } from "react-redux";
 
 import Save from "./Save";
+import Delete from "./Delete";
 
 const SaveDeleteContainer = (props) => {
     const { mdData, fileName } = props
     const [visibility, setVisibility] = useState(true);
-    const [openSave, setOpenSave] = useState(false)
+
     const [openDelete, setOpenDelete] = useState(false)
     const router = useRouter();
 
@@ -69,11 +70,12 @@ const SaveDeleteContainer = (props) => {
                 contentVisibility: visibility ? "visible" : "hidden",
             }}
         >
-            <IconButton>
+            {/* <IconButton>
                 <DeleteOutlineOutlinedIcon
                     sx={{ color: "primary.vlgray", mr: 2 }}
                 />
-            </IconButton>
+            </IconButton> */}
+            <Delete />
             <Save />
         </Grid>
     );
