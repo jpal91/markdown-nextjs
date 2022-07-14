@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router.js";
 import Grid from "@mui/material/Grid";
-import { connect } from "react-redux";
 
 import Save from "./Save";
 import Delete from "./Delete";

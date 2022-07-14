@@ -92,7 +92,8 @@ const FileInfo = (props) => {
                             typography: "editor",
                             lineHeight: "24px",
                             tabSize: 1,
-                            color: 'white'
+                            color: 'white',
+                            borderBottom: '1px solid white'
                         },
                     }}
                 />
