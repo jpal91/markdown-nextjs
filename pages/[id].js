@@ -11,11 +11,11 @@ const UserDoc = (props) => {
 
   useEffect(() => {
     let route = router.query.id;
+    if (!localData.user) {
+      return;
+    }
 
     if (!mdData) {
-      // let localData = localStorage.getItem('localData')
-      // localData = JSON.parse(localData)
-
       if (localData.docs[`${route}`]) {
         setFileName(`${route}.md`);
         setData(localData.docs[`${route}`].md);
@@ -24,7 +24,7 @@ const UserDoc = (props) => {
         router.push("/");
       }
     }
-  }, []);
+  }, [mdData, localData]);
 
   return <MainApp />;
 };

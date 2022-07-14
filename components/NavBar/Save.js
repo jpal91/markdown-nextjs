@@ -14,6 +14,7 @@ const Save = (props) => {
     let fileWOExt = fileName.slice(0, -3);
 
     let newDataState = { ...localData };
+    newDataState.user = "localUser";
     newDataState.docs[`${fileWOExt}`] = {
       md: mdData,
       date: new Date().toLocaleDateString()

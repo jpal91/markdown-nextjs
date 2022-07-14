@@ -32,7 +32,7 @@ const FileInfo = (props) => {
   };
 
   useEffect(() => {
-    if (router.query.id) {
+    if (router.pathname.includes("example") && router.query.id) {
       setDisableButton(true);
     }
 
@@ -65,7 +65,7 @@ const FileInfo = (props) => {
 
         const checkFileExists = fileExists(ele.value);
 
-        if (checkFileExists) {
+        if (checkFileExists && !router.query.id) {
           setIsInput(false);
           setDisableButton(false);
           setAlert({
@@ -73,6 +73,7 @@ const FileInfo = (props) => {
             message: "File Already Exists!",
             severity: "error"
           });
+          setInputValue("");
           return;
         }
 
@@ -81,6 +82,11 @@ const FileInfo = (props) => {
           : setFileName(ele.value + ".md");
         setIsInput(false);
         setDisableButton(false);
+        setAlert({
+          open: true,
+          message: "File re-named. Remember to save changes!",
+          severity: "success"
+        });
       }
     };
 

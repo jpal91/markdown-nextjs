@@ -3,8 +3,6 @@ import { connect } from "react-redux";
 import { useRouter } from "next/router";
 import IconButton from "@mui/material/IconButton";
 import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
-import Snackbar from "@mui/material/Snackbar";
-import Alert from "@mui/material/Alert";
 
 import DeleteModal from "./DeleteModal";
 import { updateLocalData, setAlert } from "../../actions";
