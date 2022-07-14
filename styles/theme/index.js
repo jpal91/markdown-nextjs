@@ -9,6 +9,7 @@ import grid from "./components/grid";
 import container from "./components/container";
 //import appbar from "./components/appbar";
 //import button from "./components/button";
+import alert from "./components/alert";
 
 export default createTheme({
   typography: { ...typography },
@@ -22,6 +23,7 @@ export default createTheme({
     },
     MuiGrid: { ...grid },
     MuiContainer: { ...container },
+    MuiAlert: { ...alert }
     
   }
 });

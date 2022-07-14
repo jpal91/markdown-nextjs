@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from "react";
+import { useRouter } from "next/router";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import ButtonBase from "@mui/material/ButtonBase";
@@ -11,18 +12,25 @@ import { setFileName } from "../../actions";
 const FileInfo = (props) => {
     const { fileName, setFileName } = props
     const elementRef = useRef();
+    const router = useRouter()
     const [isInput, setIsInput] = useState(false);
+    const [disableButton, setDisableButton] = useState(false)
     const [inputValue, setInputValue] = useState('')
-    // const [fileName, setFileName] = useState("welcome.md");
 
     const handleClick = () => setIsInput(!isInput);
     
+    useEffect(() => {
+        router.query.id && setDisableButton(true)
+
+        return () => {
+            setDisableButton(false)
+        }
+    }, [router])
 
     useEffect(() => {
-        if (!isInput) {
-            
-            return;
-        }
+        if (!isInput) { return }
+
+        setDisableButton(true)
         let ele = elementRef.current;
 
         ele.focus()
@@ -35,6 +43,7 @@ const FileInfo = (props) => {
                 if (ele.value.length === 0) { return setIsInput(false) }
                 fileNameRegex.test(ele.value) ? setFileName(ele.value) : setFileName(ele.value + '.md')
                 setIsInput(false);
+                setDisableButton(false)
             }
         }
 
@@ -57,7 +66,7 @@ const FileInfo = (props) => {
                 <ButtonBase
                     onClick={handleClick}
                     sx={{ justifyContent: "flex-start" }}
-                    disabled={isInput}
+                    disabled={disableButton}
                 >
                     <Typography hidden={isInput} variant="headingText">
                         {fileName}

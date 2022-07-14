@@ -10,12 +10,32 @@ import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined
 import { connect } from "react-redux";
 
 const SaveDelete = (props) => {
+    const { mdData, fileName } = props
     const [visibility, setVisibility] = useState(true);
     const [openSave, setOpenSave] = useState(false)
     const [openDelete, setOpenDelete] = useState(false)
     const router = useRouter();
 
     const handleSave = () => {
+        let localData = localStorage.getItem('localData')
+        let fileWOExt = fileName.slice(0, -3)
+
+        if (!localData) {
+            let obj = { [`${fileWOExt}`]: { dateCreated: new Date().toLocaleDateString(), data: mdData } }
+            localStorage.setItem('localData', JSON.stringify(obj))
+
+        } else if (!localData[`${fileWOExt}`]) {
+            localData = JSON.parse(localData)
+            localData[`${fileWOExt}`] = { dateCreated: new Date().toLocaleDateString(), data: mdData }
+            localStorage.setItem('localData', JSON.stringify(obj))
+
+        } else if (localData[`${fileWOExt}`]) {
+            localData = JSON.parse(localData)
+            localData[`${fileWOExt}`].data = mdData
+            localStorage.setItem('localData', JSON.stringify(localData))
+        }
+
+        router.push(`/${fileWOExt}`, undefined, { shallow: true })
         setOpenSave(true)
     }
 
@@ -60,9 +80,9 @@ const SaveDelete = (props) => {
                 autoHideDuration={5000}
                 onClose={handleClose}
                 message='Document saved'
-
+                
             >
-                <Alert severity="success" sx={{ width: 'fit-content', height: '100px', fontSize: '24px', justifyContent: 'center' }}>Document Saved!</Alert>
+                <Alert severity="success" sx={{ px: 5 }}>Document Saved!</Alert>
             </Snackbar>
         </Grid>
     );
@@ -70,7 +90,8 @@ const SaveDelete = (props) => {
 
 const mapStateToProps = (state) => {
     return {
-        mdData: state.mdData
+        mdData: state.mdData,
+        fileName: state.fileName
     }
 }
 
