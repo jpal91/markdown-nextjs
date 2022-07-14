@@ -30,7 +30,15 @@ export const getLocalData = () => {
 };
 
 export const updateLocalData = (data) => {
-  localStorage.setItem("localData", JSON.stringify(data))
+  localStorage.setItem("localData", JSON.stringify(data));
 
-  return { type: 'LOCAL_DATA', payload: data }
-}
+  return { type: "LOCAL_DATA", payload: data };
+};
+
+export const setAlert = (alertState) => {
+  if (alertState.open === false) {
+    return { type: "ALERT_STATUS", payload: false };
+  }
+
+  return { type: "ALERT_STATUS", payload: alertState };
+};

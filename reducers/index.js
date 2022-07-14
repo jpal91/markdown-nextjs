@@ -6,6 +6,7 @@ import data from "./data";
 import preview from "./preview";
 import filename from "./filename";
 import localdata from "./localdata";
+import alert from "./alert";
 
 export default combineReducers({
   isDarkMode: theme,
@@ -13,5 +14,6 @@ export default combineReducers({
   isPreviewMode: preview,
   mdData: data,
   fileName: filename,
-  localData: localdata
+  localData: localdata,
+  alertState: alert
 });

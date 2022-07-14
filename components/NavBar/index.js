@@ -19,6 +19,7 @@ import SubBar from "./SubBar.js";
 import SideNav from "./SideNav/SideNav.js";
 import SaveDeleteContainer from "./SaveDeleteContainer";
 import FileInfo from "./FileInfo.js";
+import Alerts from "../Main/Alerts";
 
 const NavBar = (props) => {
   const { isMenuOpen, toggleMenu } = props;
@@ -99,6 +100,7 @@ const NavBar = (props) => {
       </AppBar>
       <SubBar />
       <SideNav />
+      <Alerts />
     </React.Fragment>
   );
 };

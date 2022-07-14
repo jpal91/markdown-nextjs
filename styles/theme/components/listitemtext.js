@@ -1,11 +1,12 @@
 import typography from "../base/typography";
 
-const { sideNavText } = typography;
+const { sideNavText, sideNavSubText } = typography;
 
 const listItemText = {
   styleOverrides: {
     root: {},
-    primary: { ...sideNavText }
+    primary: { ...sideNavText },
+    secondary: { ...sideNavSubText }
   }
 };
 

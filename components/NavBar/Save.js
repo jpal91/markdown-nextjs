@@ -3,15 +3,12 @@ import { connect } from "react-redux";
 import { useRouter } from "next/router";
 import Image from "next/image";
 import ButtonBase from "@mui/material/Button";
-import Snackbar from "@mui/material/Snackbar";
-import Alert from "@mui/material/Alert";
 
-import { updateLocalData } from "../../actions";
+import { updateLocalData, setAlert } from "../../actions";
 
 const Save = (props) => {
-  const { fileName, mdData, localData, updateLocalData } = props;
+  const { fileName, mdData, localData, updateLocalData, setAlert } = props;
   const router = useRouter();
-  const [openSave, setOpenSave] = useState(false);
 
   const handleSave = () => {
     let fileWOExt = fileName.slice(0, -3);
@@ -19,20 +16,17 @@ const Save = (props) => {
     let newDataState = { ...localData };
     newDataState.docs[`${fileWOExt}`] = {
       md: mdData,
-      date: new Date().toLocaleString()
+      date: new Date().toLocaleDateString()
     };
     updateLocalData(newDataState);
 
     router.push(`/${fileWOExt}`, undefined, { shallow: true });
-    setOpenSave(true);
-  };
 
-  const handleClose = (event, reason) => {
-    if (reason === "clickaway") {
-      return;
-    }
-
-    setOpenSave(false);
+    setAlert({
+      open: true,
+      message: "Document Saved!",
+      severity: "success"
+    });
   };
 
   return (
@@ -40,11 +34,6 @@ const Save = (props) => {
       <ButtonBase onClick={handleSave}>
         <Image src="/images/save-button.svg" width="150" height="70" />
       </ButtonBase>
-      <Snackbar open={openSave} autoHideDuration={5000} onClose={handleClose}>
-        <Alert severity="success" sx={{ px: 5 }}>
-          Document Saved!
-        </Alert>
-      </Snackbar>
     </React.Fragment>
   );
 };
@@ -57,7 +46,7 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, { updateLocalData })(Save);
+export default connect(mapStateToProps, { updateLocalData, setAlert })(Save);
 
 // if (!localData) {
 //   let obj = {
