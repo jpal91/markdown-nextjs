@@ -20,10 +20,13 @@ const FileInfo = (props) => {
     const handleClick = () => setIsInput(!isInput);
     
     useEffect(() => {
-        router.query.id && setDisableButton(true)
+        if (router.query.id) {
+            setDisableButton(true)
+        }
 
         return () => {
             setDisableButton(false)
+            setInputValue('')
         }
     }, [router])
 
@@ -40,10 +43,15 @@ const FileInfo = (props) => {
 
             if (e.type === "focusout") {
                 e.preventDefault();
-                if (ele.value.length === 0) { return setIsInput(false) }
+                if (ele.value.length === 0) { 
+                    setIsInput(false) 
+                    setDisableButton(false)
+                    return 
+                }
                 fileNameRegex.test(ele.value) ? setFileName(ele.value) : setFileName(ele.value + '.md')
                 setIsInput(false);
                 setDisableButton(false)
+                
             }
         }
 

@@ -21,6 +21,7 @@ const Delete = (props) => {
         localData = JSON.parse(localData);
 
         if (!localData || !localData[`${fileWOExt}`]) {
+            setOpenModal(false)
             setOpenErrorAlert(true)
             return
         } else if (localData[`${fileWOExt}`]) {
