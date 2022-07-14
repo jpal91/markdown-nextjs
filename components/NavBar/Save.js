@@ -16,9 +16,12 @@ const Save = (props) => {
   const handleSave = () => {
     let fileWOExt = fileName.slice(0, -3);
 
-    let newDataState = { ...localData }
-    newDataState.docs[`${fileWOExt}`] = mdData
-    updateLocalData(newDataState)
+    let newDataState = { ...localData };
+    newDataState.docs[`${fileWOExt}`] = {
+      md: mdData,
+      date: new Date().toLocaleString()
+    };
+    updateLocalData(newDataState);
 
     router.push(`/${fileWOExt}`, undefined, { shallow: true });
     setOpenSave(true);
@@ -56,25 +59,24 @@ const mapStateToProps = (state) => {
 
 export default connect(mapStateToProps, { updateLocalData })(Save);
 
-
-    // if (!localData) {
-    //   let obj = {
-    //     [`${fileWOExt}`]: {
-    //       dateCreated: new Date().toLocaleDateString(),
-    //       data: mdData
-    //     }
-    //   };
-    //   localStorage.setItem("localData", JSON.stringify(obj));
-    // } else if (!localData[`${fileWOExt}`]) {
-    //   localData = JSON.parse(localData);
-    //   localData[`${fileWOExt}`] = {
-    //     dateCreated: new Date().toLocaleDateString(),
-    //     data: mdData
-    //   };
-    //   localStorage.setItem("localData", JSON.stringify(localData));
-    // } else if (localData[`${fileWOExt}`]) {
-    //   localData = JSON.parse(localData);
-    //   localData[`${fileWOExt}`].data = mdData;
-    //   localStorage.setItem("localData", JSON.stringify(localData));
-    // }
-    // let localData = localStorage.getItem("localData");
+// if (!localData) {
+//   let obj = {
+//     [`${fileWOExt}`]: {
+//       dateCreated: new Date().toLocaleDateString(),
+//       data: mdData
+//     }
+//   };
+//   localStorage.setItem("localData", JSON.stringify(obj));
+// } else if (!localData[`${fileWOExt}`]) {
+//   localData = JSON.parse(localData);
+//   localData[`${fileWOExt}`] = {
+//     dateCreated: new Date().toLocaleDateString(),
+//     data: mdData
+//   };
+//   localStorage.setItem("localData", JSON.stringify(localData));
+// } else if (localData[`${fileWOExt}`]) {
+//   localData = JSON.parse(localData);
+//   localData[`${fileWOExt}`].data = mdData;
+//   localStorage.setItem("localData", JSON.stringify(localData));
+// }
+// let localData = localStorage.getItem("localData");
