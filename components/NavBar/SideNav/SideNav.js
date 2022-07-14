@@ -9,6 +9,7 @@ import ModeNightOutlinedIcon from "@mui/icons-material/ModeNightOutlined";
 import Brightness5OutlinedIcon from "@mui/icons-material/Brightness5Outlined";
 
 import FileList from "./FileList";
+import { getLocalData } from "../../../actions";
 
 const SideNav = (props) => {
   const { isMenuOpen } = props;
@@ -30,7 +31,7 @@ const SideNav = (props) => {
       }}
     >
       <Typography variant="sideNavHeading">MY DOCUMENTS</Typography>
-      <ButtonBase>
+      <ButtonBase onClick={getLocalData}>
         <Image src="/images/new-document.svg" width="200" height="100" />
       </ButtonBase>
       <Box

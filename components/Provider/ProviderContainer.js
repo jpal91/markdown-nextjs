@@ -1,22 +1,28 @@
+import { useEffect } from "react";
 import { ThemeProvider } from "@mui/material/styles";
 import { connect } from "react-redux";
 
 import theme from "../../styles/theme";
+import { getLocalData } from "../../actions";
 
 const ProviderContainer = (props) => {
-    const { isDarkMode } = props;
+  const { isDarkMode, getLocalData } = props;
 
-    return (
-        <ThemeProvider theme={isDarkMode ? null : theme}>
-            {props.children}
-        </ThemeProvider>
-    );
+  useEffect(() => {
+    getLocalData();
+  }, []);
+
+  return (
+    <ThemeProvider theme={isDarkMode ? null : theme}>
+      {props.children}
+    </ThemeProvider>
+  );
 };
 
 const mapStateToProps = (state) => {
-    return {
-        isDarkMode: state.isDarkMode,
-    };
+  return {
+    isDarkMode: state.isDarkMode
+  };
 };
 
-export default connect(mapStateToProps)(ProviderContainer);
+export default connect(mapStateToProps, { getLocalData })(ProviderContainer);
