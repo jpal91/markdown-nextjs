@@ -6,39 +6,19 @@ import ButtonBase from "@mui/material/Button";
 import Snackbar from "@mui/material/Snackbar";
 import Alert from "@mui/material/Alert";
 
+import { updateLocalData } from "../../actions";
+
 const Save = (props) => {
-  const { fileName, mdData, localData } = props;
+  const { fileName, mdData, localData, updateLocalData } = props;
   const router = useRouter();
   const [openSave, setOpenSave] = useState(false);
 
-  useEffect(() => {
-    console.log(localData);
-  }, [localData]);
-
   const handleSave = () => {
-    let localData = localStorage.getItem("localData");
     let fileWOExt = fileName.slice(0, -3);
 
-    if (!localData) {
-      let obj = {
-        [`${fileWOExt}`]: {
-          dateCreated: new Date().toLocaleDateString(),
-          data: mdData
-        }
-      };
-      localStorage.setItem("localData", JSON.stringify(obj));
-    } else if (!localData[`${fileWOExt}`]) {
-      localData = JSON.parse(localData);
-      localData[`${fileWOExt}`] = {
-        dateCreated: new Date().toLocaleDateString(),
-        data: mdData
-      };
-      localStorage.setItem("localData", JSON.stringify(localData));
-    } else if (localData[`${fileWOExt}`]) {
-      localData = JSON.parse(localData);
-      localData[`${fileWOExt}`].data = mdData;
-      localStorage.setItem("localData", JSON.stringify(localData));
-    }
+    let newDataState = { ...localData }
+    newDataState.docs[`${fileWOExt}`] = mdData
+    updateLocalData(newDataState)
 
     router.push(`/${fileWOExt}`, undefined, { shallow: true });
     setOpenSave(true);
@@ -74,4 +54,27 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps)(Save);
+export default connect(mapStateToProps, { updateLocalData })(Save);
+
+
+    // if (!localData) {
+    //   let obj = {
+    //     [`${fileWOExt}`]: {
+    //       dateCreated: new Date().toLocaleDateString(),
+    //       data: mdData
+    //     }
+    //   };
+    //   localStorage.setItem("localData", JSON.stringify(obj));
+    // } else if (!localData[`${fileWOExt}`]) {
+    //   localData = JSON.parse(localData);
+    //   localData[`${fileWOExt}`] = {
+    //     dateCreated: new Date().toLocaleDateString(),
+    //     data: mdData
+    //   };
+    //   localStorage.setItem("localData", JSON.stringify(localData));
+    // } else if (localData[`${fileWOExt}`]) {
+    //   localData = JSON.parse(localData);
+    //   localData[`${fileWOExt}`].data = mdData;
+    //   localStorage.setItem("localData", JSON.stringify(localData));
+    // }
+    // let localData = localStorage.getItem("localData");

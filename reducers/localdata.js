@@ -1,6 +1,6 @@
 let obj = {
   user: "",
-  data: {}
+  docs: {}
 };
 
 export default (state = obj, action) => {

@@ -18,9 +18,9 @@ export const setFileName = (string) => {
   return { type: "FILE_NAME", payload: string };
 };
 
-export const getLocalData = (props) => {
+export const getLocalData = () => {
   const data = localStorage.getItem("localData");
-  console.log(props);
+
   if (!data) {
     localStorage.setItem("localData", JSON.stringify({ user: "", docs: {} }));
     return { type: "LOCAL_DATA", payload: { user: "", docs: {} } };
@@ -28,3 +28,9 @@ export const getLocalData = (props) => {
 
   return { type: "LOCAL_DATA", payload: JSON.parse(data) };
 };
+
+export const updateLocalData = (data) => {
+  localStorage.setItem("localData", JSON.stringify(data))
+
+  return { type: 'LOCAL_DATA', payload: data }
+}

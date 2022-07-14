@@ -7,27 +7,40 @@ import Snackbar from "@mui/material/Snackbar";
 import Alert from "@mui/material/Alert";
 
 import DeleteModal from "./DeleteModal";
+import { updateLocalData } from '../../actions'
 
 const Delete = (props) => {
-    const { fileName } = props;
+    const { fileName, updateLocalData, localData } = props;
     const router = useRouter()
     const [openDeleteAlert, setOpenDeleteAlert] = useState(false);
     const [openErrorAlert, setOpenErrorAlert] = useState(false)
     const [openModal, setOpenModal] = useState(false)
 
     const handleDelete = () => {
-        let localData = localStorage.getItem("localData");
+        // let localData = localStorage.getItem("localData");
         let fileWOExt = fileName.slice(0, -3);
-        localData = JSON.parse(localData);
+        // localData = JSON.parse(localData);
+        let newDataState = { ...localData }
 
-        if (!localData || !localData[`${fileWOExt}`]) {
+        // if (!localData || !localData[`${fileWOExt}`]) {
+        //     setOpenModal(false)
+        //     setOpenErrorAlert(true)
+        //     return
+        // } else if (localData[`${fileWOExt}`]) {
+        //     delete localData[`${fileWOExt}`];
+        //     localStorage.setItem("localData", JSON.stringify(localData));
+        // }
+
+        if (!newDataState.docs[`${fileWOExt}`]) {
             setOpenModal(false)
             setOpenErrorAlert(true)
             return
-        } else if (localData[`${fileWOExt}`]) {
-            delete localData[`${fileWOExt}`];
-            localStorage.setItem("localData", JSON.stringify(localData));
+        } else if (newDataState.docs[`${fileWOExt}`]) {
+            delete newDataState.docs[`${fileWOExt}`];
+            updateLocalData(newDataState)
         }
+
+
         setOpenModal(false)
         router.push("/");
         setOpenDeleteAlert(true);
@@ -72,7 +85,8 @@ const Delete = (props) => {
 const mapStateToProps = (state) => {
     return {
         fileName: state.fileName,
+        localData: state.localData
     };
 };
 
-export default connect(mapStateToProps)(Delete);
+export default connect(mapStateToProps, { updateLocalData })(Delete);
