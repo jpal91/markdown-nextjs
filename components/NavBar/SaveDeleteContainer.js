@@ -9,7 +9,9 @@ import Alert from '@mui/material/Alert'
 import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
 import { connect } from "react-redux";
 
-const SaveDelete = (props) => {
+import Save from "./Save";
+
+const SaveDeleteContainer = (props) => {
     const { mdData, fileName } = props
     const [visibility, setVisibility] = useState(true);
     const [openSave, setOpenSave] = useState(false)
@@ -72,18 +74,7 @@ const SaveDelete = (props) => {
                     sx={{ color: "primary.vlgray", mr: 2 }}
                 />
             </IconButton>
-            <ButtonBase onClick={handleSave} >
-                <Image src="/images/save-button.svg" width="150" height="70" />
-            </ButtonBase>
-            <Snackbar 
-                open={openSave}
-                autoHideDuration={5000}
-                onClose={handleClose}
-                message='Document saved'
-                
-            >
-                <Alert severity="success" sx={{ px: 5 }}>Document Saved!</Alert>
-            </Snackbar>
+            <Save />
         </Grid>
     );
 };
@@ -95,4 +86,4 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps)(SaveDelete);
+export default connect(mapStateToProps)(SaveDeleteContainer);

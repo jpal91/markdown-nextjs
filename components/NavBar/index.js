@@ -17,7 +17,7 @@ import { toggleMenu } from "../../actions/index.js";
 
 import SubBar from "./SubBar.js";
 import SideNav from "./SideNav.js";
-import SaveDelete from "./SaveDelete";
+import SaveDeleteContainer from "./SaveDeleteContainer";
 import FileInfo from "./FileInfo.js";
 
 const NavBar = (props) => {
@@ -94,7 +94,7 @@ const NavBar = (props) => {
                         />
                         <FileInfo />
                     </Grid>
-                    <SaveDelete />
+                    <SaveDeleteContainer />
                 </Grid>
             </AppBar>
             <SubBar />
