@@ -10,6 +10,7 @@ import container from "./components/container";
 //import appbar from "./components/appbar";
 //import button from "./components/button";
 import alert from "./components/alert";
+import listItemText from "./components/listitemtext";
 
 export default createTheme({
   typography: { ...typography },
@@ -23,7 +24,7 @@ export default createTheme({
     },
     MuiGrid: { ...grid },
     MuiContainer: { ...container },
-    MuiAlert: { ...alert }
-    
+    MuiAlert: { ...alert },
+    MuiListItemText: { ...listItemText }
   }
 });
