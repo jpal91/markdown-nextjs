@@ -3,12 +3,12 @@ import { connect } from "react-redux";
 import { ScrollSync } from "react-scroll-sync";
 import Container from "@mui/material/Container";
 
-import { setData } from "../../actions";
+import { setData, setButtonStatus, getData } from "../../actions";
 import TextArea from "./TextArea";
 import Preview from "./Preview";
 
 const MainApp = (props) => {
-  const { isMenuOpen, setData } = props;
+  const { isMenuOpen, setData, setButtonStatus, getData } = props;
 
   useEffect(() => {
     const textId = document.querySelector("textarea");
@@ -25,6 +25,14 @@ const MainApp = (props) => {
         setData(e.target.value);
       }
     });
+
+    setButtonStatus({
+      save: 'hidden',
+      fileName: 'active',
+      delete: 'disabled'
+    })
+
+    getData()
   }, []);
 
   return (
@@ -55,4 +63,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, { setData })(MainApp);
+export default connect(mapStateToProps, { setData, setButtonStatus, getData })(MainApp);

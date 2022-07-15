@@ -7,6 +7,8 @@ import preview from "./preview";
 import filename from "./filename";
 import localdata from "./localdata";
 import alert from "./alert";
+import buttonstatus from "./buttonstatus";
+import dbdata from './dbdata'
 
 export default combineReducers({
   isDarkMode: theme,
@@ -15,5 +17,7 @@ export default combineReducers({
   mdData: data,
   fileName: filename,
   localData: localdata,
-  alertState: alert
+  alertState: alert,
+  buttonStatus: buttonstatus,
+  dbData: dbdata
 });

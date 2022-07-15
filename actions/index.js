@@ -1,3 +1,5 @@
+import axios from 'axios'
+
 export const setTheme = (bool) => {
   return { type: "SET_THEME", payload: bool };
 };
@@ -42,3 +44,14 @@ export const setAlert = (alertState) => {
 
   return { type: "ALERT_STATUS", payload: alertState };
 };
+
+export const setButtonStatus = (obj) => {
+  return { type: 'CHANGE_BUTTONS', payload: obj }
+}
+
+export const getData = () => async (dispatch) => {
+  const response = await axios.get('/api/get-data')
+  
+  return dispatch({ type: 'DB_DATA', payload: response.data })
+  
+}
