@@ -9,10 +9,10 @@ import ModeNightOutlinedIcon from "@mui/icons-material/ModeNightOutlined";
 import Brightness5OutlinedIcon from "@mui/icons-material/Brightness5Outlined";
 
 import FileList from "./FileList";
-import { getLocalData } from "../../../actions";
+import { setModal } from "../../../actions";
 
 const SideNav = (props) => {
-  const { isMenuOpen } = props;
+  const { isMenuOpen, setModal } = props;
 
   return (
     <Drawer
@@ -31,7 +31,7 @@ const SideNav = (props) => {
       }}
     >
       <Typography variant="sideNavHeading">MY DOCUMENTS</Typography>
-      <ButtonBase onClick={getLocalData}>
+      <ButtonBase onClick={() => setModal({ open: true, type: 'new'})}>
         <Image src="/images/new-document.svg" width="200" height="100" />
       </ButtonBase>
       <Box
@@ -72,4 +72,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps)(SideNav);
+export default connect(mapStateToProps, { setModal })(SideNav);

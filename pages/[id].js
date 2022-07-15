@@ -6,25 +6,25 @@ import MainApp from "../components/Main/MainApp";
 import { setFileName, setData } from "../actions";
 
 const UserDoc = (props) => {
-  const { setFileName, mdData, setData, localData } = props;
+  const { setFileName, mdData, setData, dbData } = props;
   const router = useRouter();
 
   useEffect(() => {
     let route = router.query.id;
-    if (!localData.user) {
+    if (!dbData.user) {
       return;
     }
 
     if (!mdData) {
-      if (localData.docs[`${route}`]) {
-        setFileName(`${route}.md`);
-        setData(localData.docs[`${route}`].md);
+      if (dbData.docs[`${route}`]) {
+        setFileName(`${route}`);
+        setData(dbData.docs[`${route}`].md || '');
         return;
       } else {
         router.push("/");
       }
     }
-  }, [mdData, localData]);
+  }, [mdData, dbData]);
 
   return <MainApp />;
 };
@@ -38,7 +38,8 @@ export const getServerSideProps = async () => {
 const mapStateToProps = (state) => {
   return {
     mdData: state.mdData,
-    localData: state.localData
+    localData: state.localData,
+    dbData: state.dbData
   };
 };
 

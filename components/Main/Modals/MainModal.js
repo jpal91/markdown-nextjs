@@ -5,6 +5,7 @@ import Grid from "@mui/material/Grid";
 
 import { setModal } from "../../../actions";
 import DeleteModal from "./DeleteModal";
+import NewDocModal from "./NewDocModal";
 
 
 const MainModal = (props) => {
@@ -14,6 +15,8 @@ const MainModal = (props) => {
     const setClass = () => {
         if (type === "delete") {
             return <DeleteModal setClose={handleClose} />;
+        } else if (type === 'new') {
+            return <NewDocModal setClose={handleClose} />
         }
 
     };

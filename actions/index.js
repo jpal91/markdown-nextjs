@@ -12,6 +12,18 @@ const successDelete = {
     severity: "success",
 };
 
+const errorCreate = {
+    open: true,
+    message: 'Document already exists!',
+    severity: 'error'
+}
+
+const successCreate = {
+    open: true,
+    message: 'Document successfully created!',
+    severity: 'success'
+}
+
 export const setTheme = (bool) => {
     return { type: "SET_THEME", payload: bool };
 };
@@ -71,6 +83,20 @@ export const getDBData = () => async (dispatch) => {
 
     return dispatch({ type: "DB_DATA", payload: response.data });
 };
+
+export const createNewDoc = (fileName) => async (dispatch, getState) => {
+    const currentDocs = getState().dbData.docs;
+
+    if (currentDocs[fileName]) {
+        dispatch({ type: "ALERT_STATUS", payload: errorCreate });
+        throw Error("");
+    }
+
+    const response = await axios.post('/api/create-new', { fileName: fileName })
+
+    dispatch({ type: 'DB_DATA', payload: response.data })
+    dispatch({ type: 'ALERT_STATUS', payload: successCreate })
+}
 
 export const saveToDB = (post) => async (dispatch) => {
     const response = await axios.post("/api/save", { post: post });
