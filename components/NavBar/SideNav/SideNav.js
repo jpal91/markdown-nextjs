@@ -43,6 +43,7 @@ const SideNav = (props) => {
         }}
       >
         <FileList listName="My Files" />
+        <FileList listName="Examples" />
       </Box>
       <Box
         sx={{
