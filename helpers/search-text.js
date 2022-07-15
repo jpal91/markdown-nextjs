@@ -24,7 +24,8 @@ export const searchText = (str) => {
     const highRegex = /==(?:(?!==)[\s\S])+==/g;
     const strikeRegex = /~~[^~]+~~/g;
     const subRegex = /(?<!~)~[^~]+~(?!~)/g;
-    const uoRegex = /(?<=\n)((?:>\s)?\s*-\s(?!\[|]).+\n)+/g;
+    // const uoRegex = /(?<=\n)((?:>\s)?\s*-\s(?!\[|]).+\n)+/g;
+    const uoRegex = /(?<=\n)(?:- .+\n{0,2})+/g
     const olRegex = /(?<=\n)((?:>\s)?\s*\d\.\s.+\n>?)+/g;
     const checkListRegex = /-\s\[(\s|x)\]\s.+\n/g;
     const footRegex = /\[\^.\]:?(.+)?/g;
@@ -225,7 +226,7 @@ const code = (match, str) => {
 
     match.forEach((m) => {
         let cMatch = m.match(codeRegex);
-        let rMatch = returnRegex.test(m) ? "<br><br>" : "";
+        let rMatch = returnRegex.test(m) ? "\n\n" : "" ////<br><br>
 
         cMatch[0] = cMatch[0].replace(/(&lt;|<)/g, "<span><</span>");
         str = str.replace(

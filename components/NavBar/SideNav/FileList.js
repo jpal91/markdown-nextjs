@@ -1,11 +1,13 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import axios from "axios";
-import { useRouter } from 'next/router'
+import { useRouter } from "next/router";
 import List from "@mui/material/List";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemText from "@mui/material/ListItemText";
 import Collapse from "@mui/material/Collapse";
+import Backdrop from '@mui/material/Backdrop'
+import CircularProgress from '@mui/material/CircularProgress'
 import ExpandLess from "@mui/icons-material/ExpandLess";
 import ExpandMore from "@mui/icons-material/ExpandMore";
 
@@ -13,18 +15,24 @@ import { toggleMenu } from "../../../actions";
 
 const FileList = (props) => {
     const { listName, dbData, toggleMenu } = props;
-    const router = useRouter()
+    const router = useRouter();
     const [open, setOpen] = useState(false);
-    const [directoryData, setDirectory] = useState()
+    const [directoryData, setDirectory] = useState();
+    const [loading, setLoading] = useState(false)
     const handleOpen = () => setOpen(!open);
     const directory = async () =>
         await axios.get("/api/examples").then((res) => setDirectory(res.data));
 
     useEffect(() => {
-        if (listName === 'My Files') { return }
-        directory()
-    }, [])
-    
+        if (listName === "My Files") {
+            return;
+        }
+        directory();
+
+        return () => {
+            setLoading(false)
+        }
+    }, []);
 
     const buildList = () => {
         if (listName === "My Files") {
@@ -32,10 +40,14 @@ const FileList = (props) => {
                 let targetDoc = dbData.docs[doc];
 
                 return (
-                    <ListItemButton key={i} onClick={() => {
-                            toggleMenu(false)
-                            router.push(`/${doc}`)
-                        }}>
+                    <ListItemButton
+                        key={i}
+                        onClick={() => {
+                            setLoading(true)
+                            toggleMenu(false);
+                            router.push(`/${doc}`);
+                        }}
+                    >
                         <ListItemText
                             primary={`${doc}`}
                             secondary={targetDoc.date}
@@ -44,15 +56,21 @@ const FileList = (props) => {
                 );
             });
         } else if (listName === "Examples") {
-            if (!directoryData) { return }
+            if (!directoryData) {
+                return;
+            }
             return directoryData.map((file, i) => {
-                file = file.replace(/\.md/, '')
-                
+                file = file.replace(/\.md/, "");
+
                 return (
-                    <ListItemButton key={i} onClick={() => {
-                            toggleMenu(false)
-                            router.push(`/example/${file}`)
-                        }}>
+                    <ListItemButton
+                        key={i}
+                        onClick={() => {
+                            setLoading(true)
+                            toggleMenu(false);
+                            router.push(`/example/${file}`);
+                        }}
+                    >
                         <ListItemText primary={file} />
                     </ListItemButton>
                 );
@@ -61,17 +79,22 @@ const FileList = (props) => {
     };
 
     return (
-        <List sx={{ width: "100%", color: "white" }}>
-            <ListItemButton onClick={handleOpen}>
-                <ListItemText primary={listName} />
-                {open ? <ExpandMore /> : <ExpandLess />}
-            </ListItemButton>
-            <Collapse in={open} timeout="auto" unmountOnExit>
-                <List component="div" sx={{ pl: 4 }}>
-                    {buildList()}
-                </List>
-            </Collapse>
-        </List>
+        <React.Fragment>
+            <List sx={{ width: "100%", color: "white" }}>
+                <ListItemButton onClick={handleOpen}>
+                    <ListItemText primary={listName} />
+                    {open ? <ExpandMore /> : <ExpandLess />}
+                </ListItemButton>
+                <Collapse in={open} timeout="auto" unmountOnExit>
+                    <List component="div" sx={{ pl: 4 }}>
+                        {buildList()}
+                    </List>
+                </Collapse>
+            </List>
+            <Backdrop open={loading}>
+                <CircularProgress sx={{ color: "primary.lOrange" }} />
+            </Backdrop>
+        </React.Fragment>
     );
 };
 
