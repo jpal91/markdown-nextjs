@@ -6,6 +6,7 @@ import Container from "@mui/material/Container";
 import { setData, setButtonStatus, getDBData } from "../../actions";
 import TextArea from "./TextArea";
 import Preview from "./Preview";
+import MainModal from "./Modals/MainModal";
 
 const MainApp = (props) => {
   const { isMenuOpen, setData, setButtonStatus, getDBData } = props;
@@ -53,6 +54,7 @@ const MainApp = (props) => {
           <Preview />
         </Container>
       </ScrollSync>
+      <MainModal />
     </React.Fragment>
   );
 };

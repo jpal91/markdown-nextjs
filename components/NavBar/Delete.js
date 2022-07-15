@@ -1,42 +1,18 @@
-import React, { useState } from "react";
+import React from "react";
 import { connect } from "react-redux";
-import { useRouter } from "next/router";
 import IconButton from "@mui/material/IconButton";
 import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
 
-import DeleteModal from "./DeleteModal";
-import { updateLocalData, setAlert, deleteFromDB } from "../../actions";
+import { setModal } from "../../actions";
 
 const Delete = (props) => {
-  const { fileName, deleteFromDB } = props;
-  const router = useRouter();
-  const [openModal, setOpenModal] = useState(false);
-
-  const handleDelete = async () => {
-    await deleteFromDB(fileName)
-      .then(() => {
-        setOpenModal(false);
-        router.push("/");
-      })
-      .catch(() => {
-        setOpenModal(false)
-      })
-  };
-
-  const handleModalClose = () => {
-    setOpenModal(false);
-  };
+  const { setModal } = props;
 
   return (
     <React.Fragment>
-      <IconButton onClick={() => setOpenModal(true)}>
+      <IconButton onClick={() => setModal({ open: true, type: 'delete' })}>
         <DeleteOutlineOutlinedIcon sx={{ color: "primary.vlgray", mr: 2 }} />
       </IconButton>
-      <DeleteModal
-        open={openModal}
-        setClose={handleModalClose}
-        handleDelete={handleDelete}
-      />
     </React.Fragment>
   );
 };
@@ -49,4 +25,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, { updateLocalData, setAlert, deleteFromDB })(Delete);
+export default connect(mapStateToProps, { setModal })(Delete);

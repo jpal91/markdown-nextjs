@@ -1,5 +1,17 @@
 import axios from "axios";
 
+const errorDelete = {
+    open: true,
+    message: "No document saved with this name!",
+    severity: "error",
+};
+
+const successDelete = {
+    open: true,
+    message: "Document deleted!",
+    severity: "success",
+};
+
 export const setTheme = (bool) => {
     return { type: "SET_THEME", payload: bool };
 };
@@ -66,28 +78,20 @@ export const saveToDB = (post) => async (dispatch) => {
     return dispatch({ type: "DB_DATA", payload: response.data });
 };
 
-const error = {
-  open: true,
-  message: "No document saved with this name!",
-  severity: 'error'
-}
-
-const successDelete = {
-  open: true,
-  message: 'Document deleted!',
-  severity: 'success'
-}
-
 export const deleteFromDB = (fileName) => async (dispatch, getState) => {
     const currentDocs = getState().dbData.docs;
 
     if (!currentDocs[fileName]) {
-        dispatch({ type: 'ALERT_STATUS', payload: error })
-        throw Error('Nothing found')
+        dispatch({ type: "ALERT_STATUS", payload: errorDelete });
+        throw Error("Nothing found");
     }
 
     const response = await axios.post("/api/delete", { fileName: fileName });
 
     dispatch({ type: "DB_DATA", payload: response.data });
-    dispatch({ type: 'ALERT_STATUS', payload: successDelete })
+    dispatch({ type: "ALERT_STATUS", payload: successDelete });
 };
+
+export const setModal = (modal) => {
+	return { type: 'SET_MODAL', payload: modal }
+}

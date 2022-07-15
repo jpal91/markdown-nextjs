@@ -1,22 +1,29 @@
+import { connect } from "react-redux";
 import Modal from "@mui/material/Modal";
 import Card from "@mui/material/Card";
 import Grid from "@mui/material/Grid";
 
+import { setModal } from "../../../actions";
 import DeleteModal from "./DeleteModal";
 
+
 const MainModal = (props) => {
-    const { open, currentClass } = props;
+    const { setModal } = props
+    const { open, type } = props.modalStatus;
 
     const setClass = () => {
-        if (currentClass === 'delete') {
-            return <DeleteModal />
-        } else if (currentClass === 'new') {
-
+        if (type === "delete") {
+            return <DeleteModal setClose={handleClose} />;
         }
+
+    };
+
+    const handleClose = () => {
+        setModal({ open: false })
     }
 
     return (
-        <Modal open={open} onClose={setClose} closeAfterTransition>
+        <Modal open={open} onClose={handleClose} closeAfterTransition>
             <Card
                 sx={{
                     position: "absolute",
@@ -31,12 +38,18 @@ const MainModal = (props) => {
                     alignItems: "normal",
                 }}
             >
-                <Grid container>
-                    {setClass}
-                </Grid>
+                <Grid container>{setClass()}</Grid>
             </Card>
         </Modal>
     );
 };
 
-export default MainModal;
+const mapStateToProps = (state) => {
+    return {
+        modalStatus: state.modalStatus,
+    };
+};
+
+export default connect(mapStateToProps, { setModal })(MainModal);
+
+//<Grid container>{setClass()}</Grid>
