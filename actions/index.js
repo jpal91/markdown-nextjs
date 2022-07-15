@@ -102,7 +102,8 @@ export const createNewDoc = (file) => async (dispatch, getState) => {
 export const saveToDB = (post) => async (dispatch) => {
     const response = await axios.post("/api/save", { post: post });
 
-    return dispatch({ type: "DB_DATA", payload: response.data });
+    dispatch({ type: "DB_DATA", payload: response.data });
+    dispatch({ type: "UNSAVED_CHANGES", payload: false })
 };
 
 export const deleteFromDB = (fileName) => async (dispatch, getState) => {
@@ -121,4 +122,8 @@ export const deleteFromDB = (fileName) => async (dispatch, getState) => {
 
 export const setModal = (modal) => {
 	return { type: 'SET_MODAL', payload: modal }
+}
+
+export const unsavedChanges = (bool) => {
+    return { type: 'UNSAVED_CHANGES', payload: bool }
 }

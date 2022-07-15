@@ -4,11 +4,10 @@ import { ScrollSyncPane } from "react-scroll-sync";
 import Grid from "@mui/material/Grid";
 import TextField from "@mui/material/TextField";
 
-import { setData } from "../../actions";
+import { setData, unsavedChanges } from "../../actions";
 
 const TextArea = (props) => {
-    const { isPreviewMode, mdData, setData } = props;
-    // const [debounceText, setDebounceText] = useState('')
+    const { isPreviewMode, mdData, setData, unsaved, unsavedChanges } = props;
 
     useEffect(() => {
         const textId = document.querySelector("textarea");
@@ -27,15 +26,13 @@ const TextArea = (props) => {
         });
     }, []);
 
-    // useEffect(() => {
-    //     const timerId = setTimeout(() => {
-    //         setData(debounceText)
-    //     }, 200)
+    useEffect(() => {
+        if (mdData.length === 0 || unsaved) {
+            return
+        }
 
-    //     return () => {
-    //         clearTimeout(timerId)
-    //     }
-    // }, [debounceText])
+        unsavedChanges(true)
+    }, [mdData])
 
     return (
         <Grid
@@ -80,7 +77,8 @@ const mapStateToProps = (state) => {
     return {
         isPreviewMode: state.isPreviewMode,
         mdData: state.mdData,
+        unsaved: state.unsaved
     };
 };
 
-export default connect(mapStateToProps, { setData })(TextArea);
+export default connect(mapStateToProps, { setData, unsavedChanges })(TextArea);

@@ -10,6 +10,7 @@ import alert from "./alert";
 import buttonstatus from "./buttonstatus";
 import dbdata from './dbdata'
 import modal from './modal'
+import unsaved from './unsaved-changes'
 
 export default combineReducers({
   isDarkMode: theme,
@@ -21,5 +22,6 @@ export default combineReducers({
   alertState: alert,
   buttonStatus: buttonstatus,
   dbData: dbdata,
-  modalStatus: modal
+  modalStatus: modal,
+  unsaved: unsaved
 });

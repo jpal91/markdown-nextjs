@@ -6,10 +6,10 @@ import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import TextField from '@mui/material/TextField'
 
-import { createNewDoc, toggleMenu } from "../../../actions";
+import { createNewDoc, toggleMenu, unsavedChanges } from "../../../actions";
 
 const NewDocModal = (props) => {
-    const { setClose, createNewDoc, toggleMenu } = props
+    const { setClose, createNewDoc, toggleMenu, unsavedChanges } = props
     const router = useRouter()
     const [fileName, setFileName] = useState('')
 
@@ -24,6 +24,7 @@ const NewDocModal = (props) => {
             .then(() => {
                 setClose()
                 toggleMenu(false)
+                unsavedChanges(false)
                 router.push(`/${fileName}`)
             })
             .catch(() => {
@@ -69,4 +70,4 @@ const NewDocModal = (props) => {
     );
 };
 
-export default connect(null, { createNewDoc, toggleMenu })(NewDocModal)
+export default connect(null, { createNewDoc, toggleMenu, unsavedChanges })(NewDocModal)

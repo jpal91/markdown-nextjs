@@ -12,7 +12,7 @@ import FileList from "./FileList";
 import { setModal } from "../../../actions";
 
 const SideNav = (props) => {
-  const { isMenuOpen, setModal } = props;
+  const { isMenuOpen, setModal, unsaved } = props;
 
   return (
     <Drawer
@@ -31,7 +31,7 @@ const SideNav = (props) => {
       }}
     >
       <Typography variant="sideNavHeading">MY DOCUMENTS</Typography>
-      <ButtonBase onClick={() => setModal({ open: true, type: 'new'})}>
+      <ButtonBase onClick={() => setModal({ open: true, type: unsaved ? 'save-warn' : 'new' })}>
         <Image src="/images/new-document.svg" width="200" height="100" />
       </ButtonBase>
       <Box
@@ -68,7 +68,8 @@ const SideNav = (props) => {
 
 const mapStateToProps = (state) => {
   return {
-    isMenuOpen: state.isMenuOpen
+    isMenuOpen: state.isMenuOpen,
+    unsaved: state.unsaved
   };
 };
 

@@ -6,6 +6,7 @@ import Grid from "@mui/material/Grid";
 import { setModal } from "../../../actions";
 import DeleteModal from "./DeleteModal";
 import NewDocModal from "./NewDocModal";
+import SaveWarnModal from "./SaveWarnModal";
 
 
 const MainModal = (props) => {
@@ -17,6 +18,8 @@ const MainModal = (props) => {
             return <DeleteModal setClose={handleClose} />;
         } else if (type === 'new') {
             return <NewDocModal setClose={handleClose} />
+        } else if (type === 'save-warn') {
+            return <SaveWarnModal setClose={handleClose} />
         }
 
     };
