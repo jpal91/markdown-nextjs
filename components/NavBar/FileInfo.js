@@ -4,6 +4,7 @@ import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import ButtonBase from "@mui/material/ButtonBase";
 import TextField from "@mui/material/TextField";
+import CircularProgress from '@mui/material/CircularProgress'
 import InsertDriveFileOutlinedIcon from "@mui/icons-material/InsertDriveFileOutlined";
 import { connect } from "react-redux";
 
@@ -16,19 +17,9 @@ const FileInfo = (props) => {
     const [isInput, setIsInput] = useState(false);
     const [disableButton, setDisableButton] = useState(false);
     const [inputValue, setInputValue] = useState("");
+    const [loading, setLoading] = useState(false)
 
     const handleClick = () => setIsInput(!isInput);
-
-    // useEffect(() => {
-    //     if (router.pathname.includes("example") && router.query.id) {
-    //         setDisableButton(true);
-    //     }
-
-    //     return () => {
-    //         setDisableButton(false);
-    //         setInputValue("");
-    //     };
-    // }, [router]);
 
 	useEffect(() => {
 		setDisableButton(false);
@@ -74,7 +65,8 @@ const FileInfo = (props) => {
                 // }
 
 				if (buttonStatus.fileName === 'new') {
-					await createNewDoc({ fileName: ele.value, date: new Date().toLocaleDateString(), md: mdData })
+					setLoading(true)
+                    await createNewDoc({ fileName: ele.value, date: new Date().toLocaleDateString(), md: mdData })
 						.then(() => {
 							setFileName(ele.value);
 							unsavedChanges(false)
@@ -84,9 +76,11 @@ const FileInfo = (props) => {
 						.finally(() => {
 							setIsInput(false);
 							setDisableButton(false);
+                            setLoading(false)
 						})
 				} else if (buttonStatus.fileName === 'rename') {
-					await renameFile(fileName, ele.value)
+					setLoading(true)
+                    await renameFile(fileName, ele.value)
 						.then(() => {
 							setFileName(ele.value);
 							unsavedChanges(false)
@@ -96,6 +90,7 @@ const FileInfo = (props) => {
 						.finally(() => {
 							setIsInput(false);
 							setDisableButton(false);
+                            setLoading(false)
 						})
 				}
 
@@ -134,6 +129,7 @@ const FileInfo = (props) => {
                     onChange={(event) => setInputValue(event.target.value)}
                     InputProps={{
                         disableUnderline: false,
+                        endAdornment: <CircularProgress size={14} sx={{ color: 'primary.dOrange', position: 'absolute', left: '90%', visibility: loading ? 'visible' : 'hidden' }}/>,
                         sx: {
                             typography: "editor",
                             lineHeight: "24px",

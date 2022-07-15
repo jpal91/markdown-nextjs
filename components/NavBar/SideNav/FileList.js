@@ -9,8 +9,10 @@ import Collapse from "@mui/material/Collapse";
 import ExpandLess from "@mui/icons-material/ExpandLess";
 import ExpandMore from "@mui/icons-material/ExpandMore";
 
+import { toggleMenu } from "../../../actions";
+
 const FileList = (props) => {
-    const { listName, dbData } = props;
+    const { listName, dbData, toggleMenu } = props;
     const router = useRouter()
     const [open, setOpen] = useState(false);
     const [directoryData, setDirectory] = useState()
@@ -30,7 +32,10 @@ const FileList = (props) => {
                 let targetDoc = dbData.docs[doc];
 
                 return (
-                    <ListItemButton key={i} onClick={() => router.push(`/${doc}`)}>
+                    <ListItemButton key={i} onClick={() => {
+                            toggleMenu(false)
+                            router.push(`/${doc}`)
+                        }}>
                         <ListItemText
                             primary={`${doc}`}
                             secondary={targetDoc.date}
@@ -44,7 +49,10 @@ const FileList = (props) => {
                 file = file.replace(/\.md/, '')
                 
                 return (
-                    <ListItemButton key={i} onClick={() => router.push(`/example/${file}`)}>
+                    <ListItemButton key={i} onClick={() => {
+                            toggleMenu(false)
+                            router.push(`/example/${file}`)
+                        }}>
                         <ListItemText primary={file} />
                     </ListItemButton>
                 );
@@ -74,7 +82,7 @@ const mapStateToProps = (state) => {
     };
 };
 
-export default connect(mapStateToProps)(FileList);
+export default connect(mapStateToProps, { toggleMenu })(FileList);
 
 // {Object.keys(dbData.docs).map((doc, i) => {
 //     let targetDoc = dbData.docs[doc];

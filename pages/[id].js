@@ -15,7 +15,6 @@ const UserDoc = (props) => {
             fileName: 'rename',
             delete: 'disabled'
           })
-          
 	}, [])
 
     useEffect(() => {
@@ -24,17 +23,25 @@ const UserDoc = (props) => {
             return;
         }
 
-        if (!mdData) {
-            if (dbData.docs[`${route}`]) {
-                setFileName(`${route}`);
-                setData(dbData.docs[`${route}`].md || "");
-                return;
-            } else {
-                router.push("/");
-            }
+        if (!dbData.docs[`${route}`]) {
+            router.push("/");
         }
-        setFileName(`${route}`);
-    }, [mdData, dbData, router]);
+
+                        setFileName(`${route}`);
+                setData(dbData.docs[`${route}`].md || "");
+
+        // if (!mdData) {
+        //     if (dbData.docs[`${route}`]) {
+        //         setFileName(`${route}`);
+        //         setData(dbData.docs[`${route}`].md || "");
+        //         return;
+        //     } else {
+                
+        //         router.push("/");
+        //     }
+        // }
+        // setFileName(`${route}`);
+    }, [router]);
 
     return <MainApp />;
 };

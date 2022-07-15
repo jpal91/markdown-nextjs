@@ -76,7 +76,7 @@ const NavBar = (props) => {
               </IconButton>
             </Toolbar>
             <Link href="/">
-              <ButtonBase>
+              <ButtonBase onClick={() => toggleMenu(false)}>
                 <a>
                   <Typography variant="heading">
                     .MARK
