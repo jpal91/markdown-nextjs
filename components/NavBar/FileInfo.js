@@ -53,7 +53,6 @@ const FileInfo = (props) => {
     ele.focus();
 
     const editInput = (e) => {
-      let fileNameRegex = /\.md/;
 
       if (e.type === "focusout") {
         e.preventDefault();
@@ -77,9 +76,7 @@ const FileInfo = (props) => {
           return;
         }
 
-        fileNameRegex.test(ele.value)
-          ? setFileName(ele.value)
-          : setFileName(ele.value + ".md");
+        setFileName(ele.value)
         setIsInput(false);
         setDisableButton(false);
         setAlert({
@@ -108,7 +105,7 @@ const FileInfo = (props) => {
           disabled={disableButton}
         >
           <Typography hidden={isInput} variant="headingText">
-            {fileName}
+            {`${fileName}.md`}
           </Typography>
         </ButtonBase>
         <TextField

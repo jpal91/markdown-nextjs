@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { connect } from "react-redux";
 import { ScrollSyncPane } from "react-scroll-sync";
 import Grid from "@mui/material/Grid";
@@ -8,6 +8,7 @@ import { setData } from "../../actions";
 
 const TextArea = (props) => {
     const { isPreviewMode, mdData, setData } = props;
+    // const [debounceText, setDebounceText] = useState('')
 
     useEffect(() => {
         const textId = document.querySelector("textarea");
@@ -25,6 +26,16 @@ const TextArea = (props) => {
             }
         });
     }, []);
+
+    // useEffect(() => {
+    //     const timerId = setTimeout(() => {
+    //         setData(debounceText)
+    //     }, 200)
+
+    //     return () => {
+    //         clearTimeout(timerId)
+    //     }
+    // }, [debounceText])
 
     return (
         <Grid

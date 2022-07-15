@@ -5,39 +5,22 @@ import IconButton from "@mui/material/IconButton";
 import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
 
 import DeleteModal from "./DeleteModal";
-import { updateLocalData, setAlert } from "../../actions";
+import { updateLocalData, setAlert, deleteFromDB } from "../../actions";
 
 const Delete = (props) => {
-  const { fileName, updateLocalData, localData, setAlert } = props;
+  const { fileName, deleteFromDB } = props;
   const router = useRouter();
-  const [openDeleteAlert, setOpenDeleteAlert] = useState(false);
-  const [openErrorAlert, setOpenErrorAlert] = useState(false);
   const [openModal, setOpenModal] = useState(false);
 
-  const handleDelete = () => {
-    let fileWOExt = fileName.slice(0, -3);
-    let newDataState = { ...localData };
-
-    if (!newDataState.docs[`${fileWOExt}`]) {
-      setOpenModal(false);
-      setAlert({
-        open: true,
-        message: "No document saved with this name!",
-        severity: "error"
-      });
-      return;
-    } else if (newDataState.docs[`${fileWOExt}`]) {
-      delete newDataState.docs[`${fileWOExt}`];
-      updateLocalData(newDataState);
-    }
-
-    setOpenModal(false);
-    router.push("/");
-    setAlert({
-      open: true,
-      message: "Document Deleted!",
-      severity: "success"
-    });
+  const handleDelete = async () => {
+    await deleteFromDB(fileName)
+      .then(() => {
+        setOpenModal(false);
+        router.push("/");
+      })
+      .catch(() => {
+        setOpenModal(false)
+      })
   };
 
   const handleModalClose = () => {
@@ -61,8 +44,9 @@ const Delete = (props) => {
 const mapStateToProps = (state) => {
   return {
     fileName: state.fileName,
-    localData: state.localData
+    localData: state.localData,
+    dbData: state.dbData
   };
 };
 
-export default connect(mapStateToProps, { updateLocalData, setAlert })(Delete);
+export default connect(mapStateToProps, { updateLocalData, setAlert, deleteFromDB })(Delete);

@@ -6,7 +6,7 @@ const db = client.db("md");
 const col = db.collection("users");
 
 const handler = async (req, res) => {
-	console.log(req)
+
 	if (req.method !== 'GET') {
 		res.status(400).send('Unknown')
 		return

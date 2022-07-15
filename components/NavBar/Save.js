@@ -4,24 +4,22 @@ import { useRouter } from "next/router";
 import Image from "next/image";
 import ButtonBase from "@mui/material/Button";
 
-import { updateLocalData, setAlert } from "../../actions";
+import { updateLocalData, setAlert, saveToDB } from "../../actions";
 
 const Save = (props) => {
-  const { fileName, mdData, localData, updateLocalData, setAlert } = props;
+  const { fileName, mdData, setAlert, saveToDB } = props;
   const router = useRouter();
 
   const handleSave = () => {
-    let fileWOExt = fileName.slice(0, -3);
-
-    let newDataState = { ...localData };
-    newDataState.user = "localUser";
-    newDataState.docs[`${fileWOExt}`] = {
+    const newPost = {
+      fileName: fileName,
       md: mdData,
       date: new Date().toLocaleDateString()
-    };
-    updateLocalData(newDataState);
+    }
 
-    router.push(`/${fileWOExt}`, undefined, { shallow: true });
+    saveToDB(newPost)
+
+    router.push(`/${fileName}`, undefined, { shallow: true });
 
     setAlert({
       open: true,
@@ -47,7 +45,7 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, { updateLocalData, setAlert })(Save);
+export default connect(mapStateToProps, { updateLocalData, setAlert, saveToDB })(Save);
 
 // if (!localData) {
 //   let obj = {
