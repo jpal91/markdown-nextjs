@@ -150,3 +150,7 @@ export const setModal = (modal) => {
 export const unsavedChanges = (bool) => {
     return { type: 'UNSAVED_CHANGES', payload: bool }
 }
+
+export const examplePage = (bool) => {
+    return { type: 'EXAMPLE_PAGE', payload: bool }
+}

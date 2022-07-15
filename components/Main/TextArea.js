@@ -7,7 +7,7 @@ import TextField from "@mui/material/TextField";
 import { setData, unsavedChanges } from "../../actions";
 
 const TextArea = (props) => {
-    const { isPreviewMode, mdData, setData, unsaved, unsavedChanges } = props;
+    const { isPreviewMode, mdData, setData, unsaved, unsavedChanges, isExamplePage } = props;
 
     useEffect(() => {
         const textId = document.querySelector("textarea");
@@ -27,11 +27,15 @@ const TextArea = (props) => {
     }, []);
 
     useEffect(() => {
-        if (mdData.length === 0 || unsaved) {
+        if (mdData.length === 0 || unsaved || isExamplePage) {
             return
         }
 
         unsavedChanges(true)
+
+        return () => {
+            unsavedChanges(false)
+        }
     }, [mdData])
 
     return (
@@ -77,7 +81,8 @@ const mapStateToProps = (state) => {
     return {
         isPreviewMode: state.isPreviewMode,
         mdData: state.mdData,
-        unsaved: state.unsaved
+        unsaved: state.unsaved,
+        isExamplePage: state.isExamplePage
     };
 };
 

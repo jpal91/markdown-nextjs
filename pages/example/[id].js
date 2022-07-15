@@ -6,10 +6,10 @@ import path from 'path'
 
 import MainApp from "../../components/Main/MainApp";
 
-import { setData, setFileName } from "../../actions";
+import { setData, setFileName, setButtonStatus, examplePage } from "../../actions";
 
 const Example = (props) => {
-    const { setData, post, setFileName, id } = props
+    const { setData, post, setFileName, id, setButtonStatus, examplePage } = props
 
     useEffect(() => {
         setFileName(`${id}.md`)
@@ -19,6 +19,11 @@ const Example = (props) => {
             fileName: 'disabled',
             delete: 'disabled'
           })
+        examplePage(true)
+
+        return () => {
+            examplePage(false)
+        }
     }, [])
 
     return (
@@ -52,4 +57,4 @@ export const getStaticPaths = async () => {
     }
 }
 
-export default connect(null, { setData, setFileName })(Example)
+export default connect(null, { setData, setFileName, setButtonStatus, examplePage })(Example)
