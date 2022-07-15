@@ -17,12 +17,4 @@ const Delete = (props) => {
   );
 };
 
-const mapStateToProps = (state) => {
-  return {
-    fileName: state.fileName,
-    localData: state.localData,
-    dbData: state.dbData
-  };
-};
-
-export default connect(mapStateToProps, { setModal })(Delete);
+export default connect(null, { setModal })(Delete);
