@@ -7,10 +7,10 @@ import TextField from "@mui/material/TextField";
 import InsertDriveFileOutlinedIcon from "@mui/icons-material/InsertDriveFileOutlined";
 import { connect } from "react-redux";
 
-import { setFileName, setAlert, createNewDoc } from "../../actions";
+import { setFileName, setAlert, createNewDoc, renameFile, unsavedChanges } from "../../actions";
 
 const FileInfo = (props) => {
-    const { fileName, setFileName, localData, setAlert, buttonStatus, createNewDoc, mdData } = props;
+    const { fileName, setFileName, localData, setAlert, buttonStatus, createNewDoc, mdData, renameFile, unsavedChanges } = props;
     const elementRef = useRef();
     const router = useRouter();
     const [isInput, setIsInput] = useState(false);
@@ -19,28 +19,26 @@ const FileInfo = (props) => {
 
     const handleClick = () => setIsInput(!isInput);
 
-    const fileExists = (str) => {
-        let fileNameRegex = /\.md/;
+    // useEffect(() => {
+    //     if (router.pathname.includes("example") && router.query.id) {
+    //         setDisableButton(true);
+    //     }
 
-        fileNameRegex.test(str) && (str = str.slice(0, -3));
+    //     return () => {
+    //         setDisableButton(false);
+    //         setInputValue("");
+    //     };
+    // }, [router]);
 
-        if (localData.docs[`${str}`]) {
-            return true;
-        } else {
-            return false;
-        }
-    };
-
-    useEffect(() => {
-        if (router.pathname.includes("example") && router.query.id) {
-            setDisableButton(true);
-        }
+	useEffect(() => {
+		setDisableButton(false);
+		setInputValue("");
 
         return () => {
             setDisableButton(false);
             setInputValue("");
         };
-    }, [router]);
+    }, []);
 
     useEffect(() => {
         if (!isInput) {
@@ -79,7 +77,8 @@ const FileInfo = (props) => {
 					await createNewDoc({ fileName: ele.value, date: new Date().toLocaleDateString(), md: mdData })
 						.then(() => {
 							setFileName(ele.value);
-							router.push(`/${ele.value}`)
+							unsavedChanges(false)
+							router.push(`/${ele.value}`, undefined, { shallow: true });
 						})
 						.catch(() => { setInputValue("") })
 						.finally(() => {
@@ -87,7 +86,17 @@ const FileInfo = (props) => {
 							setDisableButton(false);
 						})
 				} else if (buttonStatus.fileName === 'rename') {
-					
+					await renameFile(fileName, ele.value)
+						.then(() => {
+							setFileName(ele.value);
+							unsavedChanges(false)
+							router.push(`/${ele.value}`, undefined, { shallow: true });
+						})
+						.catch(() => setInputValue(''))
+						.finally(() => {
+							setIsInput(false);
+							setDisableButton(false);
+						})
 				}
 
             }
@@ -111,7 +120,7 @@ const FileInfo = (props) => {
                 <ButtonBase
                     onClick={handleClick}
                     sx={{ justifyContent: "flex-start" }}
-                    disabled={disableButton}
+                    disabled={disableButton || buttonStatus.fileName === 'disabled'}
                 >
                     <Typography hidden={isInput} variant="headingText">
                         {`${fileName}.md`}
@@ -148,4 +157,4 @@ const mapStateToProps = (state) => {
     };
 };
 
-export default connect(mapStateToProps, { setFileName, setAlert, createNewDoc })(FileInfo);
+export default connect(mapStateToProps, { setFileName, setAlert, createNewDoc, renameFile, unsavedChanges })(FileInfo);

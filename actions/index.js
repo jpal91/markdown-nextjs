@@ -24,6 +24,13 @@ const successCreate = {
     severity: 'success'
 }
 
+const successRename = {
+    open: true,
+    message: 'Document name changed!',
+    severity: 'success'
+}
+
+
 export const setTheme = (bool) => {
     return { type: "SET_THEME", payload: bool };
 };
@@ -119,6 +126,22 @@ export const deleteFromDB = (fileName) => async (dispatch, getState) => {
     dispatch({ type: "DB_DATA", payload: response.data });
     dispatch({ type: "ALERT_STATUS", payload: successDelete });
 };
+
+export const renameFile = (oldFN, newFN) => async (dispatch, getState) => {
+    const currentDocs = getState().dbData.docs;
+
+    if (currentDocs[newFN]) {
+        dispatch({ type: "ALERT_STATUS", payload: errorCreate });
+        throw Error("");
+    }
+
+    let newDoc = { ...currentDocs[oldFN] } 
+
+    const response = await axios.post('/api/rename', { newDoc: newDoc, oldFN: oldFN, newFN: newFN })
+
+    dispatch({ type: 'DB_DATA', payload: response.data })
+    dispatch({ type: 'ALERT_STATUS', payload: successRename })
+}
 
 export const setModal = (modal) => {
 	return { type: 'SET_MODAL', payload: modal }

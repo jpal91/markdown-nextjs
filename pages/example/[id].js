@@ -14,6 +14,11 @@ const Example = (props) => {
     useEffect(() => {
         setFileName(`${id}.md`)
         setData(post)
+        setButtonStatus({
+            save: 'disabled',
+            fileName: 'disabled',
+            delete: 'disabled'
+          })
     }, [])
 
     return (
