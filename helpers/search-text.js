@@ -25,7 +25,7 @@ export const searchText = (str) => {
     const strikeRegex = /~~[^~]+~~/g;
     const subRegex = /(?<!~)~[^~]+~(?!~)/g;
     // const uoRegex = /(?<=\n)((?:>\s)?\s*-\s(?!\[|]).+\n)+/g;
-    const uoRegex = /(?<=\n)(?:- .+\n{0,2})+/g
+    const uoRegex = /(?<=\n)(?:- .+\n{0,2})+/g // FIXME: THis
     const olRegex = /(?<=\n)((?:>\s)?\s*\d\.\s.+\n>?)+/g;
     const checkListRegex = /-\s\[(\s|x)\]\s.+\n/g;
     const footRegex = /\[\^.\]:?(.+)?/g;
