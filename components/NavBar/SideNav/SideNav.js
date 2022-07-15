@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import Image from "next/image";
 import { connect } from "react-redux";
 import Drawer from "@mui/material/Drawer";
@@ -9,11 +10,12 @@ import ModeNightOutlinedIcon from "@mui/icons-material/ModeNightOutlined";
 import Brightness5OutlinedIcon from "@mui/icons-material/Brightness5Outlined";
 
 import FileList from "./FileList";
-import { setModal } from "../../../actions";
+import { setModal, setLightMode } from "../../../actions";
 
 const SideNav = (props) => {
-  const { isMenuOpen, setModal, unsaved } = props;
-
+  const { isMenuOpen, setModal, unsaved, setLightMode, isLightMode } = props;
+  const handleSwitch = () => setLightMode(!isLightMode)
+  
   return (
     <Drawer
       variant="persistent"
@@ -58,7 +60,8 @@ const SideNav = (props) => {
           <ModeNightOutlinedIcon sx={{ color: "primary.vlgray" }} />
           <Switch
             color="warning"
-            defaultChecked={true}
+            checked={isLightMode}
+            onChange={handleSwitch}
             sx={{ "& .MuiSwitch-track": { backgroundColor: "white" } }}
           />
           <Brightness5OutlinedIcon sx={{ color: "primary.dOrange" }} />
@@ -71,8 +74,9 @@ const SideNav = (props) => {
 const mapStateToProps = (state) => {
   return {
     isMenuOpen: state.isMenuOpen,
-    unsaved: state.unsaved
+    unsaved: state.unsaved,
+    isLightMode: state.isLightMode
   };
 };
 
-export default connect(mapStateToProps, { setModal })(SideNav);
+export default connect(mapStateToProps, { setModal, setLightMode })(SideNav);

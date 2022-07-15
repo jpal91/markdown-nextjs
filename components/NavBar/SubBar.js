@@ -13,9 +13,10 @@ const SubBar = (props) => {
   return (
     <Grid
       container
+      className='subBar'
       sx={{
         width: isMenuOpen ? "calc(100% - 240px)" : "100%",
-        backgroundColor: "background.vlgray",
+        backgroundColor: "background.subBar",
         height: "42px",
         ml: isMenuOpen ? "240px" : 0,
         position: "sticky"
@@ -26,14 +27,14 @@ const SubBar = (props) => {
         xs={6}
         sx={{
           borderRight: "1px solid",
-          borderColor: "primary.vlgray",
+          borderColor: "background.borders",
           justifyContent: "flex-start",
           alignItems: "center",
           display: isPreviewMode ? 'none' : 'inherit',
           pl: 2
         }}
       >
-        <Typography variant="body1" sx={{ color: "primary.lgray" }}>
+        <Typography variant="subBarText">
           MARKDOWN
         </Typography>
       </Grid>
@@ -43,18 +44,18 @@ const SubBar = (props) => {
         xs={isPreviewMode ? 12 : 6}
         sx={{
           borderLeft: isPreviewMode ? '0px' : "1px solid",
-          borderColor: "primary.vlgray",
+          borderColor: "background.borders",
           alignItems: "center"
         }}
       >
         <Grid item xs={6} sx={{ justifyContent: "flex-start", pl: 2 }}>
-          <Typography variant="body1" sx={{ color: "primary.lgray" }}>
+          <Typography variant="subBarText">
             PREVIEW
           </Typography>
         </Grid>
         <Grid item xs={6} sx={{ justifyContent: "flex-end", pr: 2 }}>
           <IconButton onClick={() => togglePreview(!isPreviewMode)}>
-            {isPreviewMode ? <VisibilityOffOutlinedIcon/> : <RemoveRedEyeOutlinedIcon />}
+            {isPreviewMode ? <VisibilityOffOutlinedIcon sx={{ color: 'primary.text' }}/> : <RemoveRedEyeOutlinedIcon sx={{ color: 'primary.text' }}/>}
           </IconButton>
         </Grid>
       </Grid>

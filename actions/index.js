@@ -31,7 +31,7 @@ const successRename = {
 }
 
 
-export const setTheme = (bool) => {
+export const setLightMode = (bool) => {
     return { type: "SET_THEME", payload: bool };
 };
 

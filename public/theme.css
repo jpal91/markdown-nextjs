@@ -13,10 +13,14 @@ code#code_styled {
   font-family: "Roboto mono", monospace !important;
 }
 
+:is(h3, h4, h5, h6)>code#code_styled {
+  font-size: calc(100% - 2px);
+}
+
 code.code-block {
   background-color: hsla(0, 0%, 9%, 1);
   font-family: "Roboto mono", monospace !important;
-  color: white;
+  color: lightsteelblue;
   font-size: 16px;
   padding: 20px;
   width: 100%;
@@ -30,7 +34,7 @@ code.code-block {
 }
 
 .hljs-string {
-  color: hsla(120, 100%, 49%, 1) !important;
+  color: palegreen !important;
 }
 
 .hljs-title {
@@ -55,4 +59,12 @@ code.code-block {
 
 #code-holder {
   display: flex;
+}
+
+.hljs-title.function_ {
+  color: palegoldenrod !important;
+}
+
+.hljs-title.class_ {
+  color: palevioletred !important;
 }

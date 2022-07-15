@@ -8,7 +8,7 @@ import MainApp from "../components/Main/MainApp";
 import { setFileName, setData, setButtonStatus, getDBData } from "../actions";
 
 const UserDoc = (props) => {
-    const { setFileName, mdData, setData, dbData, setButtonStatus, getDBData } = props;
+    const { setFileName, setData, dbData, setButtonStatus, getDBData } = props;
     const router = useRouter();
     const [loading, setLoading] = useState(false)
 

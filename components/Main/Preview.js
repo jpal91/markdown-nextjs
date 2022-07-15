@@ -44,7 +44,7 @@ const Preview = (props) => {
                 width: "100%",
                 height: "calc(100vh - 114px)",
                 borderLeft: isPreviewMode ? "none" : "1px solid",
-                borderColor: "primary.vlgray",
+                borderColor: "background.borders",
                 flex: "1 1 auto",
                 p: 5,
                 typography: "body1",

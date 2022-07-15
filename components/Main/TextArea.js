@@ -47,7 +47,7 @@ const TextArea = (props) => {
                 height: "calc(100vh - 114px)",
                 p: isPreviewMode ? 0 : 5,
                 borderRight: isPreviewMode ? "none" : "1px solid",
-                borderColor: "primary.vlgray",
+                borderColor: "background.borders",
             }}
         >
             <ScrollSyncPane>

@@ -94,13 +94,14 @@ const typography = {
     fontFamily: fontFam.slab,
     fontSize: 14,
     lineHeight: "24px",
-    color: primary.lgray
+    color: primary.text
   },
   body1: {
     fontWeight: baseProperties.fontWeightRegular,
     fontFamily: fontFam.slab,
     fontSize: 14,
-    lineHeight: "24px"
+    lineHeight: "24px",
+    color: primary.text
   },
   body2: {
     fontWeight: baseProperties.fontWeightRegular,
@@ -111,7 +112,8 @@ const typography = {
   editor: {
     fontWeight: baseProperties.fontWeightRegular,
     fontFamily: fontFam.mono,
-    fontSize: 14
+    fontSize: 14,
+    color: primary.text
   }
 };
 

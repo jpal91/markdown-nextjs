@@ -14,7 +14,7 @@ import unsaved from './unsaved-changes'
 import example from './example'
 
 export default combineReducers({
-  isDarkMode: theme,
+  isLightMode: theme,
   isMenuOpen: menu,
   isPreviewMode: preview,
   mdData: data,
