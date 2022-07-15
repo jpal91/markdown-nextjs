@@ -14,7 +14,13 @@ const NewDocModal = (props) => {
     const [fileName, setFileName] = useState('')
 
     const handleSave = async () => {
-        await createNewDoc(fileName)
+        const newDoc = {
+            fileName: fileName,
+            date: new Date().toLocaleDateString(),
+            md: ''
+        }
+        
+        await createNewDoc(newDoc)
             .then(() => {
                 setClose()
                 toggleMenu(false)

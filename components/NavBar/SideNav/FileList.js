@@ -8,7 +8,7 @@ import ExpandLess from "@mui/icons-material/ExpandLess";
 import ExpandMore from "@mui/icons-material/ExpandMore";
 
 const FileList = (props) => {
-  const { listName, localData } = props;
+  const { listName, dbData } = props;
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(!open);
 
@@ -20,14 +20,8 @@ const FileList = (props) => {
       </ListItemButton>
       <Collapse in={open} timeout="auto" unmountOnExit>
         <List component="div" sx={{ pl: 4 }}>
-          {/* <ListItemButton>
-            <ListItemText primary="Test" secondary="Thingy" />
-          </ListItemButton>
-          <ListItemButton>
-            <ListItemText primary="Test" />
-          </ListItemButton> */}
-          {Object.keys(localData.docs).map((doc, i) => {
-            let targetDoc = localData.docs[doc];
+          {Object.keys(dbData.docs).map((doc, i) => {
+            let targetDoc = dbData.docs[doc];
 
             return (
               <ListItemButton key={i}>
@@ -43,7 +37,8 @@ const FileList = (props) => {
 
 const mapStateToProps = (state) => {
   return {
-    localData: state.localData
+    localData: state.localData,
+    dbData: state.dbData
   };
 };
 

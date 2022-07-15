@@ -11,14 +11,14 @@ const handler = async (req, res) => {
 		return
 	}
 
-    const { fileName } = req.body
+    const { fileName, date, md } = req.body
 
 	try {
 		await client.connect()
 
 		await col.updateOne(
 			{ user: "1" },
-            { $set: { [`docs.${fileName}`]: { } } }
+            { $set: { [`docs.${fileName}`]: { date: date, md: md } } }
 		)
 
         const result = await col.findOne(

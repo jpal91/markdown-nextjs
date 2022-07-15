@@ -84,7 +84,8 @@ export const getDBData = () => async (dispatch) => {
     return dispatch({ type: "DB_DATA", payload: response.data });
 };
 
-export const createNewDoc = (fileName) => async (dispatch, getState) => {
+export const createNewDoc = (file) => async (dispatch, getState) => {
+    const { fileName } = file
     const currentDocs = getState().dbData.docs;
 
     if (currentDocs[fileName]) {
@@ -92,7 +93,7 @@ export const createNewDoc = (fileName) => async (dispatch, getState) => {
         throw Error("");
     }
 
-    const response = await axios.post('/api/create-new', { fileName: fileName })
+    const response = await axios.post('/api/create-new', file)
 
     dispatch({ type: 'DB_DATA', payload: response.data })
     dispatch({ type: 'ALERT_STATUS', payload: successCreate })
