@@ -11,10 +11,11 @@ const UserDoc = (props) => {
 
 	useEffect(() => {
 		setButtonStatus({
-            save: 'new',
+            save: 'existing',
             fileName: 'rename',
             delete: 'disabled'
           })
+          
 	}, [])
 
     useEffect(() => {
@@ -32,7 +33,8 @@ const UserDoc = (props) => {
                 router.push("/");
             }
         }
-    }, [mdData, dbData]);
+        setFileName(`${route}`);
+    }, [mdData, dbData, router]);
 
     return <MainApp />;
 };

@@ -118,7 +118,7 @@ export const deleteFromDB = (fileName) => async (dispatch, getState) => {
 
     if (!currentDocs[fileName]) {
         dispatch({ type: "ALERT_STATUS", payload: errorDelete });
-        throw Error("Nothing found");
+        throw Error("");
     }
 
     const response = await axios.post("/api/delete", { fileName: fileName });

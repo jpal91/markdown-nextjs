@@ -4,13 +4,18 @@ import { useRouter } from "next/router";
 import Image from "next/image";
 import ButtonBase from "@mui/material/Button";
 
-import { updateLocalData, setAlert, saveToDB } from "../../actions";
+import { updateLocalData, setAlert, saveToDB, setModal } from "../../actions";
 
 const Save = (props) => {
-  const { fileName, mdData, setAlert, saveToDB } = props;
+  const { fileName, mdData, setAlert, saveToDB, buttonStatus, setModal } = props;
   const router = useRouter();
 
   const handleSave = () => {
+    if (buttonStatus.save === 'new') {
+      setModal({ open: true, type: 'save-new' })
+      return
+    }
+    
     const newPost = {
       fileName: fileName,
       md: mdData,
@@ -41,11 +46,12 @@ const mapStateToProps = (state) => {
   return {
     fileName: state.fileName,
     mdData: state.mdData,
-    localData: state.localData
+    localData: state.localData,
+    buttonStatus: state.buttonStatus
   };
 };
 
-export default connect(mapStateToProps, { updateLocalData, setAlert, saveToDB })(Save);
+export default connect(mapStateToProps, { updateLocalData, setAlert, saveToDB, setModal })(Save);
 
 // if (!localData) {
 //   let obj = {

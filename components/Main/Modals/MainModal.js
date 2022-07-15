@@ -10,7 +10,7 @@ import SaveWarnModal from "./SaveWarnModal";
 
 
 const MainModal = (props) => {
-    const { setModal } = props
+    const { setModal, mdData } = props
     const { open, type } = props.modalStatus;
 
     const setClass = () => {
@@ -20,6 +20,8 @@ const MainModal = (props) => {
             return <NewDocModal setClose={handleClose} />
         } else if (type === 'save-warn') {
             return <SaveWarnModal setClose={handleClose} />
+        } else if (type === 'save-new') {
+            return <NewDocModal setClose={handleClose} mdData={mdData} />
         }
 
     };
@@ -53,6 +55,7 @@ const MainModal = (props) => {
 const mapStateToProps = (state) => {
     return {
         modalStatus: state.modalStatus,
+        mdData: state.mdData
     };
 };
 

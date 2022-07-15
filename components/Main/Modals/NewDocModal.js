@@ -9,7 +9,7 @@ import TextField from '@mui/material/TextField'
 import { createNewDoc, toggleMenu, unsavedChanges } from "../../../actions";
 
 const NewDocModal = (props) => {
-    const { setClose, createNewDoc, toggleMenu, unsavedChanges } = props
+    const { setClose, createNewDoc, toggleMenu, unsavedChanges, mdData } = props
     const router = useRouter()
     const [fileName, setFileName] = useState('')
 
@@ -17,7 +17,7 @@ const NewDocModal = (props) => {
         const newDoc = {
             fileName: fileName,
             date: new Date().toLocaleDateString(),
-            md: ''
+            md: mdData ? mdData : ''
         }
         
         await createNewDoc(newDoc)

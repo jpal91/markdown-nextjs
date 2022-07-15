@@ -13,7 +13,7 @@ const Home = (props) => {
         setButtonStatus({
             save: 'new',
             fileName: 'new',
-            delete: 'disabled'
+            delete: 'new'
           })
       
     }, [])
