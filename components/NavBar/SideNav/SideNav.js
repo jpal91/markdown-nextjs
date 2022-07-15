@@ -58,6 +58,7 @@ const SideNav = (props) => {
           <ModeNightOutlinedIcon sx={{ color: "primary.vlgray" }} />
           <Switch
             color="warning"
+            defaultChecked={true}
             sx={{ "& .MuiSwitch-track": { backgroundColor: "white" } }}
           />
           <Brightness5OutlinedIcon sx={{ color: "primary.dOrange" }} />

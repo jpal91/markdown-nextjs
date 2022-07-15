@@ -1,54 +1,64 @@
-import { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { useRouter } from "next/router";
+import Backdrop from '@mui/material/Backdrop'
+import CircularProgress from '@mui/material/CircularProgress'
 
 import MainApp from "../components/Main/MainApp";
-import { setFileName, setData, setButtonStatus } from "../actions";
+import { setFileName, setData, setButtonStatus, getDBData } from "../actions";
 
 const UserDoc = (props) => {
-    const { setFileName, mdData, setData, dbData, setButtonStatus } = props;
+    const { setFileName, mdData, setData, dbData, setButtonStatus, getDBData } = props;
     const router = useRouter();
-
-	useEffect(() => {
-		setButtonStatus({
-            save: 'existing',
-            fileName: 'rename',
-            delete: 'disabled'
-          })
-	}, [])
+    const [loading, setLoading] = useState(false)
 
     useEffect(() => {
         let route = router.query.id;
+
+        setLoading(true)
+
+        setButtonStatus({
+            save: "existing",
+            fileName: "rename",
+            delete: "disabled",
+        });
+
+        setFileName(`${route}`);
+
+        return () => {
+            setLoading(false)
+        }
+    }, []);
+
+    useEffect(() => {
+        let route = router.query.id;
+
         if (!dbData.user) {
-            return;
-        }
-
-        if (!dbData.docs[`${route}`]) {
+            async () => await getDBData()
+            return
+        } else if (dbData.user && !dbData.docs[`${route}`]) {
             router.push("/");
+        } else {
+            setFileName(`${route}`);
+            setData(dbData.docs[`${route}`].md || "")
+            setLoading(false)
         }
+    }, [dbData, router])
 
-                        setFileName(`${route}`);
-                setData(dbData.docs[`${route}`].md || "");
-
-        // if (!mdData) {
-        //     if (dbData.docs[`${route}`]) {
-        //         setFileName(`${route}`);
-        //         setData(dbData.docs[`${route}`].md || "");
-        //         return;
-        //     } else {
-                
-        //         router.push("/");
-        //     }
-        // }
-        // setFileName(`${route}`);
-    }, [router]);
-
-    return <MainApp />;
+    return (
+        <React.Fragment>
+            <MainApp />
+            <Backdrop open={loading}>
+                <CircularProgress sx={{ color: 'primary.lOrange' }} />
+            </Backdrop>
+        </React.Fragment>
+    )
 };
 
-export const getServerSideProps = async () => {
+export const getServerSideProps = async () => {    
     return {
-        props: {},
+        props: {
+        },
     };
 };
 
@@ -60,4 +70,9 @@ const mapStateToProps = (state) => {
     };
 };
 
-export default connect(mapStateToProps, { setFileName, setData, setButtonStatus })(UserDoc);
+export default connect(mapStateToProps, {
+    setFileName,
+    setData,
+    setButtonStatus,
+    getDBData
+})(UserDoc);
