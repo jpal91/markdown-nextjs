@@ -3,11 +3,20 @@ import { useRouter } from "next/router";
 import MainApp from "../components/Main/MainApp";
 import { connect } from "react-redux";
 
-import { setFileName, setData } from "../actions";
+import { setFileName, setData, setButtonStatus } from "../actions";
 
 const Home = (props) => {
-    const { setFileName, setData } = props;
+    const { setFileName, setData, setButtonStatus } = props;
     const router = useRouter();
+
+    useEffect(() => {
+        setButtonStatus({
+            save: 'new',
+            fileName: 'new',
+            delete: 'disabled'
+          })
+      
+    }, [])
 
     useEffect(() => {
         if (router.pathname === "/") {
@@ -19,4 +28,4 @@ const Home = (props) => {
     return <MainApp />;
 };
 
-export default connect(null, { setFileName, setData })(Home);
+export default connect(null, { setFileName, setData, setButtonStatus })(Home);

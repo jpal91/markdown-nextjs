@@ -26,13 +26,7 @@ const MainApp = (props) => {
         setData(e.target.value);
       }
     });
-
-    setButtonStatus({
-      save: 'hidden',
-      fileName: 'active',
-      delete: 'disabled'
-    })
-
+    
     getDBData()
   }, []);
 

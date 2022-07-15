@@ -3,44 +3,52 @@ import { connect } from "react-redux";
 import { useRouter } from "next/router";
 
 import MainApp from "../components/Main/MainApp";
-import { setFileName, setData } from "../actions";
+import { setFileName, setData, setButtonStatus } from "../actions";
 
 const UserDoc = (props) => {
-  const { setFileName, mdData, setData, dbData } = props;
-  const router = useRouter();
+    const { setFileName, mdData, setData, dbData, setButtonStatus } = props;
+    const router = useRouter();
 
-  useEffect(() => {
-    let route = router.query.id;
-    if (!dbData.user) {
-      return;
-    }
+	useEffect(() => {
+		setButtonStatus({
+            save: 'new',
+            fileName: 'rename',
+            delete: 'disabled'
+          })
+	}, [])
 
-    if (!mdData) {
-      if (dbData.docs[`${route}`]) {
-        setFileName(`${route}`);
-        setData(dbData.docs[`${route}`].md || '');
-        return;
-      } else {
-        router.push("/");
-      }
-    }
-  }, [mdData, dbData]);
+    useEffect(() => {
+        let route = router.query.id;
+        if (!dbData.user) {
+            return;
+        }
 
-  return <MainApp />;
+        if (!mdData) {
+            if (dbData.docs[`${route}`]) {
+                setFileName(`${route}`);
+                setData(dbData.docs[`${route}`].md || "");
+                return;
+            } else {
+                router.push("/");
+            }
+        }
+    }, [mdData, dbData]);
+
+    return <MainApp />;
 };
 
 export const getServerSideProps = async () => {
-  return {
-    props: {}
-  };
+    return {
+        props: {},
+    };
 };
 
 const mapStateToProps = (state) => {
-  return {
-    mdData: state.mdData,
-    localData: state.localData,
-    dbData: state.dbData
-  };
+    return {
+        mdData: state.mdData,
+        localData: state.localData,
+        dbData: state.dbData,
+    };
 };
 
-export default connect(mapStateToProps, { setFileName, setData })(UserDoc);
+export default connect(mapStateToProps, { setFileName, setData, setButtonStatus })(UserDoc);
