@@ -18,7 +18,6 @@ const FileList = (props) => {
     const router = useRouter();
     const [open, setOpen] = useState(false);
     const [directoryData, setDirectory] = useState();
-    const [loading, setLoading] = useState(false)
     const handleOpen = () => setOpen(!open);
     const directory = async () =>
         await axios.get("/api/examples").then((res) => setDirectory(res.data));
@@ -28,10 +27,6 @@ const FileList = (props) => {
             return;
         }
         directory();
-
-        return () => {
-            setLoading(false)
-        }
     }, []);
 
     const buildList = () => {
@@ -43,8 +38,8 @@ const FileList = (props) => {
                     <ListItemButton
                         key={i}
                         onClick={() => {
-                            setLoading(true)
                             toggleMenu(false);
+                            setOpen(false)
                             router.push(`/${doc}`);
                         }}
                     >
@@ -66,8 +61,8 @@ const FileList = (props) => {
                     <ListItemButton
                         key={i}
                         onClick={() => {
-                            setLoading(true)
                             toggleMenu(false);
+                            setOpen(false)
                             router.push(`/example/${file}`);
                         }}
                     >
@@ -91,9 +86,9 @@ const FileList = (props) => {
                     </List>
                 </Collapse>
             </List>
-            <Backdrop open={loading}>
-                <CircularProgress sx={{ color: "primary.lOrange" }} />
-            </Backdrop>
+            {/* <Backdrop open={loading}>
+                <CircularProgress sx={{ color: "primary.text" }} />
+            </Backdrop> */}
         </React.Fragment>
     );
 };

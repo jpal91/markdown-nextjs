@@ -15,8 +15,6 @@ const UserDoc = (props) => {
     useEffect(() => {
         let route = router.query.id;
 
-        setLoading(true)
-
         setButtonStatus({
             save: "existing",
             fileName: "rename",
@@ -32,6 +30,8 @@ const UserDoc = (props) => {
 
     useEffect(() => {
         let route = router.query.id;
+
+        // setLoading(true)
 
         if (!dbData.user) {
             async () => await getDBData()
