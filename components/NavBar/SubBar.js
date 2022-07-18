@@ -4,11 +4,13 @@ import Typography from "@mui/material/Typography";
 import IconButton from "@mui/material/IconButton";
 import RemoveRedEyeOutlinedIcon from "@mui/icons-material/RemoveRedEyeOutlined";
 import VisibilityOffOutlinedIcon from '@mui/icons-material/VisibilityOffOutlined';
+import LinkIcon from '@mui/icons-material/Link';
+import LinkOffIcon from '@mui/icons-material/LinkOff';
 
-import { togglePreview } from "../../actions";
+import { togglePreview, toggleScrollSync } from "../../actions";
 
 const SubBar = (props) => {
-  const { isMenuOpen, isPreviewMode, togglePreview } = props;
+  const { isMenuOpen, isPreviewMode, togglePreview, toggleScrollSync, isScrollSync } = props;
 
   return (
     <Grid
@@ -54,6 +56,9 @@ const SubBar = (props) => {
           </Typography>
         </Grid>
         <Grid item xs={6} sx={{ justifyContent: "flex-end", pr: 2 }}>
+          <IconButton onClick={() => toggleScrollSync(!isScrollSync)} sx={{ contentVisibility: isPreviewMode && 'hidden' }}>
+            {isScrollSync ? <LinkIcon sx={{ color: 'primary.text' }}/> : <LinkOffIcon sx={{ color: 'primary.text' }}/>}
+          </IconButton>
           <IconButton onClick={() => togglePreview(!isPreviewMode)}>
             {isPreviewMode ? <VisibilityOffOutlinedIcon sx={{ color: 'primary.text' }}/> : <RemoveRedEyeOutlinedIcon sx={{ color: 'primary.text' }}/>}
           </IconButton>
@@ -66,8 +71,9 @@ const SubBar = (props) => {
 const mapStateToProps = (state) => {
   return {
     isPreviewMode: state.isPreviewMode,
-    isMenuOpen: state.isMenuOpen
+    isMenuOpen: state.isMenuOpen,
+    isScrollSync: state.isScrollSync
   }
 }
 
-export default connect(mapStateToProps, { togglePreview })(SubBar);
+export default connect(mapStateToProps, { togglePreview, toggleScrollSync })(SubBar);

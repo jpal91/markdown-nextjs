@@ -9,7 +9,7 @@ import Preview from "./Preview";
 import MainModal from "./Modals/MainModal";
 
 const MainApp = (props) => {
-  const { isMenuOpen, setData, setButtonStatus, getDBData } = props;
+  const { isMenuOpen, setData, getDBData, isScrollSync } = props;
 
   useEffect(() => {
     const textId = document.querySelector("textarea");
@@ -32,7 +32,7 @@ const MainApp = (props) => {
 
   return (
     <React.Fragment>
-      <ScrollSync>
+      <ScrollSync enabled={isScrollSync}>
         <Container
           sx={{
             maxWidth: "100% !important",
@@ -55,7 +55,8 @@ const MainApp = (props) => {
 
 const mapStateToProps = (state) => {
   return {
-    isMenuOpen: state.isMenuOpen
+    isMenuOpen: state.isMenuOpen,
+    isScrollSync: state.isScrollSync
   };
 };
 

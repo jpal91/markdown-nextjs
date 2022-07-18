@@ -12,6 +12,7 @@ import dbdata from './dbdata'
 import modal from './modal'
 import unsaved from './unsaved-changes'
 import example from './example'
+import scrollsync from './scrollsync'
 
 export default combineReducers({
   isLightMode: theme,
@@ -25,5 +26,6 @@ export default combineReducers({
   dbData: dbdata,
   modalStatus: modal,
   unsaved: unsaved,
-  isExamplePage: example
+  isExamplePage: example,
+  isScrollSync: scrollsync
 });

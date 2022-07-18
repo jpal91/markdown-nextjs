@@ -154,3 +154,7 @@ export const unsavedChanges = (bool) => {
 export const examplePage = (bool) => {
     return { type: 'EXAMPLE_PAGE', payload: bool }
 }
+
+export const toggleScrollSync = (bool) => {
+    return { type: 'SCROLL_SYNC', payload: bool }
+}
