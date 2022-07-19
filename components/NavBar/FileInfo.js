@@ -89,6 +89,7 @@ const FileInfo = (props) => {
               setIsInput(false);
               setDisableButton(false);
               setLoading(false);
+              setInputValue("");
             });
         } else if (buttonStatus.fileName === "rename") {
           setLoading(true);
@@ -107,6 +108,7 @@ const FileInfo = (props) => {
               setIsInput(false);
               setDisableButton(false);
               setLoading(false);
+              setInputValue("");
             });
         }
       }

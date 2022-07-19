@@ -69,7 +69,8 @@ const LocalUserDoc = (props) => {
 
     setData(localData.docs[`${pageId}`].md || "");
     setLoading(false);
-  }, [localData]);
+    setFileName(`${pageId}`);
+  }, [localData, pageId]);
 
   return (
     <React.Fragment>
