@@ -1,4 +1,6 @@
 import axios from "axios";
+import { createLocalDoc, saveLocalDoc, deleteLocalDoc } from "./local";
+import { createDBDoc, saveDBDoc, deleteDBDoc } from "./db";
 
 const errorDelete = {
     open: true,
@@ -14,22 +16,21 @@ const successDelete = {
 
 const errorCreate = {
     open: true,
-    message: 'Document already exists!',
-    severity: 'error'
-}
+    message: "Document already exists!",
+    severity: "error",
+};
 
 const successCreate = {
     open: true,
-    message: 'Document successfully created!',
-    severity: 'success'
-}
+    message: "Document successfully created!",
+    severity: "success",
+};
 
 const successRename = {
     open: true,
-    message: 'Document name changed!',
-    severity: 'success'
-}
-
+    message: "Document name changed!",
+    severity: "success",
+};
 
 export const setLightMode = (bool) => {
     return { type: "SET_THEME", payload: bool };
@@ -92,7 +93,7 @@ export const getDBData = () => async (dispatch) => {
 };
 
 export const createNewDoc = (file) => async (dispatch, getState) => {
-    const { fileName } = file
+    const { fileName } = file;
     const currentDocs = getState().dbData.docs;
 
     if (currentDocs[fileName]) {
@@ -100,17 +101,17 @@ export const createNewDoc = (file) => async (dispatch, getState) => {
         throw Error("");
     }
 
-    const response = await axios.post('/api/create-new', file)
+    const response = await axios.post("/api/create-new", file);
 
-    dispatch({ type: 'DB_DATA', payload: response.data })
-    dispatch({ type: 'ALERT_STATUS', payload: successCreate })
-}
+    dispatch({ type: "DB_DATA", payload: response.data });
+    dispatch({ type: "ALERT_STATUS", payload: successCreate });
+};
 
 export const saveToDB = (post) => async (dispatch) => {
     const response = await axios.post("/api/save", { post: post });
 
     dispatch({ type: "DB_DATA", payload: response.data });
-    dispatch({ type: "UNSAVED_CHANGES", payload: false })
+    dispatch({ type: "UNSAVED_CHANGES", payload: false });
 };
 
 export const deleteFromDB = (fileName) => async (dispatch, getState) => {
@@ -135,26 +136,96 @@ export const renameFile = (oldFN, newFN) => async (dispatch, getState) => {
         throw Error("");
     }
 
-    let newDoc = { ...currentDocs[oldFN] } 
+    let newDoc = { ...currentDocs[oldFN] };
 
-    const response = await axios.post('/api/rename', { newDoc: newDoc, oldFN: oldFN, newFN: newFN })
+    const response = await axios.post("/api/rename", {
+        newDoc: newDoc,
+        oldFN: oldFN,
+        newFN: newFN,
+    });
 
-    dispatch({ type: 'DB_DATA', payload: response.data })
-    dispatch({ type: 'ALERT_STATUS', payload: successRename })
-}
+    dispatch({ type: "DB_DATA", payload: response.data });
+    dispatch({ type: "ALERT_STATUS", payload: successRename });
+};
 
 export const setModal = (modal) => {
-	return { type: 'SET_MODAL', payload: modal }
-}
+    return { type: "SET_MODAL", payload: modal };
+};
 
 export const unsavedChanges = (bool) => {
-    return { type: 'UNSAVED_CHANGES', payload: bool }
-}
+    return { type: "UNSAVED_CHANGES", payload: bool };
+};
 
 export const examplePage = (bool) => {
-    return { type: 'EXAMPLE_PAGE', payload: bool }
-}
+    return { type: "EXAMPLE_PAGE", payload: bool };
+};
 
 export const toggleScrollSync = (bool) => {
-    return { type: 'SCROLL_SYNC', payload: bool }
-}
+    return { type: "SCROLL_SYNC", payload: bool };
+};
+
+export const masterUpdateHandler =
+    (location, actionType, data) => async (dispatch, getState) => {
+        const newAlert = {
+            open: true,
+            message: "",
+            severity: "",
+        };
+
+        if (location === "local") {
+            try {
+                switch (actionType) {
+                    case "create":
+                        await createLocalDoc(data);
+                        newAlert.message = "New document created!";
+                        break;
+                    case "save":
+                        await saveLocalDoc(data, dispatch, getState)
+                        newAlert.message = "Document savedd!";
+                        console.log('here')
+                        break;
+                    case "delete":
+                        await deleteLocalDoc(data);
+                        newAlert.message = "Document deleted!";
+                        break;
+                }
+
+                newAlert.severity = "success";
+                dispatch({ type: "ALERT_STATUS", newAlert });
+            } catch (error) {
+                newAlert.message = error.message;
+                newAlert.severity = "error";
+                dispatch({ type: "ALERT_STATUS", newAlert });
+            }
+
+            return;
+        } else if (location === "db") {
+            try {
+                switch (actionType) {
+                    case "create":
+                        await createDBDoc(data);
+                        newAlert.message = 'New document created!'
+                        break;
+                    case "save":
+                        await saveDBDoc(data);
+                        newAlert.message = "Document saved!";
+                        break;
+                    case "delete":
+                        await deleteDBDoc(data);
+                        newAlert.message = "Document deleted!";
+                        break;
+                }
+
+                newAlert.severity = "success";
+                dispatch({ type: "ALERT_STATUS", newAlert });
+
+            } catch (error) {
+                
+                newAlert.message = error.message;
+                newAlert.severity = "error";
+                dispatch({ type: "ALERT_STATUS", newAlert });
+            }
+
+            return
+        }
+    };

@@ -23,7 +23,7 @@ export default NextAuth({
                 password: true,
             },
             async authorize(credentials, req) {
-                console.log(credentials)
+
                 try {
                     await client.connect()
 
@@ -41,7 +41,9 @@ export default NextAuth({
                         throw new Error('Unable to log you in')
                     }
 
-                    return result.user.username
+                    const user = { name: result.user.username }
+
+                    return user
 
                 } catch (error) {
                     console.log(error)
