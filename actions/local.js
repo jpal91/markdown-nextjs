@@ -46,8 +46,9 @@ export const deleteLocalDoc = async (data, dispatch, getState) => {
 export const renameLocalDoc = async (data, dispatch, getState) => {
   const { oldFN, newFN } = data;
   const localDocs = getState().localData;
+  const dbDocs = getState().dbData.docs;
 
-  if (localDocs.docs[newFN]) {
+  if (localDocs.docs[newFN] || dbDocs[newFN]) {
     throw new Error("File already exists!");
   }
 

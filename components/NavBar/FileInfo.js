@@ -100,9 +100,7 @@ const FileInfo = (props) => {
             .then(() => {
               setFileName(ele.value);
               unsavedChanges(false);
-              router.push(`/${saveState}/${ele.value}`, undefined, {
-                shallow: true
-              });
+              router.push(`/${saveState}/${ele.value}`);
             })
             .catch(() => setInputValue(""))
             .finally(() => {

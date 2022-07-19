@@ -5,7 +5,7 @@ import {
   deleteLocalDoc,
   renameLocalDoc
 } from "./local";
-import { createDBDoc, saveDBDoc, deleteDBDoc } from "./db";
+import { createDBDoc, saveDBDoc, deleteDBDoc, renameDBDoc } from "./db";
 
 const errorDelete = {
   open: true,
@@ -188,7 +188,7 @@ export const masterUpdateHandler = (location, actionType, data) => async (
     message: "",
     severity: ""
   };
-
+  console.log(location);
   if (location === "local") {
     try {
       switch (actionType) {
@@ -237,6 +237,10 @@ export const masterUpdateHandler = (location, actionType, data) => async (
           await deleteDBDoc(data, dispatch, getState);
           newAlert.message = "Document deleted!";
           break;
+        case "rename":
+          await renameDBDoc(data, dispatch, getState);
+          newAlert.message = "Document re-named!";
+          break;
         default:
           break;
       }
@@ -244,6 +248,7 @@ export const masterUpdateHandler = (location, actionType, data) => async (
       newAlert.message = error.message;
       newAlert.severity = "error";
       dispatch({ type: "ALERT_STATUS", payload: newAlert });
+      throw new Error("");
     }
 
     newAlert.severity = "success";

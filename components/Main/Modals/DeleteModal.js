@@ -26,6 +26,7 @@ const DeleteModal = (props) => {
     //   .catch(() => {
     //     setClose()
     //   })
+
     await masterUpdateHandler(saveState, "delete", fileName)
       .then(() => {
         setClose();

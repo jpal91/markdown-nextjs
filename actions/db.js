@@ -60,16 +60,16 @@ export const saveDBDoc = async (data, dispatch, getState) => {
 // }
 
 export const deleteDBDoc = async (data, dispatch, getState) => {
-  const { fileName } = data;
+  // const { fileName } = data;
   const dbDocs = getState().dbData.docs;
   const user = getState().authUser;
-
-  if (!dbDocs[fileName]) {
+  console.log(data);
+  if (!dbDocs[data]) {
     throw new Error("File does not exist!");
   }
 
   const response = await axios.post("/api/db/delete", {
-    fileName: fileName,
+    fileName: data,
     user: user
   });
 
@@ -78,10 +78,11 @@ export const deleteDBDoc = async (data, dispatch, getState) => {
 
 export const renameDBDoc = async (data, dispatch, getState) => {
   const { oldFN, newFN } = data;
-  const dbDocs = getState().dbData.docs();
+  const dbDocs = getState().dbData.docs;
+  const localDocs = getState().localData.docs;
   const user = getState().authUser;
 
-  if (dbDocs[newFN]) {
+  if (dbDocs[newFN] || localDocs[newFN]) {
     throw new Error("Document already exists!");
   }
 

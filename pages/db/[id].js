@@ -68,6 +68,7 @@ const LocalUserDoc = (props) => {
     }
 
     if (!dbData.docs[`${pageId}`]) {
+      console.log("here");
       router.push("/");
       return;
     }
