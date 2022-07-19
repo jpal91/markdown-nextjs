@@ -20,7 +20,8 @@ const Save = (props) => {
     saveToDB,
     buttonStatus,
     setModal,
-    masterUpdateHandler
+    masterUpdateHandler,
+    saveState
   } = props;
   const router = useRouter();
 
@@ -37,9 +38,9 @@ const Save = (props) => {
     };
 
     // saveToDB(newPost)
-    masterUpdateHandler("local", "save", newPost);
+    masterUpdateHandler(saveState, "save", newPost);
 
-    router.push(`/local/${fileName}`, undefined, { shallow: true });
+    router.push(`/${saveState}/${fileName}`, undefined, { shallow: true });
 
     // setAlert({
     //   open: true,
@@ -62,7 +63,8 @@ const mapStateToProps = (state) => {
     fileName: state.fileName,
     mdData: state.mdData,
     localData: state.localData,
-    buttonStatus: state.buttonStatus
+    buttonStatus: state.buttonStatus,
+    saveState: state.saveState
   };
 };
 
