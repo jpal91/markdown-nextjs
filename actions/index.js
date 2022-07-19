@@ -1,5 +1,10 @@
 import axios from "axios";
-import { createLocalDoc, saveLocalDoc, deleteLocalDoc } from "./local";
+import {
+  createLocalDoc,
+  saveLocalDoc,
+  deleteLocalDoc,
+  renameLocalDoc
+} from "./local";
 import { createDBDoc, saveDBDoc, deleteDBDoc } from "./db";
 
 const errorDelete = {
@@ -199,6 +204,10 @@ export const masterUpdateHandler = (location, actionType, data) => async (
           await deleteLocalDoc(data, dispatch, getState);
           newAlert.message = "Document deleted!";
           break;
+        case "rename":
+          await renameLocalDoc(data, dispatch, getState);
+          newAlert.message = "Document re-named!";
+          break;
         default:
           break;
       }
@@ -206,6 +215,7 @@ export const masterUpdateHandler = (location, actionType, data) => async (
       newAlert.message = error.message;
       newAlert.severity = "error";
       dispatch({ type: "ALERT_STATUS", payload: newAlert });
+      throw new Error("");
     }
 
     newAlert.severity = "success";

@@ -34,14 +34,14 @@ const FileList = (props) => {
       const dbDataKeys = Object.keys(dbData.docs);
       const localDataKeys = Object.keys(localData.docs);
 
-      return (
+      const dbList =
         dbDataKeys &&
         dbDataKeys.map((doc, i) => {
-          let targetDoc = dbData.docs[doc] || localData.docs[doc];
+          let targetDoc = dbData.docs[doc];
 
           return (
             <ListItemButton
-              key={i}
+              key={"db-" + i}
               onClick={() => {
                 toggleMenu(false);
                 setOpen(false);
@@ -51,13 +51,15 @@ const FileList = (props) => {
               <ListItemText primary={`${doc}`} secondary={targetDoc.date} />
             </ListItemButton>
           );
-        }) + localDataKeys &&
+        });
+      const localList =
+        localDataKeys &&
         localDataKeys.map((doc, i) => {
           let targetDoc = localData.docs[doc];
 
           return (
             <ListItemButton
-              key={i}
+              key={"local-" + i}
               onClick={() => {
                 toggleMenu(false);
                 setOpen(false);
@@ -67,8 +69,8 @@ const FileList = (props) => {
               <ListItemText primary={`${doc}`} secondary={targetDoc.date} />
             </ListItemButton>
           );
-        })
-      );
+        });
+      return [dbList, localList];
     } else if (listName === "Examples") {
       if (!directoryData) {
         return;

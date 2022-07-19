@@ -16,7 +16,7 @@ const handler = async (req, res) => {
   try {
     await client.connect();
 
-    const result = await col.findOne({ user: user });
+    const result = await col.findOne({ "user.username": user });
 
     return res.status(200).send(result);
   } catch (error) {

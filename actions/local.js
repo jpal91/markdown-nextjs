@@ -31,12 +31,30 @@ export const saveLocalDoc = async (data, dispatch, getState) => {
 export const deleteLocalDoc = async (data, dispatch, getState) => {
   // const { fileName } = data;
   const localDocs = getState().localData;
-  console.log(data);
+
   if (!localDocs.docs[data]) {
     throw new Error("File does not exist!");
   }
 
   delete localDocs.docs[data];
+
+  localStorage.setItem("localData", JSON.stringify(localDocs));
+
+  dispatch({ type: "LOCAL_DATA", payload: localDocs });
+};
+
+export const renameLocalDoc = async (data, dispatch, getState) => {
+  const { oldFN, newFN } = data;
+  const localDocs = getState().localData;
+
+  if (localDocs.docs[newFN]) {
+    throw new Error("File already exists!");
+  }
+
+  const newDoc = { ...localDocs.docs[oldFN] };
+
+  delete localDocs.docs[oldFN];
+  localDocs.docs[newFN] = newDoc;
 
   localStorage.setItem("localData", JSON.stringify(localDocs));
 
