@@ -8,11 +8,13 @@ import filename from "./filename";
 import localdata from "./localdata";
 import alert from "./alert";
 import buttonstatus from "./buttonstatus";
-import dbdata from './dbdata'
-import modal from './modal'
-import unsaved from './unsaved-changes'
-import example from './example'
-import scrollsync from './scrollsync'
+import dbdata from "./dbdata";
+import modal from "./modal";
+import unsaved from "./unsaved-changes";
+import example from "./example";
+import scrollsync from "./scrollsync";
+import authuser from "./authuser";
+import savestate from "./savestate";
 
 export default combineReducers({
   isLightMode: theme,
@@ -27,5 +29,7 @@ export default combineReducers({
   modalStatus: modal,
   unsaved: unsaved,
   isExamplePage: example,
-  isScrollSync: scrollsync
+  isScrollSync: scrollsync,
+  authUser: authuser,
+  saveState: savestate
 });

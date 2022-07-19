@@ -5,12 +5,16 @@ import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
+import FormControl from "@mui/material/FormControl";
+import MenuItem from "@mui/material/MenuItem";
+import Select from "@mui/material/Select";
 
 import {
   createNewDoc,
   toggleMenu,
   unsavedChanges,
-  masterUpdateHandler
+  masterUpdateHandler,
+  setSaveState
 } from "../../../actions";
 
 const NewDocModal = (props) => {
@@ -20,7 +24,10 @@ const NewDocModal = (props) => {
     toggleMenu,
     unsavedChanges,
     mdData,
-    masterUpdateHandler
+    masterUpdateHandler,
+    setSaveState,
+    saveState,
+    authUser
   } = props;
   const router = useRouter();
   const [fileName, setFileName] = useState("");
@@ -43,7 +50,7 @@ const NewDocModal = (props) => {
     //         setClose()
     //     })
 
-    await masterUpdateHandler("local", "create", newDoc)
+    await masterUpdateHandler(saveState, "create", newDoc)
       .then(() => {
         setClose();
         toggleMenu(false);
@@ -66,6 +73,20 @@ const NewDocModal = (props) => {
           value={fileName}
           onChange={(event) => setFileName(event.target.value)}
         />
+      </Grid>
+      <Grid item xs={12}>
+        <FormControl>
+          <Select
+            label="Save Pref"
+            value={saveState}
+            onChange={(event) => setSaveState(event.target.value)}
+          >
+            <MenuItem value="local">Local</MenuItem>
+            <MenuItem value="db" disabled={!authUser}>
+              Database
+            </MenuItem>
+          </Select>
+        </FormControl>
       </Grid>
       <Grid
         item
@@ -91,9 +112,17 @@ const NewDocModal = (props) => {
   );
 };
 
-export default connect(null, {
+const mapStateToProps = (state) => {
+  return {
+    saveState: state.saveState,
+    authUser: state.authUser
+  };
+};
+
+export default connect(mapStateToProps, {
   createNewDoc,
   toggleMenu,
   unsavedChanges,
-  masterUpdateHandler
+  masterUpdateHandler,
+  setSaveState
 })(NewDocModal);

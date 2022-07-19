@@ -1,22 +1,36 @@
-import { useState } from 'react'
+import { useState } from "react";
 import Image from "next/image";
 import { connect } from "react-redux";
+import { signOut } from "next-auth/react";
 import Drawer from "@mui/material/Drawer";
 import Typography from "@mui/material/Typography";
 import ButtonBase from "@mui/material/ButtonBase";
-import Button from '@mui/material/Button'
+import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
 import Switch from "@mui/material/Switch";
 import ModeNightOutlinedIcon from "@mui/icons-material/ModeNightOutlined";
 import Brightness5OutlinedIcon from "@mui/icons-material/Brightness5Outlined";
 
 import FileList from "./FileList";
-import { setModal, setLightMode } from "../../../actions";
+import { setModal, setLightMode, setAuthUser } from "../../../actions";
 
 const SideNav = (props) => {
-  const { isMenuOpen, setModal, unsaved, setLightMode, isLightMode } = props;
-  const handleSwitch = () => setLightMode(!isLightMode)
-  
+  const {
+    isMenuOpen,
+    setModal,
+    unsaved,
+    setLightMode,
+    isLightMode,
+    authUser,
+    setAuthUser
+  } = props;
+  const handleSwitch = () => setLightMode(!isLightMode);
+
+  const handleLogout = () => {
+    signOut({ redirect: false });
+    setAuthUser("");
+  };
+
   return (
     <Drawer
       variant="persistent"
@@ -34,7 +48,11 @@ const SideNav = (props) => {
       }}
     >
       <Typography variant="sideNavHeading">MY DOCUMENTS</Typography>
-      <ButtonBase onClick={() => setModal({ open: true, type: unsaved ? 'save-warn' : 'new' })}>
+      <ButtonBase
+        onClick={() =>
+          setModal({ open: true, type: unsaved ? "save-warn" : "new" })
+        }
+      >
         <Image src="/images/new-document.svg" width="200" height="100" />
       </ButtonBase>
       <Box
@@ -53,14 +71,51 @@ const SideNav = (props) => {
           display: "flex",
           alignItems: "center",
           justifyContent: "flex-end",
-          flexDirection: 'column',
+          flexDirection: "column",
           height: "100%",
-          rowGap: '20px',
+          rowGap: "20px",
           mb: 2
         }}
       >
-        <Button variant='contained' sx={{ backgroundColor: 'primary.dOrange'}} onClick={() => setModal({open: true, type: 'sign-up'})}>Sign Up</Button>
-        <Button variant='contained' sx={{ backgroundColor: 'primary.dOrange'}} onClick={() => setModal({open: true, type: 'login'})}>Login</Button>
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            rowGap: "10px",
+            contentVisibility: authUser && "hidden"
+          }}
+        >
+          <Button
+            variant="contained"
+            sx={{ backgroundColor: "primary.dOrange" }}
+            onClick={() => setModal({ open: true, type: "sign-up" })}
+          >
+            Sign Up
+          </Button>
+          <Button
+            variant="contained"
+            sx={{ backgroundColor: "primary.dOrange" }}
+            onClick={() => setModal({ open: true, type: "login" })}
+          >
+            Login
+          </Button>
+        </Box>
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            rowGap: "10px",
+            contentVisibility: !authUser && "hidden"
+          }}
+        >
+          <Button
+            variant="contained"
+            sx={{ backgroundColor: "primary.dOrange" }}
+            onClick={handleLogout}
+          >
+            Logout
+          </Button>
+        </Box>
         <Box sx={{ display: "flex", alignItems: "center", columnGap: "10px" }}>
           <ModeNightOutlinedIcon sx={{ color: "primary.vlgray" }} />
           <Switch
@@ -80,8 +135,13 @@ const mapStateToProps = (state) => {
   return {
     isMenuOpen: state.isMenuOpen,
     unsaved: state.unsaved,
-    isLightMode: state.isLightMode
+    isLightMode: state.isLightMode,
+    authUser: state.authUser
   };
 };
 
-export default connect(mapStateToProps, { setModal, setLightMode })(SideNav);
+export default connect(mapStateToProps, {
+  setModal,
+  setLightMode,
+  setAuthUser
+})(SideNav);

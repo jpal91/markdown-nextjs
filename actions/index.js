@@ -161,6 +161,14 @@ export const toggleScrollSync = (bool) => {
   return { type: "SCROLL_SYNC", payload: bool };
 };
 
+export const setAuthUser = (string) => {
+  return { type: "AUTH_USER", payload: string };
+};
+
+export const setSaveState = (string) => {
+  return { type: "SAVE_STATE", payload: string };
+};
+
 export const masterUpdateHandler = (location, actionType, data) => async (
   dispatch,
   getState
@@ -192,7 +200,7 @@ export const masterUpdateHandler = (location, actionType, data) => async (
     } catch (error) {
       newAlert.message = error.message;
       newAlert.severity = "error";
-      dispatch({ type: "ALERT_STATUS", newAlert });
+      dispatch({ type: "ALERT_STATUS", payload: newAlert });
     }
 
     newAlert.severity = "success";
@@ -220,11 +228,11 @@ export const masterUpdateHandler = (location, actionType, data) => async (
     } catch (error) {
       newAlert.message = error.message;
       newAlert.severity = "error";
-      dispatch({ type: "ALERT_STATUS", newAlert });
+      dispatch({ type: "ALERT_STATUS", payload: newAlert });
     }
 
     newAlert.severity = "success";
-    dispatch({ type: "ALERT_STATUS", newAlert });
+    dispatch({ type: "ALERT_STATUS", payload: newAlert });
 
     return;
   }

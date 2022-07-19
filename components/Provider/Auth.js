@@ -1,18 +1,26 @@
-import React, { useEffect } from 'react'
-import { useSession } from 'next-auth/react'
+import React, { useEffect } from "react";
+import { useSession } from "next-auth/react";
+import { connect } from "react-redux";
+
+import { setAuthUser } from "../../actions";
 
 const Auth = (props) => {
-    const { data: session, status } = useSession()
+  const { setAuthUser, authUser } = props;
+  const { data: session, status } = useSession();
 
-    useEffect(() => {
-        console.log(session, status)
-    }, [session])
+  useEffect(() => {
+    if (session?.user && !authUser) {
+      setAuthUser(session.user.name);
+    }
+  }, [session]);
 
-    return (
-        <React.Fragment>
-            {props.children}
-        </React.Fragment>
-    )
-}
+  return <React.Fragment>{props.children}</React.Fragment>;
+};
 
-export default Auth
+const mapStateToProps = (state) => {
+  return {
+    authUser: state.authUser
+  };
+};
+
+export default connect(mapStateToProps, { setAuthUser })(Auth);
