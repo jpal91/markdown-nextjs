@@ -4,26 +4,40 @@ import { useRouter } from "next/router";
 import Image from "next/image";
 import ButtonBase from "@mui/material/Button";
 
-import { updateLocalData, setAlert, saveToDB, setModal, masterUpdateHandler } from "../../actions";
+import {
+  updateLocalData,
+  setAlert,
+  saveToDB,
+  setModal,
+  masterUpdateHandler
+} from "../../actions";
 
 const Save = (props) => {
-  const { fileName, mdData, setAlert, saveToDB, buttonStatus, setModal, masterUpdateHandler } = props;
+  const {
+    fileName,
+    mdData,
+    setAlert,
+    saveToDB,
+    buttonStatus,
+    setModal,
+    masterUpdateHandler
+  } = props;
   const router = useRouter();
 
   const handleSave = async () => {
-    if (buttonStatus.save === 'new') {
-      setModal({ open: true, type: 'save-new' })
-      return
+    if (buttonStatus.save === "new") {
+      setModal({ open: true, type: "save-new" });
+      return;
     }
-    
+
     const newPost = {
       fileName: fileName,
       md: mdData,
       date: new Date().toLocaleDateString()
-    }
+    };
 
     // saveToDB(newPost)
-    await masterUpdateHandler('local', 'save', newPost)
+    masterUpdateHandler("local", "save", newPost);
 
     router.push(`/${fileName}`, undefined, { shallow: true });
 
@@ -52,7 +66,13 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, { updateLocalData, setAlert, saveToDB, setModal, masterUpdateHandler })(Save);
+export default connect(mapStateToProps, {
+  updateLocalData,
+  setAlert,
+  saveToDB,
+  setModal,
+  masterUpdateHandler
+})(Save);
 
 // if (!localData) {
 //   let obj = {
