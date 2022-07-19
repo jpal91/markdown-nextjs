@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import Drawer from "@mui/material/Drawer";
 import Typography from "@mui/material/Typography";
 import ButtonBase from "@mui/material/ButtonBase";
+import Button from '@mui/material/Button'
 import Box from "@mui/material/Box";
 import Switch from "@mui/material/Switch";
 import ModeNightOutlinedIcon from "@mui/icons-material/ModeNightOutlined";
@@ -50,12 +51,16 @@ const SideNav = (props) => {
       <Box
         sx={{
           display: "flex",
-          alignItems: "flex-end",
-          justifyContent: "center",
+          alignItems: "center",
+          justifyContent: "flex-end",
+          flexDirection: 'column',
           height: "100%",
+          rowGap: '20px',
           mb: 2
         }}
       >
+        <Button variant='contained' sx={{ backgroundColor: 'primary.dOrange'}} onClick={() => setModal({open: true, type: 'sign-up'})}>Sign Up</Button>
+        <Button variant='contained' sx={{ backgroundColor: 'primary.dOrange'}} onClick={() => setModal({open: true, type: 'login'})}>Login</Button>
         <Box sx={{ display: "flex", alignItems: "center", columnGap: "10px" }}>
           <ModeNightOutlinedIcon sx={{ color: "primary.vlgray" }} />
           <Switch
