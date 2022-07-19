@@ -37,6 +37,12 @@ const successRename = {
   severity: "success"
 };
 
+const logout = {
+  open: true,
+  message: "Logged out!",
+  severity: "success"
+};
+
 export const setLightMode = (bool) => {
   return { type: "SET_THEME", payload: bool };
 };
@@ -179,6 +185,12 @@ export const setSaveState = (string) => {
   return { type: "SAVE_STATE", payload: string };
 };
 
+export const logOut = () => async (dispatch) => {
+  dispatch({ type: "AUTH_USER", payload: "" });
+  dispatch({ type: "DB_DATA", payload: { _id: "", user: "", docs: {} } });
+  dispatch({ type: "ALERT_STATUS", payload: logout });
+};
+
 export const masterUpdateHandler = (location, actionType, data) => async (
   dispatch,
   getState
@@ -188,7 +200,7 @@ export const masterUpdateHandler = (location, actionType, data) => async (
     message: "",
     severity: ""
   };
-  console.log(location);
+
   if (location === "local") {
     try {
       switch (actionType) {

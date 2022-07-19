@@ -2,6 +2,7 @@ import { useState } from "react";
 import Image from "next/image";
 import { connect } from "react-redux";
 import { signOut } from "next-auth/react";
+import { useRouter } from "next/router";
 import Drawer from "@mui/material/Drawer";
 import Typography from "@mui/material/Typography";
 import ButtonBase from "@mui/material/ButtonBase";
@@ -12,7 +13,7 @@ import ModeNightOutlinedIcon from "@mui/icons-material/ModeNightOutlined";
 import Brightness5OutlinedIcon from "@mui/icons-material/Brightness5Outlined";
 
 import FileList from "./FileList";
-import { setModal, setLightMode, setAuthUser } from "../../../actions";
+import { setModal, setLightMode, setAuthUser, logOut } from "../../../actions";
 
 const SideNav = (props) => {
   const {
@@ -22,13 +23,16 @@ const SideNav = (props) => {
     setLightMode,
     isLightMode,
     authUser,
-    setAuthUser
+    logOut
   } = props;
+  const router = useRouter();
   const handleSwitch = () => setLightMode(!isLightMode);
 
   const handleLogout = () => {
-    signOut({ redirect: false });
-    setAuthUser("");
+    logOut().then(() => {
+      signOut({ redirect: false });
+      router.push("/");
+    });
   };
 
   return (
@@ -143,5 +147,6 @@ const mapStateToProps = (state) => {
 export default connect(mapStateToProps, {
   setModal,
   setLightMode,
-  setAuthUser
+  setAuthUser,
+  logOut
 })(SideNav);
