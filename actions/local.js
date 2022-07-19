@@ -29,14 +29,14 @@ export const saveLocalDoc = async (data, dispatch, getState) => {
 };
 
 export const deleteLocalDoc = async (data, dispatch, getState) => {
-  const { fileName } = data;
+  // const { fileName } = data;
   const localDocs = getState().localData;
-
-  if (!localDocs.docs[fileName]) {
+  console.log(data);
+  if (!localDocs.docs[data]) {
     throw new Error("File does not exist!");
   }
 
-  delete localDocs.docs[fileName];
+  delete localDocs.docs[data];
 
   localStorage.setItem("localData", JSON.stringify(localDocs));
 

@@ -55,7 +55,7 @@ const NewDocModal = (props) => {
         setClose();
         toggleMenu(false);
         unsavedChanges(false);
-        router.push(`/${fileName}`);
+        router.push(`/${saveState}/${fileName}`);
       })
       .catch(() => {
         setClose();

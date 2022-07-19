@@ -26,8 +26,6 @@ const MainApp = (props) => {
         setData(e.target.value);
       }
     });
-    
-    getDBData()
   }, []);
 
   return (
@@ -60,4 +58,8 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, { setData, setButtonStatus, getDBData })(MainApp);
+export default connect(mapStateToProps, {
+  setData,
+  setButtonStatus,
+  getDBData
+})(MainApp);

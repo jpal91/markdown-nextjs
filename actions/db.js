@@ -23,7 +23,7 @@ export const createDBDoc = async (data, dispatch, getState) => {
     throw new Error("File already exists!");
   }
 
-  const response = await axios.post("/api/create-new", data);
+  const response = await axios.post("/api/db/create-new", data);
 
   dispatch({ type: "DB_DATA", payload: response.data });
 };
@@ -35,7 +35,7 @@ export const createDBDoc = async (data, dispatch, getState) => {
 // }
 
 export const saveDBDoc = async (data, dispatch, getState) => {
-  const response = await axios.post("/api/save", { post: data });
+  const response = await axios.post("/api/db/save", { post: data });
 
   dispatch({ type: "DB_DATA", payload: response.data });
 };
@@ -61,7 +61,7 @@ export const deleteDBDoc = async (data, dispatch, getState) => {
     throw new Error("File does not exist!");
   }
 
-  const response = await axios.post("/api/delete", { fileName: fileName });
+  const response = await axios.post("/api/db/delete", { fileName: fileName });
 
   dispatch({ type: "DB_DATA", payload: response.data });
 };

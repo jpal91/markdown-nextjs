@@ -83,8 +83,13 @@ export const setButtonStatus = (obj) => {
   return { type: "CHANGE_BUTTONS", payload: obj };
 };
 
-export const getDBData = () => async (dispatch) => {
-  const response = await axios.get("/api/get-data");
+export const getDBData = () => async (dispatch, getState) => {
+  const user = getState().authUser;
+  if (!user) {
+    return;
+  }
+
+  const response = await axios.post("/api/db/get-data", { user: user });
 
   return dispatch({ type: "DB_DATA", payload: response.data });
 };

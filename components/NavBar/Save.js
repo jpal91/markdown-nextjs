@@ -39,7 +39,7 @@ const Save = (props) => {
     // saveToDB(newPost)
     masterUpdateHandler("local", "save", newPost);
 
-    router.push(`/${fileName}`, undefined, { shallow: true });
+    router.push(`/local/${fileName}`, undefined, { shallow: true });
 
     // setAlert({
     //   open: true,
