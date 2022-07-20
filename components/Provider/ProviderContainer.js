@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { ThemeProvider } from "@mui/material/styles";
 import { SessionProvider } from 'next-auth/react'
 import { connect } from "react-redux";
+import { SnackbarProvider } from 'notistack'
 
 import theme from "../../styles/theme";
 import themeDark from '../../styles/theme-dark'
@@ -17,7 +18,9 @@ const ProviderContainer = (props) => {
   return (
     <ThemeProvider theme={isLightMode ? theme : themeDark}>
       <SessionProvider session={session}>
-        {props.children}
+        <SnackbarProvider>
+          {props.children}
+        </SnackbarProvider>
       </SessionProvider>
     </ThemeProvider>
   );

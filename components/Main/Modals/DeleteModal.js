@@ -65,7 +65,7 @@ const DeleteModal = (props) => {
         >
           Yes, delete
         </Button> */}
-        <ButtonBase sx={{ '&:hover': { opacity: '0.9' }}}>
+        <ButtonBase sx={{ '&:hover': { opacity: '0.9' }}} onClick={handleDelete}>
           <Image src={deleteImage} />
         </ButtonBase>
       </Grid>

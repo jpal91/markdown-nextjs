@@ -17,6 +17,7 @@ specifiers:
   mongodb: ^4.8.0
   next: 12.2.0
   next-auth: ^4.10.0
+  notistack: ^2.0.5
   react: 18.2.0
   react-dom: 18.2.0
   react-html-parser: ^2.0.2
@@ -41,6 +42,7 @@ dependencies:
   mongodb: 4.8.0
   next: 12.2.0_biqbaboplfbrettd7655fr4n2y
   next-auth: 4.10.0_biqbaboplfbrettd7655fr4n2y
+  notistack: 2.0.5_iuocwb7tri4dxdikfhq2nwtau4
   react: 18.2.0
   react-dom: 18.2.0_react@18.2.0
   react-html-parser: 2.0.2_react@18.2.0
@@ -2254,6 +2256,29 @@ packages:
     hasBin: true
     dependencies:
       abbrev: 1.1.1
+    dev: false
+
+  /notistack/2.0.5_iuocwb7tri4dxdikfhq2nwtau4:
+    resolution: {integrity: sha512-Ig2T1Muqkc1PaSQcEDrK7diKv6cBxw02Iq6uv074ySfgq524TV5lK41diAb6OSsaiWfp3aRt+T3+0MF8m2EcJQ==}
+    peerDependencies:
+      '@emotion/react': ^11.4.1
+      '@emotion/styled': ^11.3.0
+      '@mui/material': ^5.0.0
+      react: ^16.8.0 || ^17.0.0 || ^18.0.0
+      react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
+    peerDependenciesMeta:
+      '@emotion/react':
+        optional: true
+      '@emotion/styled':
+        optional: true
+    dependencies:
+      '@emotion/react': 11.9.3_react@18.2.0
+      '@emotion/styled': 11.9.3_jhgplt4fmhans76oq3ok5iox2u
+      '@mui/material': 5.8.7_qsuhhlyfbpdicstla2jcf7xfmy
+      clsx: 1.2.1
+      hoist-non-react-statics: 3.3.2
+      react: 18.2.0
+      react-dom: 18.2.0_react@18.2.0
     dev: false
 
   /npmlog/5.0.1:

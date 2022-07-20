@@ -85,7 +85,7 @@ const typography = {
   sideNavSubText: {
     fontWeight: baseProperties.fontWeightRegular,
     fontFamily: fontFam.regular,
-    color: "white",
+    color: 'hsla(360, 100%, 100%, 1)',
     fontSize: 10,
     letterSpacing: "2px"
   },
