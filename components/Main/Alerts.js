@@ -1,6 +1,8 @@
 import Snackbar from "@mui/material/Snackbar";
 import Alert from "@mui/material/Alert";
 import { connect } from "react-redux";
+import Fade from '@mui/material/Fade'
+import Slide from '@mui/material/Slide';
 
 import { setAlert } from "../../actions";
 
@@ -19,6 +21,7 @@ const Alerts = (props) => {
       autoHideDuration={5000}
       onClose={handleClose}
       key="snack-1"
+      TransitionComponent={Slide}
     >
       <Alert severity={severity || "success"} sx={{ px: 5 }}>
         {message}

@@ -90,13 +90,13 @@ const SideNav = (props) => {
             contentVisibility: authUser && "hidden"
           }}
         >
-          <Button
+          {/* <Button
             variant="contained"
             sx={{ backgroundColor: "primary.dOrange" }}
             onClick={() => setModal({ open: true, type: "sign-up" })}
           >
             Sign Up
-          </Button>
+          </Button> */}
           <Button
             variant="contained"
             sx={{ backgroundColor: "primary.dOrange" }}
