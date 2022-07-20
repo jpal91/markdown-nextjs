@@ -34,7 +34,7 @@ const LocalUserDoc = (props) => {
     setButtonStatus({
       save: "existing",
       fileName: "rename",
-      delete: "disabled"
+      delete: "existing"
     });
 
     setSaveState("db");
@@ -45,30 +45,12 @@ const LocalUserDoc = (props) => {
     };
   }, []);
 
-  // useEffect(() => {
-  //     let route = router.query.id;
-
-  //     // setLoading(true)
-
-  //     if (!dbData.user) {
-  //         async () => await getDBData()
-  //         return
-  //     } else if (dbData.user && !dbData.docs[`${route}`]) {
-  //         router.push("/");
-  //     } else {
-  //         setFileName(`${route}`);
-  //         setData(dbData.docs[`${route}`].md || "")
-  //         setLoading(false)
-  //     }
-  // }, [dbData, router])
-
   useEffect(() => {
     if (Object.keys(dbData.docs).length === 0) {
       return;
     }
 
     if (!dbData.docs[`${pageId}`]) {
-      console.log("here");
       router.push("/");
       return;
     }

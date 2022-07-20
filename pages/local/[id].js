@@ -29,7 +29,7 @@ const LocalUserDoc = (props) => {
     setButtonStatus({
       save: "existing",
       fileName: "rename",
-      delete: "disabled"
+      delete: "existing"
     });
 
     setSaveState("local");

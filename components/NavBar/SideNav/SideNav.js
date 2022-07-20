@@ -28,11 +28,12 @@ const SideNav = (props) => {
   const router = useRouter();
   const handleSwitch = () => setLightMode(!isLightMode);
 
-  const handleLogout = () => {
-    logOut().then(() => {
-      signOut({ redirect: false });
-      router.push("/");
-    });
+  const handleLogout = async () => {
+    await signOut({ redirect: false })
+      .then(() => {
+        logOut()
+        router.push('/')
+      })
   };
 
   return (
