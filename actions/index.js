@@ -44,6 +44,7 @@ const logout = {
 };
 
 export const setLightMode = (bool) => {
+  localStorage.setItem('isLightMode', bool)
   return { type: "SET_THEME", payload: bool };
 };
 

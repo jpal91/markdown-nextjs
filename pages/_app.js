@@ -11,9 +11,11 @@ import reducers from "../reducers";
 import Auth from '../components/Provider/Auth'
 import '../public/theme.css'
 
+
+const composeEnhancers = composeWithDevTools({ trace: false })
 const store = createStore(
 	reducers,
-	composeWithDevTools(applyMiddleware(reduxThunk))
+	composeEnhancers(applyMiddleware(reduxThunk))
 )
 
 function MyApp({ Component, pageProps }) {
