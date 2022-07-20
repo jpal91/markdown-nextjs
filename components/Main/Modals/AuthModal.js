@@ -64,7 +64,7 @@ const AuthModal = (props) => {
     return (
         <React.Fragment>
             <Grid item xs={12} sx={{ mb: 2 }}>
-                <Typography variant="h4">Login with these providers</Typography>
+                <Typography variant="sideNavHeading" sx={{ color: 'black' }}>CHOOSE YOUR LOGIN</Typography>
             </Grid>
             {/* <Grid item xs={12} sx={{ flexDirection: 'column', rowGap: '10px', my: 2}}>
                 <TextField

@@ -2,6 +2,8 @@ import { connect } from "react-redux";
 import Modal from "@mui/material/Modal";
 import Card from "@mui/material/Card";
 import Grid from "@mui/material/Grid";
+import IconButton from '@mui/material/IconButton'
+import CloseIcon from '@mui/icons-material/Close';
 
 import { setModal } from "../../../actions";
 import DeleteModal from "./DeleteModal";
@@ -49,7 +51,8 @@ const MainModal = (props) => {
                     alignItems: "normal",
                 }}
             >
-                <Grid container>{setClass()}</Grid>
+                <IconButton sx={{ position: 'absolute', top: '5%', left: '85%'}} onClick={handleClose}><CloseIcon/></IconButton>
+                <Grid container sx={{ rowGap: '20px' }}>{setClass()}</Grid>
             </Card>
         </Modal>
     );

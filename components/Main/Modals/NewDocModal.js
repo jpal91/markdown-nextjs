@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
 import { useRouter } from "next/router";
+import Image from "next/image";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
+import ButtonBase from '@mui/material/ButtonBase'
 import TextField from "@mui/material/TextField";
 import FormControl from "@mui/material/FormControl";
 import MenuItem from "@mui/material/MenuItem";
@@ -16,6 +18,7 @@ import {
   masterUpdateHandler,
   setSaveState
 } from "../../../actions";
+import createButton from '../../../public/images/create-new.svg'
 
 const NewDocModal = (props) => {
   const {
@@ -65,7 +68,7 @@ const NewDocModal = (props) => {
   return (
     <React.Fragment>
       <Grid item xs={12}>
-        <Typography variant="h4">Name Your New Document</Typography>
+        <Typography variant="sideNavHeading" sx={{ color: 'black' }}>NAME YOUR DOCUMENT</Typography>
       </Grid>
       <Grid item xs={12}>
         <TextField
@@ -77,7 +80,7 @@ const NewDocModal = (props) => {
       <Grid item xs={12}>
         <FormControl>
           <Select
-            label="Save Pref"
+            
             value={saveState}
             onChange={(event) => setSaveState(event.target.value)}
           >
@@ -93,7 +96,7 @@ const NewDocModal = (props) => {
         xs={12}
         sx={{ justifyContent: "space-evenly", maxHeight: "50px" }}
       >
-        <Button
+        {/* <Button
           variant="contained"
           sx={{ backgroundColor: "blue" }}
           onClick={setClose}
@@ -106,7 +109,10 @@ const NewDocModal = (props) => {
           onClick={handleSave}
         >
           Submit
-        </Button>
+        </Button> */}
+        <ButtonBase onClick={handleSave} sx={{ '&:hover': { opacity: '0.9' }}}>
+          <Image src={createButton} />
+        </ButtonBase>
       </Grid>
     </React.Fragment>
   );
