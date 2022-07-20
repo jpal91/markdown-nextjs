@@ -2,16 +2,21 @@ import React, { useEffect } from "react";
 import { useSession } from "next-auth/react";
 import { connect } from "react-redux";
 
-import { setAuthUser, getDBData } from "../../actions";
+import { setAuthUser, getDBData, logOut } from "../../actions";
 
 const Auth = (props) => {
-  const { setAuthUser, authUser, getDBData } = props;
+  const { setAuthUser, authUser, getDBData, logOut } = props;
   const { data: session, status } = useSession();
 
   useEffect(() => {
+    console.log(session)
     if (session?.user && !authUser) {
       setAuthUser(session.user.name);
       getDBData();
+    }
+
+    if (!session && authUser) {
+      logOut()
     }
   }, [session]);
 
@@ -24,4 +29,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, { setAuthUser, getDBData })(Auth);
+export default connect(mapStateToProps, { setAuthUser, getDBData, logOut })(Auth);

@@ -5,6 +5,7 @@ specifiers:
   '@emotion/styled': ^11.9.3
   '@mui/icons-material': ^5.8.4
   '@mui/material': ^5.8.7
+  '@next-auth/mongodb-adapter': ^1.0.3
   '@redux-devtools/extension': ^3.2.2
   axios: 0.27.2
   bcrypt: ^5.0.1
@@ -21,6 +22,7 @@ specifiers:
   react-html-parser: ^2.0.2
   react-redux: 8.0.2
   react-scroll-sync: ^0.11.0
+  react-social-login-buttons: ^3.6.0
   redux: 4.2.0
   redux-thunk: ^2.4.1
 
@@ -29,6 +31,7 @@ dependencies:
   '@emotion/styled': 11.9.3_jhgplt4fmhans76oq3ok5iox2u
   '@mui/icons-material': 5.8.4_2t6qhahjtzgm5ommnqc4ufa6gy
   '@mui/material': 5.8.7_qsuhhlyfbpdicstla2jcf7xfmy
+  '@next-auth/mongodb-adapter': 1.0.3_6nh2obxdjhhskrjwtihgan5ogi
   '@redux-devtools/extension': 3.2.2_redux@4.2.0
   axios: 0.27.2
   bcrypt: 5.0.1
@@ -43,6 +46,7 @@ dependencies:
   react-html-parser: 2.0.2_react@18.2.0
   react-redux: 8.0.2_e42enmjmqb4imi3q3iaq2rrebm
   react-scroll-sync: 0.11.0_biqbaboplfbrettd7655fr4n2y
+  react-social-login-buttons: 3.6.0_react@18.2.0
   redux: 4.2.0
   redux-thunk: 2.4.1_redux@4.2.0
 
@@ -440,6 +444,16 @@ packages:
       prop-types: 15.8.1
       react: 18.2.0
       react-is: 17.0.2
+    dev: false
+
+  /@next-auth/mongodb-adapter/1.0.3_6nh2obxdjhhskrjwtihgan5ogi:
+    resolution: {integrity: sha512-oO8OYjMhYx8s5qsdWWD+yNCqszCO7ewg6UkDhvfY0KhJRbcoOAwOgYYH5Bo4ZGJDqmIw8g6JeGipP7+xLa2Ynw==}
+    peerDependencies:
+      mongodb: ^4.1.1
+      next-auth: ^4.0.1
+    dependencies:
+      mongodb: 4.8.0
+      next-auth: 4.10.0_biqbaboplfbrettd7655fr4n2y
     dev: false
 
   /@next/env/12.2.0:
@@ -2531,6 +2545,14 @@ packages:
       prop-types: 15.8.1
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
+    dev: false
+
+  /react-social-login-buttons/3.6.0_react@18.2.0:
+    resolution: {integrity: sha512-m5E72jHWgC4VBxRziZYQC5kQIzooGRF+dDE97K5JgSlcDPXkNxCjCzP+Qp9fNhNujG7APvPx2Qhzi1BO2xi17Q==}
+    peerDependencies:
+      react: ^15.0.0 || ^16.0.0 || ^17.x
+    dependencies:
+      react: 18.2.0
     dev: false
 
   /react-transition-group/4.4.2_biqbaboplfbrettd7655fr4n2y:
