@@ -106,61 +106,61 @@ export const getDBData = () => async (dispatch, getState) => {
   return dispatch({ type: "DB_DATA", payload: response.data });
 };
 
-export const createNewDoc = (file) => async (dispatch, getState) => {
-  const { fileName } = file;
-  const currentDocs = getState().dbData.docs;
+// export const createNewDoc = (file) => async (dispatch, getState) => {
+//   const { fileName } = file;
+//   const currentDocs = getState().dbData.docs;
 
-  if (currentDocs[fileName]) {
-    dispatch({ type: "ALERT_STATUS", payload: errorCreate });
-    throw Error("");
-  }
+//   if (currentDocs[fileName]) {
+//     dispatch({ type: "ALERT_STATUS", payload: errorCreate });
+//     throw Error("");
+//   }
 
-  const response = await axios.post("/api/create-new", file);
+//   const response = await axios.post("/api/create-new", file);
 
-  dispatch({ type: "DB_DATA", payload: response.data });
-  dispatch({ type: "ALERT_STATUS", payload: successCreate });
-};
+//   dispatch({ type: "DB_DATA", payload: response.data });
+//   dispatch({ type: "ALERT_STATUS", payload: successCreate });
+// };
 
-export const saveToDB = (post) => async (dispatch) => {
-  const response = await axios.post("/api/save", { post: post });
+// export const saveToDB = (post) => async (dispatch) => {
+//   const response = await axios.post("/api/save", { post: post });
 
-  dispatch({ type: "DB_DATA", payload: response.data });
-  dispatch({ type: "UNSAVED_CHANGES", payload: false });
-};
+//   dispatch({ type: "DB_DATA", payload: response.data });
+//   dispatch({ type: "UNSAVED_CHANGES", payload: false });
+// };
 
-export const deleteFromDB = (fileName) => async (dispatch, getState) => {
-  const currentDocs = getState().dbData.docs;
+// export const deleteFromDB = (fileName) => async (dispatch, getState) => {
+//   const currentDocs = getState().dbData.docs;
 
-  if (!currentDocs[fileName]) {
-    dispatch({ type: "ALERT_STATUS", payload: errorDelete });
-    throw Error("");
-  }
+//   if (!currentDocs[fileName]) {
+//     dispatch({ type: "ALERT_STATUS", payload: errorDelete });
+//     throw Error("");
+//   }
 
-  const response = await axios.post("/api/delete", { fileName: fileName });
+//   const response = await axios.post("/api/delete", { fileName: fileName });
 
-  dispatch({ type: "DB_DATA", payload: response.data });
-  dispatch({ type: "ALERT_STATUS", payload: successDelete });
-};
+//   dispatch({ type: "DB_DATA", payload: response.data });
+//   dispatch({ type: "ALERT_STATUS", payload: successDelete });
+// };
 
-export const renameFile = (oldFN, newFN) => async (dispatch, getState) => {
-  const currentDocs = getState().dbData.docs;
+// export const renameFile = (oldFN, newFN) => async (dispatch, getState) => {
+//   const currentDocs = getState().dbData.docs;
 
-  if (currentDocs[newFN]) {
-    dispatch({ type: "ALERT_STATUS", payload: errorCreate });
-    throw Error("");
-  }
+//   if (currentDocs[newFN]) {
+//     dispatch({ type: "ALERT_STATUS", payload: errorCreate });
+//     throw Error("");
+//   }
 
-  let newDoc = { ...currentDocs[oldFN] };
+//   let newDoc = { ...currentDocs[oldFN] };
 
-  const response = await axios.post("/api/rename", {
-    newDoc: newDoc,
-    oldFN: oldFN,
-    newFN: newFN
-  });
+//   const response = await axios.post("/api/rename", {
+//     newDoc: newDoc,
+//     oldFN: oldFN,
+//     newFN: newFN
+//   });
 
-  dispatch({ type: "DB_DATA", payload: response.data });
-  dispatch({ type: "ALERT_STATUS", payload: successRename });
-};
+//   dispatch({ type: "DB_DATA", payload: response.data });
+//   dispatch({ type: "ALERT_STATUS", payload: successRename });
+// };
 
 export const setModal = (modal) => {
   return { type: "SET_MODAL", payload: modal };
