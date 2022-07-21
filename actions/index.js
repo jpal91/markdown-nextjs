@@ -106,6 +106,10 @@ export const getDBData = () => async (dispatch, getState) => {
   return dispatch({ type: "DB_DATA", payload: response.data });
 };
 
+export const setLoading = (bool) => {
+  return { type: 'LOADING', payload: bool }
+} 
+
 // export const createNewDoc = (file) => async (dispatch, getState) => {
 //   const { fileName } = file;
 //   const currentDocs = getState().dbData.docs;

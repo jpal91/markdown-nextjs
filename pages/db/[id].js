@@ -11,7 +11,8 @@ import {
   setData,
   setButtonStatus,
   getDBData,
-  setSaveState
+  setSaveState,
+  setLoading
 } from "../../actions";
 
 const LocalUserDoc = (props) => {
@@ -22,10 +23,11 @@ const LocalUserDoc = (props) => {
     pageId,
     dbData,
     setSaveState,
-    authUser
+    authUser,
+    setLoading
   } = props;
   const router = useRouter();
-  const [loading, setLoading] = useState(true);
+  // const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     if (!authUser) {
@@ -67,9 +69,6 @@ const LocalUserDoc = (props) => {
         <title>.MD - Database Files</title>
       </Head>
       <MainApp />
-      <Backdrop open={loading}>
-        <CircularProgress sx={{ color: "primary.lOrange" }} />
-      </Backdrop>
     </React.Fragment>
   );
 };
@@ -96,5 +95,6 @@ export default connect(mapStateToProps, {
   setData,
   setButtonStatus,
   getDBData,
-  setSaveState
+  setSaveState,
+  setLoading
 })(LocalUserDoc);

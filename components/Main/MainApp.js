@@ -2,6 +2,8 @@ import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { ScrollSync } from "react-scroll-sync";
 import Container from "@mui/material/Container";
+import Backdrop from '@mui/material/Backdrop'
+import CircularProgress from '@mui/material/CircularProgress'
 
 import { setData, setButtonStatus, getDBData } from "../../actions";
 import TextArea from "./TextArea";
@@ -9,7 +11,7 @@ import Preview from "./Preview";
 import MainModal from "./Modals/MainModal";
 
 const MainApp = (props) => {
-  const { isMenuOpen, setData, getDBData, isScrollSync } = props;
+  const { isMenuOpen, setData, getDBData, isScrollSync, loading } = props;
 
   useEffect(() => {
     const textId = document.querySelector("textarea");
@@ -47,6 +49,9 @@ const MainApp = (props) => {
         </Container>
       </ScrollSync>
       <MainModal />
+      <Backdrop open={loading}>
+        <CircularProgress sx={{ color: "primary.lOrange" }} />
+      </Backdrop>
     </React.Fragment>
   );
 };
@@ -54,7 +59,8 @@ const MainApp = (props) => {
 const mapStateToProps = (state) => {
   return {
     isMenuOpen: state.isMenuOpen,
-    isScrollSync: state.isScrollSync
+    isScrollSync: state.isScrollSync,
+    loading: state.loading
   };
 };
 

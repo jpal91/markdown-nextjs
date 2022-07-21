@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { useRouter } from "next/router";
+import Head from "next/head";
 import { connect } from "react-redux";
 import { promises as fs } from "fs";
 import path from "path";
@@ -11,10 +12,11 @@ import {
     setFileName,
     setButtonStatus,
     examplePage,
+    setLoading
 } from "../../actions";
 
 const Example = (props) => {
-    const { setData, post, setFileName, id, setButtonStatus, examplePage } =
+    const { setData, post, setFileName, id, setButtonStatus, examplePage, setLoading } =
         props;
 
     useEffect(() => {
@@ -26,6 +28,7 @@ const Example = (props) => {
             delete: "disabled",
         });
         examplePage(true);
+        setLoading(false)
 
         return () => {
             examplePage(false);
@@ -79,4 +82,5 @@ export default connect(null, {
     setFileName,
     setButtonStatus,
     examplePage,
+    setLoading
 })(Example);

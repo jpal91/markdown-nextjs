@@ -15,6 +15,7 @@ import example from "./example";
 import scrollsync from "./scrollsync";
 import authuser from "./authuser";
 import savestate from "./savestate";
+import loading from './loading'
 
 export default combineReducers({
   isLightMode: theme,
@@ -31,5 +32,6 @@ export default combineReducers({
   isExamplePage: example,
   isScrollSync: scrollsync,
   authUser: authuser,
-  saveState: savestate
+  saveState: savestate,
+  loading: loading
 });

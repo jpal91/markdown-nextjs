@@ -11,10 +11,10 @@ import CircularProgress from "@mui/material/CircularProgress";
 import ExpandLess from "@mui/icons-material/ExpandLess";
 import ExpandMore from "@mui/icons-material/ExpandMore";
 
-import { toggleMenu } from "../../../actions";
+import { toggleMenu, setLoading } from "../../../actions";
 
 const FileList = (props) => {
-  const { listName, dbData, toggleMenu, localData } = props;
+  const { listName, dbData, toggleMenu, localData, setLoading } = props;
   const router = useRouter();
   const [open, setOpen] = useState(false);
   const [directoryData, setDirectory] = useState();
@@ -45,6 +45,7 @@ const FileList = (props) => {
               onClick={() => {
                 toggleMenu(false);
                 setOpen(false);
+                setLoading(true)
                 router.push(`/db/${doc}`);
               }}
               aria-label='Open document'
@@ -66,6 +67,7 @@ const FileList = (props) => {
               onClick={() => {
                 toggleMenu(false);
                 setOpen(false);
+                setLoading(true)
                 router.push(`/local/${doc}`);
               }}
               aria-label='Open document'
@@ -89,6 +91,7 @@ const FileList = (props) => {
             onClick={() => {
               toggleMenu(false);
               setOpen(false);
+              setLoading(true)
               router.push(`/example/${file}`);
             }}
             aria-label='Open document'
@@ -128,7 +131,7 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, { toggleMenu })(FileList);
+export default connect(mapStateToProps, { toggleMenu, setLoading })(FileList);
 
 // {Object.keys(dbData.docs).map((doc, i) => {
 //     let targetDoc = dbData.docs[doc];
