@@ -8,14 +8,15 @@ export const searchText = (str) => {
     // const bracketRegex = /`<.+>.*<\/.+>`/g;
     const headingsRegex = /#+\s.+\n?/g;
     // const linksRegex = /\[.+\]\(.+\)/g;
-    const linksRegex = /\[[^\[\)]+\)/g;
+    const linksRegex = /(?<!!)\[[^\[\)]+\)/g;
     // const boldRegex = /(?<!(\*|\S))\*\*[^*\n]+\*\*(?!\*)/g;
     const boldRegex = /\*\*[^*\n]+\*\*/g;
     // const boldRegex = /\*\*(?:(?!\*\*)[\s\S])+\*\*/g
     // const italicRegex = /(?<!(\*|\S))\*[^*\n]+\*(?!\*)/g;
     const italicRegex = /\*[^*\n]+\*/g;
     // const codeRegex = /`.+`/g;
-    const codeRegex = /`[^`\n]+`\n?/g;
+    // const codeRegex = /`[^`\n]+`\n?/g;
+    const codeRegex = /`(?:(?!`)[\s\S])+`\n?/g
     const imageRegex = /!\[.*\]\(.+\)/g;
     const blockCodeRegex = /```.*(\r?\n|\s)(?:(?!```)[\s\S])+\n```/g; ///```.*\s(?:(?!```)[\s\S])+\n```/g
     const emojiRegex = /:[\w]+:/g;
@@ -104,6 +105,10 @@ export const searchText = (str) => {
     str = str.replace(/(&#35;)/g, "#");
     str = str.replace(/(&#61;)/g, "=");
     str = str.replace(/(&#42;)/g, "*")
+    str = str.replace(/(&#126;)/g, "~")
+    str = str.replace(/(&#40;)/g, "(")
+    str = str.replace(/(&#91;)/g, "[")
+    
 
     return DOMPurify.sanitize(str, { ADD_ATTR: ['target'] });
 };
@@ -148,7 +153,7 @@ const headings = (match, str) => {
     const h5 = /(?<=#####\s)[^{}\n]+/g;
     const h6 = /(?<=######\s)[^{}\n]+/g;
     const headArray = [h1, h2, h3, h4, h5, h6];
-    const id = /(?<={).+(?=})/;
+    const id = /(?<={#).+(?=})/;
 
     match.forEach((m) => {
         const idMatch = m.match(id);
@@ -169,7 +174,7 @@ const headings = (match, str) => {
 
         str = str.replace(
             m,
-            `<h${index + 1}${idMatch ? `id=${idMatch[0]}` : ""}>${
+            `<h${index + 1} id="${idMatch ? `${idMatch[0]}` : ""}">${
                 m.match(headArray[index])[0]
             }</h${index + 1}>\n`
         );
@@ -237,6 +242,10 @@ const code = (match, str) => {
 
         cMatch[0] = cMatch[0].replace(/(&lt;|<)/g, "<span><</span>");
         cMatch[0] = cMatch[0].replace(/\*/g, "&#42;")
+        cMatch[0] = cMatch[0].replace(/=/g, "&#61;")
+        cMatch[0] = cMatch[0].replace(/~/g, "&#126;")
+        cMatch[0] = cMatch[0].replace(/\[/g, "&#91;")
+        cMatch[0] = cMatch[0].replace(/\(/g, "&#40;")
         str = str.replace(
             m,
             `<code id="code_styled">${cMatch[0]}</code>${rMatch}`
@@ -249,12 +258,12 @@ const code = (match, str) => {
 const image = (match, str) => {
     const description = /(?<=!\[).*(?=\])/g;
     const src = /(?<=\().+(?=\))/g;
-
+    
     match.forEach((m) => {
         let dMatch = m.match(description);
         let sMatch = m.match(src);
-
-        str = str.replace(m, `<img src=${sMatch[0]} alt=${dMatch[0] || ""} />`);
+        console.log(dMatch[0])
+        str = str.replace(m, `<img src=${sMatch[0]} alt="${dMatch[0]}" />`);
     });
 
     return str;

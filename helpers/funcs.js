@@ -64,8 +64,9 @@ export const transform = (node, index) => {
           )
       }
       let tagName = node.name;
+      let id = node.attribs.id
       return (
-          <Typography key={index} variant={tagName}>
+          <Typography key={index} variant={tagName} id={id}>
               {processNodes(node.children, transform)}
           </Typography>
       );
