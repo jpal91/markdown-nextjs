@@ -3,6 +3,7 @@ import emojis from "./emojis";
 import { listBuilder } from "./funcs";
 import DOMPurify from "dompurify";
 
+<<<<<<< HEAD
 export const searchText = (str) => {
     const openBracketRegex = /.?<.*/g;
     // const bracketRegex = /`<.+>.*<\/.+>`/g;
@@ -46,6 +47,41 @@ export const searchText = (str) => {
 
     const hasLinks = str.match(linksRegex);
     hasLinks && (str = links(hasLinks, str));
+=======
+const searchText = (str) => {
+  const openBracketRegex = /.?<.*/g;
+  const bracketRegex = /`<.+>.*<\/.+>`/g;
+  const headingsRegex = /#+\s.+\n?/g;
+  const linksRegex = /\[[^\[\)]+\)/g
+  const boldRegex = /(?<!(\*|\S))\*\*[^*\n]+\*\*(?!\*)/g;
+  const italicRegex = /(?<!(\*|\S))\*[^*\n]+\*(?!\*)/g;
+  const codeRegex = /`[^`\n]+`/g
+  const imageRegex = /!\[.*\]\(.+\)/g;
+  const blockCodeRegex = /```.*\n(?:(?!```|```\w)[\s\S])+\n```/g;
+  const emojiRegex = /:[\w]+:/g;
+  const blockQuoteRegex = /(?<=\n)(?:> .+\n)+/g;
+  const lineBreakRegex = /\n---\n/g;
+  const highRegex = /(==[^=]+==)/g;
+  const strikeRegex = /~~[^~]+~~/g;
+  const subRegex = /(?<!~)~[^~]+~(?!~)/g;
+  const uoRegex = /(?<=\n)((?:>\s)?\s*-\s(?!\[|]).+\n)+/g;
+  const olRegex = /(?<=\n)((?:>\s)?\s*\d\.\s.+\n>?)+/g;
+  const checkListRegex = /-\s\[(\s|x)\]\s.+\n/g;
+  const footRegex = /\[\^.\]:?(.+)?/g;
+  const superRegex = /\^.+\^/g;
+
+  
+  // let clean = DOMPurify.sanitize(str)
+
+  const hasOpenBracket = str.match(openBracketRegex);
+  hasOpenBracket && (str = openBrackets(hasOpenBracket, str));
+
+  const hasBlockCode = str.match(blockCodeRegex);
+  hasBlockCode && (str = blockCode(hasBlockCode, str));
+
+  const hasHeadings = str.match(headingsRegex);
+  hasHeadings && (str = headings(hasHeadings, str));
+>>>>>>> b46ed0c779fc69aeec3af3bdac59e045cb902e3f
 
     const hasBold = str.match(boldRegex);
     hasBold && (str = bold(hasBold, str));
@@ -100,7 +136,16 @@ export const searchText = (str) => {
     str = str.replace(/(&#35;)/g, "#");
     str = str.replace(/(&#61;)/g, "=");
 
+<<<<<<< HEAD
     return DOMPurify.sanitize(str, { ADD_ATTR: ['target'] });
+=======
+  str = str.replace(/\t/g, "&nbsp;"); //&nbsp;&nbsp;&nbsp;
+  str = str.replace(/\n{2,}/g, "<br><br>");
+  str = str.replace(/(<\/?br>){3,}/g, "<br><br>")
+  str = str.replace(/(\n|\\\n)/g, "</br>");
+  
+  return str;
+>>>>>>> b46ed0c779fc69aeec3af3bdac59e045cb902e3f
 };
 
 const openBrackets = (match, str) => {
@@ -121,6 +166,7 @@ const openBrackets = (match, str) => {
 
     return str;
 };
+
 
 const bracket = (match, str) => {
     const codeMatch = /(?<=`)<.+>.*<\/.+>(?=`)/g;
@@ -161,6 +207,7 @@ const headings = (match, str) => {
             ? 0
             : 5;
 
+<<<<<<< HEAD
         str = str.replace(
             m,
             `<h${index + 1}${idMatch ? `id=${idMatch[0]}` : ""}>${
@@ -168,6 +215,15 @@ const headings = (match, str) => {
             }</h${index + 1}>\n`
         );
     });
+=======
+    str = str.replace(
+      m,
+      `<h${index + 1}${idMatch ? `id=${idMatch[0]}` : ""}>${
+        m.match(headArray[index])[0]
+      }</h${index + 1}>\n`
+    );
+  });
+>>>>>>> b46ed0c779fc69aeec3af3bdac59e045cb902e3f
 
     return str;
 };
@@ -222,8 +278,13 @@ const italic = (match, str) => {
 };
 
 const code = (match, str) => {
+<<<<<<< HEAD
     const codeRegex = /(?<=`).+(?=`)/g;
     const returnRegex = /\n/;
+=======
+  const codeRegex = /(?<=`).+(?=`)/;
+  const bracketRegex = /(&lt;|<)/
+>>>>>>> b46ed0c779fc69aeec3af3bdac59e045cb902e3f
 
     match.forEach((m) => {
         let cMatch = m.match(codeRegex);
@@ -259,6 +320,7 @@ const blockCode = (match, str) => {
     const headings = /#+/g;
     const equals = /=+/g
 
+<<<<<<< HEAD
     match.forEach((m) => {
         let codeMatch = m.match(codeType) || "";
         let bcMatch = m.match(innerCode);
@@ -274,6 +336,24 @@ const blockCode = (match, str) => {
             "html",
             "javascript",
         ]).value;
+=======
+  match.forEach((m) => {
+    let codeMatch = m.match(codeType) || "";
+    let bcMatch = m.match(innerCode);
+    if (!bcMatch) {return}
+    bcMatch[0] = bcMatch[0].replace(/&lt;/g, "<");
+    let hl = hljs.highlightAuto(`${bcMatch[0]}`, [
+      `${codeMatch[0]}`,
+      "html",
+      "javascript"
+    ]).value;
+
+    str = str.replace(
+      m,
+      `<br><blockquote id='code-holder'><pre id='code-holder' wrap='true'><code class='code-block'>${hl}</code></pre></blockquote>`
+    );
+  });
+>>>>>>> b46ed0c779fc69aeec3af3bdac59e045cb902e3f
 
         hMatch ? (hl = hl.replace(/#/g, `&#35;`)) : null;
         eMatch ? (hl = hl.replace(/=/g, '&#61;')) : null
@@ -307,6 +387,7 @@ const blockQuote = (match, str) => {
     match.forEach((m) => {
         let bqMatch = m.match(bq).join("");
 
+<<<<<<< HEAD
         str = str.replace(
             m,
             `<blockquote id='block-q'>\n${bqMatch}\n</blockquote>`
@@ -314,6 +395,14 @@ const blockQuote = (match, str) => {
     });
     //style="border-left:5px solid gray;padding-left:1.5em;margin:1.2em;"
     return str;
+=======
+    str = str.replace(
+      m,
+      `<blockquote id='block-q'>\n${bqMatch}\n</blockquote>`
+    );
+  });
+  return str;
+>>>>>>> b46ed0c779fc69aeec3af3bdac59e045cb902e3f
 };
 
 const lineBreak = (match, str) => {
@@ -361,10 +450,16 @@ const subText = (match, str) => {
 };
 
 const uoList = (match, str) => {
+<<<<<<< HEAD
     match.forEach((m) => {
         // let listSection = m.split(/(\s*-\s.+\n?)/).filter((el) => el.length > 0);
         let listSection = m.split(/\n/).filter((el) => el.length > 0);
         let result = listBuilder(listSection, false);
+=======
+  match.forEach((m) => {
+    let listSection = m.split(/\n/).filter((el) => el.length > 0);
+    let result = listBuilder(listSection, false);
+>>>>>>> b46ed0c779fc69aeec3af3bdac59e045cb902e3f
 
         str = str.replace(m, result.join(""));
     });
@@ -439,3 +534,5 @@ const superScript = (match, str) => {
 
     return str;
 };
+
+export default searchText
