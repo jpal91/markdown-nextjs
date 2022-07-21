@@ -11,6 +11,7 @@ export const searchText = (str) => {
     const linksRegex = /\[[^\[\)]+\)/g;
     // const boldRegex = /(?<!(\*|\S))\*\*[^*\n]+\*\*(?!\*)/g;
     const boldRegex = /\*\*[^*\n]+\*\*/g;
+    // const boldRegex = /\*\*(?:(?!\*\*)[\s\S])+\*\*/g
     // const italicRegex = /(?<!(\*|\S))\*[^*\n]+\*(?!\*)/g;
     const italicRegex = /\*[^*\n]+\*/g;
     // const codeRegex = /`.+`/g;
@@ -18,7 +19,7 @@ export const searchText = (str) => {
     const imageRegex = /!\[.*\]\(.+\)/g;
     const blockCodeRegex = /```.*(\r?\n|\s)(?:(?!```)[\s\S])+\n```/g; ///```.*\s(?:(?!```)[\s\S])+\n```/g
     const emojiRegex = /:[\w]+:/g;
-    const blockQuoteRegex = /(?<=\n)(?:> .+\n)+/g;
+    const blockQuoteRegex = /(?<=\n)(?:> .*\n)+/g;
     const lineBreakRegex = /\n---\n/g;
     // const highRegex = /==[^=]+==/g;
     const highRegex = /==(?:(?!==)[\s\S])+==/g;
@@ -38,6 +39,9 @@ export const searchText = (str) => {
     const hasBlockCode = str.match(blockCodeRegex);
     hasBlockCode && (str = blockCode(hasBlockCode, str));
 
+    const hasCode = str.match(codeRegex);
+    hasCode && (str = code(hasCode, str));
+
     // const hasBracket = str.match(bracketRegex);
     // hasBracket && (str = bracket(hasBracket, str));
 
@@ -53,8 +57,8 @@ export const searchText = (str) => {
     const hasItalic = str.match(italicRegex);
     hasItalic && (str = italic(hasItalic, str));
 
-    const hasCode = str.match(codeRegex);
-    hasCode && (str = code(hasCode, str));
+    // const hasCode = str.match(codeRegex);
+    // hasCode && (str = code(hasCode, str));
 
     const hasImage = str.match(imageRegex);
     hasImage && (str = image(hasImage, str));
@@ -99,6 +103,7 @@ export const searchText = (str) => {
     str = str.replace(/(<\/?br>){2,}/g, "</br></br>");
     str = str.replace(/(&#35;)/g, "#");
     str = str.replace(/(&#61;)/g, "=");
+    str = str.replace(/(&#42;)/g, "*")
 
     return DOMPurify.sanitize(str, { ADD_ATTR: ['target'] });
 };
@@ -231,6 +236,7 @@ const code = (match, str) => {
         let rMatch = returnRegex.test(m) ? "\n\n" : "" ////<br><br>
 
         cMatch[0] = cMatch[0].replace(/(&lt;|<)/g, "<span><</span>");
+        cMatch[0] = cMatch[0].replace(/\*/g, "&#42;")
         str = str.replace(
             m,
             `<code id="code_styled">${cMatch[0]}</code>${rMatch}`
@@ -303,7 +309,7 @@ const emoji = (match, str) => {
 };
 
 const blockQuote = (match, str) => {
-    const bq = /(?<=>\s)(?:(?!>).+\n)+/g;
+    const bq = /(?<=>\s)(?:(?!>).*\n)+/g;
 
     match.forEach((m) => {
         let bqMatch = m.match(bq).join("");
