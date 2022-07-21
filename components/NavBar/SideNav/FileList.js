@@ -47,8 +47,11 @@ const FileList = (props) => {
                 setOpen(false);
                 router.push(`/db/${doc}`);
               }}
+              aria-label='Open document'
+              title={`${doc} - saved on database`}
             >
-              <ListItemText primary={`${doc}`} secondary={targetDoc.date} />
+              <ListItemText primary={`${doc}`} secondary={`${targetDoc.date} - DB`} />
+              
             </ListItemButton>
           );
         });
@@ -65,6 +68,8 @@ const FileList = (props) => {
                 setOpen(false);
                 router.push(`/local/${doc}`);
               }}
+              aria-label='Open document'
+              title={`${doc} - saved on local computer`}
             >
               <ListItemText primary={`${doc}`} secondary={targetDoc.date} />
             </ListItemButton>
@@ -86,6 +91,8 @@ const FileList = (props) => {
               setOpen(false);
               router.push(`/example/${file}`);
             }}
+            aria-label='Open document'
+            title={`${file} - example document`}
           >
             <ListItemText primary={file} />
           </ListItemButton>
@@ -98,7 +105,7 @@ const FileList = (props) => {
     <React.Fragment>
       <List sx={{ width: "100%", color: "white" }}>
         <ListItemButton onClick={handleOpen}>
-          <ListItemText primary={listName} />
+          <ListItemText primary={listName} aria-label={listName} title={listName}/>
           {open ? <ExpandMore /> : <ExpandLess />}
         </ListItemButton>
         <Collapse in={open} timeout="auto" unmountOnExit>

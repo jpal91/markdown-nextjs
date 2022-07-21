@@ -1,60 +1,82 @@
-import { useEffect } from "react";
+import React, { useEffect } from "react";
 import { useRouter } from "next/router";
 import { connect } from "react-redux";
-import { promises as fs } from 'fs'
-import path from 'path'
+import { promises as fs } from "fs";
+import path from "path";
 
 import MainApp from "../../components/Main/MainApp";
 
-import { setData, setFileName, setButtonStatus, examplePage } from "../../actions";
+import {
+    setData,
+    setFileName,
+    setButtonStatus,
+    examplePage,
+} from "../../actions";
 
 const Example = (props) => {
-    const { setData, post, setFileName, id, setButtonStatus, examplePage } = props
+    const { setData, post, setFileName, id, setButtonStatus, examplePage } =
+        props;
 
     useEffect(() => {
-        setFileName(`${id}.md`)
-        setData(post)
+        setFileName(`${id}.md`);
+        setData(post);
         setButtonStatus({
-            save: 'disabled',
-            fileName: 'disabled',
-            delete: 'disabled'
-          })
-        examplePage(true)
+            save: "disabled",
+            fileName: "disabled",
+            delete: "disabled",
+        });
+        examplePage(true);
 
         return () => {
-            examplePage(false)
-        }
-    }, [])
+            examplePage(false);
+        };
+    }, []);
 
     return (
-        <MainApp />
+        <React.Fragment>
+            <Head>
+                <title>.MD - Example Files</title>
+            </Head>
+            <MainApp />
+        </React.Fragment>
     );
-}
+};
 
 export const getStaticProps = async (context) => {
-    const { params } = context
-    const filePath = path.join(process.cwd(), 'public', 'examples', `${params.id}.md`)
+    const { params } = context;
+    const filePath = path.join(
+        process.cwd(),
+        "public",
+        "examples",
+        `${params.id}.md`
+    );
 
-        const post = await fs.readFile(filePath, 'utf8')
-            .then(res => { return res.replace(/\r\n/g, "\n") })
-        
+    const post = await fs.readFile(filePath, "utf8").then((res) => {
+        return res.replace(/\r\n/g, "\n");
+    });
+
     return {
         props: {
             post,
-            id: params.id
-        }
-    }
-}
+            id: params.id,
+        },
+    };
+};
 
 export const getStaticPaths = async () => {
     return {
         paths: [
-            { params: { id: 'test' } },
-            { params: { id: 'test2' } },
-            { params: { id: 'dompurify' } }
+            { params: { id: "test" } },
+            { params: { id: "test2" } },
+            { params: { id: "dompurify" } },
         ],
-        fallback: true
-    }
-}
+        fallback: true,
+    };
+};
 
-export default connect(null, { setData, setFileName, setButtonStatus, examplePage })(Example)
+export default connect(null, {
+    setData,
+    setFileName,
+    setButtonStatus,
+    examplePage,
+})(Example);

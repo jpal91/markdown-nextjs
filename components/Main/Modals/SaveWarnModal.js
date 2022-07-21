@@ -42,7 +42,7 @@ const SaveWarnModal = (props) => {
                     Create New Doc
                 </Button> */}
                 <ButtonBase onClick={() => setModal({ type: 'new' })} sx={{ '&:hover': { opacity: '0.9' }}}>
-                    <Image src={proceedButton} />
+                    <Image src={proceedButton} alt='Proceed'/>
                 </ButtonBase>
             </Grid>
         </React.Fragment>

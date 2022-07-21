@@ -14,7 +14,7 @@ const Delete = (props) => {
 
   return (
     <React.Fragment>
-      <IconButton onClick={deleteOptions}>
+      <IconButton onClick={deleteOptions} aria-label='Delete file' title='Delete file'>
         <DeleteOutlineOutlinedIcon sx={{ color: "primary.vlgray", mr: 2 }} />
       </IconButton>
     </React.Fragment>

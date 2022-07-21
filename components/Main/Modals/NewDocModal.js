@@ -75,17 +75,19 @@ const NewDocModal = (props) => {
           fullWidth
           value={fileName}
           onChange={(event) => setFileName(event.target.value)}
+          aria-lablel='Type new document name'
         />
       </Grid>
       <Grid item xs={12}>
-        <FormControl>
+        <FormControl aria-label='Select save type'>
           <Select
             
             value={saveState}
             onChange={(event) => setSaveState(event.target.value)}
+            aria-label='Select save type'
           >
-            <MenuItem value="local">Local</MenuItem>
-            <MenuItem value="db" disabled={!authUser}>
+            <MenuItem value="local" aria-label='Save in local storage' sx={{ color: 'black'}}>Local</MenuItem>
+            <MenuItem value="db" disabled={!authUser} aria-label='Save to database' sx={{ color: 'black'}}>
               Database
             </MenuItem>
           </Select>
@@ -111,7 +113,7 @@ const NewDocModal = (props) => {
           Submit
         </Button> */}
         <ButtonBase onClick={handleSave} sx={{ '&:hover': { opacity: '0.9' }}}>
-          <Image src={createButton} />
+          <Image src={createButton} alt='Create new document'/>
         </ButtonBase>
       </Grid>
     </React.Fragment>

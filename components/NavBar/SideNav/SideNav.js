@@ -57,6 +57,8 @@ const SideNav = (props) => {
         onClick={() =>
           setModal({ open: true, type: unsaved ? "save-warn" : "new" })
         }
+        aria-label='Create new document'
+        title='Create new document'
       >
         <Image src="/images/new-document.svg" width="200" height="100" />
       </ButtonBase>
@@ -101,6 +103,8 @@ const SideNav = (props) => {
             variant="contained"
             sx={{ backgroundColor: "primary.dOrange" }}
             onClick={() => setModal({ open: true, type: "login" })}
+            aria-label='Login'
+            title='Login'
           >
             Login
           </Button>
@@ -117,6 +121,8 @@ const SideNav = (props) => {
             variant="contained"
             sx={{ backgroundColor: "primary.dOrange" }}
             onClick={handleLogout}
+            aria-label='Logout'
+            title='Logout'
           >
             Logout
           </Button>
@@ -128,6 +134,8 @@ const SideNav = (props) => {
             checked={isLightMode}
             onChange={handleSwitch}
             sx={{ "& .MuiSwitch-track": { backgroundColor: "white" } }}
+            aria-label='Switch between light and dark mode'
+            title='Switch between light and dark mode'
           />
           <Brightness5OutlinedIcon sx={{ color: "primary.dOrange" }} />
         </Box>

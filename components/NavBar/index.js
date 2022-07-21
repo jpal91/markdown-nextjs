@@ -67,16 +67,18 @@ const NavBar = (props) => {
                   height: "100%",
                   width: "72px"
                 }}
+                aria-label={`${isMenuOpen ? 'Close' : 'Open'} menu`} 
+                title={`${isMenuOpen ? 'Close' : 'Open'} menu`}
               >
                 {isMenuOpen ? (
                   <CloseIcon sx={{ fontSize: "35px" }} />
                 ) : (
-                  <MenuIcon sx={{ fontSize: "35px" }} />
+                  <MenuIcon sx={{ fontSize: "35px" }}/>
                 )}
               </IconButton>
             </Toolbar>
             <Link href="/">
-              <ButtonBase onClick={() => toggleMenu(false)}>
+              <ButtonBase onClick={() => toggleMenu(false)} aria-label='Home' title='Home'>
                 <a>
                   <Typography variant="heading">
                     .MARK

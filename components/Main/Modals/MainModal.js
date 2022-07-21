@@ -51,7 +51,7 @@ const MainModal = (props) => {
                     alignItems: "normal",
                 }}
             >
-                <IconButton sx={{ position: 'absolute', top: '5%', left: '85%'}} onClick={handleClose}><CloseIcon/></IconButton>
+                <IconButton sx={{ position: 'absolute', top: '5%', left: '85%'}} onClick={handleClose} aria-label='Close dialogue' title='Close dialogue'><CloseIcon/></IconButton>
                 <Grid container sx={{ rowGap: '20px' }}>{setClass()}</Grid>
             </Card>
         </Modal>

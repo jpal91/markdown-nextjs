@@ -1,4 +1,5 @@
-import { useEffect } from "react";
+import React, { useEffect } from "react";
+import Head from "next/head";
 import { useRouter } from "next/router";
 import MainApp from "../components/Main/MainApp";
 import { connect } from "react-redux";
@@ -25,7 +26,14 @@ const Home = (props) => {
         }
     }, [router]);
 
-    return <MainApp />;
+    return (
+        <React.Fragment>
+            <Head>
+                <title>.MARKDOWN</title>
+            </Head>
+            <MainApp />
+        </React.Fragment>
+    )
 };
 
 export default connect(null, { setFileName, setData, setButtonStatus })(Home);

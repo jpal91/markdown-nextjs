@@ -56,10 +56,10 @@ const SubBar = (props) => {
           </Typography>
         </Grid>
         <Grid item xs={6} sx={{ justifyContent: "flex-end", pr: 2 }}>
-          <IconButton onClick={() => toggleScrollSync(!isScrollSync)} sx={{ contentVisibility: isPreviewMode && 'hidden' }}>
+          <IconButton onClick={() => toggleScrollSync(!isScrollSync)} sx={{ contentVisibility: isPreviewMode && 'hidden' }} aria-label={`Turn scroll sync ${isScrollSync ? 'off' : 'on'}`} title={`Turn scroll sync ${isScrollSync ? 'off' : 'on'}`}>
             {isScrollSync ? <LinkIcon sx={{ color: 'primary.text' }}/> : <LinkOffIcon sx={{ color: 'primary.text' }}/>}
           </IconButton>
-          <IconButton onClick={() => togglePreview(!isPreviewMode)}>
+          <IconButton onClick={() => togglePreview(!isPreviewMode)} aria-label={`Turn preview mode ${isPreviewMode ? 'off' : 'on'}`} title={`Turn preview mode ${isPreviewMode ? 'off' : 'on'}`}>
             {isPreviewMode ? <VisibilityOffOutlinedIcon sx={{ color: 'primary.text' }}/> : <RemoveRedEyeOutlinedIcon sx={{ color: 'primary.text' }}/>}
           </IconButton>
         </Grid>

@@ -51,7 +51,7 @@ const Save = (props) => {
 
   return (
     <React.Fragment>
-      <ButtonBase onClick={handleSave}>
+      <ButtonBase onClick={handleSave} aria-label='Save changes' title='Save changes'>
         <Image src="/images/save-button.svg" width="150" height="70" />
       </ButtonBase>
     </React.Fragment>

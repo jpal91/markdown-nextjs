@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import Head from "next/head";
 import { connect } from "react-redux";
 import { useRouter } from "next/router";
 import Backdrop from "@mui/material/Backdrop";
@@ -62,6 +63,9 @@ const LocalUserDoc = (props) => {
 
   return (
     <React.Fragment>
+      <Head>
+        <title>.MD - Database Files</title>
+      </Head>
       <MainApp />
       <Backdrop open={loading}>
         <CircularProgress sx={{ color: "primary.lOrange" }} />

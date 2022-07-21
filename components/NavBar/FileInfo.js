@@ -120,7 +120,7 @@ const FileInfo = (props) => {
   return (
     <Grid container sx={{ width: "200px", ml: 1 }}>
       <Grid item xs={3} sx={{ alignItems: "center" }}>
-        <InsertDriveFileOutlinedIcon />
+        <InsertDriveFileOutlinedIcon alt='Document Icon' title='Document Icon'/>
       </Grid>
       <Grid item xs={9} sx={{ flexDirection: "column" }}>
         <Typography variant="headingText" sx={{ color: "primary.vlgray" }}>
@@ -130,6 +130,8 @@ const FileInfo = (props) => {
           onClick={handleClick}
           sx={{ justifyContent: "flex-start" }}
           disabled={disableButton || buttonStatus.fileName === "disabled"}
+          aria-label='Rename your file'
+          title='Rename your file'
         >
           <Typography hidden={isInput} variant="headingText">
             {`${fileName}.md`}
