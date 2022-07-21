@@ -94,4 +94,12 @@ export const transform = (node, index) => {
   if (node?.name === 'label') {
     return null
   }
+
+  if (node.attribs?.id === 'block-q') {
+    return (
+      <Box sx={{ borderLeft: '15px solid hsl(13, 75%, 58%)', paddingLeft: '1.5em', pr: 10, margin: '1.2em', backgroundColor: 'background.blockq', borderRadius: '5px', width: 'fit-content', maxWidth: '90%'}}>
+        {processNodes(node.children, transform)}
+      </Box>
+    )
+  }
 };

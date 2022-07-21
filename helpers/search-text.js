@@ -382,7 +382,8 @@ const subText = (match, str) => {
 const uoList = (match, str) => {
     match.forEach((m) => {
         // let listSection = m.split(/(\s*-\s.+\n?)/).filter((el) => el.length > 0);
-        if (!m.startsWith('- [')) { return }
+        // console.log(m.includes('- ['))
+        if (m.includes('- [')) { return }
         let listSection = m.split(/\n/).filter((el) => el.length > 0);
         let result = listBuilder(listSection, false);
 

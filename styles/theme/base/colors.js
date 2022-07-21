@@ -15,6 +15,7 @@ const colors = {
     vlgray: "hsl(0, 0%, 89%)",
     subBar: "hsl(0, 0%, 89%)",
     borders: "hsl(222, 9%, 78%)",
+    blockq: 'hsl(0, 0%, 96%)'
   }
   //inputBorderColor: 'hsla(52, 100%, 50%, 1)'
 };
