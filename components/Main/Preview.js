@@ -58,6 +58,7 @@ const Preview = (props) => {
                         width: isPreviewMode ? "50%" : "100%",
                         overflow: "auto",
                         height: "100%",
+                        pb: 10
                     }}
                 >
                     {formattedText}

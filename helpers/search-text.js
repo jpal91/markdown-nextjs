@@ -31,7 +31,9 @@ export const searchText = (str) => {
     // const olRegex = /(?<=\n)((?:>\s)?\s*\d\.\s.+\n>?)+/g;
     const olRegex = /(?<=\n)(?:\s*\d\. .+\n)+/g
     const checkListRegex = /-\s\[(\s|x)\]\s.+\n/g;
-    const footRegex = /\[\^.\]:?(.+)?/g;
+    // const footRegex = /\[\^.\]:?(.+)?/g;
+    const footRegex = /\[\^.\](?!:)/g;
+    const footTextRegex = /\[\^.\]: .+\n/g
     const superRegex = /\^.+\^/g;
 
     const hasOpenBracket = str.match(openBracketRegex);
@@ -93,6 +95,9 @@ export const searchText = (str) => {
 
     const hasFootNote = str.match(footRegex);
     hasFootNote && (str = footNote(hasFootNote, str));
+
+    const hasFootText = str.match(footTextRegex)
+    hasFootText && (str = footNote(hasFootText, str))
 
     const hasSuperScript = str.match(superRegex);
     hasSuperScript && (str = superScript(hasSuperScript, str));
@@ -264,7 +269,7 @@ const image = (match, str) => {
         let dMatch = m.match(description);
         let sMatch = m.match(src);
 
-        str = str.replace(m, `<img src=${sMatch[0]} alt="${dMatch[0]}" />`);
+        str = str.replace(m, `<img src=${sMatch[0]} alt="${dMatch[0]}" style="max-width:100%"/>`);
     });
 
     return str;
@@ -442,7 +447,7 @@ const footNote = (match, str) => {
             return;
         } else if (textMatch) {
             str = str.replace(m, "");
-            str += `<br><hr><br><p id='footnote-${noteMatch[0]}'>${noteMatch[0]}. ${textMatch[0]} <a href='#note${noteMatch[0]}'>&#128281;</a></p>`;
+            str += `<br><br><hr><br><p id='footnote-${noteMatch[0]}'>${noteMatch[0]}. ${textMatch[0]} <a href='#note${noteMatch[0]}'>&#128281;</a></p>`;
         }
     });
 
