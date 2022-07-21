@@ -1,5 +1,10 @@
-import { processNodes } from "react-html-parser";
+import React from 'react'
+import { processNodes, convertNodeToElement } from "react-html-parser";
 import Typography from '@mui/material/Typography'
+import Box from '@mui/material/Box'
+import CheckBoxOutlinedIcon from '@mui/icons-material/CheckBoxOutlined';
+import CheckBoxOutlineBlankOutlinedIcon from '@mui/icons-material/CheckBoxOutlineBlankOutlined';
+
 
 export const listBuilder = (matches, ordered) => {
   const olOrUl = ordered
@@ -70,5 +75,23 @@ export const transform = (node, index) => {
               {processNodes(node.children, transform)}
           </Typography>
       );
+  }
+
+  if (node.attribs?.type === 'checkbox') {
+    const checkedBox = node.attribs?.checked === 'true'
+    const style = { height: '17px', width: '17px', mx: '10px'}
+
+    return (
+      <Box sx={{ display: 'flex', alignItems: 'center', my: -1 }}>
+        {checkedBox ? <CheckBoxOutlinedIcon sx={{ ...style }}/> : <CheckBoxOutlineBlankOutlinedIcon sx={{ ...style }} />}
+        <Typography variant='body1'>
+          {processNodes(node.next.children, transform)}
+        </Typography>
+      </Box>
+    )
+  }
+
+  if (node?.name === 'label') {
+    return null
   }
 };

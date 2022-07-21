@@ -69,10 +69,11 @@ code.code-block {
   color: palevioletred !important;
 }
 
+.hljs-regexp,.hljs-number {
+  color: red !important;
+}
+
 hr {
   opacity: 0.5;
 }
 
-.hljs-regexp,.hljs-number {
-  color: red !important;
-}

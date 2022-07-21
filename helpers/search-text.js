@@ -382,6 +382,7 @@ const subText = (match, str) => {
 const uoList = (match, str) => {
     match.forEach((m) => {
         // let listSection = m.split(/(\s*-\s.+\n?)/).filter((el) => el.length > 0);
+        if (!m.startsWith('- [')) { return }
         let listSection = m.split(/\n/).filter((el) => el.length > 0);
         let result = listBuilder(listSection, false);
 
@@ -413,8 +414,8 @@ const checkList = (match, str) => {
 
         str = str.replace(
             m,
-            `<input type='checkbox' id=${labelText} name=${labelText} disabled ${
-                checked ? `checked` : ``
+            `<input class='checkbox' type='checkbox' id=${labelText} name=${labelText} disabled ${
+                checked ? `checked=true` : `checked=false`
             } style="margin: 0px 10px;"/><label for=${labelText}>${labelText}</label>\n`
         );
     });
