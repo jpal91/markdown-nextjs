@@ -49,7 +49,7 @@ const Data = (props) => {
             clearTimeout(timerId)
         }
 
-    // }, [mdData])
+     }, [mdData])
 
     useEffect(() => {
         setFormattedText(ReactHtmlParser(formattedData, { transform: transform }))
