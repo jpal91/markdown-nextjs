@@ -72,3 +72,7 @@ code.code-block {
 hr {
   opacity: 0.5;
 }
+
+.hljs-regexp,.hljs-number {
+  color: red !important;
+}

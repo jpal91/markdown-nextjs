@@ -12,6 +12,7 @@ import ExpandMore from "@mui/icons-material/ExpandMore";
 
 const SB = forwardRef((props, ref) => {
     const [open, setOpen] = useState(false);
+    const isLimit = props.severity === 'limit'
 
     const colors = {
         error: "red",
@@ -71,10 +72,7 @@ const SB = forwardRef((props, ref) => {
                     <IconButton
                         sx={{
                             transform: open ? "rotate(180deg)" : null,
-                            contentVisibility:
-                                props.severity === "limit"
-                                    ? "visible"
-                                    : "hidden",
+                            display: !isLimit && 'none'
                         }}
                         onClick={() => setOpen(!open)}
                     >
