@@ -236,13 +236,19 @@ export const masterUpdateHandler = (location, actionType, data) => async (
 
     return;
   } else if (location === "db") {
+    const dbDocs = Object.keys(getState().dbData.docs)
+    const e = new Error('Document limit exceeded!')
+    e.name = 'limit'
+    
     try {
       switch (actionType) {
         case "create":
+          if (dbDocs.length > 9) { throw e }
           await createDBDoc(data, dispatch, getState);
           newAlert.message = "New document created!";
           break;
         case "save":
+          if (dbDocs.length > 9) { throw e }  
           await saveDBDoc(data, dispatch, getState);
           newAlert.message = "Document saved!";
           break;
@@ -259,7 +265,7 @@ export const masterUpdateHandler = (location, actionType, data) => async (
       }
     } catch (error) {
       newAlert.message = error.message;
-      newAlert.severity = "error";
+      newAlert.severity = e.name === 'limit' ? 'limit' : "error";
       dispatch({ type: "ALERT_STATUS", payload: newAlert });
       throw new Error("");
     }
