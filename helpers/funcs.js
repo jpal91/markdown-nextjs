@@ -55,7 +55,7 @@ export const listBuilder = (matches, ordered) => {
 
 
 export const transform = (node, index) => {
-  if (node.name && node.name.startsWith("h")) {
+  if (node.name && node.name.match(/h\d/)) {
       if (node.parent && node.parent.name === 'span') {
           return (
               <p key={index}>
