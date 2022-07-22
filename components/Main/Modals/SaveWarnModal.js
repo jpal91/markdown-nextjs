@@ -10,7 +10,7 @@ import { setModal } from "../../../actions";
 import proceedButton from '../../../public/images/proceed.svg'
 
 const SaveWarnModal = (props) => {
-    const { setClose, setModal } = props
+    const { setClose, setModal, redirect } = props
 
     return (
         <React.Fragment>
@@ -41,7 +41,7 @@ const SaveWarnModal = (props) => {
                 >
                     Create New Doc
                 </Button> */}
-                <ButtonBase onClick={() => setModal({ type: 'new' })} sx={{ '&:hover': { opacity: '0.9' }}}>
+                <ButtonBase onClick={() => setModal({ type: redirect })} sx={{ '&:hover': { opacity: '0.9' }}}>
                     <Image src={proceedButton} alt='Proceed'/>
                 </ButtonBase>
             </Grid>

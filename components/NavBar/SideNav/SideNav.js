@@ -80,6 +80,7 @@ const SideNav = (props) => {
                     setModal({
                         open: true,
                         type: unsaved ? "save-warn" : "new",
+                        redirect: 'new'
                     })
                 }
                 aria-label="Create new document"
@@ -133,7 +134,7 @@ const SideNav = (props) => {
                     <Button
                         variant="contained"
                         sx={{ backgroundColor: "primary.dOrange" }}
-                        onClick={() => setModal({ open: true, type: "login" })}
+                        onClick={() => setModal({ open: true, type: unsaved ? 'save-warn' : 'login', redirect: 'login' })}
                         aria-label="Login"
                         title="Login"
                     >

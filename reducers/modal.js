@@ -1,6 +1,7 @@
 const modalObj = {
     open: false,
-    type: ''
+    type: '',
+    redirect: ''
 }
 
 export default (state=modalObj, action) => {

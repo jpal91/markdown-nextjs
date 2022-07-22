@@ -14,7 +14,7 @@ import AuthModal from "./AuthModal";
 
 const MainModal = (props) => {
     const { setModal, mdData } = props
-    const { open, type } = props.modalStatus;
+    const { open, type, redirect } = props.modalStatus;
 
     const setClass = () => {
         if (type === "delete") {
@@ -22,7 +22,7 @@ const MainModal = (props) => {
         } else if (type === 'new') {
             return <NewDocModal setClose={handleClose} />
         } else if (type === 'save-warn') {
-            return <SaveWarnModal setClose={handleClose} />
+            return <SaveWarnModal setClose={handleClose} redirect={redirect}/>
         } else if (type === 'save-new') {
             return <NewDocModal setClose={handleClose} mdData={mdData} />
         } else if (type === 'sign-up' || type === 'login') {
