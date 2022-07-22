@@ -14,13 +14,21 @@ const Preview = (props) => {
     const { mdData, isPreviewMode } = props;
     const [formattedData, setFormattedData] = useState("");
     const [formattedText, setFormattedText] = useState();
-    const startId = document.getElementById('startdoc')
+    const [startId, setStartId] = useState()
+    // const startId = document.getElementById('startdoc')
+    // let startId, textId, endId
+    // const checkWindow = typeof window !== undefined
+    // const startId = typeof window !== undefined && document.getElementById('startdoc')
 
     useEffect(() => {
         setFormattedData(searchText(mdData));
         setFormattedText(
             ReactHtmlParser(formattedData, { transform: transform })
         );
+
+        if (typeof window !== undefined) {
+            setStartId(document.getElementById('startdoc'))
+        }
     }, []);
 
     useEffect(() => {

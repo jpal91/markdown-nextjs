@@ -73,7 +73,7 @@ export const getStaticPaths = async () => {
             { params: { id: "test2" } },
             { params: { id: "dompurify" } },
         ],
-        fallback: true,
+        fallback: false,
     };
 };
 

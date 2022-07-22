@@ -84,4 +84,6 @@ const SB = forwardRef((props, ref) => {
     );
 });
 
+SB.displayName = 'SB'
+
 export default SB;

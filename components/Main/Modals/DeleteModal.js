@@ -44,7 +44,7 @@ const DeleteModal = (props) => {
     <React.Fragment>
       <Grid item xs={12} sx={{ mt: 1, flexDirection: 'column', rowGap: '10px' }}>
         <Typography variant="sideNavHeading" align='center' sx={{ color: 'black', fontSize: '90%' }}>ARE YOU SURE YOU WANT TO DELETE?</Typography>
-        <Typography variant='body1' sx={{ color: 'black' }}>This action cannot be undone. Are you sure you want to delete '{`${fileName}`}'?</Typography>
+        <Typography variant='body1' sx={{ color: 'black' }}>This action cannot be undone. Are you sure you want to delete &quot;{`${fileName}`}&quot;?</Typography>
       </Grid>
       <Grid
         item

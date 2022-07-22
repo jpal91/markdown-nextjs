@@ -8,8 +8,13 @@ import { setData, unsavedChanges } from "../../actions";
 
 const TextArea = (props) => {
     const { isPreviewMode, mdData, setData, unsaved, unsavedChanges, isExamplePage } = props;
+    const checkWindow = typeof window !== undefined
 
     useEffect(() => {
+        if (!checkWindow) {
+            return
+        }
+
         const textId = document.querySelector("textarea");
 
         textId.addEventListener("keydown", (e) => {
