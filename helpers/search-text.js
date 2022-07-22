@@ -447,7 +447,7 @@ const footNote = (match, str) => {
             return;
         } else if (textMatch) {
             str = str.replace(m, "");
-            str += `<p id='footnote-${noteMatch[0]}'>${noteMatch[0]}. ${textMatch[0]} <a href='#note${noteMatch[0]}'>&#128281;</a></p>`;
+            str += `<p id='footnote-${noteMatch[0]}'>${noteMatch[0]}. ${textMatch[0]} <a class='foot-back' href='#note${noteMatch[0]}'>&#128281;</a></p>`;
         }
     });
 
