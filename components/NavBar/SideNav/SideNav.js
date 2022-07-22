@@ -119,7 +119,6 @@ const SideNav = (props) => {
                         display: "flex",
                         flexDirection: "column",
                         rowGap: "10px",
-                        contentVisibility: authUser && "hidden",
                     }}
                 >
                     <Button
@@ -133,25 +132,17 @@ const SideNav = (props) => {
                     </Button>
                     <Button
                         variant="contained"
-                        sx={{ backgroundColor: "primary.dOrange" }}
+                        sx={{ backgroundColor: "primary.dOrange", display: authUser && "none" }}
                         onClick={() => setModal({ open: true, type: unsaved ? 'save-warn' : 'login', redirect: 'login' })}
                         aria-label="Login"
                         title="Login"
+                        
                     >
                         Login
                     </Button>
-                </Box>
-                <Box
-                    sx={{
-                        display: "flex",
-                        flexDirection: "column",
-                        rowGap: "10px",
-                        contentVisibility: !authUser && "hidden",
-                    }}
-                >
                     <Button
                         variant="contained"
-                        sx={{ backgroundColor: "primary.dOrange" }}
+                        sx={{ backgroundColor: "primary.dOrange", display: !authUser && "none" }}
                         onClick={handleLogout}
                         aria-label="Logout"
                         title="Logout"
