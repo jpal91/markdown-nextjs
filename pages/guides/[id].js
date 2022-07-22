@@ -12,11 +12,12 @@ import {
     setFileName,
     setButtonStatus,
     examplePage,
-    setLoading
+    setLoading, unsavedChanges
 } from "../../actions";
 
+
 const Guides = (props) => {
-    const { setData, post, setFileName, id, setButtonStatus, examplePage, setLoading } =
+    const { setData, post, setFileName, id, setButtonStatus, examplePage, setLoading, unsavedChanges } =
         props;
 
     useEffect(() => {
@@ -29,6 +30,7 @@ const Guides = (props) => {
         });
         examplePage(true);
         setLoading(false)
+        unsavedChanges(false)
 
         return () => {
             examplePage(false);
@@ -38,7 +40,7 @@ const Guides = (props) => {
     return (
         <React.Fragment>
             <Head>
-                <title>.MD - Example Files</title>
+                <title>.MD - Guides</title>
             </Head>
             <MainApp />
         </React.Fragment>
@@ -50,7 +52,7 @@ export const getStaticProps = async (context) => {
     const filePath = path.join(
         process.cwd(),
         "public",
-        "examples",
+        "guide-docs",
         `${params.id}.md`
     );
 
@@ -69,9 +71,7 @@ export const getStaticProps = async (context) => {
 export const getStaticPaths = async () => {
     return {
         paths: [
-            { params: { id: "test" } },
-            { params: { id: "test2" } },
-            { params: { id: "dompurify" } },
+            { params: { id: "intro" } },
         ],
         fallback: true,
     };
@@ -82,5 +82,5 @@ export default connect(null, {
     setFileName,
     setButtonStatus,
     examplePage,
-    setLoading
-})(Example);
+    setLoading, unsavedChanges
+})(Guides);

@@ -75,7 +75,7 @@ const NewDocModal = (props) => {
           fullWidth
           value={fileName}
           onChange={(event) => setFileName(event.target.value)}
-          aria-lablel='Type new document name'
+          aria-label='Type new document name'
         />
       </Grid>
       <Grid item xs={12}>

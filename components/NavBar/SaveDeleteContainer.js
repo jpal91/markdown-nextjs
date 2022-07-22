@@ -4,18 +4,20 @@ import Grid from "@mui/material/Grid";
 
 import Save from "./Save";
 import Delete from "./Delete";
+import { connect } from "react-redux";
 
-const SaveDeleteContainer = () => {
+const SaveDeleteContainer = (props) => {
+    const { isExamplePage } = props
     const [visibility, setVisibility] = useState(true);
     const router = useRouter();
 
     useEffect(() => {
-        if (router.pathname.includes("example")) {
+        if (isExamplePage) {
             setVisibility(false);
             return;
         }
         setVisibility(true);
-    }, [router]);
+    }, [isExamplePage]);
 
     return (
         <Grid
@@ -34,4 +36,10 @@ const SaveDeleteContainer = () => {
     );
 };
 
-export default SaveDeleteContainer
+const mapStateToProps = (state) => {
+    return {
+        isExamplePage: state.isExamplePage
+    }
+}
+
+export default connect(mapStateToProps)(SaveDeleteContainer)
