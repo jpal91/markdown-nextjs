@@ -17,6 +17,12 @@ const globals = {
       borderRadius: "10px",
       visibility: "visible"
     }
+  },
+  "a:link": {
+    color: 'cornflowerblue'
+  },
+  "a:visited": {
+    color: 'cornflowerblue'
   }
 };
 

@@ -21,12 +21,25 @@ const Preview = (props) => {
     }, []);
 
     useEffect(() => {
+        const textId = document.querySelector("textarea");
+        const endId = document.getElementById('enddoc')
+
+        if (textId.selectionEnd >= textId.textLength - 50) {
+            
+            setTimeout(() => {
+                endId.scrollIntoView()
+            }, 100)
+
+            
+        }
+        
         const timerId = setTimeout(() => {
             setFormattedData(searchText(mdData));
         }, 100);
 
         return () => {
             clearTimeout(timerId);
+            
         };
     }, [mdData]);
 
@@ -58,11 +71,13 @@ const Preview = (props) => {
                         width: isPreviewMode ? "50%" : "100%",
                         overflow: "auto",
                         height: "100%",
-                        pb: 10
+                        
                     }}
                 >
                     {formattedText}
+                    <div id='enddoc'></div>
                 </Box>
+                
             </ScrollSyncPane>
         </Grid>
     );
