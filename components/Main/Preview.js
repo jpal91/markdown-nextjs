@@ -4,6 +4,8 @@ import { ScrollSyncPane } from "react-scroll-sync";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import ReactHtmlParser from "react-html-parser";
+import KeyboardArrowUpRoundedIcon from '@mui/icons-material/KeyboardArrowUpRounded';
+import Fab from '@mui/material/Fab'
 
 import { searchText } from "../../helpers/search-text.js";
 import { transform } from "../../helpers/funcs";
@@ -12,6 +14,7 @@ const Preview = (props) => {
     const { mdData, isPreviewMode } = props;
     const [formattedData, setFormattedData] = useState("");
     const [formattedText, setFormattedText] = useState();
+    const startId = document.getElementById('startdoc')
 
     useEffect(() => {
         setFormattedData(searchText(mdData));
@@ -74,11 +77,15 @@ const Preview = (props) => {
                         
                     }}
                 >
+                    <div id='startdoc'></div>
                     {formattedText}
                     <div id='enddoc'></div>
                 </Box>
                 
             </ScrollSyncPane>
+            <Fab size='medium' aria-label='top' title='Scroll to the top' sx={{ position: 'fixed', bottom: '15px', right: '10px', backgroundColor: 'primary.dOrange', "&:hover": { backgroundColor: 'primary.dOrange', opacity: '0.8' } }} onClick={() => startId.scrollIntoView()}>
+                <KeyboardArrowUpRoundedIcon fontSize='large' sx={{ color: 'black' }}/>
+            </Fab>
         </Grid>
     );
 };
