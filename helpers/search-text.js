@@ -97,6 +97,7 @@ export const searchText = (str) => {
     hasFootNote && (str = footNote(hasFootNote, str));
 
     const hasFootText = str.match(footTextRegex)
+    hasFootText && (str += '<br><br><hr><br>')
     hasFootText && (str = footNote(hasFootText, str))
 
     const hasSuperScript = str.match(superRegex);
@@ -113,7 +114,6 @@ export const searchText = (str) => {
     str = str.replace(/(&#126;)/g, "~")
     str = str.replace(/(&#40;)/g, "(")
     str = str.replace(/(&#91;)/g, "[")
-    // str = str.replace(/(&#96;)/g, "`")
     
 
     return DOMPurify.sanitize(str, { ADD_ATTR: ['target'] });
@@ -447,7 +447,7 @@ const footNote = (match, str) => {
             return;
         } else if (textMatch) {
             str = str.replace(m, "");
-            str += `<br><br><hr><br><p id='footnote-${noteMatch[0]}'>${noteMatch[0]}. ${textMatch[0]} <a href='#note${noteMatch[0]}'>&#128281;</a></p>`;
+            str += `<p id='footnote-${noteMatch[0]}'>${noteMatch[0]}. ${textMatch[0]} <a href='#note${noteMatch[0]}'>&#128281;</a></p>`;
         }
     });
 

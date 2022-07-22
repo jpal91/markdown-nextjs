@@ -44,6 +44,7 @@ export const saveDBDoc = async (data, dispatch, getState) => {
   const response = await axios.post("/api/db/save", { post: data, user: user });
 
   dispatch({ type: "DB_DATA", payload: response.data });
+  dispatch({ type: 'UNSAVED_CHANGES', payload: false })
 };
 
 // export const deleteDBDoc = (data) => async (dispatch, getState) => {

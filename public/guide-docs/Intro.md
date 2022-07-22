@@ -195,7 +195,7 @@ To add superscript to your text, you will wrap a letter, word(s), or numbers in 
 #### *Tables* {#tables}
 Tables can be created by combining a series of `|` (creating column limits) and `-`, creating rows. This can be visualized below -
 
-![markdown-tables](/images/md-tables.jpg)
+![markdown-tables](/images/md-tables.JPG)
 
 Source: [Markdown Guide - Tables](https://www.markdownguide.org/extended-syntax/#tables)
 
@@ -204,7 +204,7 @@ Definition lists are specially styled lists for (you guessed it!) definitions of
 
 You can begin one of these lists by stating the word and then on the next line, starting with a `:` to link the list to the word being defined. This list can have multiple definitions following the main word. Here's a visualization below -
 
-![markdown-definition](/images/md-definition.jpg)
+![markdown-definition](/images/md-definition.JPG)
 
 Source: [Markdown Guide - Definition Lists](https://www.markdownguide.org/extended-syntax/#definition-lists)
 

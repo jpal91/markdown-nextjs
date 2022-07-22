@@ -1,4 +1,5 @@
 import React from 'react'
+import Image from 'next/image';
 import { processNodes, convertNodeToElement } from "react-html-parser";
 import Typography from '@mui/material/Typography'
 import Box from '@mui/material/Box'

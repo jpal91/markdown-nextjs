@@ -26,6 +26,7 @@ export const saveLocalDoc = async (data, dispatch, getState) => {
   localStorage.setItem("localData", JSON.stringify(localDocs));
 
   dispatch({ type: "LOCAL_DATA", payload: localDocs });
+  dispatch({ type: 'UNSAVED_CHANGES', payload: false })
 };
 
 export const deleteLocalDoc = async (data, dispatch, getState) => {
