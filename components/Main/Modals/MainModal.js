@@ -38,9 +38,9 @@ const MainModal = (props) => {
             <Card
                 sx={{
                     position: "absolute",
-                    width: 400,
+                    width: { xs: 350, sm: 400 },
                     minHeight: 250,
-                    top: "50%",
+                    top: { xs: '25%', sm: "50%"},
                     left: "50%",
                     transform: "translate(-50%, -50%)",
                     p: 5,
