@@ -1,4 +1,4 @@
-# Welcome to .Markdown! {#top}
+# Welcome to `.MARKDOWN`! {#top}
 ---
 
 > #### *What is Markdown?*
@@ -6,7 +6,7 @@
 > 
 > In this guide you will learn the basics of Markdown so you'll know how to utilize this editor to make formatted documents of your own!
 
-## The .Markdown Guide
+## The `.MARKDOWN` Guide
 ---
 ##### Table of Contents {#table-of-contents}
 
@@ -187,7 +187,7 @@ To add superscript to your text, you will wrap a letter, word(s), or numbers in 
 ---
 
 ### Unavailable/In Progress Features {#unavailable}
-##### A few features available in traditional Markdown are not yet available in the .Markdown app (yet). 
+##### A few features available in traditional Markdown are not yet available in the `.MARKDOWN` app (yet). 
 ###### This section will cover these features so you're aware in case you need this functionality. Please check back with us in the future if you are interested!
 
 ---

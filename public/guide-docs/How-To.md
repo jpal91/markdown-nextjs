@@ -1,4 +1,4 @@
-# .MARKDOWN - How To Guide
+# `.MARKDOWN` - How To Guide
 
 > ##### *What's this?*
 > In this guide you will learn how to utilize the features of this editor so you can start creating beautiful documents in no time!
@@ -34,7 +34,7 @@
 
 #### *General Info* {#general}
 
-.Markdown is a free to use application without restriction on how many documents you create or general usage. However, there will be restrictions on *where* your document saves based on the following:
+`.MARKDOWN` is a free to use application without restriction on how many documents you create or general usage. However, there will be restrictions on *where* your document saves based on the following:
 
 1. If you have an account/are logged in to the application
 2. Your total number of database saves
