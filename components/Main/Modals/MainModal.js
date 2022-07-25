@@ -32,7 +32,7 @@ const MainModal = (props) => {
     };
 
     const handleClose = () => {
-        setModal({ open: false })
+        setModal({ open: false, type: '', redirect: '' })
     }
 
     return (

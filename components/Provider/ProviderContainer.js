@@ -6,13 +6,20 @@ import { SnackbarProvider } from 'notistack'
 
 import theme from "../../styles/theme";
 import themeDark from '../../styles/theme-dark'
-import { getLocalData, setLightMode } from "../../actions";
+import { getLocalData, setLightMode, setAlert } from "../../actions";
 
 const ProviderContainer = (props) => {
-  const { isLightMode, getLocalData, session, setLightMode } = props;
+  const { isLightMode, getLocalData, session, setLightMode, setAlert } = props;
 
   useEffect(() => {
     getLocalData();
+
+    const newUser = localStorage.getItem('isNewUser')
+
+    if (!newUser) {
+      setAlert({ open: true, message: 'Looks like you\'re new here!', severity: 'new' })
+      localStorage.setItem('isNewUser', 'true')
+    }
 
     const prefTheme = localStorage.getItem('isLightMode')
     const resParse = prefTheme ? JSON.parse(prefTheme) : null
@@ -36,4 +43,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, { getLocalData, setLightMode })(ProviderContainer);
+export default connect(mapStateToProps, { getLocalData, setLightMode, setAlert })(ProviderContainer);
