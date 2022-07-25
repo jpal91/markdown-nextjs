@@ -30,7 +30,6 @@ export const saveLocalDoc = async (data, dispatch, getState) => {
 };
 
 export const deleteLocalDoc = async (data, dispatch, getState) => {
-  // const { fileName } = data;
   const localDocs = getState().localData;
 
   if (!localDocs.docs[data]) {
