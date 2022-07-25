@@ -63,7 +63,7 @@ const TextArea = (props) => {
             xs={6}
             sx={{
                 width: isPreviewMode ? "0%" : "100%",
-                height: "calc(100vh - 114px)",
+                height: "100%",
                 p: isPreviewMode ? 0 : 5,
                 borderRight: isPreviewMode ? "none" : "1px solid",
                 borderColor: "background.borders",

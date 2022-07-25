@@ -70,6 +70,7 @@ const SideNav = (props) => {
                     boxSizing: "border-box",
                     backgroundColor: "background.navLight",
                     p: 2,
+                    maxHeight: '100vh'
                 },
             }}
         >

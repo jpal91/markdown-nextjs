@@ -58,7 +58,7 @@ const Preview = (props) => {
             xs={6}
             sx={{
                 width: "100%",
-                height: "calc(100vh - 114px)",
+                height: "100%",
                 borderLeft: isPreviewMode ? "none" : "1px solid",
                 borderColor: "background.borders",
                 flex: "1 1 auto",
@@ -86,7 +86,7 @@ const Preview = (props) => {
                 aria-label="top"
                 title="Scroll to the top"
                 sx={{
-                    position: "fixed",
+                    position: "absolute",
                     bottom: "15px",
                     right: "10px",
                     backgroundColor: "primary.dOrange",

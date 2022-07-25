@@ -23,10 +23,10 @@ const SubBar = (props) => {
             container
             className="subBar"
             sx={{
-                width: isMenuOpen ? "calc(100% - 240px)" : "100%",
+                width: { lg: isMenuOpen ? "calc(100% - 240px)" : "100%", xs: '100%'},//{ lg: isMenuOpen ? "calc(100% - 240px)" : "100%", xs: '100%'}
                 backgroundColor: "background.subBar",
                 height: "42px",
-                ml: isMenuOpen ? "240px" : 0,
+                ml: { lg: isMenuOpen ? "240px" : 0},
                 position: "sticky",
             }}
         >

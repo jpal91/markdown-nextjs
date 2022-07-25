@@ -34,7 +34,7 @@ const NavBar = (props) => {
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center",
-                    width: isMenuOpen ? "calc(100% - 240px)" : "100%",
+                    width: isMenuOpen ? "calc(100% - 240px)" : "100%",//{lg: isMenuOpen ? "calc(100% - 240px)" : "100%", xs: '100%'}
                     ml: isMenuOpen ? "240px" : 0,
                 }}
             >
@@ -51,7 +51,8 @@ const NavBar = (props) => {
                 >
                     <Grid
                         item
-                        xs={6}
+                        xs={isMenuOpen ? 12 : 8}
+                        lg={6}
                         sx={{ justifyContent: "flex-start", height: "100%" }}
                     >
                         <Toolbar sx={{ p: "0 !important" }}>

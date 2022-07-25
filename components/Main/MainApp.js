@@ -36,12 +36,12 @@ const MainApp = (props) => {
                 <Container
                     sx={{
                         maxWidth: "100% !important",
-                        height: "100%",
-                        maxHeight: "937px",
+                        height: "calc(100vh - 114px)",
+                        // maxHeight: "937px",
                         justifyContent: "space-evenly",
                         p: "0px !important",
-                        width: isMenuOpen ? "calc(100% - 240px)" : "100%",
-                        ml: isMenuOpen ? "240px" : 0,
+                        width: {lg: isMenuOpen ? "calc(100% - 240px)" : "100%", xs: '100%'},
+                        ml: { lg: isMenuOpen ? "240px" : 0, xs: 0} ,
                     }}
                 >
                     <TextArea />
