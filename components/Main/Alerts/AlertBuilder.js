@@ -9,32 +9,48 @@ import Paper from "@mui/material/Paper";
 import IconButton from "@mui/material/IconButton";
 import ErrorOutlineOutlinedIcon from "@mui/icons-material/ErrorOutlineOutlined";
 import DoneOutlineOutlinedIcon from "@mui/icons-material/DoneOutlineOutlined";
-import SentimentSatisfiedAltIcon from '@mui/icons-material/SentimentSatisfiedAlt';
+import SentimentSatisfiedAltIcon from "@mui/icons-material/SentimentSatisfiedAlt";
 import ExpandMore from "@mui/icons-material/ExpandMore";
 
-const SB = forwardRef((props, ref) => {
-    const { severity, message } = props
+const AlertBuilder = forwardRef((props, ref) => {
+    const { severity, message } = props;
     const [open, setOpen] = useState(false);
-    const isExtraText = severity === 'limit' || severity === 'new'
+    const isExtraText = severity === "limit" || severity === "new";
 
     const colors = {
         error: "red",
         success: "green",
         limit: "red",
-        new: "hsl(13, 75%, 58%)"
+        new: "hsl(13, 75%, 58%)",
     };
 
     const icons = {
         error: <ErrorOutlineOutlinedIcon sx={{ color: "white" }} />,
         success: <DoneOutlineOutlinedIcon sx={{ color: "white" }} />,
         limit: <ErrorOutlineOutlinedIcon sx={{ color: "white" }} />,
-        new: <SentimentSatisfiedAltIcon sx={{ color: 'white' }} />
+        new: <SentimentSatisfiedAltIcon sx={{ color: "white" }} />,
     };
 
     const extraText = {
-        limit: 'You are allowed a maximum of 10 files saved on the database. Please delete another file or save locally.',
-        new: <>If you want to learn more about .MARKDOWN please visit the <span><Link href='/guides/Intro'><a>Intro</a></Link></span> or <span><Link href='/guides/How-To'><a>How-To</a></Link></span> pages in the Guides section of the menu</>
-    }
+        limit: "You are allowed a maximum of 10 files saved on the database. Please delete another file or save locally.",
+        new: (
+            <>
+                If you want to learn more about .MARKDOWN please visit the{" "}
+                <span>
+                    <Link href="/guides/Intro">
+                        <a>Intro</a>
+                    </Link>
+                </span>{" "}
+                or{" "}
+                <span>
+                    <Link href="/guides/How-To">
+                        <a>How-To</a>
+                    </Link>
+                </span>{" "}
+                pages in the Guides section of the menu
+            </>
+        ),
+    };
 
     return (
         <SnackbarContent ref={ref}>
@@ -58,8 +74,7 @@ const SB = forwardRef((props, ref) => {
                             sx={{ color: colors[severity] }}
                             gutterBottom
                         >
-                            {extraText?.[severity] || ''}
-                            
+                            {extraText?.[severity] || ""}
                         </Typography>
                     </Paper>
                 </Collapse>
@@ -81,7 +96,7 @@ const SB = forwardRef((props, ref) => {
                     <IconButton
                         sx={{
                             transform: open ? "rotate(180deg)" : null,
-                            display: !isExtraText && 'none'
+                            display: !isExtraText && "none",
                         }}
                         onClick={() => setOpen(!open)}
                     >
@@ -93,6 +108,6 @@ const SB = forwardRef((props, ref) => {
     );
 });
 
-SB.displayName = 'SB'
+AlertBuilder.displayName = "AlertBuilder";
 
-export default SB;
+export default AlertBuilder;
