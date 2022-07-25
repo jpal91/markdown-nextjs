@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { useRouter } from "next/router.js";
 import Grid from "@mui/material/Grid";
 
 import Save from "./Save";
@@ -7,9 +6,8 @@ import Delete from "./Delete";
 import { connect } from "react-redux";
 
 const SaveDeleteContainer = (props) => {
-    const { isExamplePage } = props
+    const { isExamplePage } = props;
     const [visibility, setVisibility] = useState(true);
-    const router = useRouter();
 
     useEffect(() => {
         if (isExamplePage) {
@@ -38,8 +36,8 @@ const SaveDeleteContainer = (props) => {
 
 const mapStateToProps = (state) => {
     return {
-        isExamplePage: state.isExamplePage
-    }
-}
+        isExamplePage: state.isExamplePage,
+    };
+};
 
-export default connect(mapStateToProps)(SaveDeleteContainer)
+export default connect(mapStateToProps)(SaveDeleteContainer);
