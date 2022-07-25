@@ -37,7 +37,6 @@ const MainApp = (props) => {
                     sx={{
                         maxWidth: "100% !important",
                         height: "calc(100vh - 114px)",
-                        // maxHeight: "937px",
                         justifyContent: "space-evenly",
                         p: "0px !important",
                         width: {lg: isMenuOpen ? "calc(100% - 240px)" : "100%", xs: '100%'},

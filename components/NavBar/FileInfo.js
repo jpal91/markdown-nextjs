@@ -116,7 +116,7 @@ const FileInfo = (props) => {
     }, [isInput]);
 
     return (
-        <Grid container sx={{ width: "200px", ml: 1 }}>
+        <Grid container sx={{ width: "200px", ml: 1, display: { xs: 'none', sm: 'flex' } }}>
             <Grid item xs={3} sx={{ alignItems: "center" }}>
                 <InsertDriveFileOutlinedIcon
                     alt="Document Icon"

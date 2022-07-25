@@ -25,7 +25,7 @@ const Delete = (props) => {
                 title="Delete file"
             >
                 <DeleteOutlineOutlinedIcon
-                    sx={{ color: "primary.vlgray", mr: 2 }}
+                    sx={{ color: "primary.vlgray", mr: { xs: 0, sm: 2 }, fontSize: { xs: '40px', sm: '1.5rem' } }}
                 />
             </IconButton>
         </React.Fragment>

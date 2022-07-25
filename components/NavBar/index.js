@@ -1,6 +1,8 @@
 import React from "react";
 import { connect } from "react-redux";
 import Link from "next/link";
+import { useTheme } from '@mui/material/styles';
+import useMediaQuery from '@mui/material/useMediaQuery';
 import Typography from "@mui/material/Typography";
 import AppBar from "@mui/material/AppBar";
 import Grid from "@mui/material/Grid";
@@ -14,14 +16,17 @@ import KeyboardDoubleArrowDownIcon from "@mui/icons-material/KeyboardDoubleArrow
 
 import { toggleMenu, setLoading } from "../../actions/index.js";
 
-import SubBar from "./SubBar.js";
+import SubBar from "./SubBar/SubBar.js";
 import SideNav from "./SideNav/SideNav.js";
 import SaveDeleteContainer from "./SaveDeleteContainer";
 import FileInfo from "./FileInfo.js";
 import Alerts from "../Main/Alerts/Alerts";
+import SubBarToggles from "./SubBar/SubBarToggles.js";
 
 const NavBar = (props) => {
     const { isMenuOpen, toggleMenu, setLoading } = props;
+    const theme = useTheme();
+    const matches = useMediaQuery(theme.breakpoints.up('sm'));
 
     return (
         <React.Fragment>
@@ -31,10 +36,10 @@ const NavBar = (props) => {
                     position: "sticky",
                     maxWidth: "100%",
                     height: "72px",
-                    display: "flex",
+                    display: 'flex',
                     alignItems: "center",
                     justifyContent: "center",
-                    width: isMenuOpen ? "calc(100% - 240px)" : "100%",//{lg: isMenuOpen ? "calc(100% - 240px)" : "100%", xs: '100%'}
+                    width: isMenuOpen ? "calc(100% - 240px)" : "100%",
                     ml: isMenuOpen ? "240px" : 0,
                 }}
             >
@@ -51,7 +56,7 @@ const NavBar = (props) => {
                 >
                     <Grid
                         item
-                        xs={isMenuOpen ? 12 : 8}
+                        xs={12}
                         lg={6}
                         sx={{ justifyContent: "flex-start", height: "100%" }}
                     >
@@ -87,6 +92,7 @@ const NavBar = (props) => {
                                 }}
                                 aria-label="Home"
                                 title="Home"
+                                sx={{ display: { xs: isMenuOpen && 'none', sm: 'inline-flex' } }}
                             >
                                 <a>
                                     <Typography variant="heading">
@@ -102,11 +108,13 @@ const NavBar = (props) => {
                                 borderColor: "background.icon",
                                 ml: 5,
                                 my: 1,
+                                display: { xs: 'none' }
                             }}
                         />
                         <FileInfo />
                     </Grid>
-                    <SaveDeleteContainer />
+                    <SaveDeleteContainer display={matches ? 'flex' : 'none'}/>
+                    <SubBarToggles display={!matches ? 'flex' : 'none'}/>
                 </Grid>
             </AppBar>
             <SubBar />

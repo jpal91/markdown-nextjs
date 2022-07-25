@@ -55,23 +55,25 @@ const Preview = (props) => {
     return (
         <Grid
             item
-            xs={6}
+            xs={isPreviewMode ? 12 : 0}
+            sm={6}
             sx={{
                 width: "100%",
                 height: "100%",
                 borderLeft: isPreviewMode ? "none" : "1px solid",
                 borderColor: "background.borders",
                 flex: "1 1 auto",
-                p: 5,
+                p: { xs: 2, sm: 5 },
                 typography: "body1",
-                justifyContent: isPreviewMode ? "center" : "flex-start",
+                justifyContent: {xs: 'flex-start', sm: isPreviewMode ? "center" : "flex-start"},
+                display: { xs: !isPreviewMode && 'none', sm: 'flex' }
             }}
         >
             <ScrollSyncPane>
                 <Box
                     id="preview"
                     sx={{
-                        width: isPreviewMode ? "50%" : "100%",
+                        width: { xs: '100%', sm: isPreviewMode ? "50%" : "100%"},
                         overflow: "auto",
                         height: "100%",
                     }}

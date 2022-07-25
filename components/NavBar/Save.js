@@ -3,6 +3,8 @@ import { connect } from "react-redux";
 import { useRouter } from "next/router";
 import Image from "next/image";
 import ButtonBase from "@mui/material/Button";
+import IconButton from "@mui/material/IconButton";
+import SaveIcon from "@mui/icons-material/Save";
 
 import { setModal, masterUpdateHandler } from "../../actions";
 
@@ -14,6 +16,7 @@ const Save = (props) => {
         setModal,
         masterUpdateHandler,
         saveState,
+        isMenuOpen
     } = props;
     const router = useRouter();
 
@@ -40,9 +43,18 @@ const Save = (props) => {
                 onClick={handleSave}
                 aria-label="Save changes"
                 title="Save changes"
+                sx={{ display: { xs: "none", sm: isMenuOpen ? 'none' :'inline-flex', lg: 'inline-flex' } }}
             >
                 <Image src="/images/save-button.svg" width="150" height="70" />
             </ButtonBase>
+            <IconButton
+                onClick={handleSave}
+                aria-label="Save changes"
+                title="Save changes"
+                sx={{ display: { sm: 'none' }}}
+            >
+                <SaveIcon sx={{ color: 'primary.vlgray', fontSize: { xs: '40px' } }} />
+            </IconButton>
         </React.Fragment>
     );
 };
@@ -54,6 +66,7 @@ const mapStateToProps = (state) => {
         localData: state.localData,
         buttonStatus: state.buttonStatus,
         saveState: state.saveState,
+        isMenuOpen: state.isMenuOpen
     };
 };
 

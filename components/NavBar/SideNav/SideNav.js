@@ -3,6 +3,8 @@ import Image from "next/image";
 import { connect } from "react-redux";
 import { signOut } from "next-auth/react";
 import { useRouter } from "next/router";
+import { useTheme } from '@mui/material/styles';
+import useMediaQuery from '@mui/material/useMediaQuery';
 import Drawer from "@mui/material/Drawer";
 import Typography from "@mui/material/Typography";
 import ButtonBase from "@mui/material/ButtonBase";
@@ -13,6 +15,7 @@ import ModeNightOutlinedIcon from "@mui/icons-material/ModeNightOutlined";
 import Brightness5OutlinedIcon from "@mui/icons-material/Brightness5Outlined";
 
 import FileList from "./FileList";
+import SaveDeleteContainer from "../SaveDeleteContainer";
 import { setModal, setLightMode, setAuthUser, logOut, setAlert } from "../../../actions";
 
 const SideNav = (props) => {
@@ -30,6 +33,8 @@ const SideNav = (props) => {
     } = props;
     const router = useRouter();
     const handleSwitch = () => setLightMode(!isLightMode);
+    const theme = useTheme();
+    const matches = useMediaQuery(theme.breakpoints.up('sm'));
 
     const handleLogout = async () => {
         await signOut({ redirect: false }).then(() => {
@@ -74,7 +79,7 @@ const SideNav = (props) => {
                 },
             }}
         >
-            <Typography variant="sideNavHeading">MY DOCUMENTS</Typography>
+            <Typography variant="sideNavHeading">{matches ? 'MY DOCUMENTS' : `${fileName}.md`}</Typography>
             <ButtonBase
                 onClick={() =>
                     setModal({
@@ -115,6 +120,7 @@ const SideNav = (props) => {
                     mb: 2,
                 }}
             >
+                <SaveDeleteContainer display={matches ? 'none' : 'flex'} />
                 <Box
                     sx={{
                         display: "flex",

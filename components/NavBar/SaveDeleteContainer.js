@@ -6,7 +6,7 @@ import Delete from "./Delete";
 import { connect } from "react-redux";
 
 const SaveDeleteContainer = (props) => {
-    const { isExamplePage, isMenuOpen } = props;
+    const { isExamplePage, isMenuOpen, display } = props;
     const [visibility, setVisibility] = useState(true);
 
     useEffect(() => {
@@ -20,14 +20,16 @@ const SaveDeleteContainer = (props) => {
     return (
         <Grid
             item
-            xs={ isMenuOpen ? 0 : 4 }
+            xs={12}
+            sm={6}
             lg={6}
             sx={{
                 justifyContent: "flex-end",
                 alignItems: "center",
                 pr: { lg: 5 },
                 contentVisibility: visibility ? "visible" : "hidden",
-                display: { xs: isMenuOpen ? 'none' : 'visible' }
+                display: display,
+                columnGap: { xs: '40px', sm: 0 }
             }}
         >
             <Delete />
