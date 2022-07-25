@@ -29,11 +29,13 @@ const Preview = (props) => {
         if (typeof window !== undefined) {
             setStartId(document.getElementById('startdoc'))
         }
+
     }, []);
 
     useEffect(() => {
         const textId = document.querySelector("textarea");
         const endId = document.getElementById('enddoc')
+
 
         if (textId.selectionEnd >= textId.textLength - 50) {
             

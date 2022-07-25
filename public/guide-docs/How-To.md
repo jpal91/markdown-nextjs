@@ -73,7 +73,7 @@ Once there, click the `LOGIN` button you see near the bottom of the screen:
 
 A modal will pop up in the middle of your screen, which will prompt you to select the login provider of your choice:
 
-![login providers](/images/provider-ss.png)
+![login providers](/images/provider-ss.PNG)
 
 Follow the prompt of your chosen provider and you will be redirected back to our site where you will officially be logged in!
 
@@ -98,7 +98,7 @@ Then you will click the `New Document` button near the top of the menu:
 
 After you will be prompted to create a document name and select where the document will be saved to (either locally or on the database):
 
-![new document modal](/images/newdoc-modal.png)
+![new document modal](/images/newdoc-modal.PNG)
 
 *For more information on saving locally vs. on the database, see [Local vs. Database](#localvdb).*
  
@@ -209,7 +209,7 @@ Click this option if you only want to see your generated Markdown file in the `P
 #### *Scroll To Top* {#scroll-top}
 On the bottom right side of the `Preview` section you will see this button:
 
-![scroll-to-top](/images/scroll-to-top.png)
+![scroll-to-top](/images/scroll-to-top.PNG)
 
 Click this button to automatically scroll to the top of your screen. 
  
@@ -217,7 +217,7 @@ Click this button to automatically scroll to the top of your screen.
 #### *Day/Night Mode* {#day-night}
 In the `Menu`, at the very bottom, you will see a toggle option with two icons to switch from day mode to night mode:
 
-![day-night-toggle](/images/day-night-toggle.png)
+![day-night-toggle](/images/day-night-toggle.PNG)
 
 When the toggle is to the left (toward the Moon icon), your screen will be in Night Mode. Day mode will be the opposite side. As long as you don't clear your browser's cache, it will remember your preference when you visit the site. 
  

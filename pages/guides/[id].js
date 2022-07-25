@@ -17,6 +17,7 @@ import {
 
 
 const Guides = (props) => {
+    const router = useRouter()
     const { setData, post, setFileName, id, setButtonStatus, examplePage, setLoading, unsavedChanges } =
         props;
 
@@ -36,6 +37,12 @@ const Guides = (props) => {
             examplePage(false);
         };
     }, []);
+
+    useEffect(() => {
+        setLoading(false)
+        setFileName(`${id}.md`);
+        setData(post);
+    }, [router, id])
 
     return (
         <React.Fragment>
