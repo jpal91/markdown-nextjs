@@ -1,3 +1,12 @@
+import React from 'react'
+import Image from 'next/image';
+import { processNodes, convertNodeToElement } from "react-html-parser";
+import Typography from '@mui/material/Typography'
+import Box from '@mui/material/Box'
+import CheckBoxOutlinedIcon from '@mui/icons-material/CheckBoxOutlined';
+import CheckBoxOutlineBlankOutlinedIcon from '@mui/icons-material/CheckBoxOutlineBlankOutlined';
+
+
 export const listBuilder = (matches, ordered) => {
   const olOrUl = ordered
     ? { open: "<ol>", close: "</ol>" }
@@ -48,4 +57,50 @@ export const listBuilder = (matches, ordered) => {
 
     return newString;
   });
+};
+
+
+export const transform = (node, index) => {
+  if (node.name && node.name.match(/h\d/)) {
+      if (node.parent && node.parent.name === 'span') {
+          return (
+              <p key={index}>
+                  {processNodes(node.children, transform)}
+              </p>
+          )
+      }
+      let tagName = node.name;
+      let id = node.attribs.id || ''
+      return (
+          <Typography key={index} variant={tagName} id={id}>
+              {processNodes(node.children, transform)}
+          </Typography>
+      );
+  }
+
+  if (node.attribs?.type === 'checkbox') {
+    const checkedBox = node.attribs?.checked === 'true'
+    const style = { height: '17px', width: '17px', mx: '10px'}
+
+    return (
+      <Box sx={{ display: 'flex', alignItems: 'center', my: -1 }}>
+        {checkedBox ? <CheckBoxOutlinedIcon sx={{ ...style }}/> : <CheckBoxOutlineBlankOutlinedIcon sx={{ ...style }} />}
+        <Typography variant='body1'>
+          {processNodes(node.next.children, transform)}
+        </Typography>
+      </Box>
+    )
+  }
+
+  if (node?.name === 'label') {
+    return null
+  }
+
+  if (node.attribs?.id === 'block-q') {
+    return (
+      <Box sx={{ borderLeft: '15px solid hsl(13, 75%, 58%)', paddingLeft: '1.5em', pr: 10, margin: '1.2em', backgroundColor: 'background.blockq', borderRadius: '5px', width: 'fit-content', maxWidth: '90%'}}>
+        {processNodes(node.children, transform)}
+      </Box>
+    )
+  }
 };

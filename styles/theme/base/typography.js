@@ -73,7 +73,28 @@ const typography = {
     fontFamily: fontFam.regular,
     color: primary.vlgray,
     fontSize: 15,
-    letterSpacing: '2px'
+    letterSpacing: "2px"
+  },
+  sideNavText: {
+    fontWeight: baseProperties.fontWeightRegular,
+    fontFamily: fontFam.regular,
+    color: primary.lOrange,
+    fontSize: 13,
+    letterSpacing: "2px"
+  },
+  sideNavSubText: {
+    fontWeight: baseProperties.fontWeightRegular,
+    fontFamily: fontFam.regular,
+    color: 'hsla(360, 100%, 100%, 1)',
+    fontSize: 10,
+    letterSpacing: "2px"
+  },
+  subBarText: {
+    fontWeight: baseProperties.fontWeightRegular,
+    fontFamily: fontFam.slab,
+    fontSize: 14,
+    lineHeight: "24px",
+    color: primary.lgray
   },
   body1: {
     fontWeight: baseProperties.fontWeightRegular,

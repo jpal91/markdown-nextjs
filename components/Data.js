@@ -3,9 +3,9 @@ import { connect } from "react-redux";
 import { ScrollSyncPane } from "react-scroll-sync";
 import Typography from "@mui/material/Typography";
 import Box from '@mui/material/Box'
-import ReactHtmlParser, { processNodes } from "react-html-parser";
+import ReactHtmlParser, { processNodes, convertNodeToElement } from "react-html-parser";
 
-import { searchText } from "../helpers/search-text.js";
+import searchText from "../helpers/search-text.js";
 
 const transform = (node, index) => {
     if (node.name && node.name.startsWith("h")) {
@@ -24,6 +24,10 @@ const transform = (node, index) => {
         );
     }
 };
+
+const preprocessNodes = (nodes) => {
+    console.log(nodes)
+}
 
 const Data = (props) => {
     const { mdData, isPreviewMode } = props;
@@ -45,7 +49,7 @@ const Data = (props) => {
             clearTimeout(timerId)
         }
 
-    }, [mdData])
+     }, [mdData])
 
     useEffect(() => {
         setFormattedText(ReactHtmlParser(formattedData, { transform: transform }))

@@ -8,26 +8,32 @@ export const searchText = (str) => {
     // const bracketRegex = /`<.+>.*<\/.+>`/g;
     const headingsRegex = /#+\s.+\n?/g;
     // const linksRegex = /\[.+\]\(.+\)/g;
-    const linksRegex = /\[[^\[\)]+\)/g;
+    const linksRegex = /(?<!!)\[[^\[\)]+\)/g;
     // const boldRegex = /(?<!(\*|\S))\*\*[^*\n]+\*\*(?!\*)/g;
     const boldRegex = /\*\*[^*\n]+\*\*/g;
+    // const boldRegex = /\*\*(?:(?!\*\*)[\s\S])+\*\*/g
     // const italicRegex = /(?<!(\*|\S))\*[^*\n]+\*(?!\*)/g;
     const italicRegex = /\*[^*\n]+\*/g;
     // const codeRegex = /`.+`/g;
-    const codeRegex = /`[^`\n]+`\n?/g;
+    // const codeRegex = /`[^`\n]+`\n?/g;
+    const codeRegex = /`(?:(?!`)[\s\S])+`\n?/g
     const imageRegex = /!\[.*\]\(.+\)/g;
     const blockCodeRegex = /```.*(\r?\n|\s)(?:(?!```)[\s\S])+\n```/g; ///```.*\s(?:(?!```)[\s\S])+\n```/g
     const emojiRegex = /:[\w]+:/g;
-    const blockQuoteRegex = /(?<=\n)(?:> .+\n)+/g;
+    const blockQuoteRegex = /(?<=\n)(?:> .*\n)+/g;
     const lineBreakRegex = /\n---\n/g;
     // const highRegex = /==[^=]+==/g;
     const highRegex = /==(?:(?!==)[\s\S])+==/g;
     const strikeRegex = /~~[^~]+~~/g;
     const subRegex = /(?<!~)~[^~]+~(?!~)/g;
-    const uoRegex = /(?<=\n)((?:>\s)?\s*-\s(?!\[|]).+\n)+/g;
-    const olRegex = /(?<=\n)((?:>\s)?\s*\d\.\s.+\n>?)+/g;
+    // const uoRegex = /(?<=\n)((?:>\s)?\s*-\s(?!\[|]).+\n)+/g;
+    const uoRegex = /(?<=\n)(?:\s*- .+\n{0,2})+/g 
+    // const olRegex = /(?<=\n)((?:>\s)?\s*\d\.\s.+\n>?)+/g;
+    const olRegex = /(?<=\n)(?:\s*\d\. .+\n)+/g
     const checkListRegex = /-\s\[(\s|x)\]\s.+\n/g;
-    const footRegex = /\[\^.\]:?(.+)?/g;
+    // const footRegex = /\[\^.\]:?(.+)?/g;
+    const footRegex = /\[\^.\](?!:)/g;
+    const footTextRegex = /\[\^.\]: .+\n/g
     const superRegex = /\^.+\^/g;
 
     const hasOpenBracket = str.match(openBracketRegex);
@@ -35,6 +41,9 @@ export const searchText = (str) => {
 
     const hasBlockCode = str.match(blockCodeRegex);
     hasBlockCode && (str = blockCode(hasBlockCode, str));
+
+    const hasCode = str.match(codeRegex);
+    hasCode && (str = code(hasCode, str));
 
     // const hasBracket = str.match(bracketRegex);
     // hasBracket && (str = bracket(hasBracket, str));
@@ -51,8 +60,8 @@ export const searchText = (str) => {
     const hasItalic = str.match(italicRegex);
     hasItalic && (str = italic(hasItalic, str));
 
-    const hasCode = str.match(codeRegex);
-    hasCode && (str = code(hasCode, str));
+    // const hasCode = str.match(codeRegex);
+    // hasCode && (str = code(hasCode, str));
 
     const hasImage = str.match(imageRegex);
     hasImage && (str = image(hasImage, str));
@@ -87,6 +96,10 @@ export const searchText = (str) => {
     const hasFootNote = str.match(footRegex);
     hasFootNote && (str = footNote(hasFootNote, str));
 
+    const hasFootText = str.match(footTextRegex)
+    hasFootText && (str += '<br><br><hr><br>')
+    hasFootText && (str = footNote(hasFootText, str))
+
     const hasSuperScript = str.match(superRegex);
     hasSuperScript && (str = superScript(hasSuperScript, str));
 
@@ -96,6 +109,12 @@ export const searchText = (str) => {
     str = str.replace(/(\n|\\\n)/g, "</br>");
     str = str.replace(/(<\/?br>){2,}/g, "</br></br>");
     str = str.replace(/(&#35;)/g, "#");
+    str = str.replace(/(&#61;)/g, "=");
+    str = str.replace(/(&#42;)/g, "*")
+    str = str.replace(/(&#126;)/g, "~")
+    str = str.replace(/(&#40;)/g, "(")
+    str = str.replace(/(&#91;)/g, "[")
+    
 
     return DOMPurify.sanitize(str, { ADD_ATTR: ['target'] });
 };
@@ -119,6 +138,7 @@ const openBrackets = (match, str) => {
     return str;
 };
 
+
 const bracket = (match, str) => {
     const codeMatch = /(?<=`)<.+>.*<\/.+>(?=`)/g;
 
@@ -139,7 +159,7 @@ const headings = (match, str) => {
     const h5 = /(?<=#####\s)[^{}\n]+/g;
     const h6 = /(?<=######\s)[^{}\n]+/g;
     const headArray = [h1, h2, h3, h4, h5, h6];
-    const id = /(?<={).+(?=})/;
+    const id = /(?<={#).+(?=})/;
 
     match.forEach((m) => {
         const idMatch = m.match(id);
@@ -160,7 +180,7 @@ const headings = (match, str) => {
 
         str = str.replace(
             m,
-            `<h${index + 1}${idMatch ? `id=${idMatch[0]}` : ""}>${
+            `<h${index + 1} id="${idMatch && `${idMatch[0]}`}">${
                 m.match(headArray[index])[0]
             }</h${index + 1}>\n`
         );
@@ -224,9 +244,14 @@ const code = (match, str) => {
 
     match.forEach((m) => {
         let cMatch = m.match(codeRegex);
-        let rMatch = returnRegex.test(m) ? "<br><br>" : "";
+        let rMatch = returnRegex.test(m) ? "\n\n" : "" ////<br><br>
 
         cMatch[0] = cMatch[0].replace(/(&lt;|<)/g, "<span><</span>");
+        cMatch[0] = cMatch[0].replace(/\*/g, "&#42;")
+        cMatch[0] = cMatch[0].replace(/=/g, "&#61;")
+        cMatch[0] = cMatch[0].replace(/~/g, "&#126;")
+        cMatch[0] = cMatch[0].replace(/\[/g, "&#91;")
+        cMatch[0] = cMatch[0].replace(/\(/g, "&#40;")
         str = str.replace(
             m,
             `<code id="code_styled">${cMatch[0]}</code>${rMatch}`
@@ -239,12 +264,12 @@ const code = (match, str) => {
 const image = (match, str) => {
     const description = /(?<=!\[).*(?=\])/g;
     const src = /(?<=\().+(?=\))/g;
-
+    
     match.forEach((m) => {
         let dMatch = m.match(description);
         let sMatch = m.match(src);
 
-        str = str.replace(m, `<img src=${sMatch[0]} alt=${dMatch[0] || ""} />`);
+        str = str.replace(m, `<img src=${sMatch[0]} alt="${dMatch[0]}" style="max-width:100%"/>`);
     });
 
     return str;
@@ -254,15 +279,18 @@ const blockCode = (match, str) => {
     const innerCode = /(?<=```.*(\r\n|\s))(.+\s*)+\n?(?=```)/gm;
     const codeType = /(?<=```).*(?=\n)/;
     const headings = /#+/g;
+    const equals = /=+/g
 
     match.forEach((m) => {
         let codeMatch = m.match(codeType) || "";
         let bcMatch = m.match(innerCode);
         let hMatch = m.match(headings);
+        let eMatch = m.match(equals)
         if (!bcMatch) {
             return;
         }
         bcMatch[0] = bcMatch[0].replace(/&lt;/g, "<");
+        // bcMatch[0] = bcMatch[0].replace(/`/g, "<span>`</span>")
 
         let hl = hljs.highlightAuto(`${bcMatch[0]}`, [
             `${codeMatch[0]}`,
@@ -270,7 +298,9 @@ const blockCode = (match, str) => {
             "javascript",
         ]).value;
 
+        hl = hl.replace(/`/g, "&#96;")
         hMatch ? (hl = hl.replace(/#/g, `&#35;`)) : null;
+        eMatch ? (hl = hl.replace(/=/g, '&#61;')) : null
 
         str = str.replace(
             m,
@@ -296,7 +326,7 @@ const emoji = (match, str) => {
 };
 
 const blockQuote = (match, str) => {
-    const bq = /(?<=>\s)(?:(?!>).+\n)+/g;
+    const bq = /(?<=>\s)(?:(?!>).*\n)+/g;
 
     match.forEach((m) => {
         let bqMatch = m.match(bq).join("");
@@ -320,7 +350,7 @@ const lineBreak = (match, str) => {
 
 const highLight = (match, str) => {
     const highL = /(?<===)[\s\S]+(?===)/;
-    console.log(match)
+    // console.log(match)
     match.forEach((m) => {
         let highLMatch = m.match(highL);
 
@@ -357,6 +387,8 @@ const subText = (match, str) => {
 const uoList = (match, str) => {
     match.forEach((m) => {
         // let listSection = m.split(/(\s*-\s.+\n?)/).filter((el) => el.length > 0);
+        // console.log(m.includes('- ['))
+        if (m.includes('- [')) { return }
         let listSection = m.split(/\n/).filter((el) => el.length > 0);
         let result = listBuilder(listSection, false);
 
@@ -388,8 +420,8 @@ const checkList = (match, str) => {
 
         str = str.replace(
             m,
-            `<input type='checkbox' id=${labelText} name=${labelText} disabled ${
-                checked ? `checked` : ``
+            `<input class='checkbox' type='checkbox' id=${labelText} name=${labelText} disabled ${
+                checked ? `checked=true` : `checked=false`
             } style="margin: 0px 10px;"/><label for=${labelText}>${labelText}</label>\n`
         );
     });
@@ -415,7 +447,7 @@ const footNote = (match, str) => {
             return;
         } else if (textMatch) {
             str = str.replace(m, "");
-            str += `<br><hr><br><p id='footnote-${noteMatch[0]}'>${noteMatch[0]}. ${textMatch[0]} <a href='#note${noteMatch[0]}'>&#128281;</a></p>`;
+            str += `<p id='footnote-${noteMatch[0]}'>${noteMatch[0]}. ${textMatch[0]} <a class='foot-back' href='#note${noteMatch[0]}'>&#128281;</a></p>`;
         }
     });
 
@@ -433,3 +465,5 @@ const superScript = (match, str) => {
 
     return str;
 };
+
+export default searchText
