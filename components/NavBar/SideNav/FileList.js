@@ -18,6 +18,7 @@ const FileList = (props) => {
     const [directoryData, setDirectory] = useState();
     const [guideDirectoryData, setGuideDirectory] = useState();
     const handleOpen = () => setOpen(!open);
+
     const directory = async () =>
         await axios.get("/api/examples").then((res) => setDirectory(res.data));
     const guideDirectory = async () =>
@@ -30,7 +31,7 @@ const FileList = (props) => {
             return;
         }
         directory();
-		guideDirectory()
+        guideDirectory();
     }, []);
 
     const buildList = () => {
@@ -153,9 +154,6 @@ const FileList = (props) => {
                     </List>
                 </Collapse>
             </List>
-            {/* <Backdrop open={loading}>
-                <CircularProgress sx={{ color: "primary.text" }} />
-            </Backdrop> */}
         </React.Fragment>
     );
 };
@@ -168,16 +166,3 @@ const mapStateToProps = (state) => {
 };
 
 export default connect(mapStateToProps, { toggleMenu, setLoading })(FileList);
-
-// {Object.keys(dbData.docs).map((doc, i) => {
-//     let targetDoc = dbData.docs[doc];
-
-//     return (
-//         <ListItemButton key={i}>
-//             <ListItemText
-//                 primary={`${doc}`}
-//                 secondary={targetDoc.date}
-//             />
-//         </ListItemButton>
-//     );
-// })}

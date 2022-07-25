@@ -1,4 +1,3 @@
-import { useState } from "react";
 import axios from "axios";
 import Image from "next/image";
 import { connect } from "react-redux";
@@ -52,7 +51,7 @@ const SideNav = (props) => {
 			a.click()
 			a.remove()
 
-			await axios.post("/api/delete-temp", { fileName: fileName, all: true })
+			await axios.post("/api/delete-temp", { fileName: fileName })
 		} catch (error) {
 			setAlert({ open: true, message: 'Download failed! Please try again', severity: 'error' })
 		}
