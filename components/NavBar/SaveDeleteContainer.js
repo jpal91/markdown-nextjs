@@ -28,7 +28,7 @@ const SaveDeleteContainer = (props) => {
                 alignItems: "center",
                 pr: { lg: 5 },
                 contentVisibility: visibility ? "visible" : "hidden",
-                display: display,
+                display: { xs: display, sm: isMenuOpen ? 'none' : display, lg: display },
                 columnGap: { xs: '40px', sm: 0 }
             }}
         >

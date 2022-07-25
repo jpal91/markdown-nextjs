@@ -12,7 +12,7 @@ const SubBarToggles = (props) => {
     const { isPreviewMode, isScrollSync, togglePreview, toggleScrollSync, display, isMenuOpen } = props
     
     return (
-        <Grid item xs={6} sx={{ justifyContent: "flex-end", pr: 2, display: isMenuOpen ? 'none' : display }}>
+        <Grid item xs={6} sx={{ justifyContent: "flex-end", pr: 2, display: { xs: isMenuOpen ? 'none' : display, sm: display } }}>
             <IconButton
                 onClick={() => toggleScrollSync(!isScrollSync)}
                 sx={{ contentVisibility: { xs: 'visible', sm: isPreviewMode && "hidden"} }}//{ xs: 'hidden', sm: isPreviewMode && "hidden" } }}
