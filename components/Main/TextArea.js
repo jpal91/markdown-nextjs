@@ -43,6 +43,20 @@ const TextArea = (props) => {
         }
     }, [mdData])
 
+    useEffect(() => {
+        if (!checkWindow) {
+            return
+        }
+
+        const warnUnsaved = () => {
+            if (unsaved) {
+                return "You have unsaved changes on this page!"
+            }
+        }
+
+        window.onbeforeunload = warnUnsaved
+    }, [unsaved])
+
     return (
         <Grid
             item
