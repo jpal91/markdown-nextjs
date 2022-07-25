@@ -15,7 +15,7 @@ const SubBarToggles = (props) => {
         <Grid item xs={6} sx={{ justifyContent: "flex-end", pr: 2, display: isMenuOpen ? 'none' : display }}>
             <IconButton
                 onClick={() => toggleScrollSync(!isScrollSync)}
-                sx={{ contentVisibility: isPreviewMode && "hidden" }}//{ xs: 'hidden', sm: isPreviewMode && "hidden" } }}
+                sx={{ contentVisibility: { xs: 'visible', sm: isPreviewMode && "hidden"} }}//{ xs: 'hidden', sm: isPreviewMode && "hidden" } }}
                 aria-label={`Turn scroll sync ${isScrollSync ? "off" : "on"}`}
                 title={`Turn scroll sync ${isScrollSync ? "off" : "on"}`}
             >

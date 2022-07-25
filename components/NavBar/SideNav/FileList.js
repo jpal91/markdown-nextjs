@@ -12,7 +12,7 @@ import ExpandMore from "@mui/icons-material/ExpandMore";
 import { toggleMenu, setLoading } from "../../../actions";
 
 const FileList = (props) => {
-    const { listName, dbData, toggleMenu, localData, setLoading } = props;
+    const { listName, dbData, toggleMenu, localData, setLoading, fileName } = props;
     const router = useRouter();
     const [open, setOpen] = useState(false);
     const [directoryData, setDirectory] = useState();
@@ -43,6 +43,7 @@ const FileList = (props) => {
                 dbDataKeys &&
                 dbDataKeys.map((doc, i) => {
                     let targetDoc = dbData.docs[doc];
+                    const isChosenFile = doc === fileName
 
                     return (
                         <ListItemButton
@@ -55,6 +56,7 @@ const FileList = (props) => {
                             }}
                             aria-label="Open document"
                             title={`${doc} - saved on database`}
+                            sx={{ backgroundColor: isChosenFile && 'primary.lgray', borderRadius: '2px' }}
                         >
                             <ListItemText
                                 primary={`${doc}`}
@@ -67,6 +69,7 @@ const FileList = (props) => {
                 localDataKeys &&
                 localDataKeys.map((doc, i) => {
                     let targetDoc = localData.docs[doc];
+                    const isChosenFile = doc === fileName
 
                     return (
                         <ListItemButton
@@ -79,6 +82,7 @@ const FileList = (props) => {
                             }}
                             aria-label="Open document"
                             title={`${doc} - saved on local computer`}
+                            sx={{ backgroundColor: isChosenFile && 'primary.lgray', borderRadius: '2px' }}
                         >
                             <ListItemText
                                 primary={`${doc}`}
@@ -94,6 +98,7 @@ const FileList = (props) => {
             }
             return directoryData.map((file, i) => {
                 file = file.replace(/\.md/, "");
+                const isChosenFile = file === fileName
 
                 return (
                     <ListItemButton
@@ -106,6 +111,7 @@ const FileList = (props) => {
                         }}
                         aria-label="Open document"
                         title={`${file} - example document`}
+                        sx={{ backgroundColor: isChosenFile && 'primary.lgray', borderRadius: '2px' }}
                     >
                         <ListItemText primary={file} />
                     </ListItemButton>
@@ -117,6 +123,7 @@ const FileList = (props) => {
             }
             return guideDirectoryData.map((file, i) => {
                 file = file.replace(/\.md/, "");
+                const isChosenFile = file === fileName
 
                 return (
                     <ListItemButton
@@ -129,6 +136,7 @@ const FileList = (props) => {
                         }}
                         aria-label="Open document"
                         title={`${file} - guide document`}
+                        sx={{ backgroundColor: isChosenFile && 'primary.lgray', borderRadius: '2px' }}
                     >
                         <ListItemText primary={file} />
                     </ListItemButton>
@@ -162,6 +170,7 @@ const mapStateToProps = (state) => {
     return {
         localData: state.localData,
         dbData: state.dbData,
+        fileName: state.fileName
     };
 };
 
