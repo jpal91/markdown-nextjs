@@ -4,10 +4,10 @@ import { useSnackbar } from 'notistack'
 
 
 import AlertBuilder from './AlertBuilder';
-import { setAlert } from "../../../actions";
+import { setAlert, setLoading } from "../../../actions";
 
 const Alerts = (props) => {
-  const { setAlert } = props
+  const { setAlert, setLoading } = props
   const { message, severity } = props.alertState;
   const { enqueueSnackbar } = useSnackbar()
 
@@ -16,7 +16,7 @@ const Alerts = (props) => {
       return
     }
     
-    enqueueSnackbar(message, { content: (key, message) => <AlertBuilder id={key} message={message} severity={severity}/> })
+    enqueueSnackbar(message, { content: (key, message) => <AlertBuilder id={key} message={message} severity={severity} setLoading={setLoading}/> })
     setAlert({ open: false, message: '', severity: ''})
   }, [message])
 
@@ -31,4 +31,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, { setAlert })(Alerts);
+export default connect(mapStateToProps, { setAlert, setLoading })(Alerts);

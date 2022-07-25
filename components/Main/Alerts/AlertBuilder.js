@@ -13,7 +13,7 @@ import SentimentSatisfiedAltIcon from "@mui/icons-material/SentimentSatisfiedAlt
 import ExpandMore from "@mui/icons-material/ExpandMore";
 
 const AlertBuilder = forwardRef((props, ref) => {
-    const { severity, message } = props;
+    const { severity, message, setLoading } = props;
     const [open, setOpen] = useState(false);
     const isExtraText = severity === "limit" || severity === "new";
 
@@ -37,14 +37,14 @@ const AlertBuilder = forwardRef((props, ref) => {
             <>
                 If you want to learn more about .MARKDOWN please visit the{" "}
                 <span>
-                    <Link href="/guides/Intro">
-                        <a>Intro</a>
+                    <Link href="/guides/Intro" >
+                        <a onClick={() => setLoading(true)}>Intro</a>
                     </Link>
                 </span>{" "}
                 or{" "}
                 <span>
                     <Link href="/guides/How-To">
-                        <a>How-To</a>
+                        <a onClick={() => setLoading(true)}>How-To</a>
                     </Link>
                 </span>{" "}
                 pages in the Guides section of the menu
