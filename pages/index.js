@@ -4,10 +4,10 @@ import { useRouter } from "next/router";
 import MainApp from "../components/Main/MainApp";
 import { connect } from "react-redux";
 
-import { setFileName, setData, setButtonStatus } from "../actions";
+import { setFileName, setData, setButtonStatus, setLoading } from "../actions";
 
 const Home = (props) => {
-    const { setFileName, setData, setButtonStatus } = props;
+    const { setFileName, setData, setButtonStatus, setLoading } = props;
     const router = useRouter();
 
     useEffect(() => {
@@ -23,6 +23,7 @@ const Home = (props) => {
         if (router.pathname === "/") {
             setFileName("welcome.md");
             setData("");
+            setLoading(false)
         }
     }, [router]);
 
@@ -36,4 +37,4 @@ const Home = (props) => {
     )
 };
 
-export default connect(null, { setFileName, setData, setButtonStatus })(Home);
+export default connect(null, { setFileName, setData, setButtonStatus, setLoading })(Home);
