@@ -179,7 +179,7 @@ export const masterUpdateHandler = (location, actionType, data) => async (
       }
     } catch (error) {
       newAlert.message = error.message;
-      newAlert.severity = e.name === 'limit' ? 'limit' : "error";
+      newAlert.severity = error === e ? 'limit' : "error";
       dispatch({ type: "ALERT_STATUS", payload: newAlert });
       throw new Error("");
     }

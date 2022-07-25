@@ -29,7 +29,8 @@ const SideNav = (props) => {
         logOut,
         fileName,
         mdData,
-		setAlert
+		setAlert,
+        buttonStatus
     } = props;
     const router = useRouter();
     const handleSwitch = () => setLightMode(!isLightMode);
@@ -79,7 +80,14 @@ const SideNav = (props) => {
                 },
             }}
         >
-            <Typography variant="sideNavHeading">{matches ? 'MY DOCUMENTS' : `${fileName}.md`}</Typography>
+            {/* <Typography variant="sideNavHeading">{matches ? 'MY DOCUMENTS' : `${fileName}.md`}</Typography> */}
+            <ButtonBase
+                onClick={() => setModal({ open: true, type: buttonStatus.fileName === 'new' ? 'new' : 'rename'})}
+                disabled={matches}
+                sx={{ justifyContent: 'flex-start' }}
+            >
+                <Typography variant="sideNavHeading">{matches ? 'MY DOCUMENTS' : `${fileName}.md`}</Typography>
+            </ButtonBase>
             <ButtonBase
                 onClick={() =>
                     setModal({
@@ -192,6 +200,7 @@ const mapStateToProps = (state) => {
         authUser: state.authUser,
         fileName: state.fileName,
         mdData: state.mdData,
+        buttonStatus: state.buttonStatus
     };
 };
 

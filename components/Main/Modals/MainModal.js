@@ -10,6 +10,7 @@ import DeleteModal from "./DeleteModal";
 import NewDocModal from "./NewDocModal";
 import SaveWarnModal from "./SaveWarnModal";
 import AuthModal from "./AuthModal";
+import RenameModal from "./RenameModal";
 
 const MainModal = (props) => {
     const { setModal, mdData } = props;
@@ -26,6 +27,8 @@ const MainModal = (props) => {
             return <NewDocModal setClose={handleClose} mdData={mdData} />;
         } else if (type === "sign-up" || type === "login") {
             return <AuthModal setClose={handleClose} type={type} />;
+        } else if (type === 'rename') {
+            return <RenameModal setClose={handleClose} />
         }
     };
 
