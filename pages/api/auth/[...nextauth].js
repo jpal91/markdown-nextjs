@@ -1,15 +1,9 @@
 import NextAuth from "next-auth";
 import GitHubProvider from "next-auth/providers/github";
 import GoogleProvider from "next-auth/providers/google";
-import { MongoClient } from "mongodb";
 import { MongoDBAdapter } from "@next-auth/mongodb-adapter";
 
 import clientPromise from "../../../helpers/mongodb";
-
-const uri = process.env.MONGO_URL;
-const client = new MongoClient(uri, { monitorCommands: true });
-const db = client.db("md");
-const col = db.collection("users");
 
 export default NextAuth({
     session: {

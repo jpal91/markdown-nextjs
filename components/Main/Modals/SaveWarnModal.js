@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import Image from "next/image";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
+import ButtonBase  from "@mui/material/ButtonBase";
 
 import { setModal } from "../../../actions";
 import proceedButton from '../../../public/images/proceed.svg'
