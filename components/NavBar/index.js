@@ -24,7 +24,7 @@ import Alerts from "../Main/Alerts/Alerts";
 import SubBarToggles from "./SubBar/SubBarToggles.js";
 
 const NavBar = (props) => {
-    const { isMenuOpen, toggleMenu, setLoading } = props;
+    const { isMenuOpen, toggleMenu, setLoading, loading } = props;
     const theme = useTheme();
     const matches = useMediaQuery(theme.breakpoints.up('sm'));
 
@@ -41,6 +41,7 @@ const NavBar = (props) => {
                     justifyContent: "center",
                     width: isMenuOpen ? "calc(100% - 240px)" : "100%",
                     ml: isMenuOpen ? "240px" : 0,
+                    contentVisibility: loading ? 'hidden' : 'visible'
                 }}
             >
                 <Grid
@@ -108,7 +109,7 @@ const NavBar = (props) => {
                                 borderColor: "background.icon",
                                 ml: 5,
                                 my: 1,
-                                display: { xs: 'none' }
+                                display: { xs: 'none', sm: 'initial' }
                             }}
                         />
                         <FileInfo />
@@ -127,6 +128,7 @@ const NavBar = (props) => {
 const mapStateToProps = (state) => {
     return {
         isMenuOpen: state.isMenuOpen,
+        loading: state.loading
     };
 };
 
