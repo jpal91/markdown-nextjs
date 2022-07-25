@@ -6,29 +6,29 @@ const db = client.db("md");
 const col = db.collection("users");
 
 const handler = async (req, res) => {
-  if (req.method !== "POST") {
-    res.status(400).send("Unknown");
-    return;
-  }
+    if (req.method !== "POST") {
+        res.status(400).send("Unknown");
+        return;
+    }
 
-  const { fileName, date, md, user } = req.body;
+    const { fileName, date, md, user } = req.body;
 
-  try {
-    await client.connect();
+    try {
+        await client.connect();
 
-    await col.updateOne(
-      { "user.username": user },
-      { $set: { [`docs.${fileName}`]: { date: date, md: md } } }
-    );
+        await col.updateOne(
+            { "user.username": user },
+            { $set: { [`docs.${fileName}`]: { date: date, md: md } } }
+        );
 
-    const result = await col.findOne({ "user.username": user });
+        const result = await col.findOne({ "user.username": user });
 
-    return res.status(200).send(result);
-  } catch (error) {
-    console.log(error.message);
-  } finally {
-    await client.close();
-  }
+        return res.status(200).send(result);
+    } catch (error) {
+        console.log(error.message);
+    } finally {
+        await client.close();
+    }
 };
 
 export default handler;

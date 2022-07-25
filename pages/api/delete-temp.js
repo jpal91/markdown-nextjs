@@ -10,12 +10,6 @@ const handler = async (req, res) => {
 
     const filePath = path.join(process.cwd(), "public", "temp");
 
-    // if (all) {
-    //     await fs.emptyDir(`${filePath}/`)
-    // } else if (!all) {
-    //     await fs.rm(`${filePath}/${fileName}.md`)
-    // }
-
     await fs.rm(`${filePath}/${fileName}.md`, { recursive: true, maxRetries: 2 });
 
     res.status(200).send("Deleted");

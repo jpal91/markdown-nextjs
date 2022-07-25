@@ -1,112 +1,92 @@
-import React, { useEffect, useState } from "react";
-import Head from 'next/head'
+import React, { useEffect } from "react";
+import Head from "next/head";
 import { connect } from "react-redux";
 import { useRouter } from "next/router";
-import Backdrop from "@mui/material/Backdrop";
-import CircularProgress from "@mui/material/CircularProgress";
 
 import MainApp from "../../components/Main/MainApp";
 import {
-  setFileName,
-  setData,
-  setButtonStatus,
-  getDBData,
-  setSaveState,
-  setLoading
-} from "../../actions";
-
-const LocalUserDoc = (props) => {
-  const {
     setFileName,
     setData,
     setButtonStatus,
-    pageId,
-    localData,
+    getDBData,
     setSaveState,
-    setLoading
-  } = props;
-  const router = useRouter();
-  // const [loading, setLoading] = useState(true);
+    setLoading,
+} from "../../actions";
 
-  useEffect(() => {
-    setButtonStatus({
-      save: "existing",
-      fileName: "rename",
-      delete: "existing"
-    });
+const LocalUserDoc = (props) => {
+    const {
+        setFileName,
+        setData,
+        setButtonStatus,
+        pageId,
+        localData,
+        setSaveState,
+        setLoading,
+    } = props;
+    const router = useRouter();
 
-    setSaveState("local");
-    setFileName(`${pageId}`);
+    useEffect(() => {
+        setButtonStatus({
+            save: "existing",
+            fileName: "rename",
+            delete: "existing",
+        });
 
-    return () => {
-      setLoading(false);
-    };
-  }, []);
+        setSaveState("local");
+        setFileName(`${pageId}`);
 
-  // useEffect(() => {
-  //     let route = router.query.id;
+        return () => {
+            setLoading(false);
+        };
+    }, []);
 
-  //     // setLoading(true)
+    useEffect(() => {
+        if (Object.keys(localData.docs).length === 0) {
+            return;
+        }
 
-  //     if (!dbData.user) {
-  //         async () => await getDBData()
-  //         return
-  //     } else if (dbData.user && !dbData.docs[`${route}`]) {
-  //         router.push("/");
-  //     } else {
-  //         setFileName(`${route}`);
-  //         setData(dbData.docs[`${route}`].md || "")
-  //         setLoading(false)
-  //     }
-  // }, [dbData, router])
+        if (!localData.docs[`${pageId}`]) {
+            router.push("/");
+            return;
+        }
 
-  useEffect(() => {
-    if (Object.keys(localData.docs).length === 0) {
-      return;
-    }
+        setData(localData.docs[`${pageId}`].md || "");
+        setLoading(false);
+        setFileName(`${pageId}`);
+    }, [localData, pageId]);
 
-    if (!localData.docs[`${pageId}`]) {
-      router.push("/");
-      return;
-    }
-
-    setData(localData.docs[`${pageId}`].md || "");
-    setLoading(false);
-    setFileName(`${pageId}`);
-  }, [localData, pageId]);
-
-  return (
-    <React.Fragment>
-      <Head>
-        <title>.MD - Local Files</title>
-      </Head>
-      <MainApp />
-    </React.Fragment>
-  );
+    return (
+        <React.Fragment>
+            <Head>
+                <title>.MD - Local Files</title>
+            </Head>
+            <MainApp />
+        </React.Fragment>
+    );
 };
 
 export const getServerSideProps = async (context) => {
-  const { id } = context.params;
+    const { id } = context.params;
 
-  return {
-    props: {
-      pageId: id
-    }
-  };
+    return {
+        props: {
+            pageId: id,
+        },
+    };
 };
 
 const mapStateToProps = (state) => {
-  return {
-    localData: state.localData,
-    authUser: state.authUser
-  };
+    return {
+        localData: state.localData,
+        authUser: state.authUser,
+    };
 };
 
 export default connect(mapStateToProps, {
-  setFileName,
-  setData,
-  setButtonStatus,
-  getDBData,
-  setSaveState,
-  setLoading
+    setFileName,
+    setData,
+    setButtonStatus,
+    getDBData,
+    setSaveState,
+    setLoading,
 })(LocalUserDoc);
