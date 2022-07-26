@@ -81,7 +81,6 @@ const SideNav = (props) => {
                 },
             }}
         >
-            {/* <Typography variant="sideNavHeading">{matches ? 'MY DOCUMENTS' : `${fileName}.md`}</Typography> */}
             <ButtonBase
                 onClick={() => setModal({ open: true, type: buttonStatus.fileName === 'new' ? 'new' : 'rename'})}
                 disabled={matches || isExamplePage}

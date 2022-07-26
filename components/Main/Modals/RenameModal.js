@@ -18,9 +18,7 @@ const RenameModal = (props) => {
     const {
         fileName,
         masterUpdateHandler,
-        type,
         saveState,
-        mdData,
         setFileName,
         unsavedChanges,
         setClose,

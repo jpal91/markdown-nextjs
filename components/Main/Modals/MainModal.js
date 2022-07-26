@@ -77,4 +77,3 @@ const mapStateToProps = (state) => {
 
 export default connect(mapStateToProps, { setModal })(MainModal);
 
-//<Grid container>{setClass()}</Grid>
