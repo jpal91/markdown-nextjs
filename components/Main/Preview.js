@@ -56,7 +56,7 @@ const Preview = (props) => {
         <Grid
             item
             xs={isPreviewMode ? 12 : 0}
-            sm={6}
+            sm={isPreviewMode ? 12 : 6}
             sx={{
                 width: "100%",
                 height: "100%",

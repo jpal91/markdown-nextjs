@@ -30,7 +30,8 @@ const SideNav = (props) => {
         fileName,
         mdData,
 		setAlert,
-        buttonStatus
+        buttonStatus,
+        isExamplePage
     } = props;
     const router = useRouter();
     const handleSwitch = () => setLightMode(!isLightMode);
@@ -83,8 +84,8 @@ const SideNav = (props) => {
             {/* <Typography variant="sideNavHeading">{matches ? 'MY DOCUMENTS' : `${fileName}.md`}</Typography> */}
             <ButtonBase
                 onClick={() => setModal({ open: true, type: buttonStatus.fileName === 'new' ? 'new' : 'rename'})}
-                disabled={matches}
-                sx={{ justifyContent: 'flex-start' }}
+                disabled={matches || isExamplePage}
+                sx={{ justifyContent: 'flex-start', pb: 5 }}
             >
                 <Typography variant="sideNavHeading">{matches ? 'MY DOCUMENTS' : `${fileName}.md`}</Typography>
             </ButtonBase>
@@ -102,7 +103,7 @@ const SideNav = (props) => {
                 <Image
                     src="/images/new-document.svg"
                     width="200"
-                    height="100"
+                    height="50"
                 />
             </ButtonBase>
             <Box
@@ -200,7 +201,8 @@ const mapStateToProps = (state) => {
         authUser: state.authUser,
         fileName: state.fileName,
         mdData: state.mdData,
-        buttonStatus: state.buttonStatus
+        buttonStatus: state.buttonStatus,
+        isExamplePage: state.isExamplePage
     };
 };
 
