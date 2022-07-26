@@ -57,16 +57,13 @@ const Preview = (props) => {
             item
             xs={isPreviewMode ? 12 : 0}
             sm={isPreviewMode ? 12 : 6}
+            variant='preview'
             sx={{
-                width: "100%",
-                height: "100%",
                 borderLeft: isPreviewMode ? "none" : "1px solid",
-                borderColor: "background.borders",
-                flex: "1 1 auto",
-                p: { xs: 2, sm: 5 },
-                typography: "body1",
                 justifyContent: {xs: 'flex-start', sm: isPreviewMode ? "center" : "flex-start"},
-                display: { xs: !isPreviewMode && 'none', sm: 'flex' }
+                display: { xs: !isPreviewMode && 'none', sm: 'flex' },
+                p: { xs: 2, sm: 5 },
+                borderColor: "background.borders",
             }}
         >
             <ScrollSyncPane>
@@ -87,16 +84,7 @@ const Preview = (props) => {
                 size="medium"
                 aria-label="top"
                 title="Scroll to the top"
-                sx={{
-                    position: "absolute",
-                    bottom: "15px",
-                    right: "10px",
-                    backgroundColor: "primary.dOrange",
-                    "&:hover": {
-                        backgroundColor: "primary.dOrange",
-                        opacity: "0.8",
-                    },
-                }}
+                variant='preview'
                 onClick={() => startId.scrollIntoView()}
             >
                 <KeyboardArrowUpRoundedIcon

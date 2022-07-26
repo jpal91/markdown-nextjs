@@ -34,11 +34,8 @@ const MainApp = (props) => {
         <React.Fragment>
             <ScrollSync enabled={isScrollSync}>
                 <Container
+                    variant='main'
                     sx={{
-                        maxWidth: "100% !important",
-                        height: "calc(100vh - 114px)",
-                        justifyContent: "space-evenly",
-                        p: "0px !important",
                         width: {lg: isMenuOpen ? "calc(100% - 240px)" : "100%", xs: '100%'},
                         ml: { lg: isMenuOpen ? "240px" : 0, xs: 0} ,
                     }}

@@ -39,17 +39,11 @@ const MainModal = (props) => {
     return (
         <Modal open={open} onClose={handleClose} closeAfterTransition>
             <Card
+                variant='modal'
                 sx={{
-                    position: "absolute",
                     width: { xs: 350, sm: 400 },
-                    minHeight: 250,
                     top: { xs: '25%', sm: "50%"},
-                    left: "50%",
-                    transform: "translate(-50%, -50%)",
-                    p: 5,
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "normal",
+                    p: 5
                 }}
             >
                 <IconButton

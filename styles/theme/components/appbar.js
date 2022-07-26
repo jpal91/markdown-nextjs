@@ -1,9 +1,19 @@
+import colors from "../base/colors";
+
+const { background } = colors
+
 const appbar = {
     styleOverrides: {
-      ...(open && {
-        width: 'calc(100% - 240px)'
-      })
-    }
-  };
-  
-  export default appbar;
+		root: {
+			backgroundColor: background.navLight,
+			position: "sticky",
+			maxWidth: "100%",
+			height: "72px",
+			display: 'flex',
+			alignItems: "center",
+			justifyContent: "center",
+		}
+	},
+};
+
+export default appbar;

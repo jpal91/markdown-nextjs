@@ -3,22 +3,13 @@ import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import { useTheme } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
-import IconButton from "@mui/material/IconButton";
-import RemoveRedEyeOutlinedIcon from "@mui/icons-material/RemoveRedEyeOutlined";
-import VisibilityOffOutlinedIcon from "@mui/icons-material/VisibilityOffOutlined";
-import LinkIcon from "@mui/icons-material/Link";
-import LinkOffIcon from "@mui/icons-material/LinkOff";
 
-import { togglePreview, toggleScrollSync } from "../../../actions";
 import SubBarToggles from "./SubBarToggles";
 
 const SubBar = (props) => {
     const {
         isMenuOpen,
         isPreviewMode,
-        togglePreview,
-        toggleScrollSync,
-        isScrollSync,
     } = props;
     const theme = useTheme();
     const matches = useMediaQuery(theme.breakpoints.up('sm'));
@@ -28,7 +19,7 @@ const SubBar = (props) => {
             container
             className="subBar"
             sx={{
-                width: { lg: isMenuOpen ? "calc(100% - 240px)" : "100%", xs: '100%'},//{ lg: isMenuOpen ? "calc(100% - 240px)" : "100%", xs: '100%'}
+                width: { lg: isMenuOpen ? "calc(100% - 240px)" : "100%", xs: '100%'},
                 backgroundColor: "background.subBar",
                 height: "42px",
                 ml: { lg: isMenuOpen ? "240px" : 0},
@@ -76,10 +67,9 @@ const mapStateToProps = (state) => {
     return {
         isPreviewMode: state.isPreviewMode,
         isMenuOpen: state.isMenuOpen,
-        isScrollSync: state.isScrollSync,
     };
 };
 
-export default connect(mapStateToProps, { togglePreview, toggleScrollSync })(
+export default connect(mapStateToProps)(
     SubBar
 );

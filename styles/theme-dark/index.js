@@ -7,10 +7,13 @@ import borders from "./base/borders";
 //import breakpoints from "./base/breakpoints";
 import grid from "./components/grid";
 import container from "./components/container";
-//import appbar from "./components/appbar";
+import appbar from "./components/appbar";
 //import button from "./components/button";
 import alert from "./components/alert";
 import listItemText from "./components/listitemtext";
+import fab from './components/fab'
+import card from './components/card'
+import drawer from "./components/drawer";
 
 export default createTheme({
   typography: { ...typography },
@@ -25,6 +28,10 @@ export default createTheme({
     MuiGrid: { ...grid },
     MuiContainer: { ...container },
     MuiAlert: { ...alert },
-    MuiListItemText: { ...listItemText }
+    MuiListItemText: { ...listItemText },
+    MuiFab: { ...fab },
+    MuiCard: { ...card },
+    MuiDrawer: { ...drawer },
+    MuiAppBar: { ...appbar }
   }
 });

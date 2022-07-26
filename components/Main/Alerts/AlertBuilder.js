@@ -55,16 +55,9 @@ const AlertBuilder = forwardRef((props, ref) => {
     return (
         <SnackbarContent ref={ref}>
             <Card
+                variant='alert'
                 sx={{
-                    minWidth: "200px",
-                    minHeight: "50px",
-                    display: "flex",
-                    alignItems: "center",
                     backgroundColor: colors[severity],
-                    justifyContent: "center",
-                    maxWidth: "350px",
-                    gap: "10px",
-                    flexDirection: "column",
                 }}
             >
                 <Collapse in={open} unmountOnExit>

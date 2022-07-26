@@ -32,13 +32,6 @@ const NavBar = (props) => {
         <React.Fragment>
             <AppBar
                 sx={{
-                    backgroundColor: "background.navLight",
-                    position: "sticky",
-                    maxWidth: "100%",
-                    height: "72px",
-                    display: 'flex',
-                    alignItems: "center",
-                    justifyContent: "center",
                     width: isMenuOpen ? "calc(100% - 240px)" : "100%",
                     ml: isMenuOpen ? "240px" : 0,
                     contentVisibility: loading ? 'hidden' : 'visible'

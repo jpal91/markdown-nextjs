@@ -22,7 +22,6 @@ const SaveDeleteContainer = (props) => {
             item
             xs={12}
             sm={6}
-            lg={6}
             sx={{
                 justifyContent: "flex-end",
                 alignItems: "center",

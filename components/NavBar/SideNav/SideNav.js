@@ -69,17 +69,6 @@ const SideNav = (props) => {
             variant="persistent"
             anchor="left"
             open={isMenuOpen}
-            sx={{
-                width: 240,
-                flexShrink: 0,
-                "& .MuiDrawer-paper": {
-                    width: 240,
-                    boxSizing: "border-box",
-                    backgroundColor: "background.navLight",
-                    p: 2,
-                    maxHeight: '100vh'
-                },
-            }}
         >
             <ButtonBase
                 onClick={() => setModal({ open: true, type: buttonStatus.fileName === 'new' ? 'new' : 'rename'})}
