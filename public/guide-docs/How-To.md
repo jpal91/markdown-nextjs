@@ -19,6 +19,7 @@
   - [Warning!](#warning)
  - [Re-name Your Document](#rename)
  - [Delete a document](#delete)
+ - [Mobile Differences](#mobile)
 - [Site Features](#site-features)
  - [Scroll Lock](#scroll-lock)
  - [Preview Mode](#preview-mode)
@@ -183,6 +184,17 @@ In the top right side of your screen you will see a trash can icon located next 
 
 Once clicked you will be prompted to confirm the action. *You cannot reverse the delete after you have selected the option*. **Please use caution**.
  
+
+#### *Mobile Differences* {#mobile}
+If you are accessing `.MARKDOWN` on mobile, there will be a few key differences to preserve screen space:
+
+![mobile-home](/images/mobile-home.png)
+
+On the home screen, the [Scroll Lock](#scroll-lock) and [Preview Mode](#preview-mode) buttons are moved to the top info bar and you'll only see either the Markdown editor or the Preview section, not both. 
+
+![mobile-sidenav](/images/mobile-sidenav.png)
+
+The [Re-name](#rename) function as well as the [Save](#save) and [Delete](#delete) functions have been moved to the Menu. `Re-name` is shown in a yellow square at the top of the screenshot. The `Save` and `Delete` functions are below in a blue square (trashcan icon for delete, floppy disk for save).
 
 ---
 
