@@ -105,4 +105,46 @@ describe("My First Test", () => {
         cy.url({ timeout: 20000 }).should("include", "/guides/Intro");
         cy.get('[aria-label="Rename your file"]').contains("Intro");
     });
+
+    it("Has functioning Markdown", () => {
+        cy.contains("h1", "Welcome to").and("have.descendants", "code");
+        cy.get("div.MuiBox-root").contains("h4", "What is Markdown?");
+        cy.get("ul>li").contains("a", "Basic Features");
+        cy.contains("b", "bold");
+        cy.contains("i", "italic");
+        cy.contains("mark", "Highlight your words");
+        cy.contains("strike", "Strike out your text");
+        cy.contains("code", "backtick").should(
+            "have.css",
+            "color",
+            "rgb(228, 102, 68)"
+        );
+        cy.get("ol>li");
+        cy.get("img");
+        cy.get("hr");
+        cy.get("a")
+            .contains("Table of Contents")
+            .should("have.attr", "href", "#table-of-contents")
+            .click();
+        cy.url().should("include", "#table-of-contents");
+        cy.get("code.code-block");
+        cy.get('svg[data-testid="CheckBoxOutlinedIcon"]');
+        cy.get('svg[data-testid="CheckBoxOutlineBlankOutlinedIcon"]');
+        cy.contains("a", "1")
+            .should("have.attr", "href", "#footnote-1")
+            .click();
+        cy.url().should("include", "#footnote-1");
+        cy.contains("sub", "2");
+        cy.contains("sup", "1000");
+    });
+
+    it("Has save/delete/rename disabled on existing", () => {
+        cy.get("#save-btn").should("be.disabled");
+        cy.get("#delete-btn").should("be.disabled");
+        cy.get('[aria-label="Rename your file"]').should("be.disabled");
+    });
+
+    it("Scroll to top functioning", () => {
+        cy.get("");
+    });
 });
