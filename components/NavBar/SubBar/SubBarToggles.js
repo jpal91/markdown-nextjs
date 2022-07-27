@@ -8,6 +8,7 @@ import IconButton from "@mui/material/IconButton";
 
 import { togglePreview, toggleScrollSync } from "../../../actions";
 
+//Sub-component of SubBar - holds the two toggle buttons for ScrollSync and Preview Mode
 const SubBarToggles = (props) => {
     const {
         isPreviewMode,

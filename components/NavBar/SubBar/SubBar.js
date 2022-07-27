@@ -6,6 +6,7 @@ import useMediaQuery from '@mui/material/useMediaQuery';
 
 import SubBarToggles from "./SubBarToggles";
 
+//Component holding the thin bar between the main app and the top navbar
 const SubBar = (props) => {
     const {
         isMenuOpen,
