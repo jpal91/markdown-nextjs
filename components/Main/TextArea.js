@@ -76,7 +76,10 @@ const TextArea = (props) => {
                 width: isPreviewMode ? "0%" : "100%",
                 height: "100%",
                 p: isPreviewMode ? 0 : { xs: 2, sm: 5 },
-                borderRight: isPreviewMode ? "none" : "1px solid",
+                borderRight: {
+                    xs: "none",
+                    sm: isPreviewMode ? "none" : "1px solid",
+                },
                 borderColor: "background.borders",
                 display: { xs: isPreviewMode && "none", sm: "flex" },
             }}

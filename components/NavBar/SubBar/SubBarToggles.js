@@ -41,9 +41,13 @@ const SubBarToggles = (props) => {
                 title={`Turn scroll sync ${isScrollSync ? "off" : "on"}`}
             >
                 {isScrollSync ? (
-                    <LinkIcon sx={{ color: "primary.text" }} />
+                    <LinkIcon
+                        sx={{ color: { xs: "white", sm: "primary.text" } }}
+                    />
                 ) : (
-                    <LinkOffIcon sx={{ color: "primary.text" }} />
+                    <LinkOffIcon
+                        sx={{ color: { xs: "white", sm: "primary.text" } }}
+                    />
                 )}
             </IconButton>
             <IconButton
@@ -52,9 +56,13 @@ const SubBarToggles = (props) => {
                 title={`Turn preview mode ${isPreviewMode ? "off" : "on"}`}
             >
                 {isPreviewMode ? (
-                    <VisibilityOffOutlinedIcon sx={{ color: "primary.text" }} />
+                    <VisibilityOffOutlinedIcon
+                        sx={{ color: { xs: "white", sm: "primary.text" } }}
+                    />
                 ) : (
-                    <RemoveRedEyeOutlinedIcon sx={{ color: "primary.text" }} />
+                    <RemoveRedEyeOutlinedIcon
+                        sx={{ color: { xs: "white", sm: "primary.text" } }}
+                    />
                 )}
             </IconButton>
         </Grid>
