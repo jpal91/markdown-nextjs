@@ -29,8 +29,8 @@ const MainModal = (props) => {
             return <NewDocModal setClose={handleClose} mdData={mdData} />;
         } else if (type === "sign-up" || type === "login") {
             return <AuthModal setClose={handleClose} type={type} />;
-        } else if (type === 'rename') {
-            return <RenameModal setClose={handleClose} />
+        } else if (type === "rename") {
+            return <RenameModal setClose={handleClose} />;
         }
     };
 
@@ -41,11 +41,11 @@ const MainModal = (props) => {
     return (
         <Modal open={open} onClose={handleClose} closeAfterTransition>
             <Card
-                variant='modal'
+                variant="modal"
                 sx={{
                     width: { xs: 350, sm: 400 },
-                    top: { xs: '25%', sm: "50%"},
-                    p: 5
+                    top: { xs: "25%", sm: "50%" },
+                    p: 5,
                 }}
             >
                 <IconButton
@@ -53,6 +53,7 @@ const MainModal = (props) => {
                     onClick={handleClose}
                     aria-label="Close dialogue"
                     title="Close dialogue"
+                    id="close-modal"
                 >
                     <CloseIcon />
                 </IconButton>
@@ -72,4 +73,3 @@ const mapStateToProps = (state) => {
 };
 
 export default connect(mapStateToProps, { setModal })(MainModal);
-

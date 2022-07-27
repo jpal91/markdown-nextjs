@@ -33,10 +33,12 @@ const NewDocModal = (props) => {
     } = props;
     const router = useRouter();
     const [fileName, setFileName] = useState("");
-    const [error, setError] = useState(false)
+    const [error, setError] = useState(false);
 
     const handleSave = async () => {
-        if (!fileName) { return setError(true) }
+        if (!fileName) {
+            return setError(true);
+        }
         const newDoc = {
             fileName: fileName,
             date: new Date().toLocaleDateString(),
@@ -48,12 +50,12 @@ const NewDocModal = (props) => {
                 setClose();
                 toggleMenu(false);
                 unsavedChanges(false);
-                setError(false)
+                setError(false);
                 router.push(`/${saveState}/${fileName}`);
             })
             .catch(() => {
                 setClose();
-                setError(false)
+                setError(false);
             });
     };
 
@@ -71,7 +73,7 @@ const NewDocModal = (props) => {
                     error={error}
                     onChange={(event) => setFileName(event.target.value)}
                     aria-label="Type new document name"
-                    helperText='Please input new name'
+                    helperText="Please input new name"
                 />
             </Grid>
             <Grid item xs={12}>
@@ -107,6 +109,7 @@ const NewDocModal = (props) => {
                 <ButtonBase
                     onClick={handleSave}
                     sx={{ "&:hover": { opacity: "0.9" } }}
+                    id="create-doc-btn"
                 >
                     <Image src={createButton} alt="Create new document" />
                 </ButtonBase>

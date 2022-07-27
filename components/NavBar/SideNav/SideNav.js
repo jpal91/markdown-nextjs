@@ -3,8 +3,8 @@ import Image from "next/image";
 import { connect } from "react-redux";
 import { signOut } from "next-auth/react";
 import { useRouter } from "next/router";
-import { useTheme } from '@mui/material/styles';
-import useMediaQuery from '@mui/material/useMediaQuery';
+import { useTheme } from "@mui/material/styles";
+import useMediaQuery from "@mui/material/useMediaQuery";
 import Drawer from "@mui/material/Drawer";
 import Typography from "@mui/material/Typography";
 import ButtonBase from "@mui/material/ButtonBase";
@@ -16,7 +16,13 @@ import Brightness5OutlinedIcon from "@mui/icons-material/Brightness5Outlined";
 
 import FileList from "./FileList";
 import SaveDeleteContainer from "../SaveDeleteContainer";
-import { setModal, setLightMode, setAuthUser, logOut, setAlert } from "../../../actions";
+import {
+    setModal,
+    setLightMode,
+    setAuthUser,
+    logOut,
+    setAlert,
+} from "../../../actions";
 
 //Sub-component of NavBar/index
 //Main component holding the side pop up menu
@@ -31,14 +37,14 @@ const SideNav = (props) => {
         logOut,
         fileName,
         mdData,
-		setAlert,
+        setAlert,
         buttonStatus,
-        isExamplePage
+        isExamplePage,
     } = props;
     const router = useRouter();
     const handleSwitch = () => setLightMode(!isLightMode);
     const theme = useTheme();
-    const matches = useMediaQuery(theme.breakpoints.up('sm'));
+    const matches = useMediaQuery(theme.breakpoints.up("sm"));
 
     const handleLogout = async () => {
         await signOut({ redirect: false }).then(() => {
@@ -48,53 +54,59 @@ const SideNav = (props) => {
     };
 
     const handleDownload = async () => {
-		try {
-			await axios.post("/api/write-file", {
-				name: fileName,
-				content: mdData,
-			});
+        try {
+            await axios.post("/api/write-file", {
+                name: fileName,
+                content: mdData,
+            });
 
-			const a = document.createElement('a')
-			a.href = `/temp/${fileName}.md`
-			a.setAttribute('download', `${fileName}.md`)
-			a.click()
-			a.remove()
+            const a = document.createElement("a");
+            a.href = `/temp/${fileName}.md`;
+            a.setAttribute("download", `${fileName}.md`);
+            a.click();
+            a.remove();
 
-			await axios.post("/api/delete-temp", { fileName: fileName })
-		} catch (error) {
-			setAlert({ open: true, message: 'Download failed! Please try again', severity: 'error' })
-		}
+            await axios.post("/api/delete-temp", { fileName: fileName });
+        } catch (error) {
+            setAlert({
+                open: true,
+                message: "Download failed! Please try again",
+                severity: "error",
+            });
+        }
     };
 
     return (
-        <Drawer
-            variant="persistent"
-            anchor="left"
-            open={isMenuOpen}
-        >
+        <Drawer variant="persistent" anchor="left" open={isMenuOpen}>
             <ButtonBase
-                onClick={() => setModal({ open: true, type: buttonStatus.fileName === 'new' ? 'new' : 'rename'})}
+                onClick={() =>
+                    setModal({
+                        open: true,
+                        type:
+                            buttonStatus.fileName === "new" ? "new" : "rename",
+                    })
+                }
                 disabled={matches || isExamplePage}
-                sx={{ justifyContent: 'flex-start', pb: 5 }}
+                sx={{ justifyContent: "flex-start", pb: 5 }}
+                id="mobile-new-doc-btn"
             >
-                <Typography variant="sideNavHeading">{matches ? 'MY DOCUMENTS' : `${fileName}.md`}</Typography>
+                <Typography variant="sideNavHeading">
+                    {matches ? "MY DOCUMENTS" : `${fileName}.md`}
+                </Typography>
             </ButtonBase>
             <ButtonBase
                 onClick={() =>
                     setModal({
                         open: true,
                         type: unsaved ? "save-warn" : "new",
-                        redirect: 'new'
+                        redirect: "new",
                     })
                 }
                 aria-label="Create new document"
                 title="Create new document"
+                id="new-doc-btn"
             >
-                <Image
-                    src="/images/new-document.svg"
-                    width="200"
-                    height="50"
-                />
+                <Image src="/images/new-document.svg" width="200" height="50" />
             </ButtonBase>
             <Box
                 sx={{
@@ -106,7 +118,7 @@ const SideNav = (props) => {
             >
                 <FileList listName="My Files" />
                 <FileList listName="Examples" />
-                <FileList listName='Guides' />
+                <FileList listName="Guides" />
             </Box>
             <Box
                 sx={{
@@ -119,7 +131,7 @@ const SideNav = (props) => {
                     mb: 2,
                 }}
             >
-                <SaveDeleteContainer display={matches ? 'none' : 'flex'} />
+                <SaveDeleteContainer display={matches ? "none" : "flex"} />
                 <Box
                     sx={{
                         display: "flex",
@@ -129,26 +141,41 @@ const SideNav = (props) => {
                 >
                     <Button
                         variant="contained"
-                        sx={{ backgroundColor: "primary.dOrange", visibility: router.pathname === '/' ? 'hidden' : 'visible' }}
+                        sx={{
+                            backgroundColor: "primary.dOrange",
+                            visibility:
+                                router.pathname === "/" ? "hidden" : "visible",
+                        }}
                         onClick={handleDownload}
-						aria-label="Download"
+                        aria-label="Download"
                         title="Download file"
                     >
                         Download
                     </Button>
                     <Button
                         variant="contained"
-                        sx={{ backgroundColor: "primary.dOrange", display: authUser && "none" }}
-                        onClick={() => setModal({ open: true, type: unsaved ? 'save-warn' : 'login', redirect: 'login' })}
+                        sx={{
+                            backgroundColor: "primary.dOrange",
+                            display: authUser && "none",
+                        }}
+                        onClick={() =>
+                            setModal({
+                                open: true,
+                                type: unsaved ? "save-warn" : "login",
+                                redirect: "login",
+                            })
+                        }
                         aria-label="Login"
                         title="Login"
-                        
                     >
                         Login
                     </Button>
                     <Button
                         variant="contained"
-                        sx={{ backgroundColor: "primary.dOrange", display: !authUser && "none" }}
+                        sx={{
+                            backgroundColor: "primary.dOrange",
+                            display: !authUser && "none",
+                        }}
                         onClick={handleLogout}
                         aria-label="Logout"
                         title="Logout"
@@ -192,7 +219,7 @@ const mapStateToProps = (state) => {
         fileName: state.fileName,
         mdData: state.mdData,
         buttonStatus: state.buttonStatus,
-        isExamplePage: state.isExamplePage
+        isExamplePage: state.isExamplePage,
     };
 };
 
@@ -201,5 +228,5 @@ export default connect(mapStateToProps, {
     setLightMode,
     setAuthUser,
     logOut,
-	setAlert
+    setAlert,
 })(SideNav);

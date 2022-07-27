@@ -24,6 +24,7 @@ const Delete = (props) => {
                 onClick={deleteOptions}
                 aria-label="Delete file"
                 title="Delete file"
+                id='delete-btn'
             >
                 <DeleteOutlineOutlinedIcon
                     sx={{ color: "primary.vlgray", mr: { xs: 0, sm: 2 }, fontSize: { xs: '40px', sm: '1.5rem' } }}

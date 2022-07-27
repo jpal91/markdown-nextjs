@@ -71,6 +71,7 @@ const NavBar = (props) => {
                                     isMenuOpen ? "Close" : "Open"
                                 } menu`}
                                 title={`${isMenuOpen ? "Close" : "Open"} menu`}
+                                id='toggle-menu'
                             >
                                 {isMenuOpen ? (
                                     <CloseIcon sx={{ fontSize: "35px" }} />

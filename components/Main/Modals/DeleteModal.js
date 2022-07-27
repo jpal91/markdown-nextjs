@@ -52,6 +52,7 @@ const DeleteModal = (props) => {
                 <ButtonBase
                     sx={{ "&:hover": { opacity: "0.9" } }}
                     onClick={handleDelete}
+                    id="confirm-delete"
                 >
                     <Image src={deleteImage} />
                 </ButtonBase>
