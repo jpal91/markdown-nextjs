@@ -11,6 +11,7 @@ import ExpandMore from "@mui/icons-material/ExpandMore";
 
 import { toggleMenu, setLoading } from "../../../actions";
 
+//Sub-component of SideNav - holds the separate file list dropdowns
 const FileList = (props) => {
     const { listName, dbData, toggleMenu, localData, setLoading, fileName } = props;
     const router = useRouter();
@@ -19,6 +20,7 @@ const FileList = (props) => {
     const [guideDirectoryData, setGuideDirectory] = useState();
     const handleOpen = () => setOpen(!open);
 
+    //Pulls data from the two interal directories to get the "Example" and "Guides" files
     const directory = async () =>
         await axios.get("/api/examples").then((res) => setDirectory(res.data));
     const guideDirectory = async () =>
@@ -34,6 +36,7 @@ const FileList = (props) => {
         guideDirectory();
     }, []);
 
+    //Creates a list based on the props passed from SideNav for listName
     const buildList = () => {
         if (listName === "My Files") {
             const dbDataKeys = Object.keys(dbData.docs);
@@ -92,6 +95,7 @@ const FileList = (props) => {
                     );
                 });
             return [dbList, localList];
+
         } else if (listName === "Examples") {
             if (!directoryData) {
                 return;
@@ -117,6 +121,7 @@ const FileList = (props) => {
                     </ListItemButton>
                 );
             });
+            
         } else if (listName === "Guides") {
             if (!guideDirectoryData) {
                 return;

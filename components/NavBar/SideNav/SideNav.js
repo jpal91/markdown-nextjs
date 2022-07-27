@@ -18,6 +18,8 @@ import FileList from "./FileList";
 import SaveDeleteContainer from "../SaveDeleteContainer";
 import { setModal, setLightMode, setAuthUser, logOut, setAlert } from "../../../actions";
 
+//Sub-component of NavBar/index
+//Main component holding the side pop up menu
 const SideNav = (props) => {
     const {
         isMenuOpen,
