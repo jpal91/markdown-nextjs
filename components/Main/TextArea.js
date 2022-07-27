@@ -6,6 +6,7 @@ import TextField from "@mui/material/TextField";
 
 import { setData, unsavedChanges } from "../../actions";
 
+//Sub-component of MainApp - holds the editor area where the user types
 const TextArea = (props) => {
     const { isPreviewMode, mdData, setData, unsaved, unsavedChanges, isExamplePage } = props;
     const checkWindow = typeof window !== undefined
@@ -31,6 +32,8 @@ const TextArea = (props) => {
         });
     }, []);
 
+    //Tracks unsaved changes so alert can pop up if the user decides to exit 
+    //the screen before saving (for example)
     useEffect(() => {
         if (mdData.length === 0 || unsaved || isExamplePage) {
             return

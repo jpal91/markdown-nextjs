@@ -10,7 +10,12 @@ import Fab from "@mui/material/Fab";
 import { searchText } from "../../helpers/search-text.js";
 import { transform } from "../../helpers/funcs";
 
+//Sub-component of MainApp, holds rendered Markdown
+
 const Preview = (props) => {
+    //mdData - actual typed string from the user
+    //formattedData - mdData ran through the searchText() function, converting it to Markdown
+    //formattedText - formattedData ran through ReactHtmlParser to render viewable
     const { mdData, isPreviewMode } = props;
     const [formattedData, setFormattedData] = useState("");
     const [formattedText, setFormattedText] = useState();
@@ -27,10 +32,14 @@ const Preview = (props) => {
         }
     }, []);
 
+    //Sets a small debounce in sending the typed data to state before it's
+    //converted to Markdown
     useEffect(() => {
         const textId = document.querySelector("textarea");
         const endId = document.getElementById("enddoc");
 
+        //Auto-scrolling feature if the user is typing near
+        //the bottom of the screen
         if (textId.selectionEnd >= textId.textLength - 50) {
             setTimeout(() => {
                 endId.scrollIntoView();

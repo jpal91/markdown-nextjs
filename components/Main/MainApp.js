@@ -10,6 +10,9 @@ import TextArea from "./TextArea";
 import Preview from "./Preview";
 import MainModal from "./Modals/MainModal";
 
+//Main component holding the application
+//Includes Editor(TextArea) and Preview sub-components
+
 const MainApp = (props) => {
     const { isMenuOpen, setData, isScrollSync, loading } = props;
 
