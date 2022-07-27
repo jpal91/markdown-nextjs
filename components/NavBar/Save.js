@@ -17,7 +17,7 @@ const Save = (props) => {
         setModal,
         masterUpdateHandler,
         saveState,
-        isMenuOpen
+        isMenuOpen,
     } = props;
     const router = useRouter();
 
@@ -46,8 +46,15 @@ const Save = (props) => {
                 onClick={handleSave}
                 aria-label="Save changes"
                 title="Save changes"
-                id='save-btn'
-                sx={{ display: { xs: "none", sm: isMenuOpen ? 'none' :'inline-flex', lg: 'inline-flex' } }}
+                id="save-btn"
+                sx={{
+                    display: {
+                        xs: "none",
+                        sm: isMenuOpen ? "none" : "inline-flex",
+                        lg: "inline-flex",
+                    },
+                }}
+                disabled={buttonStatus.save === "disabled" && true}
             >
                 <Image src="/images/save-button.svg" width="150" height="70" />
             </ButtonBase>
@@ -55,10 +62,13 @@ const Save = (props) => {
                 onClick={handleSave}
                 aria-label="Save changes"
                 title="Save changes"
-                id='save-btn-icon'
-                sx={{ display: { sm: 'none' }}}
+                id="save-btn-icon"
+                sx={{ display: { sm: "none" } }}
+                disabled={buttonStatus.save === "disabled" && true}
             >
-                <SaveIcon sx={{ color: 'primary.vlgray', fontSize: { xs: '40px' } }} />
+                <SaveIcon
+                    sx={{ color: "primary.vlgray", fontSize: { xs: "40px" } }}
+                />
             </IconButton>
         </React.Fragment>
     );
@@ -71,7 +81,7 @@ const mapStateToProps = (state) => {
         localData: state.localData,
         buttonStatus: state.buttonStatus,
         saveState: state.saveState,
-        isMenuOpen: state.isMenuOpen
+        isMenuOpen: state.isMenuOpen,
     };
 };
 

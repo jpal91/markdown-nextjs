@@ -24,10 +24,15 @@ const Delete = (props) => {
                 onClick={deleteOptions}
                 aria-label="Delete file"
                 title="Delete file"
-                id='delete-btn'
+                id="delete-btn"
+                disabled={buttonStatus.save === "disabled" && true}
             >
                 <DeleteOutlineOutlinedIcon
-                    sx={{ color: "primary.vlgray", mr: { xs: 0, sm: 2 }, fontSize: { xs: '40px', sm: '1.5rem' } }}
+                    sx={{
+                        color: "primary.vlgray",
+                        mr: { xs: 0, sm: 2 },
+                        fontSize: { xs: "40px", sm: "1.5rem" },
+                    }}
                 />
             </IconButton>
         </React.Fragment>
