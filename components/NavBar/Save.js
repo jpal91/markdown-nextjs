@@ -46,6 +46,7 @@ const Save = (props) => {
                 onClick={handleSave}
                 aria-label="Save changes"
                 title="Save changes"
+                id='save-btn'
                 sx={{ display: { xs: "none", sm: isMenuOpen ? 'none' :'inline-flex', lg: 'inline-flex' } }}
             >
                 <Image src="/images/save-button.svg" width="150" height="70" />
@@ -54,6 +55,7 @@ const Save = (props) => {
                 onClick={handleSave}
                 aria-label="Save changes"
                 title="Save changes"
+                id='save-btn-icon'
                 sx={{ display: { sm: 'none' }}}
             >
                 <SaveIcon sx={{ color: 'primary.vlgray', fontSize: { xs: '40px' } }} />
