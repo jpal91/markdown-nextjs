@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { ScrollSyncPane } from "react-scroll-sync";
 import Grid from "@mui/material/Grid";
@@ -8,12 +8,19 @@ import { setData, unsavedChanges } from "../../actions";
 
 //Sub-component of MainApp - holds the editor area where the user types
 const TextArea = (props) => {
-    const { isPreviewMode, mdData, setData, unsaved, unsavedChanges, isExamplePage } = props;
-    const checkWindow = typeof window !== undefined
+    const {
+        isPreviewMode,
+        mdData,
+        setData,
+        unsaved,
+        unsavedChanges,
+        isExamplePage,
+    } = props;
+    const checkWindow = typeof window !== undefined;
 
     useEffect(() => {
         if (!checkWindow) {
-            return
+            return;
         }
 
         const textId = document.querySelector("textarea");
@@ -32,33 +39,33 @@ const TextArea = (props) => {
         });
     }, []);
 
-    //Tracks unsaved changes so alert can pop up if the user decides to exit 
+    //Tracks unsaved changes so alert can pop up if the user decides to exit
     //the screen before saving (for example)
     useEffect(() => {
         if (mdData.length === 0 || unsaved || isExamplePage) {
-            return
+            return;
         }
 
-        unsavedChanges(true)
+        unsavedChanges(true);
 
         return () => {
-            unsavedChanges(false)
-        }
-    }, [mdData])
+            unsavedChanges(false);
+        };
+    }, [mdData]);
 
     useEffect(() => {
         if (!checkWindow) {
-            return
+            return;
         }
 
         const warnUnsaved = () => {
             if (unsaved) {
-                return "You have unsaved changes on this page!"
+                return "You have unsaved changes on this page!";
             }
-        }
+        };
 
-        window.onbeforeunload = warnUnsaved
-    }, [unsaved])
+        window.onbeforeunload = warnUnsaved;
+    }, [unsaved]);
 
     return (
         <Grid
@@ -71,7 +78,7 @@ const TextArea = (props) => {
                 p: isPreviewMode ? 0 : { xs: 2, sm: 5 },
                 borderRight: isPreviewMode ? "none" : "1px solid",
                 borderColor: "background.borders",
-                display: { xs: isPreviewMode && 'none', sm: 'flex' }
+                display: { xs: isPreviewMode && "none", sm: "flex" },
             }}
         >
             <ScrollSyncPane>
@@ -80,6 +87,7 @@ const TextArea = (props) => {
                     variant="standard"
                     value={mdData}
                     onChange={(event) => setData(event.target.value)}
+                    id="editor"
                     sx={{
                         width: "100%",
                         overflow: "auto",
@@ -106,7 +114,7 @@ const mapStateToProps = (state) => {
         isPreviewMode: state.isPreviewMode,
         mdData: state.mdData,
         unsaved: state.unsaved,
-        isExamplePage: state.isExamplePage
+        isExamplePage: state.isExamplePage,
     };
 };
 
