@@ -8,10 +8,16 @@ import theme from "../../styles/theme";
 import themeDark from "../../styles/theme-dark";
 import { getLocalData, setLightMode, setAlert } from "../../actions";
 
+//Holds several provider components for theme, auth session, and alerts.
+//Components were wrapped and put into this sub-component in _app so they
+//would have access to redux state
 const ProviderContainer = (props) => {
     const { isLightMode, getLocalData, session, setLightMode, setAlert } =
         props;
 
+    //Handles a few initial calls on mount.
+    //Checks if new user and sends alert with new user info.
+    //Checks if user prefers lightmode and updates state is preference exists
     useEffect(() => {
         getLocalData();
 
