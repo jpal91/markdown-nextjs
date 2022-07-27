@@ -12,6 +12,7 @@ import DoneOutlineOutlinedIcon from "@mui/icons-material/DoneOutlineOutlined";
 import SentimentSatisfiedAltIcon from "@mui/icons-material/SentimentSatisfiedAlt";
 import ExpandMore from "@mui/icons-material/ExpandMore";
 
+//Sub-Component of Alerts - holds code for actual alert viewed
 const AlertBuilder = forwardRef((props, ref) => {
     const { severity, message, setLoading } = props;
     const [open, setOpen] = useState(false);
@@ -31,6 +32,7 @@ const AlertBuilder = forwardRef((props, ref) => {
         new: <SentimentSatisfiedAltIcon sx={{ color: "white" }} />,
     };
 
+    //Two instances of alerts where there's a carrot expand option to view an extra explanation of the error or intro to new user
     const extraText = {
         limit: "You are allowed a maximum of 10 files saved on the database. Please delete another file or save locally.",
         new: (
