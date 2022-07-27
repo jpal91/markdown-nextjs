@@ -1,6 +1,8 @@
 import { promises as fs } from 'fs'
 import path from 'path'
 
+//Handles reading file directory for Examples
+//See components/SideNav/FileList/directory()
 const handler = async (req, res) => {
     if (req.method !== 'GET') {
         return res.status(400).send('Unknown')

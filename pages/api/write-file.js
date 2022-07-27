@@ -1,6 +1,8 @@
 import { promises as fs } from 'fs'
 import path from 'path'
 
+//Handles the writing of a document so it can be downloaded 
+//See components/NavBar/SideNav/SideNav/handleDownload()
 const handler = async (req, res) => {
     if (req.method !== 'POST') {
         return res.status(400).send('Unknown')

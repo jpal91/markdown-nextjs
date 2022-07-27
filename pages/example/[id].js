@@ -15,6 +15,7 @@ import {
     setLoading
 } from "../../actions";
 
+//Page for examples
 const Example = (props) => {
     const router = useRouter()
     const { setData, post, setFileName, id, setButtonStatus, examplePage, setLoading } =

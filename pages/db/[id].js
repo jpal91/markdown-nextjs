@@ -13,6 +13,7 @@ import {
     setLoading,
 } from "../../actions";
 
+//Page for user-owned documents that were saved in the db
 const LocalUserDoc = (props) => {
     const {
         setFileName,

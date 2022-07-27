@@ -5,6 +5,8 @@ const client = new MongoClient(uri, { monitorCommands: true });
 const db = client.db("md");
 const col = db.collection("users");
 
+//Handles deleting from db
+//See actions/db
 const handler = async (req, res) => {
     if (req.method !== "POST") {
         res.status(400).send("Unknown");

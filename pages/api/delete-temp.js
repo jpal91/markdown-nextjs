@@ -1,6 +1,8 @@
 import fs from "fs-extra";
 import path from "path";
 
+//Handles deleting the temporary document after it's created (./write-file) and downloaded
+//See components/NavBar/SideNav/SideNav/handleDownload()
 const handler = async (req, res) => {
     if (req.method !== "POST") {
         res.status(400).send("Unknown");

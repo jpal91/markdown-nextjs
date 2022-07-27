@@ -15,7 +15,7 @@ import {
     setLoading, unsavedChanges
 } from "../../actions";
 
-
+//Page for Guides
 const Guides = (props) => {
     const router = useRouter()
     const { setData, post, setFileName, id, setButtonStatus, examplePage, setLoading, unsavedChanges } =
@@ -53,6 +53,7 @@ const Guides = (props) => {
         </React.Fragment>
     );
 };
+
 
 export const getStaticProps = async (context) => {
     const { params } = context;

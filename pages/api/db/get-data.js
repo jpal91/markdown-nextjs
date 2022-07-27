@@ -12,6 +12,8 @@ const newUserObj = {
     docs: {},
 };
 
+//Handles getting all user data from db after user login
+//or creating a new user object in db if none exists
 const handler = async (req, res) => {
     if (req.method !== "POST") {
         res.status(400).send("Unknown");
