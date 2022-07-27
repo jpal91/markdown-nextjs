@@ -39,6 +39,8 @@ const SubBarToggles = (props) => {
                 }}
                 aria-label={`Turn scroll sync ${isScrollSync ? "off" : "on"}`}
                 title={`Turn scroll sync ${isScrollSync ? "off" : "on"}`}
+                id={display === "none" ? null : "toggle-ss-btn"}
+                disabled={display === "none" && true}
             >
                 {isScrollSync ? (
                     <LinkIcon
@@ -54,6 +56,8 @@ const SubBarToggles = (props) => {
                 onClick={() => togglePreview(!isPreviewMode)}
                 aria-label={`Turn preview mode ${isPreviewMode ? "off" : "on"}`}
                 title={`Turn preview mode ${isPreviewMode ? "off" : "on"}`}
+                id={display === "none" ? null : "toggle-prev-btn"}
+                disabled={display === "none" && true}
             >
                 {isPreviewMode ? (
                     <VisibilityOffOutlinedIcon

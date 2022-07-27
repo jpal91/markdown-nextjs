@@ -80,7 +80,10 @@ const TextArea = (props) => {
                     xs: "none",
                     sm: isPreviewMode ? "none" : "1px solid",
                 },
-                borderColor: "background.borders",
+                borderRightColor: {
+                    xs: "background.borders",
+                    sm: "background.borders",
+                },
                 display: { xs: isPreviewMode && "none", sm: "flex" },
             }}
         >
