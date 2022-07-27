@@ -15,6 +15,7 @@ import {
     masterUpdateHandler,
 } from "../../actions";
 
+//Sub-component of NavBar/index - holds the Document Name section with renaming functionality
 const FileInfo = (props) => {
     const {
         fileName,
@@ -44,6 +45,8 @@ const FileInfo = (props) => {
         };
     }, []);
 
+    //The document name (in the navbar) in it's normal state is a button, once pressed it turns into an input.
+    //A ref tracks the input value and on click away, the value is submitted as the new file name
     useEffect(() => {
         if (!isInput) {
             return;
@@ -57,12 +60,18 @@ const FileInfo = (props) => {
         const editInput = async (e) => {
             if (e.type === "focusout") {
                 e.preventDefault();
+                
+                //If the user input nothing, no action is taken
                 if (ele.value.length === 0) {
                     setIsInput(false);
                     setDisableButton(false);
                     return;
                 }
 
+                //Handles two instances - if the user is on the home screen, the renaming
+                //function acts as if the user is creating a new document instead of renaming.
+                //If the user is in a file they own, it will initite the function to rename an existing file.
+                //buttonStatus is assigned based on the page, which changes how it reacts.
                 if (buttonStatus.fileName === "new") {
                     setLoading(true);
                     await masterUpdateHandler(saveState, "create", {

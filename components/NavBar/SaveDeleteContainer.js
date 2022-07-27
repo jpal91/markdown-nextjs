@@ -5,10 +5,13 @@ import Save from "./Save";
 import Delete from "./Delete";
 import { connect } from "react-redux";
 
+//Sub component of NavBar/index - holds both the Save and Delete components
 const SaveDeleteContainer = (props) => {
     const { isExamplePage, isMenuOpen, display } = props;
     const [visibility, setVisibility] = useState(true);
 
+    //To prevent saving/deleting of non-user owned docs, this section is hidden
+    //when visiting one of these pages
     useEffect(() => {
         if (isExamplePage) {
             setVisibility(false);

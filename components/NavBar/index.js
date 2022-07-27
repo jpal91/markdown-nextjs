@@ -23,6 +23,7 @@ import FileInfo from "./FileInfo.js";
 import Alerts from "../Main/Alerts/Alerts";
 import SubBarToggles from "./SubBar/SubBarToggles.js";
 
+//Main component holding the top screen navigation
 const NavBar = (props) => {
     const { isMenuOpen, toggleMenu, setLoading, loading } = props;
     const theme = useTheme();

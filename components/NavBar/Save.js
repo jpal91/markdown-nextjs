@@ -8,6 +8,7 @@ import SaveIcon from "@mui/icons-material/Save";
 
 import { setModal, masterUpdateHandler } from "../../actions";
 
+//Sub-component of SaveDeleteContainer - holds save button and it's functionality
 const Save = (props) => {
     const {
         fileName,
@@ -21,6 +22,8 @@ const Save = (props) => {
     const router = useRouter();
 
     const handleSave = async () => {
+        //In the event that the user is on the home screen, the Save button acts the
+        //same as the New Document button in the side nav
         if (buttonStatus.save === "new") {
             setModal({ open: true, type: "save-new" });
             return;

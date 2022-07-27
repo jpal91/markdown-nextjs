@@ -5,6 +5,7 @@ import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined
 
 import { setModal, setAlert } from "../../actions";
 
+//Sub component of SaveDeleteContainer - holds delete button and it's functionality
 const Delete = (props) => {
     const { setModal, buttonStatus, setAlert } = props;
     const deleteOptions =
