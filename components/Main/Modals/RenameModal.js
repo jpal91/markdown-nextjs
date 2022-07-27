@@ -14,6 +14,7 @@ import {
     toggleMenu
 } from "../../../actions";
 
+//Sub-component of MainModal - gives ability to update file to new name
 const RenameModal = (props) => {
     const {
         fileName,

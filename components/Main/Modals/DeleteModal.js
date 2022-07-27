@@ -9,6 +9,7 @@ import ButtonBase from "@mui/material/ButtonBase";
 import { deleteFromDB, masterUpdateHandler } from "../../../actions";
 import deleteImage from "../../../public/images/delete.svg";
 
+//Sub-component of MainModal - shows delete warning screen
 const DeleteModal = (props) => {
     const { setClose, fileName, masterUpdateHandler, saveState } = props;
     const router = useRouter();

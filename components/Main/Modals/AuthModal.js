@@ -9,6 +9,7 @@ import { GoogleLoginButton, GithubLoginButton } from 'react-social-login-buttons
 
 import { setAlert } from "../../../actions";
 
+//Sub-component of MainModal - shows login options
 const AuthModal = (props) => {
     const { setClose } = props
 

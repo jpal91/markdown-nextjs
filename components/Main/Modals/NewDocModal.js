@@ -19,6 +19,7 @@ import {
 } from "../../../actions";
 import createButton from "../../../public/images/create-new.svg";
 
+//Sub-component of MainModal - shows modal to give new document a name
 const NewDocModal = (props) => {
     const {
         setClose,

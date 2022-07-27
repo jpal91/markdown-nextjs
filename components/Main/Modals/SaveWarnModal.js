@@ -8,6 +8,11 @@ import ButtonBase  from "@mui/material/ButtonBase";
 import { setModal } from "../../../actions";
 import proceedButton from '../../../public/images/proceed.svg'
 
+//Sub-component of MainModal - warns user in the event that their action
+//will cause changes to go unsaved. Mainly fires if the user clicks
+//the New Document button when there are unsaved changes and redirects.
+//Also fires if the user attempts to login with unsaved changes as it will
+//cause a page reload
 const SaveWarnModal = (props) => {
     const { setModal, redirect } = props
 

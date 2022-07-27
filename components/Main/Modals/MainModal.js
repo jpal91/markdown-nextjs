@@ -12,6 +12,8 @@ import SaveWarnModal from "./SaveWarnModal";
 import AuthModal from "./AuthModal";
 import RenameModal from "./RenameModal";
 
+//Main component holding the modal
+//Adds sub-components based on the Modal type called
 const MainModal = (props) => {
     const { setModal, mdData } = props;
     const { open, type, redirect } = props.modalStatus;
