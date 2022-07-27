@@ -27,9 +27,12 @@ const RenameModal = (props) => {
         toggleMenu
     } = props;
     const [newFileName, setNewFileName] = useState(fileName);
+    const [error, setError] = useState(false)
     const router = useRouter();
 
     const handleSubmit = async () => {
+        if (!newFileName) { return setError(true) }
+        setError(false)
         setClose()
         setLoading(true)
 
@@ -63,8 +66,10 @@ const RenameModal = (props) => {
                 <TextField
                     fullWidth
                     value={newFileName}
+                    error={error}
                     onChange={(event) => setNewFileName(event.target.value)}
                     aria-label="Type new document name"
+                    helperText='Type new doument name'
                 />
             </Grid>
             <Grid item xs={12}>

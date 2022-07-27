@@ -33,8 +33,10 @@ const NewDocModal = (props) => {
     } = props;
     const router = useRouter();
     const [fileName, setFileName] = useState("");
+    const [error, setError] = useState(false)
 
     const handleSave = async () => {
+        if (!fileName) { return setError(true) }
         const newDoc = {
             fileName: fileName,
             date: new Date().toLocaleDateString(),
@@ -46,10 +48,12 @@ const NewDocModal = (props) => {
                 setClose();
                 toggleMenu(false);
                 unsavedChanges(false);
+                setError(false)
                 router.push(`/${saveState}/${fileName}`);
             })
             .catch(() => {
                 setClose();
+                setError(false)
             });
     };
 
@@ -64,8 +68,10 @@ const NewDocModal = (props) => {
                 <TextField
                     fullWidth
                     value={fileName}
+                    error={error}
                     onChange={(event) => setFileName(event.target.value)}
                     aria-label="Type new document name"
+                    helperText='Please input new name'
                 />
             </Grid>
             <Grid item xs={12}>
