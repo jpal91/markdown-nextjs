@@ -3,7 +3,16 @@ import emojis from "./emojis";
 import { listBuilder } from "./funcs";
 import DOMPurify from "dompurify";
 
+/**
+ * 
+ * @param {String} str - String of user input 
+ * @see /components/TextArea - Origin of user input
+ * @see /components/Preview - User input passed to this function
+ * @returns - String of HTML, passed through DOMPurify as the last step
+ * @example - '# This is a heading' => '<h1>This is a heading</h1>
+ */
 export const searchText = (str) => {
+    //String initially passed through RegExps and matched based on standard Markdown criteria
     const openBracketRegex = /.?<.*/g;
     const headingsRegex = /#+\s.+\n?/g;
     const linksRegex = /(?<!!)\[[^\[\)]+\)/g;
@@ -25,6 +34,7 @@ export const searchText = (str) => {
     const footTextRegex = /\[\^.\]: .+\n/g;
     const superRegex = /\^.+\^/g;
 
+    //When text matches, it's passed on to the appropriate helper functions(s) below
     const hasOpenBracket = str.match(openBracketRegex);
     hasOpenBracket && (str = openBrackets(hasOpenBracket, str));
 
@@ -86,6 +96,17 @@ export const searchText = (str) => {
     const hasSuperScript = str.match(superRegex);
     hasSuperScript && (str = superScript(hasSuperScript, str));
 
+    /**
+     * During the process of several helper functions, certain characters are transformed
+     * so they will not pass through another match function. Here they are transformed back so they
+     * will show up correctly on the DOM. 
+     * 
+     * Example -
+     * 'I'm going to write a ~ in code like this: `~`, cool huh?'
+     * 
+     * Everything in between the two ~ could be matched by the subscript regex, but it wasn't my intent
+     * to make it subscript. The ~ between the two backticks is instead turned to an HTML code and changed back here.
+     */
     str = str.replace(/\t/g, "&nbsp;");
     str = str.replace(/\n{3,}/g, "</br></br>");
     str = str.replace(/\n\n/g, "</br></br>");
@@ -98,9 +119,15 @@ export const searchText = (str) => {
     str = str.replace(/(&#40;)/g, "(");
     str = str.replace(/(&#91;)/g, "[");
 
+    //DOMPurify removes any bad HTML/Javascript if it somehow gets through 
+    //Examples - Javascript alerts, iFrames, etc.
     return DOMPurify.sanitize(str, { ADD_ATTR: ["target"] });
 };
 
+// Changes all opening brackets (<) into their HTML character code
+// Helps sanitize but also helps correctly format as no HTML would actually be 
+// added by this point. 
+// Ignores situations where they are code lines or code blocks as they are handled later
 const openBrackets = (match, str) => {
     const quoteTest = /`<.*>`/g;
     const blockCodeTest = /```js\n(?:(?!```)[\s\S])+\n```/g;
@@ -214,6 +241,7 @@ const code = (match, str) => {
     match.forEach((m) => {
         let cMatch = m.match(codeRegex);
         let rMatch = returnRegex.test(m) ? "\n\n" : "";
+        if (!cMatch) { return }
 
         cMatch[0] = cMatch[0].replace(/(&lt;|<)/g, "<span><</span>");
         cMatch[0] = cMatch[0].replace(/\*/g, "&#42;");
@@ -247,6 +275,8 @@ const image = (match, str) => {
     return str;
 };
 
+//Block code sections are ran through HighlightJS to assist in auto-formatting
+//based on the code type
 const blockCode = (match, str) => {
     const innerCode = /(?<=```.*(\r\n|\s))(.+\s*)+\n?(?=```)/gm;
     const codeType = /(?<=```).*(?=\n)/;

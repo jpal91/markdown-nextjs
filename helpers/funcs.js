@@ -24,7 +24,8 @@ export const listBuilder = (matches, ordered) => {
         //Matches either "- some text" or "1. some text"
         let item = /(?<=(-|\d\.)\s).+/;
         let targetItem = l.match(item);
-
+        if (!targetItem) { return }
+        
         //Finds the index of the preceding token "-" or "1"
         //If the index of the current item is the same as the last, we shouldn't create an embedded list
         //If the index is greater, the next item should be embedded
@@ -63,7 +64,7 @@ export const listBuilder = (matches, ordered) => {
                 ? olOrUl.open + newItem
                 : currIndex === lastIndex
                 ? newItem
-                : null;
+                : '';
 
         //If we've reached the end of the list, we add + </ol> to the end of the string
         //If it's the beginning of the list we add <ol> + generated string
