@@ -6,7 +6,7 @@ import CheckBoxOutlinedIcon from "@mui/icons-material/CheckBoxOutlined";
 import CheckBoxOutlineBlankOutlinedIcon from "@mui/icons-material/CheckBoxOutlineBlankOutlined";
 
 /**
- * 
+ *
  * @param {array} matches - Array of string items matching the description of being a ordered or unordered list item
  * @example ['1. First list item, '2. Second list item', ' 1. Embedded list item']
  * @param {boolean} ordered - Indicates whether list sent was ordered or unordered to know which to build
@@ -24,8 +24,10 @@ export const listBuilder = (matches, ordered) => {
         //Matches either "- some text" or "1. some text"
         let item = /(?<=(-|\d\.)\s).+/;
         let targetItem = l.match(item);
-        if (!targetItem) { return }
-        
+        if (!targetItem) {
+            return;
+        }
+
         //Finds the index of the preceding token "-" or "1"
         //If the index of the current item is the same as the last, we shouldn't create an embedded list
         //If the index is greater, the next item should be embedded
@@ -43,7 +45,7 @@ export const listBuilder = (matches, ordered) => {
         /**
          * Tracks the overall index of the chain so we know what to do next
          * Example -
-         * 
+         *
          * Previous item - '2. Second List item' (lastIndex === 0)
          * Current item - ' 1. Embedded List item' (currIndex === 1 because of space in front of digit)
          * index + 1
@@ -64,7 +66,7 @@ export const listBuilder = (matches, ordered) => {
                 ? olOrUl.open + newItem
                 : currIndex === lastIndex
                 ? newItem
-                : '';
+                : "";
 
         //If we've reached the end of the list, we add + </ol> to the end of the string
         //If it's the beginning of the list we add <ol> + generated string
@@ -104,28 +106,21 @@ export const transform = (node, index) => {
         );
     }
 
-    //Transforms standard html checkboxes into MUI checkbox icons
-    if (node.attribs?.type === "checkbox") {
+    //Transforms user created checkboxes into an MUI checkbox with text
+    if (node.attribs?.class === "checkbox") {
         const checkedBox = node.attribs?.checked === "true";
-        const style = { height: "17px", width: "17px", mx: "10px" };
+        const style = { height: "17px", width: "17px", mx: "10px", mb: -0.5 };
 
         return (
-            <Box sx={{ display: "flex", alignItems: "center", my: -1 }}>
+            <Typography variant="body1">
                 {checkedBox ? (
                     <CheckBoxOutlinedIcon sx={{ ...style }} />
                 ) : (
                     <CheckBoxOutlineBlankOutlinedIcon sx={{ ...style }} />
                 )}
-                <Typography variant="body1">
-                    {processNodes(node.next.children, transform)}
-                </Typography>
-            </Box>
+                {processNodes(node?.children, transform)}
+            </Typography>
         );
-    }
-
-    //Makes sure that label nodes are removed as they are handled by the above if
-    if (node?.name === "label") {
-        return null;
     }
 
     //Transforms blockquotes into MUI Boxes with added styling
@@ -142,7 +137,7 @@ export const transform = (node, index) => {
                     maxWidth: "90%",
                 }}
             >
-                {processNodes(node.children, transform)}
+                {processNodes(node?.children, transform)}
             </Box>
         );
     }

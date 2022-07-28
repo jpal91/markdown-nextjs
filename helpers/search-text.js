@@ -4,8 +4,8 @@ import { listBuilder } from "./funcs";
 import DOMPurify from "dompurify";
 
 /**
- * 
- * @param {String} str - String of user input 
+ *
+ * @param {String} str - String of user input
  * @see /components/TextArea - Origin of user input
  * @see /components/Preview - User input passed to this function
  * @returns - String of HTML, passed through DOMPurify as the last step
@@ -99,11 +99,11 @@ export const searchText = (str) => {
     /**
      * During the process of several helper functions, certain characters are transformed
      * so they will not pass through another match function. Here they are transformed back so they
-     * will show up correctly on the DOM. 
-     * 
+     * will show up correctly on the DOM.
+     *
      * Example -
      * 'I'm going to write a ~ in code like this: `~`, cool huh?'
-     * 
+     *
      * Everything in between the two ~ could be matched by the subscript regex, but it wasn't my intent
      * to make it subscript. The ~ between the two backticks is instead turned to an HTML code and changed back here.
      */
@@ -119,14 +119,14 @@ export const searchText = (str) => {
     str = str.replace(/(&#40;)/g, "(");
     str = str.replace(/(&#91;)/g, "[");
 
-    //DOMPurify removes any bad HTML/Javascript if it somehow gets through 
+    //DOMPurify removes any bad HTML/Javascript if it somehow gets through
     //Examples - Javascript alerts, iFrames, etc.
     return DOMPurify.sanitize(str, { ADD_ATTR: ["target"] });
 };
 
 // Changes all opening brackets (<) into their HTML character code
-// Helps sanitize but also helps correctly format as no HTML would actually be 
-// added by this point. 
+// Helps sanitize but also helps correctly format as no HTML would actually be
+// added by this point.
 // Ignores situations where they are code lines or code blocks as they are handled later
 const openBrackets = (match, str) => {
     const quoteTest = /`<.*>`/g;
@@ -241,7 +241,9 @@ const code = (match, str) => {
     match.forEach((m) => {
         let cMatch = m.match(codeRegex);
         let rMatch = returnRegex.test(m) ? "\n\n" : "";
-        if (!cMatch) { return }
+        if (!cMatch) {
+            return;
+        }
 
         cMatch[0] = cMatch[0].replace(/(&lt;|<)/g, "<span><</span>");
         cMatch[0] = cMatch[0].replace(/\*/g, "&#42;");
@@ -299,7 +301,7 @@ const blockCode = (match, str) => {
             "javascript",
         ]).value;
 
-        hl.startsWith('\n') && (hl = hl.trimStart() )
+        hl.startsWith("\n") && (hl = hl.trimStart());
         hl = hl.replace(/`/g, "&#96;");
         hMatch ? (hl = hl.replace(/#/g, `&#35;`)) : null;
         eMatch ? (hl = hl.replace(/=/g, "&#61;")) : null;
@@ -422,9 +424,9 @@ const checkList = (match, str) => {
 
         str = str.replace(
             m,
-            `<input class='checkbox' type='checkbox' id=${labelText} name=${labelText} disabled ${
+            `<div class='checkbox' ${
                 checked ? `checked=true` : `checked=false`
-            } style="margin: 0px 10px;"/><label for=${labelText}>${labelText}</label>\n`
+            }>${labelText}</div>`
         );
     });
 
