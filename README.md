@@ -13,17 +13,17 @@ This is a solution to the [In-browser markdown editor challenge on Frontend Ment
 -   [My process](#my-process)
     -   [Built with](#built-with)
     -   [What I learned](#what-i-learned)
-    -   [RegExp](#regexp)
-    -   [NextAuth](#next-auth)
-    -   [Cypress](#cypress)
+        -   [RegExp](#regexp)
+        -   [NextAuth](#next-auth)
+        -   [Cypress](#cypress)
     -   [Continued development](#continued-development)
     -   [Useful resources](#useful-resources)
 -   [Author](#author)
 -   [Acknowledgments](#acknowledgments)
 
-## Overview {#overview}
+## Overview
 
-### The challenge {#the-challenge}
+### The challenge
 
 Based on the original challenge users should be able to:
 
@@ -45,7 +45,7 @@ Additional features added not in the original challenge:
 -   [x] Login using Google/GitHub OAuth
 -   [x] Alert notifications throughout the app
 
-### Screenshot {#screenshot}
+### Screenshot
 
 ![screenshot](/images/screenshot.png)
 
@@ -54,7 +54,7 @@ Additional features added not in the original challenge:
 -   Solution URL: [GitHub Solution](https://github.com/jpal91/markdown-nextjs)
 -   Live Site URL: [Add live site URL here](https://your-live-site-url.com)
 
-## My process {#my-process}
+## My process
 
 ### Built with {#built-with}
 
