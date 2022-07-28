@@ -16,6 +16,7 @@ import {
     unsavedChanges,
     masterUpdateHandler,
     setSaveState,
+    setLoading
 } from "../../../actions";
 import createButton from "../../../public/images/create-new.svg";
 
@@ -30,6 +31,7 @@ const NewDocModal = (props) => {
         setSaveState,
         saveState,
         authUser,
+        setLoading
     } = props;
     const router = useRouter();
     const [fileName, setFileName] = useState("");
@@ -45,6 +47,8 @@ const NewDocModal = (props) => {
             md: mdData ? mdData : "",
         };
 
+        setLoading(true)
+
         await masterUpdateHandler(saveState, "create", newDoc)
             .then(() => {
                 setClose();
@@ -56,7 +60,8 @@ const NewDocModal = (props) => {
             .catch(() => {
                 setClose();
                 setError(false);
-            });
+                setLoading(false)
+            })
     };
 
     return (
@@ -131,4 +136,5 @@ export default connect(mapStateToProps, {
     unsavedChanges,
     masterUpdateHandler,
     setSaveState,
+    setLoading
 })(NewDocModal);
