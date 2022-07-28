@@ -102,7 +102,7 @@ This function takes a match of `[text](href)` and finds the alt-description from
 
 Please feel free to check out my [searchText function on GitHub](https://github.com/jpal91/markdown-nextjs/blob/main/helpers/search-text.js) for many more examples.
 
-###### NextAuth {#next-auth}
+###### NextAuth{#next-auth}
 
 I had used NextAuth previously in a tutorial I watched, but not quite this extensively. Originally, I had functionality for a normal username/password credentials style login, but unfortunately NextAuth doesn't make it easy to have both this an OAuth on the same app.
 
