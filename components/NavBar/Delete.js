@@ -32,6 +32,7 @@ const Delete = (props) => {
                         color: "primary.vlgray",
                         mr: { xs: 0, sm: 2 },
                         fontSize: { xs: "40px", sm: "1.5rem" },
+                        '&:hover': { color: 'primary.lOrange' }
                     }}
                 />
             </IconButton>

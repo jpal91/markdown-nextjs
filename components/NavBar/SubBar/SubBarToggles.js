@@ -44,11 +44,11 @@ const SubBarToggles = (props) => {
             >
                 {isScrollSync ? (
                     <LinkIcon
-                        sx={{ color: { xs: "white", sm: "primary.text" } }}
+                        sx={{ color: { xs: "white", sm: "primary.text" }, '&:hover': { color: 'primary.lOrange' } }}
                     />
                 ) : (
                     <LinkOffIcon
-                        sx={{ color: { xs: "white", sm: "primary.text" } }}
+                        sx={{ color: { xs: "white", sm: "primary.text" }, '&:hover': { color: 'primary.lOrange' } }}
                     />
                 )}
             </IconButton>
@@ -61,11 +61,11 @@ const SubBarToggles = (props) => {
             >
                 {isPreviewMode ? (
                     <VisibilityOffOutlinedIcon
-                        sx={{ color: { xs: "white", sm: "primary.text" } }}
+                        sx={{ color: { xs: "white", sm: "primary.text" }, '&:hover': { color: 'primary.lOrange' } }}
                     />
                 ) : (
                     <RemoveRedEyeOutlinedIcon
-                        sx={{ color: { xs: "white", sm: "primary.text" } }}
+                        sx={{ color: { xs: "white", sm: "primary.text" }, '&:hover': { color: 'primary.lOrange' } }}
                     />
                 )}
             </IconButton>

@@ -148,7 +148,7 @@ const FileInfo = (props) => {
                     aria-label="Rename your file"
                     title="Rename your file"
                 >
-                    <Typography hidden={isInput} variant="headingText">
+                    <Typography hidden={isInput} variant="headingText" sx={{ '&:hover': { color: 'primary.lOrange' } }}>
                         {`${fileName}.md`}
                     </Typography>
                 </ButtonBase>

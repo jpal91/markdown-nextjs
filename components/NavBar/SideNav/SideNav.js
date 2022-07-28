@@ -105,6 +105,7 @@ const SideNav = (props) => {
                 aria-label="Create new document"
                 title="Create new document"
                 id="new-doc-btn"
+                sx={{ '&:hover': { opacity: 0.8 } }}
             >
                 <Image src="/images/new-document.svg" width="200" height="50" />
             </ButtonBase>
@@ -145,6 +146,7 @@ const SideNav = (props) => {
                             backgroundColor: "primary.dOrange",
                             visibility:
                                 router.pathname === "/" ? "hidden" : "visible",
+                            '&:hover': { opacity: 0.8, backgroundColor: "primary.dOrange" }
                         }}
                         onClick={handleDownload}
                         aria-label="Download"
@@ -157,6 +159,7 @@ const SideNav = (props) => {
                         sx={{
                             backgroundColor: "primary.dOrange",
                             display: authUser && "none",
+                            '&:hover': { opacity: 0.8, backgroundColor: "primary.dOrange" }
                         }}
                         onClick={() =>
                             setModal({
@@ -175,6 +178,7 @@ const SideNav = (props) => {
                         sx={{
                             backgroundColor: "primary.dOrange",
                             display: !authUser && "none",
+                            '&:hover': { opacity: 0.8, backgroundColor: "primary.dOrange" }
                         }}
                         onClick={handleLogout}
                         aria-label="Logout"
@@ -197,6 +201,7 @@ const SideNav = (props) => {
                         onChange={handleSwitch}
                         sx={{
                             "& .MuiSwitch-track": { backgroundColor: "white" },
+                            '&:hover': { "& .MuiSwitch-track": {backgroundColor: "primary.lOrange"} }
                         }}
                         aria-label="Switch between light and dark mode"
                         title="Switch between light and dark mode"

@@ -53,6 +53,7 @@ const Save = (props) => {
                         sm: isMenuOpen ? "none" : "inline-flex",
                         lg: "inline-flex",
                     },
+                    '&:hover': { opacity: 0.9 }
                 }}
                 disabled={buttonStatus.save === "disabled" && true}
             >

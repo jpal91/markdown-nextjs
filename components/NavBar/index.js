@@ -90,7 +90,7 @@ const NavBar = (props) => {
                                 sx={{ display: { xs: isMenuOpen && 'none', sm: 'inline-flex' } }}
                             >
                                 <a>
-                                    <Typography variant="heading">
+                                    <Typography variant="heading" sx={{ '&:hover': { opacity: 0.8 } }}>
                                         .MARK
                                         <KeyboardDoubleArrowDownIcon />
                                     </Typography>

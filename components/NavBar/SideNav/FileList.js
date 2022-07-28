@@ -153,7 +153,7 @@ const FileList = (props) => {
     return (
         <React.Fragment>
             <List sx={{ width: "100%", color: "white" }}>
-                <ListItemButton onClick={handleOpen}>
+                <ListItemButton onClick={handleOpen} >
                     <ListItemText
                         primary={listName}
                         aria-label={listName}
