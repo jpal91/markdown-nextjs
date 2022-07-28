@@ -45,7 +45,6 @@ const NavBar = (props) => {
                         height: "100%",
                         flexWrap: "nowrap",
                         alignItems: "center",
-                        p: { xs: 1, lg: 0 },
                         ml: { xs: 0, lg: 0 },
                     }}
                 >

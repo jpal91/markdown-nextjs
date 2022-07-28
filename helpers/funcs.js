@@ -139,7 +139,6 @@ export const transform = (node, index) => {
                     margin: "1.2em",
                     backgroundColor: "background.blockq",
                     borderRadius: "5px",
-                    width: "fit-content",
                     maxWidth: "90%",
                 }}
             >

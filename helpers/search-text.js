@@ -278,7 +278,7 @@ const image = (match, str) => {
 //Block code sections are ran through HighlightJS to assist in auto-formatting
 //based on the code type
 const blockCode = (match, str) => {
-    const innerCode = /(?<=```.*(\r\n|\s))(.+\s*)+\n?(?=```)/gm;
+    const innerCode = /(?<=```.*(\r\n|\s))(.+\s*|\n)+\n?(?=```)/gm;
     const codeType = /(?<=```).*(?=\n)/;
     const headings = /#+/g;
     const equals = /=+/g;
@@ -299,6 +299,7 @@ const blockCode = (match, str) => {
             "javascript",
         ]).value;
 
+        hl.startsWith('\n') && (hl = hl.trimStart() )
         hl = hl.replace(/`/g, "&#96;");
         hMatch ? (hl = hl.replace(/#/g, `&#35;`)) : null;
         eMatch ? (hl = hl.replace(/=/g, "&#61;")) : null;
