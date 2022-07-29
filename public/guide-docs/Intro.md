@@ -8,7 +8,7 @@
 
 ## The `.MARKDOWN` Guide
 ---
-##### Table of Contents {#table-of-contents}
+##### Table of Contents
 
 - [Basic Features](#basic)
  - [Headings](#headings)
@@ -17,29 +17,29 @@
  - [Highlight](#highlight)
  - [Strikethrough](#strikethrough)
  - [Code](#code)
- - [Un-ordered List](#uolist)
- - [Ordered List](#olist)
+ - [Un-ordered List](#un-ordered-list)
+ - [Ordered List](#ordered-list)
  - [Links](#links)
  - [Images](#images)
  - [Blockquote](#blockquote)
- - [Horizontal Rule](#hr)
-- [Advanced Features](#advanced)
+ - [Horizontal Rule](#horizontal-rule)
+- [Advanced Features](#advanced-features)
  - [Heading-ID](#heading-id)
- - [Fenced Code Block](#fenced-code)
+ - [Fenced Code Block](#fenced-code-block)
  - [Task List](#task-list)
  - [Emojis](#emojis)
  - [Footnotes](#footnotes)
  - [Subscript](#subscript)
  - [Superscript](#superscript)
-- [Unavailable/In Progress Features](#unavailable)
+- [Unavailable/In Progress Features](#unavailable-in-progress-features)
  - [Tables](#tables)
- - [Definition List](#definition)
+ - [Definition List](#definition-list)
 
 
-### Basic Features {#basic}
+### Basic Features
 ---
 
-#### *Headings* {#headings}
+#### *Headings*
 Simply add one to six `#` sign(s) in front of your heading to make your desired heading size. Like so:
 
 # Heading 1
@@ -48,52 +48,62 @@ Simply add one to six `#` sign(s) in front of your heading to make your desired 
 #### Heading 4
 ##### Heading 5
 ###### Heading 6
+ 
 
-#### *Bold* {#bold}
+#### *Bold*
 Add two `**` signs on either side of your word to make it **bold**.
+ 
 
-#### *Italic* {#italic}
+#### *Italic*
 Add one `*` sign on either side of your word(s) to make them *italic*.
+ 
 
-#### *Highlight* {#highlight}
+#### *Highlight*
 ==Highlight your words== by surrounding them in two `==` signs.
+ 
 
-#### *Strikethrough* {#strikethrough}
+#### *Strikethrough*
 ~~Strike out your text~~ by adding two `~~` signs around your words.
+ 
 
-#### *Code* {#code}
+#### *Code*
 Add one `backtick` on either side of words or code to give it special formatting and even write actual code between them!
 
 `<div>Look at me, I'm a div!</div>`
+ 
 
-#### *Un-ordered List* {#uolist}
+#### *Un-ordered List*
 - Add one `-` sign with a space to create an unordered list.
 - You can make them as long as you like!
  - Add one additional space before the `-` to nest the list item 
 - Add another line without the space to go back to the original list.
+ 
 
-#### *Ordered List* {#olist}
+#### *Ordered List*
 1. Add a number followed by a period and a space to make an ordered list.
 2. You'll be able to go like this in order as long as you like.
  3. Just like with the ordered list you can nest items.
  4. Nested items start a new list, so the numbers will be reset to the beginning.
 5. Well at least I know how to count...
+ 
 
-#### *Links* {#links}
+#### *Links*
 Add a link to your text using this format: `[text](link address)`
 
 Check out this cool website I found! It's called [Google](https://google.com).
 
 You can also create links within your own document as well by referencing the assigned ID. Here, take this one back to the [top](#top)!
 
-Check out the [Heading-ID](#heading-id) section to learn more about assigning a linkable ID.
+Check out the [Heading-ID](#heading-id) section to learn more about linking within your document.
+ 
 
-#### *Images* {#images}
+#### *Images*
 Add an image using this format: `![alt text](image source)`
 
 ![sign in with google button](/images/google-button.png)
+ 
 
-#### *Blockquote* {#blockquote}
+#### *Blockquote*
 Want a fancy blockquote section like the one up [top](#top)? Well just add a `>` sign plus a space at the beginning of the line and away you go!
 
 > Doesn't this look so much better? I feel so fancy in here!
@@ -102,25 +112,42 @@ Want a fancy blockquote section like the one up [top](#top)? Well just add a `>`
 > Always remember to save your changes!
 > 
 > ![save-button](/images/save-button.svg)
+ 
 
-#### *Horizontal Rule* {#hr}
+#### *Horizontal Rule*
 To add a horizontal rule you just have to add `---` to any line with nothing else.
 
 It's a great way to start or end a section, so let's try it now!
+ 
 
 ---
 
-### Advanced Features {#advanced}
+### Advanced Features
 ###### A few more fun add-ons!
 
 ---
 
-#### *Heading-ID* {#heading-id}
-Following a heading, you can add on an id to the `h` tag in order to create a link within your own document. You do so by adding a section like this right after your heading text `{#your-id-here}`.
+#### *Heading-ID*
+If you want to link to a Heading, like in a [Table of Contents](#table-of-contents), for example; simply make sure the `href` of your link, start with `#` followed by the actual word content of your headings, separated by a `-`, in lower case. This is the ID that is automatically assigned to a heading when it's created. 
 
-This can be very helpful and is normally used with a [Table of Contents](#table-of-contents) to better help a user navigate a long document (kind of like this one). 
+If I wanted to link to this heading:
 
-#### *Fenced Code Block* {#fenced-code}
+##### A Heading I Want To Link To
+Here's what my link would look like: 
+
+`[A Heading I Want To Link To](#a-heading-i-want-to-link-to)`
+
+Make sure **NOT** to include other punctuation (`!,.` etc.) in your `href`! For example if I wanted to link to:
+
+##### Markdown, it's super fun!
+My link would look like this:
+
+`[Markdown, it's super fun!](#markdown-its-super-fun)`
+
+See [Links](#links) for more general details on links. 
+ 
+
+#### *Fenced Code Block*
 If you want to write an entire block of code, instead of just a line like the [code](#code) section above, here's what you do -
 
 - Start your line with `3 backticks` + the shorthand name of a programming language (ie html, js, bash)
@@ -146,7 +173,7 @@ const image = (match, str) => {
 };
 ```
 
-#### *Task List* {#task-list}
+#### *Task List*
 Make a list with checkboxes next to them to indicate whether or not the task is complete. It's best use is to show progress during a project, especially one related to coding (like this one!). 
 
 To do this start your line off with `- [ ]` for `un-checked` or `- [x]` for `checked`.
@@ -154,8 +181,9 @@ To do this start your line off with `- [ ]` for `un-checked` or `- [x]` for `che
 - [x] Make a task list
 - [x] Make a Markdown guide for the website
 - [ ] Get some sleep
+ 
 
-#### *Emojis* {#emojis}
+#### *Emojis*
 That's right! You even get some emojis! :grinning::joy::heart_eyes:
 
 You can add emojis to any of your text by adding the emoji "shortcode" between two `:` signs -
@@ -163,8 +191,9 @@ You can add emojis to any of your text by adding the emoji "shortcode" between t
 `:emoji: :insert_desired_emoji_here:`
 
 There are thousands of emojis to choose from. Please refer to [Emojipedia](https://emojipedia.org/) for the full list. Once you find your desired emoji, look up the "shortcode" on it's page and you will be able to use it in this app.
+ 
 
-#### *Footnotes* {#footnotes}
+#### *Footnotes*
 You can add footnotes using the following - 
 
 1. Create the footnote superscript like this `[^id]`[^1] 
@@ -173,16 +202,19 @@ You can add footnotes using the following -
 [^1]: This is the footnote
 
 Don't worry about where you put #2 in your text, it will always appear on the bottom of your document once it's rendered. 
+ 
 
-#### *Subscript* {#subscript}
+#### *Subscript*
 To add a subscript to your text simply wrap a letter, word(s), or numbers in one `~` on either side. Here's an example I'm sure you'll recognize:
 
 H~2~O: A common element found in beer :beer:.
+ 
 
-#### *Superscript* {#superscript}
+#### *Superscript*
 To add superscript to your text, you will wrap a letter, word(s), or numbers in one `^` on either side. Here's an example -
 
 10^1000^: A number I'd bet you'd have difficulty counting to.
+ 
 
 ---
 
@@ -192,14 +224,15 @@ To add superscript to your text, you will wrap a letter, word(s), or numbers in 
 
 ---
 
-#### *Tables* {#tables}
+#### *Tables*
 Tables can be created by combining a series of `|` (creating column limits) and `-`, creating rows. This can be visualized below -
 
 ![markdown-tables](/images/md-tables.JPG)
 
 Source: [Markdown Guide - Tables](https://www.markdownguide.org/extended-syntax/#tables)
+ 
 
-#### *Definition List* {#definition}
+#### *Definition List*
 Definition lists are specially styled lists for (you guessed it!) definitions of words. 
 
 You can begin one of these lists by stating the word and then on the next line, starting with a `:` to link the list to the word being defined. This list can have multiple definitions following the main word. Here's a visualization below -
@@ -207,10 +240,11 @@ You can begin one of these lists by stating the word and then on the next line, 
 ![markdown-definition](/images/md-definition.JPG)
 
 Source: [Markdown Guide - Definition Lists](https://www.markdownguide.org/extended-syntax/#definition-lists)
+ 
 
 ---
 
-#### *Further Reading* {#further}
+#### *Further Reading*
 If you're interested in learning more about Markdown and it's capabilities. Please feel free to utilize some of these awesome resources below -
 
 - [Markdown Guide](https://www.markdownguide.org/) - An amazing resource that helped out quite a bit on this very project. Their cheat sheet was the basis for a lot of the functionality when I was originally building the logic for how this editor compiles text into Markdown.

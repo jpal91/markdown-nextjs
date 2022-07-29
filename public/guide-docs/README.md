@@ -13,17 +13,17 @@ This is a solution to the [In-browser markdown editor challenge on Frontend Ment
 -   [My process](#my-process)
     -   [Built with](#built-with)
     -   [What I learned](#what-i-learned)
-    -   [RegExp](#regexp)
-    -   [NextAuth](#next-auth)
-    -   [Cypress](#cypress)
+        -   [RegExp](#regexp)
+        -   [NextAuth](#nextauth)
+        -   [Cypress](#cypress)
     -   [Continued development](#continued-development)
     -   [Useful resources](#useful-resources)
 -   [Author](#author)
 -   [Acknowledgments](#acknowledgments)
 
-## Overview {#overview}
+## Overview
 
-### The challenge {#the-challenge}
+### The challenge
 
 Based on the original challenge users should be able to:
 
@@ -45,18 +45,18 @@ Additional features added not in the original challenge:
 -   [x] Login using Google/GitHub OAuth
 -   [x] Alert notifications throughout the app
 
-### Screenshot {#screenshot}
+### Screenshot
 
 ![screenshot](/images/screenshot.png)
 
-### Links {#links}
+### Links
 
 -   Solution URL: [GitHub Solution](https://github.com/jpal91/markdown-nextjs)
 -   Live Site URL: [Add live site URL here](https://your-live-site-url.com)
 
-## My process {#my-process}
+## My process
 
-### Built with {#built-with}
+### Built with
 
 -   Regular Expressions - For Markdown editor logic. See [search-text.js](https://github.com/jpal91/markdown-nextjs/blob/main/helpers/search-text.js) for details.
 -   [Next.js](https://nextjs.org/) - React framework
@@ -69,11 +69,11 @@ Additional features added not in the original challenge:
 -   [Notistack](https://notistack.com/) - For notifications/alerts
 -   [Cypress](https://docs.cypress.io/) - E2E testing suite
 
-### What I learned {#what-i-learned}
+### What I learned
 
 This project heavily expanded my knowledge with just about every resource I utilized. Here are a few to note -
 
-###### RegExp {#regexp}
+###### RegExp
 
 This was definitely the most challenge portion of this application. There are a few very well-built and maintained packages available for the conversion of text to Markdown, but I decided early on I wanted to try and build this by myself as a challenge.
 
@@ -102,7 +102,7 @@ This function takes a match of `[text](href)` and finds the alt-description from
 
 Please feel free to check out my [searchText function on GitHub](https://github.com/jpal91/markdown-nextjs/blob/main/helpers/search-text.js) for many more examples.
 
-###### NextAuth {#next-auth}
+###### NextAuth
 
 I had used NextAuth previously in a tutorial I watched, but not quite this extensively. Originally, I had functionality for a normal username/password credentials style login, but unfortunately NextAuth doesn't make it easy to have both this an OAuth on the same app.
 
@@ -113,7 +113,7 @@ Here's a snippet from my [/pages/auth/api page](https://github.com/jpal91/markdo
 ```js
 export default NextAuth({
     ...,
-				providers: [
+	providers: [
         GitHubProvider({
             clientId: process.env.GITHUB_ID,
             clientSecret: process.env.GITHUB_SECRET,
@@ -128,7 +128,7 @@ export default NextAuth({
 })
 ```
 
-###### Cypress {#cypress}
+###### Cypress
 
 This was my first time adding testing to an application and I went with Cypress. I do not have a great amount of knowledge on testing providers in general, but they seemed to provide an easy to use interface and functionality I wanted.
 
@@ -147,7 +147,7 @@ it("Saves new content", () => {
 });
 ```
 
-### Continued Development {#continued-development}
+### Continued Development
 
 ###### .MARKDOWN Project
 
@@ -164,7 +164,7 @@ For future projects, I want to take a lot of what I learned and apply it to more
 -   `NextAuth` - It was surprisingly easier than I thought to add in OAuth options to my project. Adding in authentication is a great way to improve usability/functionality and I want to utilize this more
 -   `Cypress` - Learning how to test my apps in an effective manner is something that I have lacked in my entire learning process. I want to start adding testing to all of my future applications to make sure the functionality remains intact after changes, and of course to spot bugs.
 
-### Useful resources {#useful-resources}
+### Useful resources
 
 -   [RegExr](https://regexr.com/) - A **huge** resource for this project. Helped me test and refine just about every one of my RegExp matching functions and has a decent RegExp guide built in.
 -   [Markdown Guide](https://www.markdownguide.org/) - My go-to for learning all about Markdown and what Markdown Editors should do. Used this as the educational resource when designing my RegExp matching functions.
@@ -177,13 +177,13 @@ In this project I made 2 user guides to help out on this site:
 1. [Intro.md](/guides/Intro) - Goes over the basics of Markdown and shows what this editor is capable of
 2. [How-To.md](/guides/How-To) - Goes over the functionality of the site, and gives users a guide how to do the basic CRUD actions
 
-## Author {#author}
+## Author
 
 -   Website - Working on it...
 -   Frontend Mentor - [@jpal91](https://www.frontendmentor.io/profile/jpal91)
 -   GitHub- [https://github.com/jpal91/](https://github.com/jpal91/)
 
-## Acknowledgments {#acknowledgments}
+## Acknowledgments
 
 -   [StackEdit](https://stackedit.io/) - This site was a big source of inspiration for my project. Very well-built and mature project that has all the functionality one would expect from a Markdown editor. I tried to emulate some of the features that they had for my site to make it more user friendly.
 -   [Markdown-it](https://github.com/markdown-it/markdown-it) - Popular Markdown parser. If I didn't build out the logic myself, I ultimately would have used this package to render the text to Markdown. I referenced it a few times throughout the project to see what they were doing in "x" or "y" situation to make it work. This package works differently than my logic, but it was still a great resource regardless.

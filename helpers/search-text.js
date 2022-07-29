@@ -155,11 +155,9 @@ const headings = (match, str) => {
     const h5 = /(?<=#####\s)[^{}\n]+/g;
     const h6 = /(?<=######\s)[^{}\n]+/g;
     const headArray = [h1, h2, h3, h4, h5, h6];
-    const id = /(?<={#).+(?=})/;
+    const idRegex = /[\w]+/g
 
     match.forEach((m) => {
-        const idMatch = m.match(id);
-
         const index = m.match(h6)
             ? 5
             : m.match(h5)
@@ -173,11 +171,14 @@ const headings = (match, str) => {
             : m.match(h1)
             ? 0
             : 5;
+        
+        const innerText = m.match(headArray[index])[0]
+        const id = innerText.match(idRegex).join('-').toLowerCase()
 
         str = str.replace(
             m,
-            `<h${index + 1} id="${idMatch && `${idMatch[0]}`}">${
-                m.match(headArray[index])[0]
+            `<h${index + 1} id="${id}">${
+                innerText
             }</h${index + 1}>\n`
         );
     });

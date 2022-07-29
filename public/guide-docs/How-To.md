@@ -8,32 +8,32 @@
 ## Table of Contents
 
 - [Accounts](#accounts)
- - [General Info](#general)
+ - [General Info](#general-info)
  - [Login](#login)
-- [Basic Actions](#basic)
- - [Create A New Document](#create)
- - [Save An Existing Document](#save)
-  - [The Save Button](#save)
-  - [Local vs. Database](#localvdb)
-  - [Database Limits](#dblimits)
+- [Basic Actions](#basic-actions)
+ - [Create A New Document](#create-a-new-document)
+ - [Save An Existing Document](#save-an-existing-document)
+  - [The Save Button](#the-save-button)
+  - [Local vs. Database](#local-vs-database)
+  - [Database Limits](#database-limits)
   - [Warning!](#warning)
- - [Re-name Your Document](#rename)
- - [Delete a document](#delete)
- - [Mobile Differences](#mobile)
+ - [Re-name Your Document](#re-name-your-document)
+ - [Delete a document](#delete-a-document)
+ - [Mobile Differences](#mobile-differences)
 - [Site Features](#site-features)
  - [Scroll Lock](#scroll-lock)
  - [Preview Mode](#preview-mode)
- - [Scroll To Top](#scroll-top)
- - [Day/Night Mode](#day-night)
+ - [Scroll To Top](#scroll-to-top)
+ - [Day/Night Mode](#day-night-mode)
  - [Download](#download)
  - [Notifications](#notifications)
 
 ---
 
-## Accounts {#accounts}
+## Accounts
 ###### How to set up accounts and why/if it matters
 
-#### *General Info* {#general}
+#### *General Info*
 
 `.MARKDOWN` is a free to use application without restriction on how many documents you create or general usage. However, there will be restrictions on *where* your document saves based on the following:
 
@@ -58,12 +58,12 @@ Once you are logged in, you are given the additional ability to save documents b
 Every logged in user is given **a total of 10** saves in our database. After you have reached your quota, you must save all other files locally, or delete one of the documents saved to the database in order to save another. 
 
 For more information, please check out the following sections:
-- [Local vs. Database](#localvdb)
-- [Save An Existing Document](#save)
-- [Delete A Document](#delete)
+- [Local vs. Database](#local-vs-database)
+- [Save An Existing Document](#save-an-existing-document)
+- [Delete A Document](#delete-a-document)
 
 
-#### *Login* {#login}
+#### *Login*
 To login and/or sign-up, simply go to the menu bar located at the top left corner of your screen:
 
 ![menu](/images/menu.png)
@@ -80,11 +80,11 @@ Follow the prompt of your chosen provider and you will be redirected back to our
 
 ---
 
-## Basic Actions {#basic}
+## Basic Actions
 ###### The CRUD[^1] of it
 [^1]: An acronym for Create, Read, Update, Destroy
 
-#### *Create A New Document* {#create}
+#### *Create A New Document*
 There are three methods to create a new document:
  
 
@@ -101,7 +101,7 @@ After you will be prompted to create a document name and select where the docume
 
 ![new document modal](/images/newdoc-modal.PNG)
 
-*For more information on saving locally vs. on the database, see [Local vs. Database](#localvdb).*
+*For more information on saving locally vs. on the database, see [Local vs. Database](#local-vs-database).*
  
 
 ###### *Second Method - Rename Your Document From The Home Screen*
@@ -111,7 +111,7 @@ Click right below `Document Name` and a text prompt will pop up. Type in the des
 
 ![rename](/images/rename.png)
 
-*For more information on re-naming your document, see [Re-name Your Document](#rename)*
+*For more information on re-naming your document, see [Re-name Your Document](#re-name-your-document)*
 
  
 
@@ -126,9 +126,9 @@ Once clicked, you will be prompted with the same modal as when you click on the 
 
  
 
-#### *Save An Existing Document* {#save}
+#### *Save An Existing Document*
 
-##### The Save Button {#save}
+##### The Save Button
 When you are in a user-owned[^2] document, a button will appear on the top right side of your screen:
 [^2]: A document that was created and saved by you, the user. This does not include pages in the `Examples` or `Guides` folders, so you will not see the `Save Changes` button on any of those files
 
@@ -137,7 +137,7 @@ When you are in a user-owned[^2] document, a button will appear on the top right
 Simply click this button and your changes will immediately be saved based on **the initial save type**. If you originally saved your document locally, it will automatically save locally and vice-versa for database.
  
 
-##### Local vs. Database {#localvdb}
+##### Local vs. Database
 When you first create a document, you are prompted to select either `Local` or `Database` as your save choice. 
 
 ![new document modal](/images/newdoc-modal.PNG)
@@ -151,11 +151,11 @@ If you are a logged in user, both options will be available. The `Database` choi
 [^3]: Our database is a MongoDB cluster accessed through sever-side REST protocols 
 
 
-###### Database Limits {#dblimits}
+###### Database Limits
 As a logged in user, you have the ability to save a **maximum of 10 documents** to the database. After which you will only be able to save your data locally. To save a new document to the database, you must first delete another document already saved to the database first, then save your new document after.
  
 
-##### Warning! {#warning}
+##### Warning!
 Several warning messages are built into the app to advise you when saving a document is not possible. These messages will let you know what/if there is an issue, and what to do in order to get around it. Please keep the following in mind when using `.MARKDOWN`:
 
 1. Logged in users will have a maximum of 10 saved files per login. 
@@ -163,7 +163,7 @@ Several warning messages are built into the app to advise you when saving a docu
 3. Any files saved locally will remain on your computer unless you purposesfully delete/refresh your browsers local data and/or cache. Remember to download files if you want to keep them, or login as a user to save them to the database.
  
 
-#### *Re-name an Existing Document* {#rename}
+#### *Re-name Your Document*
 To re-name your document after you've already created it, you will navigate to the document itself using the menu button on the top left side of the screen:
 
 ![menu](/images/menu.png)
@@ -177,7 +177,7 @@ Finally, click your document's name under the `Document Name` section at the top
 ![re-name](/images/rename.png)
  
 
-#### *Delete a Document* {#delete}
+#### *Delete a Document*
 In the top right side of your screen you will see a trash can icon located next to the `Save Changes` button. Simply click this icon when you are on a page of one of your saved documents:
 
 ![delete-button](/images/delete-button.png)
@@ -185,7 +185,7 @@ In the top right side of your screen you will see a trash can icon located next 
 Once clicked you will be prompted to confirm the action. *You cannot reverse the delete after you have selected the option*. **Please use caution**.
  
 
-#### *Mobile Differences* {#mobile}
+#### *Mobile Differences*
 If you are accessing `.MARKDOWN` on mobile, there will be a few key differences to preserve screen space:
 
 ![mobile-home](/images/mobile-home.png)
@@ -194,13 +194,14 @@ On the home screen, the [Scroll Lock](#scroll-lock) and [Preview Mode](#preview-
 
 ![mobile-sidenav](/images/mobile-sidenav.png)
 
-The [Re-name](#rename) function as well as the [Save](#save) and [Delete](#delete) functions have been moved to the Menu. `Re-name` is shown in a yellow square at the top of the screenshot. The `Save` and `Delete` functions are below in a blue square (trashcan icon for delete, floppy disk for save).
+The [Re-name](#re-name-your-document) function as well as the [Save](#save-an-existing-document) and [Delete](#delete-a-document) functions have been moved to the Menu. `Re-name` is shown in a yellow square at the top of the screenshot. The `Save` and `Delete` functions are below in a blue square (trashcan icon for delete, floppy disk for save).
+ 
 
 ---
 
-## Site Features {#site-features}
+## Site Features
 
-#### *Scroll Lock* {#scroll-lock}
+#### *Scroll Lock*
 On the top right corner of the `Preview` section (right side of your screen), you will see two buttons:
 
 ![scroll-prev-btns](/images/scroll-prev-btns.png)
@@ -210,7 +211,7 @@ In the green (button the left) is the Scroll Lock button. By default this is ena
 Click the Scroll Lock button to prevent both screens from scrolling together .
  
 
-#### *Preview Mode* {#preview-mode}
+#### *Preview Mode*
 On the top right corner of the `Preview` section, right next to the `Scroll Lock` button is the `Preview Mode` button (in the red/right side of the screenshot):
 
 ![scroll-prev-btns](/images/scroll-prev-btns.png)
@@ -218,7 +219,7 @@ On the top right corner of the `Preview` section, right next to the `Scroll Lock
 Click this option if you only want to see your generated Markdown file in the `Preview` section. Click again to take this option off. 
  
 
-#### *Scroll To Top* {#scroll-top}
+#### *Scroll To Top*
 On the bottom right side of the `Preview` section you will see this button:
 
 ![scroll-to-top](/images/scroll-to-top.PNG)
@@ -226,7 +227,7 @@ On the bottom right side of the `Preview` section you will see this button:
 Click this button to automatically scroll to the top of your screen. 
  
 
-#### *Day/Night Mode* {#day-night}
+#### *Day/Night Mode*
 In the `Menu`, at the very bottom, you will see a toggle option with two icons to switch from day mode to night mode:
 
 ![day-night-toggle](/images/day-night-toggle.PNG)
@@ -234,13 +235,13 @@ In the `Menu`, at the very bottom, you will see a toggle option with two icons t
 When the toggle is to the left (toward the Moon icon), your screen will be in Night Mode. Day mode will be the opposite side. As long as you don't clear your browser's cache, it will remember your preference when you visit the site. 
  
 
-#### *Download* {#download}
+#### *Download*
 In the `Menu`, near the bottom above the `Login/Logout` buttons, you will see a `Download` button. 
 
 If you click this, a `.md` file will be generated from the content currently added to your editor. This is a free option whether or not you are logged in. Feel free to use it as much as you like!
  
 
-#### *Notifications* {#notifications}
+#### *Notifications*
 Notifications will pop up on the bottom left side of your screen to give you feedback on various actions (ie saving, deleting, creating a new document, etc.). Use these as confirmation that the action you were attempting to take was successful. 
 
 Generally on an error message, you will be informed on what action failed. To fix most errors, simply try the action again or follow any instructions given from the notification if the action is unavailable at the time.
