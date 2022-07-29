@@ -8,25 +8,25 @@
 ## Table of Contents
 
 - [Accounts](#accounts)
- - [General Info](#general-info)
- - [Login](#login)
+    - [General Info](#general-info)
+    - [Login](#login)
 - [Basic Actions](#basic-actions)
- - [Create A New Document](#create-a-new-document)
- - [Save An Existing Document](#save-an-existing-document)
-  - [The Save Button](#the-save-button)
-  - [Local vs. Database](#local-vs-database)
-  - [Database Limits](#database-limits)
-  - [Warning!](#warning)
- - [Re-name Your Document](#re-name-your-document)
- - [Delete a document](#delete-a-document)
- - [Mobile Differences](#mobile-differences)
+    - [Create A New Document](#create-a-new-document)
+    - [Save An Existing Document](#save-an-existing-document)
+        - [The Save Button](#the-save-button)
+        - [Local vs. Database](#local-vs-database)
+        - [Database Limits](#database-limits)
+        - [Warning!](#warning)
+    - [Re-name Your Document](#re-name-your-document)
+    - [Delete a document](#delete-a-document)
+    - [Mobile Differences](#mobile-differences)
 - [Site Features](#site-features)
- - [Scroll Lock](#scroll-lock)
- - [Preview Mode](#preview-mode)
- - [Scroll To Top](#scroll-to-top)
- - [Day/Night Mode](#day-night-mode)
- - [Download](#download)
- - [Notifications](#notifications)
+    - [Scroll Lock](#scroll-lock)
+    - [Preview Mode](#preview-mode)
+    - [Scroll To Top](#scroll-to-top)
+    - [Day/Night Mode](#day-night-mode)
+    - [Download](#download)
+    - [Notifications](#notifications)
 
 ---
 
@@ -46,8 +46,8 @@ The registration process is quick and painless with us. You simply have to click
 
 [*See the login section for more info on how to find these*](#login)
 
-![google login](/images/google-button.png)
-![github login](/images/github-button.png)
+![google login](/public/images/google-button.png)
+![github login](/public/images/github-button.png)
 
 After clicking on one of these links, you will be redirected to the associated site and asked to give us permission to access your account. We only receive your user name and/or email address and use this to associate your account in our database. Your information is never sent/sold to any third parties and will only be used internally. 
  
@@ -66,15 +66,15 @@ For more information, please check out the following sections:
 #### *Login*
 To login and/or sign-up, simply go to the menu bar located at the top left corner of your screen:
 
-![menu](/images/menu.png)
+![menu](/public/images/menu.png)
 
 Once there, click the `LOGIN` button you see near the bottom of the screen:
 
-![login](/images/login-ss.png)
+![login](/public/images/login-ss.png)
 
 A modal will pop up in the middle of your screen, which will prompt you to select the login provider of your choice:
 
-![login providers](/images/provider-ss.PNG)
+![login providers](/public/images/provider-ss.PNG)
 
 Follow the prompt of your chosen provider and you will be redirected back to our site where you will officially be logged in!
 
@@ -91,15 +91,15 @@ There are three methods to create a new document:
 ###### *First Method - The New Document Button*
 On any screen, click the Menu Bar icon in the top left of your screen:
 
-![menu](/images/menu.png)
+![menu](/public/images/menu.png)
 
 Then you will click the `New Document` button near the top of the menu:
 
-![new document](/images/new-document.svg)
+![new document](/public/images/new-document.svg)
 
 After you will be prompted to create a document name and select where the document will be saved to (either locally or on the database):
 
-![new document modal](/images/newdoc-modal.PNG)
+![new document modal](/public/images/newdoc-modal.PNG)
 
 *For more information on saving locally vs. on the database, see [Local vs. Database](#local-vs-database).*
  
@@ -109,7 +109,7 @@ This method is only available from the home screen (`welcome.md` will always be 
 
 Click right below `Document Name` and a text prompt will pop up. Type in the desired name of your document, and you will be re-directed to your new document's page!
 
-![rename](/images/rename.png)
+![rename](/public/images/rename.png)
 
 *For more information on re-naming your document, see [Re-name Your Document](#re-name-your-document)*
 
@@ -118,7 +118,7 @@ Click right below `Document Name` and a text prompt will pop up. Type in the des
 ###### *Third Method - Save Your Document From The Home Screen*
 This method is only available from the home screen when you click the `Save Changes` button in the top right side of your screen.
 
-![save](/images/save-button.svg)
+![save](/public/images/save-button.svg)
 
 Once clicked, you will be prompted with the same modal as when you click on the `New Document` button within the menu. Simply name your document, select the save type, and you will be re-directed to your new document's page!
 
@@ -132,7 +132,7 @@ Once clicked, you will be prompted with the same modal as when you click on the 
 When you are in a user-owned[^2] document, a button will appear on the top right side of your screen:
 [^2]: A document that was created and saved by you, the user. This does not include pages in the `Examples` or `Guides` folders, so you will not see the `Save Changes` button on any of those files
 
-![save](/images/save-button.svg)
+![save](/public/images/save-button.svg)
 
 Simply click this button and your changes will immediately be saved based on **the initial save type**. If you originally saved your document locally, it will automatically save locally and vice-versa for database.
  
@@ -140,7 +140,7 @@ Simply click this button and your changes will immediately be saved based on **t
 ##### Local vs. Database
 When you first create a document, you are prompted to select either `Local` or `Database` as your save choice. 
 
-![new document modal](/images/newdoc-modal.PNG)
+![new document modal](/public/images/newdoc-modal.PNG)
 
 If you are a logged in user, both options will be available. The `Database` choice will be disabled until you've logged in. Once the document is created, every time you save, the document will save to the original choice you selected when creating the document. 
 
@@ -166,21 +166,21 @@ Several warning messages are built into the app to advise you when saving a docu
 #### *Re-name Your Document*
 To re-name your document after you've already created it, you will navigate to the document itself using the menu button on the top left side of the screen:
 
-![menu](/images/menu.png)
+![menu](/public/images/menu.png)
 
 Click on the `My Files` tab to see a full list of documents you've saved both locally and on the database (if you're a logged in user):
 
-![my-files](/images/myfiles.png)
+![my-files](/public/images/myfiles.png)
 
 Finally, click your document's name under the `Document Name` section at the top of the screen and input a new file name of your choice. Once done, click anywhere else on the screen and the app will automatically save your file with it's new name:
 
-![re-name](/images/rename.png)
+![re-name](/public/images/rename.png)
  
 
 #### *Delete a Document*
 In the top right side of your screen you will see a trash can icon located next to the `Save Changes` button. Simply click this icon when you are on a page of one of your saved documents:
 
-![delete-button](/images/delete-button.png)
+![delete-button](/public/images/delete-button.png)
 
 Once clicked you will be prompted to confirm the action. *You cannot reverse the delete after you have selected the option*. **Please use caution**.
  
@@ -188,11 +188,11 @@ Once clicked you will be prompted to confirm the action. *You cannot reverse the
 #### *Mobile Differences*
 If you are accessing `.MARKDOWN` on mobile, there will be a few key differences to preserve screen space:
 
-![mobile-home](/images/mobile-home.png)
+![mobile-home](/public/images/mobile-home.png)
 
 On the home screen, the [Scroll Lock](#scroll-lock) and [Preview Mode](#preview-mode) buttons are moved to the top info bar and you'll only see either the Markdown editor or the Preview section, not both. 
 
-![mobile-sidenav](/images/mobile-sidenav.png)
+![mobile-sidenav](/public/images/mobile-sidenav.png)
 
 The [Re-name](#re-name-your-document) function as well as the [Save](#save-an-existing-document) and [Delete](#delete-a-document) functions have been moved to the Menu. `Re-name` is shown in a yellow square at the top of the screenshot. The `Save` and `Delete` functions are below in a blue square (trashcan icon for delete, floppy disk for save).
  
@@ -204,7 +204,7 @@ The [Re-name](#re-name-your-document) function as well as the [Save](#save-an-ex
 #### *Scroll Lock*
 On the top right corner of the `Preview` section (right side of your screen), you will see two buttons:
 
-![scroll-prev-btns](/images/scroll-prev-btns.png)
+![scroll-prev-btns](/public/images/scroll-prev-btns.png)
 
 In the green (button the left) is the Scroll Lock button. By default this is enabled. When you scroll in the `Markdown` section (section on the left where you type), the `Preview` section will scroll as well. 
 
@@ -214,7 +214,7 @@ Click the Scroll Lock button to prevent both screens from scrolling together .
 #### *Preview Mode*
 On the top right corner of the `Preview` section, right next to the `Scroll Lock` button is the `Preview Mode` button (in the red/right side of the screenshot):
 
-![scroll-prev-btns](/images/scroll-prev-btns.png)
+![scroll-prev-btns](/public/images/scroll-prev-btns.png)
 
 Click this option if you only want to see your generated Markdown file in the `Preview` section. Click again to take this option off. 
  
@@ -222,7 +222,7 @@ Click this option if you only want to see your generated Markdown file in the `P
 #### *Scroll To Top*
 On the bottom right side of the `Preview` section you will see this button:
 
-![scroll-to-top](/images/scroll-to-top.PNG)
+![scroll-to-top](/public/images/scroll-to-top.PNG)
 
 Click this button to automatically scroll to the top of your screen. 
  
@@ -230,7 +230,7 @@ Click this button to automatically scroll to the top of your screen.
 #### *Day/Night Mode*
 In the `Menu`, at the very bottom, you will see a toggle option with two icons to switch from day mode to night mode:
 
-![day-night-toggle](/images/day-night-toggle.PNG)
+![day-night-toggle](/public/images/day-night-toggle.PNG)
 
 When the toggle is to the left (toward the Moon icon), your screen will be in Night Mode. Day mode will be the opposite side. As long as you don't clear your browser's cache, it will remember your preference when you visit the site. 
  

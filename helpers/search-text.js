@@ -268,6 +268,7 @@ const image = (match, str) => {
     match.forEach((m) => {
         let dMatch = m.match(description);
         let sMatch = m.match(src);
+        sMatch[0].startsWith('/public') && (sMatch[0] = sMatch[0].replace(/\/public/, ""))
 
         str = str.replace(
             m,
