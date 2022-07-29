@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
+import { useRouter } from "next/router.js";
 import { ScrollSyncPane } from "react-scroll-sync";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
@@ -20,6 +21,7 @@ const Preview = (props) => {
     const [formattedData, setFormattedData] = useState("");
     const [formattedText, setFormattedText] = useState();
     const [startId, setStartId] = useState();
+    const router = useRouter()
 
     useEffect(() => {
         setFormattedData(searchText(mdData));
@@ -37,10 +39,11 @@ const Preview = (props) => {
     useEffect(() => {
         const textId = document.querySelector("textarea");
         const endId = document.getElementById("enddoc");
+        const active = document.activeElement
 
         //Auto-scrolling feature if the user is typing near
         //the bottom of the screen
-        if (textId.selectionEnd >= textId.textLength - 50) {
+        if (active === textId && textId.selectionEnd >= (textId.textLength - 50)) {
             setTimeout(() => {
                 endId.scrollIntoView();
             }, 100);
@@ -60,6 +63,11 @@ const Preview = (props) => {
             ReactHtmlParser(formattedData, { transform: transform })
         );
     }, [formattedData]);
+
+    useEffect(() => {
+        if (!startId) { return }
+        startId.scrollIntoView()
+    }, [router])
 
     return (
         <Grid

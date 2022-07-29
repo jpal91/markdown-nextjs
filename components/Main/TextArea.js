@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { connect } from "react-redux";
+import { useRouter } from "next/router.js";
 import { ScrollSyncPane } from "react-scroll-sync";
 import Grid from "@mui/material/Grid";
 import TextField from "@mui/material/TextField";
@@ -21,6 +22,7 @@ const TextArea = (props) => {
     } = props;
     const checkWindow = typeof window !== undefined;
     const [startId, setStartId] = useState();
+    const router = useRouter()
 
     useEffect(() => {
         if (!checkWindow) {
@@ -74,6 +76,11 @@ const TextArea = (props) => {
 
         window.onbeforeunload = warnUnsaved;
     }, [unsaved]);
+
+    useEffect(() => {
+        if (!startId) { return }
+        startId.scrollIntoView()
+    }, [router])
 
     return (
         <Grid
