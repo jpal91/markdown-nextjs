@@ -47,6 +47,7 @@ const Example = (props) => {
         <React.Fragment>
             <Head>
                 <title>.MD - Example Files</title>
+                <meta name="description" content=".MARKDOWN - Example Files" />
             </Head>
             <MainApp />
         </React.Fragment>

@@ -11,7 +11,7 @@ class MyDocument extends Document {
                         href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.0/styles/default.min.css"
                     />
                     <Script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.0/highlight.min.js"></Script>
-
+                    <link rel="icon" href="/icon.ico" />
                     <link
                         rel="preconnect"
                         href="https://fonts.googleapis.com"

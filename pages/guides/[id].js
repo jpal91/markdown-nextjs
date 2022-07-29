@@ -48,6 +48,7 @@ const Guides = (props) => {
         <React.Fragment>
             <Head>
                 <title>.MD - Guides</title>
+                <meta name="description" content=".MARKDOWN - Site Guides" />
             </Head>
             <MainApp />
         </React.Fragment>

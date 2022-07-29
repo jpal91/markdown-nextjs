@@ -60,6 +60,7 @@ const LocalUserDoc = (props) => {
         <React.Fragment>
             <Head>
                 <title>.MD - Local Files</title>
+                <meta name="description" content=".MARKDOWN - Local User Files" />
             </Head>
             <MainApp />
         </React.Fragment>

@@ -12,18 +12,17 @@ const Home = (props) => {
 
     useEffect(() => {
         setButtonStatus({
-            save: 'new',
-            fileName: 'new',
-            delete: 'new'
-          })
-      
-    }, [])
+            save: "new",
+            fileName: "new",
+            delete: "new",
+        });
+    }, []);
 
     useEffect(() => {
         if (router.pathname === "/") {
             setFileName("welcome.md");
             setData("");
-            setLoading(false)
+            setLoading(false);
         }
     }, [router]);
 
@@ -31,10 +30,16 @@ const Home = (props) => {
         <React.Fragment>
             <Head>
                 <title>.MARKDOWN</title>
+                <meta name="description" content=".MARKDOWN Home Page" />
             </Head>
             <MainApp />
         </React.Fragment>
-    )
+    );
 };
 
-export default connect(null, { setFileName, setData, setButtonStatus, setLoading })(Home);
+export default connect(null, {
+    setFileName,
+    setData,
+    setButtonStatus,
+    setLoading,
+})(Home);

@@ -65,6 +65,7 @@ const LocalUserDoc = (props) => {
         <React.Fragment>
             <Head>
                 <title>.MD - Database Files</title>
+                <meta name="description" content=".MARKDOWN - User Database Files" />
             </Head>
             <MainApp />
         </React.Fragment>
