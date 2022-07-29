@@ -2,24 +2,25 @@ import React, { useEffect } from "react";
 import { useSession } from "next-auth/react";
 import { connect } from "react-redux";
 
-import { setAuthUser, getDBData, logOut } from "../../actions";
+import { setAuthUser, getDBData, userLogOut, setAlert } from "../../actions";
 
 //Watches authorization session and updates state accordingly
 const Auth = (props) => {
-    const { setAuthUser, authUser, getDBData, logOut } = props;
+    const { setAuthUser, authUser, getDBData, userLogOut, setAlert } = props;
     const { data: session } = useSession();
 
     //If there is a user, it will set user name in state and get their data from db
-    //If no user session, it will make sure the logOut function is called so user can't access
+    //If no user session, it will make sure the userLogOut function is called so user can't access
     //any of the restricted options (ie saving to database)
     useEffect(() => {
         if (session?.user && !authUser) {
-            setAuthUser(session.user.name);
+            setAuthUser(session.user.name)
+            setAlert({ open: true, message: 'Logged in!', severity: 'success' })
             getDBData();
         }
 
         if (!session && authUser) {
-            logOut();
+            userLogOut();
         }
     }, [session]);
 
@@ -32,6 +33,6 @@ const mapStateToProps = (state) => {
     };
 };
 
-export default connect(mapStateToProps, { setAuthUser, getDBData, logOut })(
+export default connect(mapStateToProps, { setAuthUser, getDBData, userLogOut, setAlert })(
     Auth
 );

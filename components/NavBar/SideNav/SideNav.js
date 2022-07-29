@@ -144,13 +144,13 @@ const SideNav = (props) => {
                         variant="contained"
                         sx={{
                             backgroundColor: "primary.dOrange",
-                            display:
-                                router.pathname === "/" && 'none',
-                            '&:hover': { opacity: 0.8, backgroundColor: "primary.dOrange" }
+                            '&:hover': { opacity: 0.8, backgroundColor: "primary.dOrange" },
+                            '&.Mui-disabled': { backgroundColor: 'primary.vlgray' }
                         }}
                         onClick={handleDownload}
                         aria-label="Download"
                         title="Download file"
+                        disabled={router.pathname === "/"}
                     >
                         Download
                     </Button>

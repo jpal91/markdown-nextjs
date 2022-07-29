@@ -142,7 +142,7 @@ export const setSaveState = (string) => {
  * @see setSaveState()
  * @see setAlert()
  */
-export const logOut = () => async (dispatch) => {
+export const userLogOut = () => async (dispatch) => {
     dispatch({ type: "AUTH_USER", payload: "" });
     dispatch({ type: "DB_DATA", payload: { _id: "", user: "", docs: {} } });
     dispatch({ type: "SAVE_STATE", payload: "local" });
