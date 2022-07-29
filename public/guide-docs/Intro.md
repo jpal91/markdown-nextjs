@@ -202,9 +202,9 @@ Make a list with checkboxes next to them to indicate whether or not the task is 
 
 To do this start your line off with `- [ ]` for `un-checked` or `- [x]` for `checked`.
 
--   [x] Make a task list
--   [x] Make a Markdown guide for the website
--   [ ] Get some sleep
+- [x] Make a task list
+- [x] Make a Markdown guide for the website
+- [ ] Get some sleep
 
 #### *Emojis*
 
