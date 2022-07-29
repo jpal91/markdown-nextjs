@@ -1,5 +1,4 @@
-# Welcome to `.MARKDOWN`! {#top}
----
+# Welcome to `.MARKDOWN`!
 
 > #### *What is Markdown?*
 > Well I'm glad you asked! Markdown is a simple markup language you can use to quickly and easily make a formatted document all without the help of a word processor.
@@ -7,7 +6,6 @@
 > In this guide you will learn the basics of Markdown so you'll know how to utilize this editor to make formatted documents of your own!
 
 ## The `.MARKDOWN` Guide
----
 ##### Table of Contents
 
 - [Basic Features](#basic)
@@ -22,6 +20,7 @@
  - [Links](#links)
  - [Images](#images)
  - [Blockquote](#blockquote)
+ - [Extra Space](#extra-space)
  - [Horizontal Rule](#horizontal-rule)
 - [Advanced Features](#advanced-features)
  - [Heading-ID](#heading-id)
@@ -112,6 +111,23 @@ Want a fancy blockquote section like the one up [top](#top)? Well just add a `>`
 > Always remember to save your changes!
 > 
 > ![save-button](/images/save-button.svg)
+ 
+
+#### *Extra Space*
+In general, the editor will ignore multiple return lines and won't add any additional spacing within the formatted document.
+
+Look here in the editor!
+
+
+
+
+
+This will still show up as a one line difference in the formatted document.
+
+If you really want to add more white space in your formatted document, just add a blank line with one `space bar` as the only content.
+ 
+
+This will create a new line.
  
 
 #### *Horizontal Rule*

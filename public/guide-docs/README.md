@@ -3,6 +3,7 @@
 ##### A Markdown Editor built with Next.js/Redux/RegExp/MongoDB
 
 This is a solution to the [In-browser markdown editor challenge on Frontend Mentor](https://www.frontendmentor.io/challenges/inbrowser-markdown-editor-r16TrrQX9). Without the use of a third party package to render Markdown.
+ 
 
 ## Table of contents
 
@@ -49,13 +50,12 @@ Additional features added not in the original challenge:
 
 ### Screenshot
 
-![screenshot](/public/images/screenshot.png)
+![screenshot](/images/screenshot.png)
 
 ### Links
 -   Solution URL: [GitHub Solution](https://github.com/jpal91/markdown-nextjs)
 -   Live Site URL: [Add live site URL here](https://your-live-site-url.com)
 
----
 
 ## My process
 

@@ -100,9 +100,12 @@ export const transform = (node, index) => {
         let tagName = node.name;
         let id = node.attribs.id || "";
         return (
+            <React.Fragment>
             <Typography key={index} variant={tagName} id={id}>
                 {processNodes(node.children, transform)}
             </Typography>
+            {node.name[1] <= 2 && <hr/>}
+            </React.Fragment>
         );
     }
 
