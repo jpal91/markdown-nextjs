@@ -155,7 +155,7 @@ describe("Test Suite", () => {
     it("Scroll to top functioning", () => {
         cy.get("#enddoc").scrollTo("top", { ensureScrollable: false });
         cy.contains("h1", "Welcome to").should("not.be.visible");
-        cy.get(".MuiFab-preview").click();
+        cy.get("#scroll-to-top-prev").click();
         cy.contains("h1", "Welcome to").should("be.visible");
     });
 

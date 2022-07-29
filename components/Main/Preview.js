@@ -110,6 +110,7 @@ const Preview = (props) => {
                 title="Scroll to the top"
                 variant="preview"
                 onClick={() => startId.scrollIntoView()}
+                id='scroll-to-top-prev'
             >
                 <KeyboardArrowUpRoundedIcon
                     fontSize="large"

@@ -137,6 +137,7 @@ const TextArea = (props) => {
                 variant="preview"
                 onClick={() => startId.scrollIntoView()}
                 sx={{ display: { sm: 'none' }}}
+                id='scroll-to-top-text'
             >
                 <KeyboardArrowUpRoundedIcon
                     fontSize="large"
