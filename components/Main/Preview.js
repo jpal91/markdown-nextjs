@@ -85,7 +85,7 @@ const Preview = (props) => {
                     sx={{
                         width: {
                             xs: "100%",
-                            sm: isPreviewMode ? "50%" : "100%",
+                            sm: isPreviewMode ? "70%" : "100%",
                         },
                         overflow: "auto",
                         height: "100%",

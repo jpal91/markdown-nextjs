@@ -46,7 +46,7 @@ const SubBar = (props) => {
                 container
                 item
                 xs={isPreviewMode ? 12 : 0}
-                sm={6}
+                sm={isPreviewMode ? 8 : 6}
                 sx={{
                     borderLeft: isPreviewMode ? "0px" : "1px solid",
                     borderColor: "background.borders",
