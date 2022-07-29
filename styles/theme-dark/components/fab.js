@@ -11,9 +11,16 @@ const fab = {
                 bottom: "15px",
                 right: "10px",
                 backgroundColor: primary.dOrange,
-                "&:hover": {
-                    backgroundColor: primary.dOrange,
-                    opacity: "0.8",
+                "@media (hover: hover)": {
+                    "&:hover": {
+                        backgroundColor: primary.dOrange,
+                        opacity: "0.8",
+                    },
+                },
+                "@media (hover: none)": {
+                    "&:focus": {
+                        backgroundColor: primary.dOrange,
+                    },
                 },
             }
         }

@@ -33,8 +33,8 @@ const SubBarToggles = (props) => {
                 onClick={() => toggleScrollSync(!isScrollSync)}
                 sx={{
                     contentVisibility: {
-                        xs: "visible",
-                        sm: isPreviewMode && "hidden",
+                        xs: 'hidden',
+                        sm: isPreviewMode ? "hidden" : 'visible',
                     },
                 }}
                 aria-label={`Turn scroll sync ${isScrollSync ? "off" : "on"}`}

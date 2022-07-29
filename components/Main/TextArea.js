@@ -3,6 +3,9 @@ import { connect } from "react-redux";
 import { ScrollSyncPane } from "react-scroll-sync";
 import Grid from "@mui/material/Grid";
 import TextField from "@mui/material/TextField";
+import Fab from '@mui/material/Fab'
+import Box from '@mui/material/Box'
+import KeyboardArrowUpRoundedIcon from "@mui/icons-material/KeyboardArrowUpRounded";
 
 import { setData, unsavedChanges } from "../../actions";
 
@@ -17,6 +20,7 @@ const TextArea = (props) => {
         isExamplePage,
     } = props;
     const checkWindow = typeof window !== undefined;
+    const [startId, setStartId] = useState();
 
     useEffect(() => {
         if (!checkWindow) {
@@ -37,6 +41,10 @@ const TextArea = (props) => {
                 setData(e.target.value);
             }
         });
+
+        if (typeof window !== undefined) {
+            setStartId(document.getElementById("start-editor"));
+        }
     }, []);
 
     //Tracks unsaved changes so alert can pop up if the user decides to exit
@@ -87,7 +95,10 @@ const TextArea = (props) => {
                 display: { xs: isPreviewMode && "none", sm: "flex" },
             }}
         >
+            
             <ScrollSyncPane>
+                <Box sx={{ width: '100%', overflow: "auto"}}>
+                <div id="start-editor"></div>
                 <TextField
                     multiline
                     variant="standard"
@@ -96,7 +107,7 @@ const TextArea = (props) => {
                     id="editor"
                     sx={{
                         width: "100%",
-                        overflow: "auto",
+                        
                         height: "100%",
                         tabSize: 1,
                     }}
@@ -110,7 +121,21 @@ const TextArea = (props) => {
                         },
                     }}
                 />
+                </Box>
             </ScrollSyncPane>
+            <Fab
+                size="medium"
+                aria-label="top"
+                title="Scroll to the top"
+                variant="preview"
+                onClick={() => startId.scrollIntoView()}
+                sx={{ display: { sm: 'none' }}}
+            >
+                <KeyboardArrowUpRoundedIcon
+                    fontSize="large"
+                    sx={{ color: "black" }}
+                />
+            </Fab>
         </Grid>
     );
 };
