@@ -144,8 +144,8 @@ const SideNav = (props) => {
                         variant="contained"
                         sx={{
                             backgroundColor: "primary.dOrange",
-                            visibility:
-                                router.pathname === "/" ? "hidden" : "visible",
+                            display:
+                                router.pathname === "/" && 'none',
                             '&:hover': { opacity: 0.8, backgroundColor: "primary.dOrange" }
                         }}
                         onClick={handleDownload}
