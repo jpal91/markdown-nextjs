@@ -54,7 +54,7 @@ const DeleteModal = (props) => {
                     onClick={handleDelete}
                     id="confirm-delete"
                 >
-                    <Image src={deleteImage} />
+                    <Image src={deleteImage} alt='delete-button' />
                 </ButtonBase>
             </Grid>
         </React.Fragment>
