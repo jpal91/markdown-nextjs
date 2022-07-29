@@ -17,6 +17,10 @@ code#code_styled {
   font-size: calc(100% - 2px);
 }
 
+blockquote#code-holder {
+  overflow-x: auto;
+}
+
 code.code-block {
   background-color: hsla(0, 0%, 9%, 1);
   font-family: "Roboto mono", monospace !important;
@@ -26,7 +30,6 @@ code.code-block {
   width: fit-content;
   max-width: 100%;
   border-radius: 3px;
-  word-break: break-all;
 }
 
 .hljs-keyword {
