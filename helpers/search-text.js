@@ -305,6 +305,7 @@ const blockCode = (match, str) => {
 
         hl.startsWith("\n") && (hl = hl.trimStart());
         hl = hl.replace(/`/g, "&#96;");
+        hl = hl.replace(/\^/g, "&#94;")
         hMatch ? (hl = hl.replace(/#/g, `&#35;`)) : null;
         eMatch ? (hl = hl.replace(/=/g, "&#61;")) : null;
 
