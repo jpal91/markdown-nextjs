@@ -113,7 +113,7 @@ Here's a snippet from my [/pages/auth/api page](https://github.com/jpal91/markdo
 ```js
 export default NextAuth({
     ...,
-				providers: [
+	providers: [
         GitHubProvider({
             clientId: process.env.GITHUB_ID,
             clientSecret: process.env.GITHUB_SECRET,
