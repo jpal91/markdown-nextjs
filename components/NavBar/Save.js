@@ -57,7 +57,7 @@ const Save = (props) => {
                 }}
                 disabled={buttonStatus.save === "disabled" && true}
             >
-                <Image src="/images/save-button.svg" width="150" height="70" />
+                <Image src="/images/save-button.svg" width="150" height="70" alt='save-button' />
             </ButtonBase>
             <IconButton
                 onClick={handleSave}

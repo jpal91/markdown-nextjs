@@ -6,7 +6,7 @@ import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import ButtonBase from "@mui/material/ButtonBase";
 
-import { deleteFromDB, masterUpdateHandler } from "../../../actions";
+import { masterUpdateHandler } from "../../../actions";
 import deleteImage from "../../../public/images/delete.svg";
 
 //Sub-component of MainModal - shows delete warning screen
@@ -68,6 +68,6 @@ const mapStateToProps = (state) => {
     };
 };
 
-export default connect(mapStateToProps, { deleteFromDB, masterUpdateHandler })(
+export default connect(mapStateToProps, { masterUpdateHandler })(
     DeleteModal
 );

@@ -11,7 +11,6 @@ import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
 
 import {
-    createNewDoc,
     toggleMenu,
     unsavedChanges,
     masterUpdateHandler,
@@ -131,7 +130,6 @@ const mapStateToProps = (state) => {
 };
 
 export default connect(mapStateToProps, {
-    createNewDoc,
     toggleMenu,
     unsavedChanges,
     masterUpdateHandler,

@@ -107,7 +107,7 @@ const SideNav = (props) => {
                 id="new-doc-btn"
                 sx={{ '&:hover': { opacity: 0.8 } }}
             >
-                <Image src="/images/new-document.svg" width="200" height="50" />
+                <Image src="/images/new-document.svg" width="200" height="50" alt='new-document' />
             </ButtonBase>
             <Box
                 sx={{
