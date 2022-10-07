@@ -54,7 +54,7 @@ Additional features added not in the original challenge:
 
 ### Links
 -   Solution URL: [GitHub Solution](https://github.com/jpal91/markdown-nextjs)
--   Live Site URL: [Add live site URL here](https://markdown-nextjs-lime.vercel.app/)
+-   Live Site URL: [Live site URL](https://markdown-nextjs-lime.vercel.app/)
 
 
 ## My process
